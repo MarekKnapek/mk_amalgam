@@ -20,9 +20,11 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_jumbo.h" />
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_setup.h" />
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_try.h" />
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_utils.h" />
 	</ItemGroup>
 	<ItemGroup>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_clobber.c" />
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_try.c" />
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_utils.c" />
 	</ItemGroup>
 </Project>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup>
+		<Filter Include="jumbo"><UniqueIdentifier>{7c19a1e3-b016-4142-b084-5c65188b8aa4}</UniqueIdentifier></Filter>
 		<Filter Include="src"><UniqueIdentifier>{158db3b3-231b-44b2-be9f-bb5aa5856ebd}</UniqueIdentifier></Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -10,9 +11,11 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_jumbo.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_setup.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_try.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_utils.h"><Filter>jumbo</Filter></ClInclude>
 	</ItemGroup>
 	<ItemGroup>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_clobber.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_try.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_utils.c"><Filter>jumbo</Filter></ClCompile>
 	</ItemGroup>
 </Project>
