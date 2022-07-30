@@ -4,6 +4,13 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_utils", "..\..\libs\mk_utils\projects\vs2022\mk_utils.vcxitems", "{635870d5-81aa-4df4-8ca3-37c018fd525d}"
 EndProject
+Project("{2150e333-8fdc-42a3-9474-1a3956d46de8}") = "Solution Items", "Solution Items", "{ccd1c5d4-2133-4e2f-8203-423f09b4cb0c}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\.editorconfig = ..\..\.editorconfig
+		..\..\.gitattributes = ..\..\.gitattributes
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
