@@ -13,4 +13,16 @@
 	<ItemGroup>
 		<ProjectCapability Include="SourceItemsFromImports"/>
 	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_assert.h" />
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_clobber.h" />
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_inline.h" />
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_jumbo.h" />
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_setup.h" />
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_try.h" />
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_clobber.c" />
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_try.c" />
+	</ItemGroup>
 </Project>
