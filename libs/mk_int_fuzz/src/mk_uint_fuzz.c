@@ -13,7 +13,14 @@
 #endif
 
 
-int LLVMFuzzerTestOneInput(unsigned char const* data, size_t size)
+#if defined(__cplusplus)
+#define mk_extern_c extern "C"
+#else
+#define mk_extern_c
+#endif
+
+
+mk_extern_c int LLVMFuzzerTestOneInput(unsigned char const* data, size_t size)
 {
 	if(size != 2 * 16)
 	{
@@ -28,6 +35,9 @@ int LLVMFuzzerTestOneInput(unsigned char const* data, size_t size)
 
 	return 0;
 }
+
+
+#undef mk_extern_c
 
 
 #if defined(_MSC_VER)
