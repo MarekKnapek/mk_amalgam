@@ -16,7 +16,7 @@
 #define mk_uint_tn llong
 #define mk_uint_t unsigned long long
 
-#include "../inl/mk_uint_base.h"
+#include "../inl/mk_uint_base.h.inl"
 
 #undef mk_uint_tn
 #undef mk_uint_t

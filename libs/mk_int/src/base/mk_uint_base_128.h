@@ -19,7 +19,7 @@
 #define mk_uint_tn 128
 #define mk_uint_t unsigned __int128
 
-#include "../inl/mk_uint_base.h"
+#include "../inl/mk_uint_base.h.inl"
 
 #undef mk_uint_tn
 #undef mk_uint_t
