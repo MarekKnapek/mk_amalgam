@@ -9,6 +9,7 @@ Project("{2150e333-8fdc-42a3-9474-1a3956d46de8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_int", "..\..\libs\mk_int\projects\vs2022\mk_int.vcxitems", "{83700097-ac5b-4642-9b9a-2d5f5db0026c}" EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_utils", "..\..\libs\mk_utils\projects\vs2022\mk_utils.vcxitems", "{635870d5-81aa-4df4-8ca3-37c018fd525d}" EndProject
 Global
 	GlobalSection(SolutionProperties) = preSolution
