@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup>
 		<Filter Include="dependencies"><UniqueIdentifier>{f87cfe58-e395-44ad-bd4f-72fee857a0c2}</UniqueIdentifier></Filter>
+		<Filter Include="jumbo"><UniqueIdentifier>{936bdb65-3dc1-4db0-93cd-8c098a78c7d5}</UniqueIdentifier></Filter>
 		<Filter Include="src"><UniqueIdentifier>{182eb37d-872c-4144-883b-0881260d4b3e}</UniqueIdentifier></Filter>
 	</ItemGroup>
 	<ItemGroup>
@@ -19,10 +20,11 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_32.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_64.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_8.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="..\jumbo\mk_int_fuzz.c"><Filter>jumbo</Filter></ClCompile>
 	</ItemGroup>
 	<ItemGroup>
 		<None Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz.c.inl"><Filter>src</Filter></None>
 		<None Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz.h.inl"><Filter>src</Filter></None>
-		<None Include="$(MSBuildThisFileDirectory).gitignore" />
+		<None Include="$(MSBuildThisFileDirectory).gitignore"/>
 	</ItemGroup>
 </Project>
