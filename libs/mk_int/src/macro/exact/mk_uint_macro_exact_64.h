@@ -4,7 +4,7 @@
 
 
 #if CHAR_BIT == 8
-#if mk_uint_has_long_long
+#if mk_has_long_long
 #if ULLONG_MAX == 0xffffffffffffffff
 #include "../base/mk_uint_macro_base_llong.h"
 #define mk_uint_small_bits 64

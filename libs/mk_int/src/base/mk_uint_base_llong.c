@@ -10,7 +10,7 @@
 #include "../../../mk_utils/src/mk_setup.h"
 
 
-#if mk_uint_has_long_long
+#if mk_has_long_long
 
 #define mk_uint_tn llong
 #define mk_uint_t unsigned long long

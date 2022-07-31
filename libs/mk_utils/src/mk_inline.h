@@ -5,7 +5,7 @@
 #include "mk_setup.h"
 
 
-#if mk_uint_has_inline
+#if mk_has_inline
 #define mk_inline inline
 #else
 #define mk_inline

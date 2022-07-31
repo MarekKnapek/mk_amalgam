@@ -14,7 +14,7 @@
 #include "../../../mk_utils/src/mk_setup.h"
 
 
-#if mk_uint_has_128bit_int
+#if mk_has_128bit_int
 
 #define mk_uint_tn 128
 #define mk_uint_t unsigned __int128

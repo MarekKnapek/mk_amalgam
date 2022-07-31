@@ -10,7 +10,7 @@
 #include "../../mk_utils/src/mk_setup.h"
 
 
-#if mk_uint_has_128bit_int
+#if mk_has_128bit_int
 
 #if defined(__GNUC__)
 #pragma GCC diagnostic push

@@ -10,12 +10,12 @@
 
 
 #if CHAR_BIT == 8
-#if mk_uint_has_128bit_int
+#if mk_has_128bit_int
 #include "../base/mk_uint_macro_base_128.h"
 #define mk_uint_small_bits 128
 #define mk_uint128_c(a, b, c, d) {(((unsigned __int128)a) << 96) | (((unsigned __int128)b) << 64) | (((unsigned __int128)c) << 32) | (((unsigned __int128)d) << 0)}
 #else
-#if mk_uint_has_long_long
+#if mk_has_long_long
 #if ULLONG_MAX == 0xffffffffffffffff
 #include "../base/mk_uint_macro_base_llong.h"
 #define mk_uint_small_bits 64
