@@ -5,8 +5,8 @@
 #include "mk_utils.h"
 
 
+#include "../../src/mk_break_point.c"
 #include "../../src/mk_clobber.c"
-#include "../../src/mk_try.c"
 
 
 #endif

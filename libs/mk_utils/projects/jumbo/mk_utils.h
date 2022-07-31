@@ -3,6 +3,8 @@
 
 
 #include "../../src/mk_assert.h"
+#include "../../src/mk_break_point.h"
+#include "../../src/mk_check.h"
 #include "../../src/mk_clobber.h"
 #include "../../src/mk_inline.h"
 #include "../../src/mk_jumbo.h"

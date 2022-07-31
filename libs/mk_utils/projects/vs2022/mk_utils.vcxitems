@@ -15,6 +15,8 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_assert.h" />
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_break_point.h" />
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_check.h" />
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_clobber.h" />
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_inline.h" />
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_jumbo.h" />
@@ -23,8 +25,8 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_utils.h" />
 	</ItemGroup>
 	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_break_point.c" />
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_clobber.c" />
-		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_try.c" />
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_utils.c" />
 	</ItemGroup>
 </Project>
