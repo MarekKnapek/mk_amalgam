@@ -19,6 +19,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_break_point.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_check.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_clobber.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_cpp.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_inline.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_jumbo.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_setup.h"/>
