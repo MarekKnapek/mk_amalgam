@@ -19,7 +19,7 @@
 
 #define mk_uint_n 128
 #define uint128_t unsigned __int128
-#include "mk_uint_fuzz.c.inl"
+#include "mk_uint_fuzz.inl.c"
 #undef mk_uint_n
 #undef uint128_t
 

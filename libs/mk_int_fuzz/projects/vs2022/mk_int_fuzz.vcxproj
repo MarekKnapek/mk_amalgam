@@ -36,8 +36,8 @@
 		<ClCompile Include="..\jumbo\mk_int_fuzz.c"><ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild><ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild></ClCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz.c.inl"><ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild><ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild></None>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz.h.inl"><ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild><ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz.inl.c"><ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild><ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz.inl.h"><ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild><ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild></None>
 		<None Include="$(MSBuildThisFileDirectory).gitignore"/></ItemGroup>
 	<PropertyGroup Label="Globals">
 		<VCProjectVersion>16.0</VCProjectVersion>

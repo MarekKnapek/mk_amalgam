@@ -9,7 +9,7 @@
 
 
 #define mk_uint_n 64
-#include "mk_uint_fuzz.h.inl"
+#include "mk_uint_fuzz.inl.h"
 #undef mk_uint_n
 
 

@@ -54,16 +54,16 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_int.c"><Filter>jumbo</Filter></ClCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint.c.inl"><Filter>src\inl</Filter></None>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint.h.inl"><Filter>src\inl</Filter></None>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_1.c.inl"><Filter>src\inl</Filter></None>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_2.c.inl"><Filter>src\inl</Filter></None>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_any.c.inl"><Filter>src\inl</Filter></None>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_any_str.c.inl"><Filter>src\inl</Filter></None>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_base.c.inl"><Filter>src\inl</Filter></None>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_base.h.inl"><Filter>src\inl</Filter></None>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_fuzz.inl.c.inl"><Filter>src\inl</Filter></None>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_fuzz.inl.h.inl"><Filter>src\inl</Filter></None>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_n.c.inl"><Filter>src\inl</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint.inl.c"><Filter>src\inl</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint.inl.h"><Filter>src\inl</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_1.inl.c"><Filter>src\inl</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_2.inl.c"><Filter>src\inl</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_any.inl.c"><Filter>src\inl</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_any_str.inl.c"><Filter>src\inl</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_base.inl.c"><Filter>src\inl</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_base.inl.h"><Filter>src\inl</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_fuzz.inl.c"><Filter>src\inl</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_fuzz.inl.h"><Filter>src\inl</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_n.inl.c"><Filter>src\inl</Filter></None>
 	</ItemGroup>
 </Project>

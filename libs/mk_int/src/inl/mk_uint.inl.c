@@ -4,25 +4,25 @@
 #if mk_uint_parts == 1
 
 
-#include "mk_uint_1.c.inl"
+#include "mk_uint_1.inl.c"
 
 
 #elif mk_uint_parts == 2
 
 
-#include "mk_uint_2.c.inl"
+#include "mk_uint_2.inl.c"
 
 
 #else
 
 
-#include "mk_uint_n.c.inl"
+#include "mk_uint_n.inl.c"
 
 
 #endif
 
 
-#include "mk_uint_any.c.inl"
+#include "mk_uint_any.inl.c"
 
 
 #undef mk_uint_parts

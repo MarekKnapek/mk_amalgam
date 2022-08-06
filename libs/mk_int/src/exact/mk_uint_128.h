@@ -14,7 +14,7 @@
 #include "../macro/exact/mk_uint_macro_exact_128.h"
 
 
-#include "../inl/mk_uint.h.inl"
+#include "../inl/mk_uint.inl.h"
 
 
 #include "../macro/exact/mk_uint_macro_exact_undef.h"

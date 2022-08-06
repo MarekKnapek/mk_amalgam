@@ -57,16 +57,16 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_int.c"/>
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint.c.inl"/>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint.h.inl"/>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_1.c.inl"/>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_2.c.inl"/>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_any.c.inl"/>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_any_str.c.inl"/>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_base.c.inl"/>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_base.h.inl"/>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_fuzz.inl.c.inl"/>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_fuzz.inl.h.inl"/>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_n.c.inl"/>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint.inl.c"/>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint.inl.h"/>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_1.inl.c"/>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_2.inl.c"/>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_any.inl.c"/>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_any_str.inl.c"/>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_base.inl.c"/>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_base.inl.h"/>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_fuzz.inl.c"/>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_fuzz.inl.h"/>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_n.inl.c"/>
 	</ItemGroup>
 </Project>

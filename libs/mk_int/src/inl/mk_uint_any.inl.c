@@ -2,7 +2,7 @@
 #define mk_char_t char
 #define mk_char_c(x) x
 #define mk_str_c(x) x
-#include "mk_uint_any_str.c.inl"
+#include "mk_uint_any_str.inl.c"
 #undef mk_uint_str_suffix
 #undef mk_char_t
 #undef mk_char_c
@@ -13,7 +13,7 @@
 #define mk_char_t wchar_t
 #define mk_char_c(x) L ## x
 #define mk_str_c(x) L ## x
-#include "mk_uint_any_str.c.inl"
+#include "mk_uint_any_str.inl.c"
 #undef mk_uint_str_suffix
 #undef mk_char_t
 #undef mk_char_c

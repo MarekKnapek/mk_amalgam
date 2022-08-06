@@ -23,8 +23,8 @@
 		<ClCompile Include="..\jumbo\mk_int_fuzz.c"><Filter>jumbo</Filter></ClCompile>
 	</ItemGroup>
 	<ItemGroup>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz.c.inl"><Filter>src</Filter></None>
-		<None Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz.h.inl"><Filter>src</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz.inl.c"><Filter>src</Filter></None>
+		<None Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz.inl.h"><Filter>src</Filter></None>
 		<None Include="$(MSBuildThisFileDirectory).gitignore"/>
 	</ItemGroup>
 </Project>

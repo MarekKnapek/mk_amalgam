@@ -10,7 +10,7 @@
 #define mk_uint_tn short
 #define mk_uint_t unsigned short
 
-#include "../inl/mk_uint_base.c.inl"
+#include "../inl/mk_uint_base.inl.c"
 
 #undef mk_uint_tn
 #undef mk_uint_t
