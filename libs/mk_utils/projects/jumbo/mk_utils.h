@@ -2,6 +2,7 @@
 #define mk_include_guard_utils_h
 
 
+#include "../../src/mk_alignof.h"
 #include "../../src/mk_assert.h"
 #include "../../src/mk_break_point.h"
 #include "../../src/mk_check.h"

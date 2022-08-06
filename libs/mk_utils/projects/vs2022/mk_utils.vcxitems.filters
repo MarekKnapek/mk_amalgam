@@ -5,6 +5,7 @@
 		<Filter Include="src"><UniqueIdentifier>{158db3b3-231b-44b2-be9f-bb5aa5856ebd}</UniqueIdentifier></Filter>
 	</ItemGroup>
 	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_alignof.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_assert.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_break_point.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_check.h"><Filter>src</Filter></ClInclude>
