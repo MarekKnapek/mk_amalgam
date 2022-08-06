@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<Filter Include="dependencies"><UniqueIdentifier>{3e92e468-02be-40e3-a707-2e3dd7465fce}</UniqueIdentifier></Filter>
+		<Filter Include="jumbo"><UniqueIdentifier>{a426bbfd-ea4c-41a6-aa8d-36aa091df9d0}</UniqueIdentifier></Filter>
+		<Filter Include="src"><UniqueIdentifier>{40423094-898e-4b8c-aabe-d6aa44dd29f9}</UniqueIdentifier></Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_base_tests.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_win_base_tests.c"><Filter>jumbo</Filter></ClCompile>
+		<ClCompile Include="..\..\..\mk_utils\projects\jumbo\mk_utils.c"><Filter>dependencies</Filter></ClCompile>
+	</ItemGroup>
+</Project>
