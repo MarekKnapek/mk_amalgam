@@ -7,6 +7,8 @@
 #include "../../mk_win_base/src/mk_win_base_user_types.h"
 #include "../../mk_win_base/src/mk_win_base_platform.h"
 
+#include "../../mk_win/src/mk_win_user_window.h"
+
 #include "../../mk_utils/src/mk_alignof.h"
 #include "../../mk_utils/src/mk_assert.h"
 #include "../../mk_utils/src/mk_inline.h"
@@ -313,6 +315,89 @@ static mk_inline int mk_win_base_tests_user_types(void)
 	mk_assert(offsetof(mk_win_base_user_types_msg_t, m_point) == offsetof(MSG, pt));
 	mk_assert(sizeof(mk_win_base_user_types_msg_t) == sizeof(MSG));
 	mk_assert(mk_alignof(mk_win_base_user_types_msg_t) == mk_alignof(MSG));
+
+	#if mk_win_base_platform_os == mk_win_base_platform_os_win16
+	#define CREATESTRUCTA CREATESTRUCT
+	#endif
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_param) == sizeof(((CREATESTRUCTA*)NULL)->lpCreateParams));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_instance) == sizeof(((CREATESTRUCTA*)NULL)->hInstance));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_menu) == sizeof(((CREATESTRUCTA*)NULL)->hMenu));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_parent) == sizeof(((CREATESTRUCTA*)NULL)->hwndParent));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_height) == sizeof(((CREATESTRUCTA*)NULL)->cy));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_width) == sizeof(((CREATESTRUCTA*)NULL)->cx));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_y) == sizeof(((CREATESTRUCTA*)NULL)->y));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_x) == sizeof(((CREATESTRUCTA*)NULL)->x));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_style) == sizeof(((CREATESTRUCTA*)NULL)->style));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_name) == sizeof(((CREATESTRUCTA*)NULL)->lpszName));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_class) == sizeof(((CREATESTRUCTA*)NULL)->lpszClass));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_extra_style) == sizeof(((CREATESTRUCTA*)NULL)->dwExStyle));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_param) == mk_alignof(((CREATESTRUCTA*)NULL)->lpCreateParams));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_instance) == mk_alignof(((CREATESTRUCTA*)NULL)->hInstance));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_menu) == mk_alignof(((CREATESTRUCTA*)NULL)->hMenu));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_parent) == mk_alignof(((CREATESTRUCTA*)NULL)->hwndParent));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_height) == mk_alignof(((CREATESTRUCTA*)NULL)->cy));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_width) == mk_alignof(((CREATESTRUCTA*)NULL)->cx));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_y) == mk_alignof(((CREATESTRUCTA*)NULL)->y));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_x) == mk_alignof(((CREATESTRUCTA*)NULL)->x));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_style) == mk_alignof(((CREATESTRUCTA*)NULL)->style));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_name) == mk_alignof(((CREATESTRUCTA*)NULL)->lpszName));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_class) == mk_alignof(((CREATESTRUCTA*)NULL)->lpszClass));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_a_t*)NULL)->m_extra_style) == mk_alignof(((CREATESTRUCTA*)NULL)->dwExStyle));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_a_t, m_param) == offsetof(CREATESTRUCTA, lpCreateParams));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_a_t, m_instance) == offsetof(CREATESTRUCTA, hInstance));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_a_t, m_menu) == offsetof(CREATESTRUCTA, hMenu));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_a_t, m_parent) == offsetof(CREATESTRUCTA, hwndParent));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_a_t, m_height) == offsetof(CREATESTRUCTA, cy));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_a_t, m_width) == offsetof(CREATESTRUCTA, cx));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_a_t, m_y) == offsetof(CREATESTRUCTA, y));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_a_t, m_x) == offsetof(CREATESTRUCTA, x));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_a_t, m_style) == offsetof(CREATESTRUCTA, style));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_a_t, m_name) == offsetof(CREATESTRUCTA, lpszName));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_a_t, m_class) == offsetof(CREATESTRUCTA, lpszClass));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_a_t, m_extra_style) == offsetof(CREATESTRUCTA, dwExStyle));
+	mk_assert(sizeof(mk_win_base_user_types_wm_create_a_t) == sizeof(CREATESTRUCTA));
+	mk_assert(mk_alignof(mk_win_base_user_types_wm_create_a_t) == mk_alignof(CREATESTRUCTA));
+
+	#if mk_win_base_platform_os != mk_win_base_platform_os_win16
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_param) == sizeof(((CREATESTRUCTW*)NULL)->lpCreateParams));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_instance) == sizeof(((CREATESTRUCTW*)NULL)->hInstance));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_menu) == sizeof(((CREATESTRUCTW*)NULL)->hMenu));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_parent) == sizeof(((CREATESTRUCTW*)NULL)->hwndParent));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_height) == sizeof(((CREATESTRUCTW*)NULL)->cy));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_width) == sizeof(((CREATESTRUCTW*)NULL)->cx));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_y) == sizeof(((CREATESTRUCTW*)NULL)->y));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_x) == sizeof(((CREATESTRUCTW*)NULL)->x));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_style) == sizeof(((CREATESTRUCTW*)NULL)->style));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_name) == sizeof(((CREATESTRUCTW*)NULL)->lpszName));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_class) == sizeof(((CREATESTRUCTW*)NULL)->lpszClass));
+	mk_assert(sizeof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_extra_style) == sizeof(((CREATESTRUCTW*)NULL)->dwExStyle));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_param) == mk_alignof(((CREATESTRUCTW*)NULL)->lpCreateParams));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_instance) == mk_alignof(((CREATESTRUCTW*)NULL)->hInstance));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_menu) == mk_alignof(((CREATESTRUCTW*)NULL)->hMenu));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_parent) == mk_alignof(((CREATESTRUCTW*)NULL)->hwndParent));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_height) == mk_alignof(((CREATESTRUCTW*)NULL)->cy));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_width) == mk_alignof(((CREATESTRUCTW*)NULL)->cx));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_y) == mk_alignof(((CREATESTRUCTW*)NULL)->y));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_x) == mk_alignof(((CREATESTRUCTW*)NULL)->x));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_style) == mk_alignof(((CREATESTRUCTW*)NULL)->style));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_name) == mk_alignof(((CREATESTRUCTW*)NULL)->lpszName));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_class) == mk_alignof(((CREATESTRUCTW*)NULL)->lpszClass));
+	mk_assert(mk_alignof(((mk_win_base_user_types_wm_create_w_t*)NULL)->m_extra_style) == mk_alignof(((CREATESTRUCTW*)NULL)->dwExStyle));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_w_t, m_param) == offsetof(CREATESTRUCTW, lpCreateParams));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_w_t, m_instance) == offsetof(CREATESTRUCTW, hInstance));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_w_t, m_menu) == offsetof(CREATESTRUCTW, hMenu));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_w_t, m_parent) == offsetof(CREATESTRUCTW, hwndParent));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_w_t, m_height) == offsetof(CREATESTRUCTW, cy));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_w_t, m_width) == offsetof(CREATESTRUCTW, cx));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_w_t, m_y) == offsetof(CREATESTRUCTW, y));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_w_t, m_x) == offsetof(CREATESTRUCTW, x));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_w_t, m_style) == offsetof(CREATESTRUCTW, style));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_w_t, m_name) == offsetof(CREATESTRUCTW, lpszName));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_w_t, m_class) == offsetof(CREATESTRUCTW, lpszClass));
+	mk_assert(offsetof(mk_win_base_user_types_wm_create_w_t, m_extra_style) == offsetof(CREATESTRUCTW, dwExStyle));
+	mk_assert(sizeof(mk_win_base_user_types_wm_create_w_t) == sizeof(CREATESTRUCTW));
+	mk_assert(mk_alignof(mk_win_base_user_types_wm_create_w_t) == mk_alignof(CREATESTRUCTW));
+	#endif
 
 	return 0;
 }

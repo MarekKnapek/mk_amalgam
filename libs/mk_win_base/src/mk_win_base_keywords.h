@@ -9,15 +9,15 @@
 #define mk_win_base_keywords_near __near
 #define mk_win_base_keywords_far __far
 #define mk_win_base_keywords_calling_convention_api __pascal __far
+#define mk_win_base_keywords_dll_export
+#define mk_win_base_keywords_dll_import
 #else
 #define mk_win_base_keywords_near
 #define mk_win_base_keywords_far
 #define mk_win_base_keywords_calling_convention_api __stdcall
-#endif
-
-
 #define mk_win_base_keywords_dll_export __declspec(dllexport)
 #define mk_win_base_keywords_dll_import __declspec(dllimport)
+#endif
 
 
 #endif
