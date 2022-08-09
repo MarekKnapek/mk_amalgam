@@ -64,4 +64,21 @@
 #endif
 
 
+#define mk_win_base_platform_osver_30 3000
+#define mk_win_base_platform_osver_31 3001
+#define mk_win_base_platform_osver_35 3002
+#define mk_win_base_platform_osver_40 3003
+#define mk_win_base_platform_osver_50 3004
+#define mk_win_base_platform_osver_51 3005
+#ifndef mk_win_base_platform_osver
+#if mk_win_base_platform_os == mk_win_base_platform_os_win16
+#define mk_win_base_platform_osver mk_win_base_platform_osver_30
+#elif mk_win_base_platform_os == mk_win_base_platform_os_win32
+#define mk_win_base_platform_osver mk_win_base_platform_osver_31
+#elif mk_win_base_platform_os == mk_win_base_platform_os_win64
+#define mk_win_base_platform_osver mk_win_base_platform_osver_51
+#endif
+#endif
+
+
 #endif

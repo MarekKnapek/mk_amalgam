@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup Label="ProjectConfigurations">
+		<ProjectConfiguration Include="Debug|Win32">
+			<Configuration>Debug</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release|Win32">
+			<Configuration>Release</Configuration>
+			<Platform>Win32</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Debug|x64">
+			<Configuration>Debug</Configuration>
+			<Platform>x64</Platform>
+		</ProjectConfiguration>
+		<ProjectConfiguration Include="Release|x64">
+			<Configuration>Release</Configuration>
+			<Platform>x64</Platform>
+		</ProjectConfiguration>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_win\projects\jumbo\mk_win.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_app.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_main.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_parent.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_mdi.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Debug'">true</ExcludedFromBuild></ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_win\projects\jumbo\mk_win.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_app.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_parent.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_parent_constants.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<ResourceCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_parent.rc"/>
+	</ItemGroup>
+	<PropertyGroup Label="Globals">
+		<VCProjectVersion>16.0</VCProjectVersion>
+		<Keyword>Win32Proj</Keyword>
+		<ProjectGuid>{389533e2-a829-4bd5-a2e6-6102e9988eb6}</ProjectGuid>
+		<RootNamespace>mkmdi</RootNamespace>
+		<WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+	</PropertyGroup>
+	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props"/>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+		<ConfigurationType>Application</ConfigurationType>
+		<UseDebugLibraries>true</UseDebugLibraries>
+		<PlatformToolset>v143</PlatformToolset>
+		<CharacterSet>Unicode</CharacterSet>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+		<ConfigurationType>Application</ConfigurationType>
+		<UseDebugLibraries>false</UseDebugLibraries>
+		<PlatformToolset>v143</PlatformToolset>
+		<WholeProgramOptimization>true</WholeProgramOptimization>
+		<CharacterSet>Unicode</CharacterSet>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+		<ConfigurationType>Application</ConfigurationType>
+		<UseDebugLibraries>true</UseDebugLibraries>
+		<PlatformToolset>v143</PlatformToolset>
+		<CharacterSet>Unicode</CharacterSet>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+		<ConfigurationType>Application</ConfigurationType>
+		<UseDebugLibraries>false</UseDebugLibraries>
+		<PlatformToolset>v143</PlatformToolset>
+		<WholeProgramOptimization>true</WholeProgramOptimization>
+		<CharacterSet>Unicode</CharacterSet>
+	</PropertyGroup>
+	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
+	<ImportGroup Label="ExtensionSettings">
+	</ImportGroup>
+	<ImportGroup Label="Shared">
+	</ImportGroup>
+	<ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+		<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform"/>
+	</ImportGroup>
+	<ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+		<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform"/>
+	</ImportGroup>
+	<ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+		<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform"/>
+	</ImportGroup>
+	<ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+		<Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform"/>
+	</ImportGroup>
+	<PropertyGroup Label="UserMacros"/>
+	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+		<ClCompile>
+			<WarningLevel>EnableAllWarnings</WarningLevel>
+			<SDLCheck>true</SDLCheck>
+			<PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<ConformanceMode>true</ConformanceMode>
+			<DisableSpecificWarnings>4464;4711;4820;5045</DisableSpecificWarnings>
+		</ClCompile>
+		<Link>
+			<SubSystem>Windows</SubSystem>
+			<GenerateDebugInformation>true</GenerateDebugInformation>
+		</Link>
+	</ItemDefinitionGroup>
+	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+		<ClCompile>
+			<WarningLevel>EnableAllWarnings</WarningLevel>
+			<FunctionLevelLinking>true</FunctionLevelLinking>
+			<IntrinsicFunctions>true</IntrinsicFunctions>
+			<SDLCheck>true</SDLCheck>
+			<PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<ConformanceMode>true</ConformanceMode>
+			<DisableSpecificWarnings>4464;4711;4820;5045</DisableSpecificWarnings>
+		</ClCompile>
+		<Link>
+			<SubSystem>Windows</SubSystem>
+			<EnableCOMDATFolding>true</EnableCOMDATFolding>
+			<OptimizeReferences>true</OptimizeReferences>
+			<GenerateDebugInformation>true</GenerateDebugInformation>
+		</Link>
+	</ItemDefinitionGroup>
+	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+		<ClCompile>
+			<WarningLevel>EnableAllWarnings</WarningLevel>
+			<SDLCheck>true</SDLCheck>
+			<PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<ConformanceMode>true</ConformanceMode>
+			<DisableSpecificWarnings>4464;4711;4820;5045</DisableSpecificWarnings>
+		</ClCompile>
+		<Link>
+			<SubSystem>Windows</SubSystem>
+			<GenerateDebugInformation>true</GenerateDebugInformation>
+		</Link>
+	</ItemDefinitionGroup>
+	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+		<ClCompile>
+			<WarningLevel>EnableAllWarnings</WarningLevel>
+			<FunctionLevelLinking>true</FunctionLevelLinking>
+			<IntrinsicFunctions>true</IntrinsicFunctions>
+			<SDLCheck>true</SDLCheck>
+			<PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<ConformanceMode>true</ConformanceMode>
+			<DisableSpecificWarnings>4464;4711;4820;5045</DisableSpecificWarnings>
+		</ClCompile>
+		<Link>
+			<SubSystem>Windows</SubSystem>
+			<EnableCOMDATFolding>true</EnableCOMDATFolding>
+			<OptimizeReferences>true</OptimizeReferences>
+			<GenerateDebugInformation>true</GenerateDebugInformation>
+		</Link>
+	</ItemDefinitionGroup>
+	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>
+	<ImportGroup Label="ExtensionTargets">
+	</ImportGroup>
+</Project>

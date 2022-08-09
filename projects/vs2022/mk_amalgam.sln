@@ -11,7 +11,10 @@ Project("{2150e333-8fdc-42a3-9474-1a3956d46de8}") = "Solution Items", "Solution 
 EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_int", "..\..\libs\mk_int\projects\vs2022\mk_int.vcxitems", "{83700097-ac5b-4642-9b9a-2d5f5db0026c}" EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_int_fuzz", "..\..\libs\mk_int_fuzz\projects\vs2022\mk_int_fuzz.vcxproj", "{935d11b5-2b4d-43c8-99bc-a3f7bf1bffa3}" EndProject
+Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_mdi", "..\..\libs\mk_mdi\projects\vs2022\mk_mdi.vcxproj", "{389533e2-a829-4bd5-a2e6-6102e9988eb6}" EndProject
+Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_std", "..\..\libs\mk_std\projects\vs2022\mk_std.vcxitems", "{4347c505-9db0-4190-aca5-9a2c74dee7cb}" EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_utils", "..\..\libs\mk_utils\projects\vs2022\mk_utils.vcxitems", "{635870d5-81aa-4df4-8ca3-37c018fd525d}" EndProject
+Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_win", "..\..\libs\mk_win\projects\vs2022\mk_win.vcxitems", "{492e7943-ab62-40ce-8ac9-9e9e582dfb02}" EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_win_base", "..\..\libs\mk_win_base\projects\vs2022\mk_win_base.vcxitems", "{a44b038c-2c60-4552-802a-6b0880042401}" EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_win_base_tests", "..\..\libs\mk_win_base_tests\projects\vs2022\mk_win_base_tests.vcxproj", "{9eb7bb3e-d204-49ce-a249-a6db3e40ef39}" EndProject
 Global
@@ -22,6 +25,14 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{389533e2-a829-4bd5-a2e6-6102e9988eb6}.Debug|x64.ActiveCfg = Debug|x64
+		{389533e2-a829-4bd5-a2e6-6102e9988eb6}.Debug|x64.Build.0 = Debug|x64
+		{389533e2-a829-4bd5-a2e6-6102e9988eb6}.Debug|x86.ActiveCfg = Debug|Win32
+		{389533e2-a829-4bd5-a2e6-6102e9988eb6}.Debug|x86.Build.0 = Debug|Win32
+		{389533e2-a829-4bd5-a2e6-6102e9988eb6}.Release|x64.ActiveCfg = Release|x64
+		{389533e2-a829-4bd5-a2e6-6102e9988eb6}.Release|x64.Build.0 = Release|x64
+		{389533e2-a829-4bd5-a2e6-6102e9988eb6}.Release|x86.ActiveCfg = Release|Win32
+		{389533e2-a829-4bd5-a2e6-6102e9988eb6}.Release|x86.Build.0 = Release|Win32
 		{935d11b5-2b4d-43c8-99bc-a3f7bf1bffa3}.Debug|x64.ActiveCfg = Debug|x64
 		{935d11b5-2b4d-43c8-99bc-a3f7bf1bffa3}.Debug|x64.Build.0 = Debug|x64
 		{935d11b5-2b4d-43c8-99bc-a3f7bf1bffa3}.Debug|x86.ActiveCfg = Debug|Win32
