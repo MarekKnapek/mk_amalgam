@@ -1,0 +1,22 @@
+#include "mk_mdi_parent_constants.h"
+
+
+mk_mdi_parent_menu MENU
+BEGIN
+	POPUP "&File"
+	BEGIN
+		MENUITEM "&New File", mk_mdi_parent_menu_id_file_new_file
+		MENUITEM "&Clos File", mk_mdi_parent_menu_id_file_close_file
+		MENUITEM SEPARATOR
+		MENUITEM "New &Window", mk_mdi_parent_menu_id_file_new_window
+		MENUITEM "Clos&e Window", mk_mdi_parent_menu_id_file_close_window
+	END
+	POPUP "&Window"
+	BEGIN
+		MENUITEM "&Cascade", 1
+		MENUITEM "Tile &Vertically", 2
+		MENUITEM "Tile &Horizontally", 3
+		MENUITEM "&Arrange Icons", 4
+		MENUITEM "&Close All", 5
+	END
+END

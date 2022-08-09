@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup Label="Globals">
+		<MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+		<HasSharedItems>true</HasSharedItems>
+		<ItemsProjectGuid>{492e7943-ab62-40ce-8ac9-9e9e582dfb02}</ItemsProjectGuid>
+	</PropertyGroup>
+	<ItemDefinitionGroup>
+		<ClCompile>
+			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+		</ClCompile>
+	</ItemDefinitionGroup>
+	<ItemGroup>
+		<ProjectCapability Include="SourceItemsFromImports"/>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_api.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_char.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_module.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_str.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_unicode.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_brush.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_class.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_cursor.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_icon.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_message.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_window.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_win.h"/>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_module.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_str.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_unicode.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_brush.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_class.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_cursor.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_icon.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_message.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_window.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_win.c"/>
+	</ItemGroup>
+</Project>
