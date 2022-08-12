@@ -11,6 +11,7 @@
 #include "../../src/mk_win_user_class.c"
 #include "../../src/mk_win_user_cursor.c"
 #include "../../src/mk_win_user_icon.c"
+#include "../../src/mk_win_user_menu.c"
 #include "../../src/mk_win_user_message.c"
 #include "../../src/mk_win_user_window.c"
 

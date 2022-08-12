@@ -26,6 +26,7 @@ mk_jumbo int mk_std_ptr_buff_construct(mk_std_ptr_buff_t* ptr_buff)
 mk_jumbo int mk_std_ptr_buff_destruct(mk_std_ptr_buff_t* ptr_buff)
 {
 	mk_assert(ptr_buff);
+	mk_assert(ptr_buff->m_count == 0);
 
 	mk_try(mk_std_buffer_deinit(&ptr_buff->m_ptrs));
 
@@ -43,7 +44,7 @@ mk_jumbo int mk_std_ptr_buff_get_count(mk_std_ptr_buff_t* ptr_buff, size_t* coun
 	return 0;
 }
 
-mk_jumbo int mk_std_ptr_buffer_get_element(mk_std_ptr_buff_t* ptr_buff, size_t idx, void** element)
+mk_jumbo int mk_std_ptr_buff_get_element(mk_std_ptr_buff_t* ptr_buff, size_t idx, void** element)
 {
 	void** data;
 

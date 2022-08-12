@@ -2,6 +2,7 @@
 
 #include "mk_win_api.h"
 #include "mk_win_unicode.h"
+#include "mk_win_user_message.h"
 
 #include "../../mk_utils/src/mk_assert.h"
 #include "../../mk_utils/src/mk_jumbo.h"
@@ -175,6 +176,70 @@ mk_jumbo int mk_win_user_window_defproc(mk_win_base_user_types_hwnd_t hwnd, mk_w
 	#undef DefWindowProcM
 }
 
+mk_jumbo int mk_win_user_window_defframeproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_user_types_hwnd_t mdi, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_user_types_lresult_t* lres)
+{
+	#if mk_win_api == mk_win_api_old
+	#define DefFrameProcM DefFrameProc
+	#elif mk_win_api == mk_win_api_ansi
+	#define DefFrameProcM DefFrameProcA
+	#elif mk_win_api == mk_win_api_wide
+	#define DefFrameProcM DefFrameProcW
+	#endif
+
+	mk_win_base_user_types_lresult_t lr;
+	#if mk_win_api != mk_win_api_both
+	lr = DefFrameProcM(hwnd, mdi, msg, wparam, lparam);
+	#else
+	int unicode_enabled;
+	mk_try(mk_win_unicode_enabled(&unicode_enabled));
+	if(!unicode_enabled)
+	{
+		lr = DefFrameProcA(hwnd, mdi, msg, wparam, lparam);
+	}
+	else
+	{
+		lr = DefFrameProcW(hwnd, mdi, msg, wparam, lparam);
+	}
+	#endif
+	mk_assert(lres);
+	*lres = lr;
+	return 0;
+
+	#undef DefFrameProcM
+}
+
+mk_jumbo int mk_win_user_window_defmdichildproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_user_types_lresult_t* lres)
+{
+	#if mk_win_api == mk_win_api_old
+	#define DefMDIChildProcM DefMDIChildProc
+	#elif mk_win_api == mk_win_api_ansi
+	#define DefMDIChildProcM DefMDIChildProcA
+	#elif mk_win_api == mk_win_api_wide
+	#define DefMDIChildProcM DefMDIChildProcW
+	#endif
+	
+	mk_win_base_user_types_lresult_t lr;
+	#if mk_win_api != mk_win_api_both
+	lr = DefMDIChildProcM(hwnd, msg, wparam, lparam);
+	#else
+	int unicode_enabled;
+	mk_try(mk_win_unicode_enabled(&unicode_enabled));
+	if(!unicode_enabled)
+	{
+		lr = DefMDIChildProcA(hwnd, msg, wparam, lparam);
+	}
+	else
+	{
+		lr = DefMDIChildProcW(hwnd, msg, wparam, lparam);
+	}
+	#endif
+	mk_assert(lres);
+	*lres = lr;
+	return 0;
+
+	#undef DefMDIChildProcM
+}
+
 mk_jumbo int mk_win_user_window_show(mk_win_base_user_types_hwnd_t hwnd, int show, mk_win_base_types_bool_t* ret)
 {
 	mk_win_base_types_bool_t b;
@@ -187,7 +252,7 @@ mk_jumbo int mk_win_user_window_show(mk_win_base_user_types_hwnd_t hwnd, int sho
 	return 0;
 }
 
-mk_jumbo int mk_win_user_window_message_post(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_types_bool_t* ret)
+mk_jumbo int mk_win_user_window_post(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_types_bool_t* ret)
 {
 	#if mk_win_api == mk_win_api_old
 	#define PostMessageM PostMessage
@@ -217,11 +282,137 @@ mk_jumbo int mk_win_user_window_message_post(mk_win_base_user_types_hwnd_t hwnd,
 	#undef PostMessageM
 }
 
-mk_jumbo int mk_win_user_window_message_post_close(mk_win_base_user_types_hwnd_t hwnd)
+mk_jumbo int mk_win_user_window_send(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_user_types_lresult_t* ret)
+{
+	#if mk_win_api == mk_win_api_old
+	#define SendMessageM SendMessage
+	#elif mk_win_api == mk_win_api_ansi
+	#define SendMessageM SendMessageA
+	#elif mk_win_api == mk_win_api_wide
+	#define SendMessageM SendMessageW
+	#endif
+	mk_win_base_user_types_lresult_t r;
+	#if mk_win_api != mk_win_api_both
+	r = SendMessageM(hwnd, msg, wparam, lparam);
+	#else
+	int unicode_enabled;
+	mk_try(mk_win_unicode_enabled(&unicode_enabled));
+	if(!unicode_enabled)
+	{
+		r = SendMessageA(hwnd, msg, wparam, lparam);
+	}
+	else
+	{
+		r = SendMessageW(hwnd, msg, wparam, lparam);
+	}
+	#endif
+	mk_assert(ret);
+	*ret = r;
+	return 0;
+	#undef SendMessageM
+}
+
+mk_jumbo int mk_win_user_window_is_child(mk_win_base_user_types_hwnd_t parent, mk_win_base_user_types_hwnd_t child, mk_win_base_types_bool_t* ret)
 {
 	mk_win_base_types_bool_t b;
 
-	mk_try(mk_win_user_window_message_post(hwnd, mk_win_base_user_types_window_wm_close, 0, 0, &b));
+	mk_assert(ret);
+
+	b = IsChild(parent, child);
+	*ret = b;
 
 	return 0;
+}
+
+
+mk_jumbo int mk_win_user_window_post_close(mk_win_base_user_types_hwnd_t hwnd)
+{
+	mk_win_base_types_bool_t b;
+
+	mk_try(mk_win_user_window_post(hwnd, mk_win_base_user_types_window_wm_close, 0, 0, &b));
+
+	return 0;
+}
+
+
+mk_jumbo int mk_win_user_window_send_close(mk_win_base_user_types_hwnd_t hwnd)
+{
+	mk_win_base_user_types_lresult_t r;
+
+	mk_try(mk_win_user_window_send(hwnd, mk_win_base_user_types_window_wm_close, 0, 0, &r));
+	(void)r;
+
+	return 0;
+}
+
+mk_jumbo int mk_win_user_window_send_mdicreate(mk_win_base_user_types_hwnd_t hwnd, mk_win_user_window_mdicreate_pct mdi, mk_win_base_user_types_hwnd_t* mdihwnd)
+{
+	#if mk_win_api == mk_win_api_old
+	#define mk_win_base_user_wm_mdicreate_m_t mk_win_base_user_wm_mdicreate_a_t
+	#define mk_win_str_to_m_z mk_win_str_to_narrow_z
+	#elif mk_win_api == mk_win_api_ansi
+	#define mk_win_base_user_wm_mdicreate_m_t mk_win_base_user_wm_mdicreate_a_t
+	#define mk_win_str_to_m_z mk_win_str_to_narrow_z
+	#elif mk_win_api == mk_win_api_wide
+	#define mk_win_base_user_wm_mdicreate_m_t mk_win_base_user_wm_mdicreate_w_t
+	#define mk_win_str_to_m_z mk_win_str_to_wide_z
+	#endif
+	#if mk_win_api != mk_win_api_both
+	mk_win_base_user_wm_mdicreate_m_t wmdi;
+	mk_win_base_user_types_lresult_t lres;
+	mk_try(mk_win_str_to_m_z(mdi->m_class_name, 0, &wmdi.m_class_name));
+	mk_try(mk_win_str_to_m_z(mdi->m_window_name, 1, &wmdi.m_window_name));
+	wmdi.m_instance = mdi->m_instance;
+	wmdi.m_x = mdi->m_x;
+	wmdi.m_y = mdi->m_y;
+	wmdi.m_width = mdi->m_width;
+	wmdi.m_height = mdi->m_height;
+	wmdi.m_style = mdi->m_style;
+	wmdi.m_param = mdi->m_param;
+	mk_try(mk_win_user_window_send(hwnd, mk_win_user_message_id_mdicreate, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_user_wm_mdicreate_a_lpct)&wmdi, &lres));
+	mk_assert(mdihwnd);
+	*mdihwnd = (mk_win_base_user_types_hwnd_t)lres;
+	return 0;
+	#else
+	int unicode_enabled;
+	mk_try(mk_win_unicode_enabled(&unicode_enabled));
+	if(!unicode_enabled)
+	{
+		mk_win_base_user_wm_mdicreate_a_t wmdi;
+		mk_win_base_user_types_lresult_t lres;
+		mk_try(mk_win_str_to_narrow_z(mdi->m_class_name, 0, &wmdi.m_class_name));
+		mk_try(mk_win_str_to_narrow_z(mdi->m_window_name, 1, &wmdi.m_window_name));
+		wmdi.m_instance = mdi->m_instance;
+		wmdi.m_x = mdi->m_x;
+		wmdi.m_y = mdi->m_y;
+		wmdi.m_width = mdi->m_width;
+		wmdi.m_height = mdi->m_height;
+		wmdi.m_style = mdi->m_style;
+		wmdi.m_param = mdi->m_param;
+		mk_try(mk_win_user_window_send(hwnd, mk_win_user_message_id_mdicreate, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_user_wm_mdicreate_a_lpct)&wmdi, &lres));
+		mk_assert(mdihwnd);
+		*mdihwnd = (mk_win_base_user_types_hwnd_t)lres;
+		return 0;
+	}
+	else
+	{
+		mk_win_base_user_wm_mdicreate_w_t wmdi;
+		mk_win_base_user_types_lresult_t lres;
+		mk_try(mk_win_str_to_wide_z(mdi->m_class_name, 0, &wmdi.m_class_name));
+		mk_try(mk_win_str_to_wide_z(mdi->m_window_name, 1, &wmdi.m_window_name));
+		wmdi.m_instance = mdi->m_instance;
+		wmdi.m_x = mdi->m_x;
+		wmdi.m_y = mdi->m_y;
+		wmdi.m_width = mdi->m_width;
+		wmdi.m_height = mdi->m_height;
+		wmdi.m_style = mdi->m_style;
+		wmdi.m_param = mdi->m_param;
+		mk_try(mk_win_user_window_send(hwnd, mk_win_user_message_id_mdicreate, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_user_wm_mdicreate_a_lpct)&wmdi, &lres));
+		mk_assert(mdihwnd);
+		*mdihwnd = (mk_win_base_user_types_hwnd_t)lres;
+		return 0;
+	}
+	#endif
+	#undef mk_win_base_user_wm_mdicreate_m_t
+	#undef mk_win_str_to_m_z
 }

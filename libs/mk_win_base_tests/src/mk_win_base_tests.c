@@ -399,5 +399,79 @@ static mk_inline int mk_win_base_tests_user_types(void)
 	mk_assert(mk_alignof(mk_win_base_user_types_wm_create_w_t) == mk_alignof(CREATESTRUCTW));
 	#endif
 
+	mk_assert(sizeof(((mk_win_base_user_client_create_t*)NULL)->m_menu) == sizeof(((CLIENTCREATESTRUCT*)NULL)->hWindowMenu));
+	mk_assert(sizeof(((mk_win_base_user_client_create_t*)NULL)->m_first_child_id) == sizeof(((CLIENTCREATESTRUCT*)NULL)->idFirstChild));
+	mk_assert(mk_alignof(((mk_win_base_user_client_create_t*)NULL)->m_menu) == mk_alignof(((CLIENTCREATESTRUCT*)NULL)->hWindowMenu));
+	mk_assert(mk_alignof(((mk_win_base_user_client_create_t*)NULL)->m_first_child_id) == mk_alignof(((CLIENTCREATESTRUCT*)NULL)->idFirstChild));
+	mk_assert(offsetof(mk_win_base_user_client_create_t, m_menu) == offsetof(CLIENTCREATESTRUCT, hWindowMenu));
+	mk_assert(offsetof(mk_win_base_user_client_create_t, m_first_child_id) == offsetof(CLIENTCREATESTRUCT, idFirstChild));
+	mk_assert(sizeof(mk_win_base_user_client_create_t) == sizeof(CLIENTCREATESTRUCT));
+	mk_assert(mk_alignof(mk_win_base_user_client_create_t) == mk_alignof(CLIENTCREATESTRUCT));
+
+	#if mk_win_base_platform_os == mk_win_base_platform_os_win16
+	#define MDICREATESTRUCTA MDICREATESTRUCT
+	#endif
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_class_name) == sizeof(((MDICREATESTRUCTA*)NULL)->szClass));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_window_name) == sizeof(((MDICREATESTRUCTA*)NULL)->szTitle));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_instance) == sizeof(((MDICREATESTRUCTA*)NULL)->hOwner));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_x) == sizeof(((MDICREATESTRUCTA*)NULL)->x));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_y) == sizeof(((MDICREATESTRUCTA*)NULL)->y));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_width) == sizeof(((MDICREATESTRUCTA*)NULL)->cx));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_height) == sizeof(((MDICREATESTRUCTA*)NULL)->cy));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_style) == sizeof(((MDICREATESTRUCTA*)NULL)->style));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_param) == sizeof(((MDICREATESTRUCTA*)NULL)->lParam));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_class_name) == mk_alignof(((MDICREATESTRUCTA*)NULL)->szClass));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_window_name) == mk_alignof(((MDICREATESTRUCTA*)NULL)->szTitle));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_instance) == mk_alignof(((MDICREATESTRUCTA*)NULL)->hOwner));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_x) == mk_alignof(((MDICREATESTRUCTA*)NULL)->x));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_y) == mk_alignof(((MDICREATESTRUCTA*)NULL)->y));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_width) == mk_alignof(((MDICREATESTRUCTA*)NULL)->cx));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_height) == mk_alignof(((MDICREATESTRUCTA*)NULL)->cy));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_style) == mk_alignof(((MDICREATESTRUCTA*)NULL)->style));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_a_t*)NULL)->m_param) == mk_alignof(((MDICREATESTRUCTA*)NULL)->lParam));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_a_t, m_class_name) == offsetof(MDICREATESTRUCTA, szClass));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_a_t, m_window_name) == offsetof(MDICREATESTRUCTA, szTitle));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_a_t, m_instance) == offsetof(MDICREATESTRUCTA, hOwner));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_a_t, m_x) == offsetof(MDICREATESTRUCTA, x));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_a_t, m_y) == offsetof(MDICREATESTRUCTA, y));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_a_t, m_width) == offsetof(MDICREATESTRUCTA, cx));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_a_t, m_height) == offsetof(MDICREATESTRUCTA, cy));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_a_t, m_style) == offsetof(MDICREATESTRUCTA, style));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_a_t, m_param) == offsetof(MDICREATESTRUCTA, lParam));
+	mk_assert(sizeof(mk_win_base_user_wm_mdicreate_a_t) == sizeof(MDICREATESTRUCTA));
+	mk_assert(mk_alignof(mk_win_base_user_wm_mdicreate_a_t) == mk_alignof(MDICREATESTRUCTA));
+
+	#if mk_win_base_platform_os != mk_win_base_platform_os_win16
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_class_name) == sizeof(((MDICREATESTRUCTW*)NULL)->szClass));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_window_name) == sizeof(((MDICREATESTRUCTW*)NULL)->szTitle));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_instance) == sizeof(((MDICREATESTRUCTW*)NULL)->hOwner));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_x) == sizeof(((MDICREATESTRUCTW*)NULL)->x));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_y) == sizeof(((MDICREATESTRUCTW*)NULL)->y));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_width) == sizeof(((MDICREATESTRUCTW*)NULL)->cx));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_height) == sizeof(((MDICREATESTRUCTW*)NULL)->cy));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_style) == sizeof(((MDICREATESTRUCTW*)NULL)->style));
+	mk_assert(sizeof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_param) == sizeof(((MDICREATESTRUCTW*)NULL)->lParam));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_class_name) == mk_alignof(((MDICREATESTRUCTW*)NULL)->szClass));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_window_name) == mk_alignof(((MDICREATESTRUCTW*)NULL)->szTitle));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_instance) == mk_alignof(((MDICREATESTRUCTW*)NULL)->hOwner));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_x) == mk_alignof(((MDICREATESTRUCTW*)NULL)->x));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_y) == mk_alignof(((MDICREATESTRUCTW*)NULL)->y));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_width) == mk_alignof(((MDICREATESTRUCTW*)NULL)->cx));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_height) == mk_alignof(((MDICREATESTRUCTW*)NULL)->cy));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_style) == mk_alignof(((MDICREATESTRUCTW*)NULL)->style));
+	mk_assert(mk_alignof(((mk_win_base_user_wm_mdicreate_w_t*)NULL)->m_param) == mk_alignof(((MDICREATESTRUCTW*)NULL)->lParam));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_w_t, m_class_name) == offsetof(MDICREATESTRUCTW, szClass));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_w_t, m_window_name) == offsetof(MDICREATESTRUCTW, szTitle));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_w_t, m_instance) == offsetof(MDICREATESTRUCTW, hOwner));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_w_t, m_x) == offsetof(MDICREATESTRUCTW, x));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_w_t, m_y) == offsetof(MDICREATESTRUCTW, y));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_w_t, m_width) == offsetof(MDICREATESTRUCTW, cx));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_w_t, m_height) == offsetof(MDICREATESTRUCTW, cy));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_w_t, m_style) == offsetof(MDICREATESTRUCTW, style));
+	mk_assert(offsetof(mk_win_base_user_wm_mdicreate_w_t, m_param) == offsetof(MDICREATESTRUCTW, lParam));
+	mk_assert(sizeof(mk_win_base_user_wm_mdicreate_w_t) == sizeof(MDICREATESTRUCTW));
+	mk_assert(mk_alignof(mk_win_base_user_wm_mdicreate_w_t) == mk_alignof(MDICREATESTRUCTW));
+	#endif
+
 	return 0;
 }

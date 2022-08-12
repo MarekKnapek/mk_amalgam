@@ -1,6 +1,7 @@
 #include "../../mk_std/src/mk_std_global.h"
 
 #include "mk_mdi_app.h"
+#include "mk_mdi_global.h"
 
 #include "../../mk_utils/src/mk_assert.h"
 #include "../../mk_utils/src/mk_try.h"
@@ -23,7 +24,7 @@ int mk_win_base_keywords_calling_convention_api WinMain(mk_win_base_types_hinsta
 	mk_try(mk_std_global_init());
 	mk_try(mk_win_global_init());
 	mk_try(mk_win_instance_init(current ? current : previous));
-	mk_try(mk_mdi_app_init());
+	mk_try(mk_mdi_global_init());
 	mk_try(mk_mdi_app_construct(&app));
 
 	mk_try(mk_mdi_app_add_parent(&app));
@@ -32,7 +33,7 @@ int mk_win_base_keywords_calling_convention_api WinMain(mk_win_base_types_hinsta
 	mk_try(mk_mdi_app_get_exit_code(&app, &exit_code));
 
 	mk_try(mk_mdi_app_destruct(&app));
-	mk_try(mk_mdi_app_deinit());
+	mk_try(mk_mdi_global_deinit());
 	mk_try(mk_win_instance_deinit());
 	mk_try(mk_win_global_deinit());
 	mk_try(mk_std_global_deinit());

@@ -13,6 +13,7 @@
 #include "../../src/mk_win_user_class.h"
 #include "../../src/mk_win_user_cursor.h"
 #include "../../src/mk_win_user_icon.h"
+#include "../../src/mk_win_user_menu.h"
 #include "../../src/mk_win_user_message.h"
 #include "../../src/mk_win_user_window.h"
 
