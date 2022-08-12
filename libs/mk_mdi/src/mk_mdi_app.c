@@ -10,30 +10,27 @@
 #include "../../mk_utils/src/mk_try.h"
 
 #include "../../mk_win/src/mk_win_user_message.h"
+#include "../../mk_win/src/mk_win_user_window.h"
 
 #include "../../mk_win_base/src/mk_win_base_user_types.h"
 
 #include <stddef.h>
 
 
-static mk_inline int mk_mdi_app_private_message_process(mk_mdi_app_t* app, mk_win_base_user_types_msg_t const* msg);
+static mk_inline int mk_mdi_app_private_message_process(mk_mdi_app_pt app, mk_win_base_user_types_msg_t const* msg);
 
 
 mk_jumbo int mk_mdi_app_init(void)
 {
-	mk_try(mk_mdi_parent_init());
-
 	return 0;
 }
 
 mk_jumbo int mk_mdi_app_deinit(void)
 {
-	mk_try(mk_mdi_parent_deinit());
-
 	return 0;
 }
 
-mk_jumbo int mk_mdi_app_construct(mk_mdi_app_t* app)
+mk_jumbo int mk_mdi_app_construct(mk_mdi_app_pt app)
 {
 	mk_assert(app);
 
@@ -43,7 +40,7 @@ mk_jumbo int mk_mdi_app_construct(mk_mdi_app_t* app)
 	return 0;
 }
 
-mk_jumbo int mk_mdi_app_destruct(mk_mdi_app_t* app)
+mk_jumbo int mk_mdi_app_destruct(mk_mdi_app_pt app)
 {
 	mk_assert(app);
 
@@ -52,7 +49,7 @@ mk_jumbo int mk_mdi_app_destruct(mk_mdi_app_t* app)
 	return 0;
 }
 
-mk_jumbo int mk_mdi_app_get_exit_code(mk_mdi_app_t* app, int* exit_code)
+mk_jumbo int mk_mdi_app_get_exit_code(mk_mdi_app_pt app, int* exit_code)
 {
 	mk_assert(app);
 	mk_assert(exit_code);
@@ -62,7 +59,7 @@ mk_jumbo int mk_mdi_app_get_exit_code(mk_mdi_app_t* app, int* exit_code)
 	return 0;
 }
 
-mk_jumbo int mk_mdi_app_add_parent(mk_mdi_app_t* app)
+mk_jumbo int mk_mdi_app_add_parent(mk_mdi_app_pt app)
 {
 	mk_mdi_parent_pt parent;
 
@@ -76,7 +73,7 @@ mk_jumbo int mk_mdi_app_add_parent(mk_mdi_app_t* app)
 	return 0;
 }
 
-mk_jumbo int mk_mdi_app_show_last_parent(mk_mdi_app_t* app, int show)
+mk_jumbo int mk_mdi_app_show_last_parent(mk_mdi_app_pt app, int show)
 {
 	size_t count;
 	mk_mdi_parent_pt parent;
@@ -85,13 +82,13 @@ mk_jumbo int mk_mdi_app_show_last_parent(mk_mdi_app_t* app, int show)
 
 	mk_try(mk_std_ptr_buff_get_count(&app->m_parents, &count));
 	mk_assert(count != 0);
-	mk_try(mk_std_ptr_buffer_get_element(&app->m_parents, count - 1, &parent));
+	mk_try(mk_std_ptr_buff_get_element(&app->m_parents, count - 1, &parent));
 	mk_try(mk_mdi_parent_show(parent, show));
 
 	return 0;
 }
 
-mk_jumbo int mk_mdi_app_run(mk_mdi_app_t* app)
+mk_jumbo int mk_mdi_app_run(mk_mdi_app_pt app)
 {
 	mk_win_base_user_types_msg_t msg;
 	mk_win_base_types_bool_t b;
@@ -113,7 +110,7 @@ mk_jumbo int mk_mdi_app_run(mk_mdi_app_t* app)
 	return 0;
 }
 
-mk_jumbo int mk_mdi_app_on_parent_destroy(mk_mdi_app_t* app, struct mk_mdi_parent_s* parent)
+mk_jumbo int mk_mdi_app_on_parent_destroy(mk_mdi_app_pt app, mk_mdi_parent_pt parent)
 {
 	size_t count;
 
@@ -133,16 +130,36 @@ mk_jumbo int mk_mdi_app_on_parent_destroy(mk_mdi_app_t* app, struct mk_mdi_paren
 }
 
 
-static mk_inline int mk_mdi_app_private_message_process(mk_mdi_app_t* app, mk_win_base_user_types_msg_t const* msg)
+static mk_inline int mk_mdi_app_private_message_process(mk_mdi_app_pt app, mk_win_base_user_types_msg_t const* msg)
 {
+	mk_win_base_types_bool_t mdi_translated;
+	size_t count;
+	size_t i;
+	mk_mdi_parent_pt parent;
+	mk_win_base_types_bool_t is_child;
 	mk_win_base_types_bool_t translated;
 	mk_win_base_user_types_lresult_t lres;
 
 	mk_assert(app);
 	mk_assert(msg);
 
-	mk_try(mk_win_user_message_translate(msg, &translated));
-	mk_try(mk_win_user_message_dispatch(msg, &lres));
+	mdi_translated = 0;
+	mk_try(mk_std_ptr_buff_get_count(&app->m_parents, &count));
+	for(i = 0; i != count; ++i)
+	{
+		mk_try(mk_std_ptr_buff_get_element(&app->m_parents, i, &parent));
+		mk_try(mk_win_user_window_is_child(parent->m_hwnd, msg->m_hwnd, &is_child));
+		if(is_child != 0)
+		{
+			mk_try(mk_win_user_message_translate_mdi_sys_accel(parent->m_mdi, msg, &mdi_translated));
+			break;
+		}
+	}
+	if(mdi_translated == 0)
+	{
+		mk_try(mk_win_user_message_translate(msg, &translated));
+		mk_try(mk_win_user_message_dispatch(msg, &lres));
+	}
 
 	return 0;
 }

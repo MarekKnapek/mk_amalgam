@@ -23,6 +23,8 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_win\projects\jumbo\mk_win.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_app.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_child.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_global.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_main.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_parent.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_mdi.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Debug'">true</ExcludedFromBuild></ClCompile>
@@ -32,6 +34,8 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_win\projects\jumbo\mk_win.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_app.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_child.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_global.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_parent.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_mdi_parent_constants.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
 	</ItemGroup>

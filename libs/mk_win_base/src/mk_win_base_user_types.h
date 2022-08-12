@@ -152,5 +152,43 @@ struct mk_win_base_user_types_wm_create_w_s
 typedef struct mk_win_base_user_types_wm_create_w_s mk_win_base_user_types_wm_create_w_t;
 typedef mk_win_base_user_types_wm_create_w_t const mk_win_base_keywords_far* mk_win_base_user_types_wm_create_w_lpct;
 
+struct mk_win_base_user_client_create_s
+{
+	mk_win_base_user_types_hmenu_t m_menu;
+	mk_win_base_types_uint_t m_first_child_id;
+};
+typedef struct mk_win_base_user_client_create_s mk_win_base_user_client_create_t;
+
+struct mk_win_base_user_wm_mdicreate_a_s
+{
+	mk_win_base_types_strac_t m_class_name;
+	mk_win_base_types_strac_t m_window_name;
+	mk_win_base_types_hinstance_t m_instance;
+	int m_x;
+	int m_y;
+	int m_width;
+	int m_height;
+	mk_win_base_types_dword_t m_style;
+	mk_win_base_types_void_t m_param;
+};
+typedef struct mk_win_base_user_wm_mdicreate_a_s mk_win_base_user_wm_mdicreate_a_t;
+typedef mk_win_base_user_wm_mdicreate_a_t const* mk_win_base_user_wm_mdicreate_a_pct;
+typedef mk_win_base_user_wm_mdicreate_a_t const mk_win_base_keywords_far* mk_win_base_user_wm_mdicreate_a_lpct;
+struct mk_win_base_user_wm_mdicreate_w_s
+{
+	mk_win_base_types_strwc_t m_class_name;
+	mk_win_base_types_strwc_t m_window_name;
+	mk_win_base_types_hinstance_t m_instance;
+	int m_x;
+	int m_y;
+	int m_width;
+	int m_height;
+	mk_win_base_types_dword_t m_style;
+	mk_win_base_types_void_t m_param;
+};
+typedef struct mk_win_base_user_wm_mdicreate_w_s mk_win_base_user_wm_mdicreate_w_t;
+typedef mk_win_base_user_wm_mdicreate_w_t const* mk_win_base_user_wm_mdicreate_w_pct;
+typedef mk_win_base_user_wm_mdicreate_w_t const mk_win_base_keywords_far* mk_win_base_user_wm_mdicreate_w_lpct;
+
 
 #endif
