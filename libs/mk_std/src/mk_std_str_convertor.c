@@ -47,13 +47,17 @@ mk_jumbo int mk_std_str_convertor_narrow_to_narrow_z(char const mk_win_base_keyw
 	mk_assert(out);
 	mk_assert(idx >= 0 && idx < mk_std_str_convertor_private_idx_max);
 
-	len = 0;
 	if(in)
 	{
+		len = 0;
 		str = in;
 		while(*str++) ++len;
+		mk_try(mk_std_str_convertor_narrow_to_narrow_s(in, len + 1, idx, out));
 	}
-	mk_try(mk_std_str_convertor_narrow_to_narrow_s(in, len + 1, idx, out));
+	else
+	{
+		*out = NULL;
+	}
 
 	return 0;
 }
@@ -66,13 +70,17 @@ mk_jumbo int mk_std_str_convertor_wide_to_narrow_z(wchar_t const* in, int idx, c
 	mk_assert(out);
 	mk_assert(idx >= 0 && idx < mk_std_str_convertor_private_idx_max);
 
-	len = 0;
 	if(in)
 	{
+		len = 0;
 		str = in;
 		while(*str++) ++len;
+		mk_try(mk_std_str_convertor_wide_to_narrow_s(in, len + 1, idx, out));
 	}
-	mk_try(mk_std_str_convertor_wide_to_narrow_s(in, len + 1, idx, out));
+	else
+	{
+		*out = NULL;
+	}
 
 	return 0;
 }
@@ -85,13 +93,17 @@ mk_jumbo int mk_std_str_convertor_narrow_to_wide_z(char const* in, int idx, wcha
 	mk_assert(out);
 	mk_assert(idx >= 0 && idx < mk_std_str_convertor_private_idx_max);
 
-	len = 0;
 	if(in)
 	{
+		len = 0;
 		str = in;
 		while(*str++) ++len;
+		mk_try(mk_std_str_convertor_narrow_to_wide_s(in, len + 1, idx, out));
 	}
-	mk_try(mk_std_str_convertor_narrow_to_wide_s(in, len + 1, idx, out));
+	else
+	{
+		*out = NULL;
+	}
 
 	return 0;
 }

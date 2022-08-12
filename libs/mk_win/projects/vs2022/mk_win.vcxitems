@@ -25,6 +25,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_class.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_cursor.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_icon.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_menu.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_message.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_window.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_win.h"/>
@@ -39,6 +40,7 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_class.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_cursor.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_icon.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_menu.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_message.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_window.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_win.c"/>

@@ -88,6 +88,20 @@ mk_jumbo int mk_win_user_message_dispatch(mk_win_base_user_types_msg_t const* ms
 	#undef DispatchMessageM
 }
 
+mk_jumbo int mk_win_user_message_translate_mdi_sys_accel(mk_win_base_user_types_hwnd_t mdi, mk_win_base_user_types_msg_t const* msg, mk_win_base_types_bool_t* ret)
+{
+	mk_win_base_types_bool_t b;
+
+	mk_assert(mdi);
+	mk_assert(msg);
+	mk_assert(ret);
+
+	b = TranslateMDISysAccel(mdi, msg);
+	*ret = b;
+
+	return 0;
+}
+
 mk_jumbo int mk_win_user_message_post_quit(int exit_code)
 {
 	PostQuitMessage(exit_code);

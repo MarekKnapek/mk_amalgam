@@ -13,10 +13,11 @@ BEGIN
 	END
 	POPUP "&Window"
 	BEGIN
-		MENUITEM "&Cascade", 1
-		MENUITEM "Tile &Vertically", 2
-		MENUITEM "Tile &Horizontally", 3
-		MENUITEM "&Arrange Icons", 4
-		MENUITEM "&Close All", 5
+		MENUITEM "&Cascade", mk_mdi_parent_menu_id_window_cascade
+		MENUITEM "Cascade in &Z order", mk_mdi_parent_menu_id_window_cascade_zorder
+		MENUITEM "Tile &Vertically", mk_mdi_parent_menu_id_window_tile_vertically
+		MENUITEM "Tile &Horizontally", mk_mdi_parent_menu_id_window_tile_horizontally
+		MENUITEM "Arrange &Icons", mk_mdi_parent_menu_id_window_arrange_icons
+		MENUITEM "Close &All", mk_mdi_parent_menu_id_window_close_all
 	END
 END

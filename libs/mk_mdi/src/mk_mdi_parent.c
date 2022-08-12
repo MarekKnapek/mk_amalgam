@@ -2,17 +2,24 @@
 
 #include "mk_mdi_parent_constants.h"
 #include "mk_mdi_app.h"
+#include "mk_mdi_child.h"
+
+#include "../../mk_std/src/mk_std_gcallocator.h"
+#include "../../mk_std/src/mk_std_ptr_buff.h"
 
 #include "../../mk_utils/src/mk_assert.h"
 #include "../../mk_utils/src/mk_jumbo.h"
 #include "../../mk_utils/src/mk_inline.h"
 #include "../../mk_utils/src/mk_try.h"
 
+#include "../../mk_win/src/mk_win_char.h"
 #include "../../mk_win/src/mk_win_instance.h"
 #include "../../mk_win/src/mk_win_user_brush.h"
 #include "../../mk_win/src/mk_win_user_class.h"
 #include "../../mk_win/src/mk_win_user_cursor.h"
 #include "../../mk_win/src/mk_win_user_icon.h"
+#include "../../mk_win/src/mk_win_user_menu.h"
+#include "../../mk_win/src/mk_win_user_message.h"
 #include "../../mk_win/src/mk_win_user_window.h"
 
 #include "../../mk_win_base/src/mk_win_base_keywords.h"
@@ -22,16 +29,27 @@
 #include <stddef.h>
 
 
+typedef mk_mdi_parent_t mk_win_base_keywords_far* mk_mdi_parent_lpt;
+
+
 static mk_win_char_t const mk_mdi_parent_private_menu_name[] = mk_win_char_c("mk_mdi_parent_menu");
 static mk_win_char_t const mk_mdi_parent_private_class_name[] = mk_win_char_c("mk_mdi_parent_class");
 
 
 static mk_inline int mk_mdi_parent_private_register_class(void);
+static mk_inline int mk_mdi_parent_private_on_create(mk_mdi_parent_pt parent, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_destroy(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_parent_private_on_close(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu_new_file(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu_close_file(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu_new_window(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu_close_window(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_parent_private_on_menu_window_cascade(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_parent_private_on_menu_window_cascade_zorder(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_parent_private_on_menu_window_tile_vertically(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_parent_private_on_menu_window_tile_horizontally(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_parent_private_on_menu_window_arrange_icons(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_parent_private_on_menu_window_close_all(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu(mk_mdi_parent_pt parent, unsigned short menu_id, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_command(mk_mdi_parent_pt parent, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_message(mk_mdi_parent_pt parent, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
@@ -51,9 +69,24 @@ mk_jumbo int mk_mdi_parent_deinit(void)
 	return 0;
 }
 
-mk_jumbo int mk_mdi_parent_construct(mk_mdi_parent_pt parent, struct mk_mdi_app_s* app)
+mk_jumbo int mk_mdi_parent_hwnd2object(mk_win_base_user_types_hwnd_t hwnd, mk_mdi_parent_pt* object)
 {
-	mk_win_user_window_create_t wnd_info;
+	mk_win_base_types_uintptr_t info;
+	mk_mdi_parent_pt obj;
+
+	mk_assert(hwnd);
+	mk_assert(object);
+
+	mk_try(mk_win_user_window_get_info(hwnd, mk_win_base_user_types_window_info_id_userdata, &info));
+	obj = (mk_mdi_parent_pt)(mk_mdi_parent_lpt)info;
+	*object = obj;
+
+	return 0;
+}
+
+mk_jumbo int mk_mdi_parent_construct(mk_mdi_parent_pt parent, mk_mdi_app_pt app)
+{
+	mk_win_user_window_create_t wnd;
 	mk_win_base_user_types_hwnd_t hwnd;
 
 	mk_assert(parent);
@@ -61,20 +94,22 @@ mk_jumbo int mk_mdi_parent_construct(mk_mdi_parent_pt parent, struct mk_mdi_app_
 
 	parent->m_app = app;
 	parent->m_hwnd = NULL;
+	parent->m_mdi = NULL;
+	mk_try(mk_std_ptr_buff_construct(&parent->m_children));
 
-	wnd_info.m_extra_style = mk_win_user_window_style_ex_overlappedwindow;
-	wnd_info.m_class_name = mk_mdi_parent_private_class_name;
-	wnd_info.m_window_name = mk_win_char_c("Parent");
-	wnd_info.m_style = mk_win_user_window_style_overlappedwindow;
-	wnd_info.m_x = mk_win_user_window_default_value;
-	wnd_info.m_y = mk_win_user_window_default_value;
-	wnd_info.m_width = mk_win_user_window_default_value;
-	wnd_info.m_height = mk_win_user_window_default_value;
-	wnd_info.m_parent = NULL;
-	wnd_info.m_menu = NULL;
-	mk_try(mk_win_instance_get(&wnd_info.m_instance));
-	wnd_info.m_param = parent;
-	mk_try(mk_win_user_window_create(&wnd_info, &hwnd));
+	wnd.m_extra_style = mk_win_user_window_style_ex_overlappedwindow;
+	wnd.m_class_name = mk_mdi_parent_private_class_name;
+	wnd.m_window_name = mk_win_char_c("Parent");
+	wnd.m_style = mk_win_user_window_style_overlappedwindow | mk_win_user_window_style_clipchildren | mk_win_user_window_style_visible;
+	wnd.m_x = mk_win_user_window_default_value;
+	wnd.m_y = mk_win_user_window_default_value;
+	wnd.m_width = mk_win_user_window_default_value;
+	wnd.m_height = mk_win_user_window_default_value;
+	wnd.m_parent = NULL;
+	wnd.m_menu = NULL;
+	mk_try(mk_win_instance_get(&wnd.m_instance));
+	wnd.m_param = parent;
+	mk_try(mk_win_user_window_create(&wnd, &hwnd));
 	mk_assert(parent->m_hwnd == hwnd);
 
 	return 0;
@@ -84,6 +119,8 @@ mk_jumbo int mk_mdi_parent_destruct(mk_mdi_parent_pt parent)
 {
 	mk_assert(parent);
 
+	mk_try(mk_std_ptr_buff_destruct(&parent->m_children));
+
 	return 0;
 }
 
@@ -92,6 +129,7 @@ mk_jumbo int mk_mdi_parent_show(mk_mdi_parent_pt parent, int show)
 	mk_win_base_types_bool_t b;
 
 	mk_assert(parent);
+	mk_assert(parent->m_hwnd);
 
 	mk_try(mk_win_user_window_show(parent->m_hwnd, show, &b));
 	(void)b;
@@ -104,7 +142,140 @@ mk_jumbo int mk_mdi_parent_close(mk_mdi_parent_pt parent)
 	mk_assert(parent);
 	mk_assert(parent->m_hwnd);
 
-	mk_try(mk_win_user_window_message_post_close(parent->m_hwnd));
+	mk_try(mk_win_user_window_send_close(parent->m_hwnd));
+
+	return 0;
+}
+
+mk_jumbo int mk_mdi_parent_children_add(mk_mdi_parent_pt parent)
+{
+	mk_mdi_child_pt child;
+
+	mk_assert(parent);
+
+	mk_try(mk_std_ptr_buff_reserve_one(&parent->m_children));
+	mk_try(mk_std_gcallocator_allocate(sizeof(*child), &child));
+	mk_try(mk_std_ptr_buff_append(&parent->m_children, child));
+	mk_try(mk_mdi_child_construct(child, parent));
+
+	return 0;
+}
+
+mk_jumbo int mk_mdi_parent_children_close_active(mk_mdi_parent_pt parent)
+{
+	mk_win_base_types_bool_t b;
+	mk_win_base_user_types_lresult_t lr;
+	mk_win_base_user_types_hwnd_t childwnd;
+	int maximized;
+	mk_mdi_child_pt child;
+
+	mk_assert(parent);
+	mk_assert(parent->m_mdi);
+
+	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mdigetactive, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_types_bool_lpt)&b, &lr));
+	if(lr != 0)
+	{
+		childwnd = (mk_win_base_user_types_hwnd_t)lr;
+		maximized = b != 0;
+		mk_try(mk_mdi_child_hwnd2object(childwnd, &child));
+		mk_assert(child);
+		mk_try(mk_mdi_child_close(child));
+	}
+
+	return 0;
+}
+
+mk_jumbo int mk_mdi_parent_children_cascade(mk_mdi_parent_pt parent)
+{
+	mk_win_base_user_types_lresult_t r;
+
+	mk_assert(parent);
+	mk_assert(parent->m_mdi);
+
+	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mdicascade, 0, 0, &r));
+	(void)r;
+
+	return 0;
+}
+
+mk_jumbo int mk_mdi_parent_children_cascade_zorder(mk_mdi_parent_pt parent)
+{
+	mk_win_base_user_types_lresult_t r;
+
+	mk_assert(parent);
+	mk_assert(parent->m_mdi);
+
+	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mdicascade, mk_win_user_message_param_mditile_zorder, 0, &r));
+	(void)r;
+
+	return 0;
+}
+
+mk_jumbo int mk_mdi_parent_children_tile_vertically(mk_mdi_parent_pt parent)
+{
+	mk_win_base_user_types_lresult_t r;
+
+	mk_assert(parent);
+	mk_assert(parent->m_mdi);
+
+	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mditile, mk_win_user_message_param_mditile_vertical, 0, &r));
+	(void)r;
+
+	return 0;
+}
+
+mk_jumbo int mk_mdi_parent_children_tile_horizontally(mk_mdi_parent_pt parent)
+{
+	mk_win_base_user_types_lresult_t r;
+
+	mk_assert(parent);
+	mk_assert(parent->m_mdi);
+
+	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mditile, mk_win_user_message_param_mditile_horizontal, 0, &r));
+	(void)r;
+
+	return 0;
+}
+
+mk_jumbo int mk_mdi_parent_children_arrange_icons(mk_mdi_parent_pt parent)
+{
+	mk_win_base_user_types_lresult_t r;
+
+	mk_assert(parent);
+	mk_assert(parent->m_mdi);
+
+	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mdiiconarrange, 0, 0, &r));
+	(void)r;
+
+	return 0;
+}
+
+mk_jumbo int mk_mdi_parent_children_close_all(mk_mdi_parent_pt parent)
+{
+	size_t count;
+	size_t i;
+	mk_mdi_child_pt child;
+
+	mk_assert(parent);
+
+	mk_try(mk_std_ptr_buff_get_count(&parent->m_children, &count));
+	for(i = 0; i != count; ++i)
+	{
+		mk_try(mk_std_ptr_buff_get_element(&parent->m_children, count - 1 - i, &child));
+		mk_try(mk_mdi_child_close(child));
+	}
+
+	return 0;
+}
+
+mk_jumbo int mk_mdi_parent_on_child_destroy(mk_mdi_parent_pt parent, mk_mdi_child_pt child)
+{
+	mk_assert(parent);
+	mk_assert(child);
+
+	mk_try(mk_std_ptr_buff_remove_val(&parent->m_children, child));
+	mk_try(mk_mdi_child_destruct(child));
+	mk_try(mk_std_gcallocator_deallocate(child));
 
 	return 0;
 }
@@ -127,17 +298,76 @@ static mk_inline int mk_mdi_parent_private_register_class(void)
 	cls.m_class_name = mk_mdi_parent_private_class_name;
 	cls.m_small_icon = NULL;
 	mk_try(mk_win_user_class_register(&cls, &atom));
+	mk_assert(atom != 0);
+
+	return 0;
+}
+
+static mk_inline int mk_mdi_parent_private_on_create(mk_mdi_parent_pt parent, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	mk_win_base_user_types_wm_create_a_lpct create;
+	mk_win_base_user_client_create_t client_create;
+	mk_win_base_user_types_hmenu_t menu_bar;
+	mk_win_base_user_types_hmenu_t menu_window;
+	mk_win_user_window_create_t wnd;
+	mk_win_base_user_types_hwnd_t mdi;
+
+	mk_assert(parent);
+	mk_assert(lparam != 0);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	create = (mk_win_base_user_types_wm_create_a_lpct)lparam;
+	(void)create;
+
+	mk_try(mk_win_user_menu_get(parent->m_hwnd, &menu_bar));
+	mk_assert(menu_bar);
+	mk_try(mk_win_user_menu_get_sub(menu_bar, 1, &menu_window));
+	mk_assert(menu_window);
+	client_create.m_menu = menu_window;
+	client_create.m_first_child_id = mk_mdi_parent_menu_id_window_children;
+	wnd.m_extra_style = 0;
+	wnd.m_class_name = mk_win_char_c("mdiclient");
+	wnd.m_window_name = NULL;
+	wnd.m_style = mk_win_user_window_style_hscroll | mk_win_user_window_style_vscroll | mk_win_user_window_style_clipchildren | mk_win_user_window_style_visible | mk_win_user_window_style_child;
+	wnd.m_x = 0;
+	wnd.m_y = 0;
+	wnd.m_width = 0;
+	wnd.m_height = 0;
+	wnd.m_parent = parent->m_hwnd;
+	wnd.m_menu = 0;
+	mk_try(mk_win_instance_get(&wnd.m_instance));
+	wnd.m_param = (mk_win_base_types_void_t)&client_create;
+	mk_try(mk_win_user_window_create(&wnd, &mdi));
+	mk_assert(mdi);
+	parent->m_mdi = mdi;
 
 	return 0;
 }
 
 static mk_inline int mk_mdi_parent_private_on_destroy(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
 {
+	mk_win_base_types_uintptr_t prev;
+
 	mk_assert(parent);
 	mk_assert(override_defproc);
 	mk_assert(lres);
 
+	mk_try(mk_win_user_window_set_info(parent->m_hwnd, mk_win_base_user_types_window_info_id_userdata, 0, &prev));
+	mk_assert((mk_mdi_parent_pt)(mk_mdi_parent_lpt)prev == parent);
+
 	mk_try(mk_mdi_app_on_parent_destroy(parent->m_app, parent));
+
+	return 0;
+}
+
+static mk_inline int mk_mdi_parent_private_on_close(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	mk_assert(parent);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	mk_try(mk_mdi_parent_children_close_all(parent));
 
 	return 0;
 }
@@ -148,7 +378,7 @@ static mk_inline int mk_mdi_parent_private_on_menu_new_file(mk_mdi_parent_pt par
 	mk_assert(override_defproc);
 	mk_assert(lres);
 
-	/**/
+	mk_try(mk_mdi_parent_children_add(parent));
 
 	return 0;
 }
@@ -159,7 +389,7 @@ static mk_inline int mk_mdi_parent_private_on_menu_close_file(mk_mdi_parent_pt p
 	mk_assert(override_defproc);
 	mk_assert(lres);
 
-	/**/
+	mk_try(mk_mdi_parent_children_close_active(parent));
 
 	return 0;
 }
@@ -187,6 +417,72 @@ static mk_inline int mk_mdi_parent_private_on_menu_close_window(mk_mdi_parent_pt
 	return 0;
 }
 
+static mk_inline int mk_mdi_parent_private_on_menu_window_cascade(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	mk_assert(parent);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	mk_try(mk_mdi_parent_children_cascade(parent));
+
+	return 0;
+}
+
+static mk_inline int mk_mdi_parent_private_on_menu_window_cascade_zorder(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	mk_assert(parent);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	mk_try(mk_mdi_parent_children_cascade_zorder(parent));
+
+	return 0;
+}
+
+static mk_inline int mk_mdi_parent_private_on_menu_window_tile_vertically(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	mk_assert(parent);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	mk_try(mk_mdi_parent_children_tile_vertically(parent));
+
+	return 0;
+}
+
+static mk_inline int mk_mdi_parent_private_on_menu_window_tile_horizontally(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	mk_assert(parent);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	mk_try(mk_mdi_parent_children_tile_horizontally(parent));
+
+	return 0;
+}
+
+static mk_inline int mk_mdi_parent_private_on_menu_window_arrange_icons(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	mk_assert(parent);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	mk_try(mk_mdi_parent_children_arrange_icons(parent));
+
+	return 0;
+}
+
+static mk_inline int mk_mdi_parent_private_on_menu_window_close_all(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	mk_assert(parent);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	mk_try(mk_mdi_parent_children_close_all(parent));
+
+	return 0;
+}
+
 static mk_inline int mk_mdi_parent_private_on_menu(mk_mdi_parent_pt parent, unsigned short menu_id, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
 {
 	mk_assert(parent);
@@ -199,6 +495,12 @@ static mk_inline int mk_mdi_parent_private_on_menu(mk_mdi_parent_pt parent, unsi
 		case mk_mdi_parent_menu_id_file_close_file: mk_try(mk_mdi_parent_private_on_menu_close_file(parent, override_defproc, lres)); break;
 		case mk_mdi_parent_menu_id_file_new_window: mk_try(mk_mdi_parent_private_on_menu_new_window(parent, override_defproc, lres)); break;
 		case mk_mdi_parent_menu_id_file_close_window: mk_try(mk_mdi_parent_private_on_menu_close_window(parent, override_defproc, lres)); break;
+		case mk_mdi_parent_menu_id_window_cascade: mk_try(mk_mdi_parent_private_on_menu_window_cascade(parent, override_defproc, lres)); break;
+		case mk_mdi_parent_menu_id_window_cascade_zorder: mk_try(mk_mdi_parent_private_on_menu_window_cascade_zorder(parent, override_defproc, lres)); break;
+		case mk_mdi_parent_menu_id_window_tile_vertically: mk_try(mk_mdi_parent_private_on_menu_window_tile_vertically(parent, override_defproc, lres)); break;
+		case mk_mdi_parent_menu_id_window_tile_horizontally: mk_try(mk_mdi_parent_private_on_menu_window_tile_horizontally(parent, override_defproc, lres)); break;
+		case mk_mdi_parent_menu_id_window_arrange_icons: mk_try(mk_mdi_parent_private_on_menu_window_arrange_icons(parent, override_defproc, lres)); break;
+		case mk_mdi_parent_menu_id_window_close_all: mk_try(mk_mdi_parent_private_on_menu_window_close_all(parent, override_defproc, lres)); break;
 	}
 
 	return 0;
@@ -226,7 +528,9 @@ static mk_inline int mk_mdi_parent_private_on_message(mk_mdi_parent_pt parent, m
 
 	switch(msg)
 	{
+		case mk_win_base_user_types_window_wm_create: mk_try(mk_mdi_parent_private_on_create(parent, lparam, override_defproc, lres)); break;
 		case mk_win_base_user_types_window_wm_destroy: mk_try(mk_mdi_parent_private_on_destroy(parent, override_defproc, lres)); break;
+		case mk_win_base_user_types_window_wm_close: mk_try(mk_mdi_parent_private_on_close(parent, override_defproc, lres)); break;
 		case mk_win_base_user_types_window_wm_command: mk_try(mk_mdi_parent_private_on_command(parent, wparam, lparam, override_defproc, lres)); break;
 	}
 
@@ -236,8 +540,8 @@ static mk_inline int mk_mdi_parent_private_on_message(mk_mdi_parent_pt parent, m
 static mk_inline int mk_mdi_parent_private_on_wndproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_user_types_lresult_t* lres)
 {
 	int override_defproc;
-	mk_win_base_types_uintptr_t info;
 	mk_mdi_parent_pt parent;
+	mk_win_base_user_types_hwnd_t mdi;
 
 	mk_assert(hwnd);
 	mk_assert(lres);
@@ -257,15 +561,19 @@ static mk_inline int mk_mdi_parent_private_on_wndproc(mk_win_base_user_types_hwn
 		mk_assert(prev == 0);
 	}
 	override_defproc = 0;
-	mk_try(mk_win_user_window_get_info(hwnd, mk_win_base_user_types_window_info_id_userdata, &info));
-	if(info != 0)
+	mk_try(mk_mdi_parent_hwnd2object(hwnd, &parent));
+	if(parent)
 	{
-		parent = (mk_mdi_parent_pt)(mk_mdi_parent_lpt)info;
+		mdi = parent->m_mdi;
 		mk_try(mk_mdi_parent_private_on_message(parent, msg, wparam, lparam, &override_defproc, lres));
+	}
+	else
+	{
+		mdi = NULL;
 	}
 	if(!override_defproc)
 	{
-		mk_try(mk_win_user_window_defproc(hwnd, msg, wparam, lparam, lres));
+		mk_try(mk_win_user_window_defframeproc(hwnd, mdi, msg, wparam, lparam, lres));
 	}
 
 	return 0;

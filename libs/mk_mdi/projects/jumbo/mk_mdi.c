@@ -3,6 +3,8 @@
 
 
 #include "../../src/mk_mdi_app.c"
+#include "../../src/mk_mdi_child.c"
+#include "../../src/mk_mdi_global.c"
 #include "../../src/mk_mdi_main.c"
 #include "../../src/mk_mdi_parent.c"
 

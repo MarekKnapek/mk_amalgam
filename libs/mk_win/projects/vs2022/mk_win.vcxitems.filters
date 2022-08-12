@@ -16,6 +16,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_class.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_cursor.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_icon.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_menu.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_message.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_window.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_win.h"><Filter>jumbo</Filter></ClInclude>
@@ -30,6 +31,7 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_class.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_cursor.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_icon.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_menu.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_message.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_window.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_win.c"><Filter>jumbo</Filter></ClCompile>

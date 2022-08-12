@@ -32,6 +32,8 @@ typedef mk_win_base_types_int64_t mk_win_base_types_intptr_t;
 #endif
 
 typedef int mk_win_base_types_bool_t;
+typedef mk_win_base_types_bool_t* mk_win_base_types_bool_pt;
+typedef mk_win_base_types_bool_t mk_win_base_keywords_far* mk_win_base_types_bool_lpt;
 typedef unsigned short int mk_win_base_types_atom_t;
 typedef unsigned int mk_win_base_types_uint_t;
 typedef mk_win_base_types_uint32_t mk_win_base_types_dword_t;
