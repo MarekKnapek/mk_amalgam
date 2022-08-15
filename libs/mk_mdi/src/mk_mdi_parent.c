@@ -363,10 +363,34 @@ static mk_inline int mk_mdi_parent_private_on_destroy(mk_mdi_parent_pt parent, i
 
 static mk_inline int mk_mdi_parent_private_on_close(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
 {
+	int ok;
+	size_t count;
+	size_t i;
+	mk_mdi_child_pt child;
+	mk_win_base_user_types_lresult_t lr;
+	mk_win_base_types_bool_t b;
+
 	mk_assert(parent);
 	mk_assert(override_defproc);
 	mk_assert(lres);
 
+	ok = 1;
+	mk_try(mk_std_ptr_buff_get_count(&parent->m_children, &count));
+	for(i = 0; i != count; ++i)
+	{
+		mk_try(mk_std_ptr_buff_get_element(&parent->m_children, i, &child));
+		mk_try(mk_win_user_window_send(child->m_hwnd, mk_win_user_message_id_queryendsession, 0, 0, &lr));
+		if(lr == 0)
+		{
+			ok = 0;
+			break;
+		}
+	}
+	if(ok != 0)
+	{
+		mk_try(mk_win_user_window_show(parent->m_hwnd, mk_win_user_window_show_hide, &b));
+		
+	}
 	mk_try(mk_mdi_parent_children_close_all(parent));
 
 	return 0;
