@@ -11,6 +11,7 @@
 #define mk_win_user_message_id_create          ((unsigned short)0x0001u)
 #define mk_win_user_message_id_destroy         ((unsigned short)0x0002u)
 #define mk_win_user_message_id_close           ((unsigned short)0x0010u)
+#define mk_win_user_message_id_queryendsession ((unsigned short)0x0011u)
 #define mk_win_user_message_id_quit            ((unsigned short)0x0012u)
 #define mk_win_user_message_id_command         ((unsigned short)0x0111u)
 #define mk_win_user_message_id_mdicreate       ((unsigned short)0x0220u)
