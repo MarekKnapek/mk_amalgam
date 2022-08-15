@@ -2,23 +2,12 @@
 #define mk_include_guard_mdi_child
 
 
+#include "mk_mdi_forward.h"
+
 #include "../../mk_utils/src/mk_jumbo.h"
 
 #include "../../mk_win_base/src/mk_win_base_keywords.h"
 #include "../../mk_win_base/src/mk_win_base_user_types.h"
-
-
-struct mk_mdi_app_s;
-typedef struct mk_mdi_app_s mk_mdi_app_t;
-typedef mk_mdi_app_t* mk_mdi_app_pt;
-
-struct mk_mdi_parent_s;
-typedef struct mk_mdi_parent_s mk_mdi_parent_t;
-typedef mk_mdi_parent_t* mk_mdi_parent_pt;
-
-struct mk_mdi_child_s;
-typedef struct mk_mdi_child_s mk_mdi_child_t;
-typedef mk_mdi_child_t* mk_mdi_child_pt;
 
 
 struct mk_mdi_child_s
