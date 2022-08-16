@@ -428,6 +428,7 @@ mk_jumbo void mk_uint_concat(mk_uint_tn, div)(mk_uint_t* out, mk_uint_t const* a
 	mk_assert(out);
 	mk_assert(a);
 	mk_assert(b);
+	mk_assert(*b != 0);
 
 	r = (mk_uint_t)(*a / *b);
 
@@ -441,6 +442,7 @@ mk_jumbo void mk_uint_concat(mk_uint_tn, mod)(mk_uint_t* out, mk_uint_t const* a
 	mk_assert(out);
 	mk_assert(a);
 	mk_assert(b);
+	mk_assert(*b != 0);
 
 	r = (mk_uint_t)(*a % *b);
 
