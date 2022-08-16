@@ -281,6 +281,17 @@ mk_jumbo void mk_uint_mul(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b
 	mk_uint_small_mul(&out->m_data, &a->m_data, &b->m_data);
 }
 
+mk_jumbo void mk_uint_divmod(mk_uint_t* div, mk_uint_t* mod, mk_uint_t const* a, mk_uint_t const* b)
+{
+	mk_assert(div);
+	mk_assert(mod);
+	mk_assert(a);
+	mk_assert(b);
+	mk_assert(!mk_uint_is_zero(b));
+
+	mk_uint_small_divmod(&div->m_data, &mod->m_data, &a->m_data, &b->m_data);
+}
+
 mk_jumbo void mk_uint_div(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b)
 {
 	mk_assert(out);
