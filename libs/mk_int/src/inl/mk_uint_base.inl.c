@@ -421,6 +421,28 @@ mk_jumbo void mk_uint_concat(mk_uint_tn, mulhi)(mk_uint_t* out, mk_uint_t const*
 	#undef mask
 }
 
+mk_jumbo void mk_uint_concat(mk_uint_tn, divmod)(mk_uint_t* div, mk_uint_t* mod, mk_uint_t const* a, mk_uint_t const* b)
+{
+	mk_uint_t aa;
+	mk_uint_t bb;
+	mk_uint_t d;
+	mk_uint_t m;
+
+	mk_assert(div);
+	mk_assert(mod);
+	mk_assert(a);
+	mk_assert(b);
+	mk_assert(*b != 0);
+
+	aa = *a;
+	bb = *b;
+	d = (mk_uint_t)(aa / bb);
+	m = (mk_uint_t)(aa % bb);
+
+	*div = d;
+	*mod = m;
+}
+
 mk_jumbo void mk_uint_concat(mk_uint_tn, div)(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b)
 {
 	mk_uint_t r;

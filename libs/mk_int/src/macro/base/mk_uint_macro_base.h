@@ -43,5 +43,6 @@
 #define mk_uint_small_sub mk_uint_concat(sub)
 #define mk_uint_small_mul mk_uint_concat(mul)
 #define mk_uint_small_mulhi mk_uint_concat(mulhi)
+#define mk_uint_small_divmod mk_uint_concat(divmod)
 #define mk_uint_small_div mk_uint_concat(div)
 #define mk_uint_small_mod mk_uint_concat(mod)

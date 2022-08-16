@@ -47,6 +47,7 @@ mk_jumbo void mk_uint_concat(mk_uint_tn, add)(mk_uint_t* out, mk_uint_t const* a
 mk_jumbo void mk_uint_concat(mk_uint_tn, sub)(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b);
 mk_jumbo void mk_uint_concat(mk_uint_tn, mul)(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b);
 mk_jumbo void mk_uint_concat(mk_uint_tn, mulhi)(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b);
+mk_jumbo void mk_uint_concat(mk_uint_tn, divmod)(mk_uint_t* div, mk_uint_t* mod, mk_uint_t const* a, mk_uint_t const* b);
 mk_jumbo void mk_uint_concat(mk_uint_tn, div)(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b);
 mk_jumbo void mk_uint_concat(mk_uint_tn, mod)(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b);
 
