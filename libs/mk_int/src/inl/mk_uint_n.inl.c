@@ -636,68 +636,64 @@ mk_jumbo void mk_uint_dec(mk_uint_t* x)
 
 mk_jumbo void mk_uint_add(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b)
 {
-	mk_uint_t r;
-	int i;
 	int overflow;
-	mk_uint_small_t one;
+	int i;
+	mk_uint_small_t aa;
+	mk_uint_small_t bb;
+	mk_uint_small_t cc;
 
 	mk_assert(out);
 	mk_assert(a);
 	mk_assert(b);
 
 	overflow = 0;
-	mk_uint_small_add(r.m_data + 0, a->m_data + 0, b->m_data + 0);
-	for(i = 1; i != mk_uint_parts; ++i)
+	for(i = 0; i != mk_uint_parts; ++i)
 	{
-		overflow =
-			overflow == 0 ?
-			(
-				mk_uint_small_lt(r.m_data + i - 1, a->m_data + i - 1) ||
-				mk_uint_small_lt(r.m_data + i - 1, b->m_data + i - 1)
-			) :
-			(
-				mk_uint_small_le(r.m_data + i - 1, a->m_data + i - 1) ||
-				mk_uint_small_le(r.m_data + i - 1, b->m_data + i - 1)
-			);
-		mk_uint_small_add(r.m_data + i, a->m_data + i, b->m_data + i);
-		if(overflow)
+		aa = a->m_data[i];
+		bb = b->m_data[i];
+		mk_uint_small_add(&cc, &aa, &bb);
+		if(overflow == 0)
 		{
-			mk_uint_small_one(&one);
-			mk_uint_small_add(r.m_data + i, r.m_data + i, &one);
+			overflow = mk_uint_small_lt(&cc, &aa) | mk_uint_small_lt(&cc, &bb);
 		}
+		else
+		{
+			mk_uint_small_inc(&cc);
+			overflow = mk_uint_small_le(&cc, &aa) | mk_uint_small_le(&cc, &bb);
+		}
+		out->m_data[i] = cc;
 	}
-
-	*out = r;
 }
 
 mk_jumbo void mk_uint_sub(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b)
 {
-	mk_uint_t r;
-	int i;
 	int overflow;
-	mk_uint_small_t one;
+	int i;
+	mk_uint_small_t aa;
+	mk_uint_small_t bb;
+	mk_uint_small_t cc;
 
 	mk_assert(out);
 	mk_assert(a);
 	mk_assert(b);
 
 	overflow = 0;
-	mk_uint_small_sub(r.m_data + 0, a->m_data + 0, b->m_data + 0);
-	for(i = 1; i != mk_uint_parts; ++i)
+	for(i = 0; i != mk_uint_parts; ++i)
 	{
-		overflow =
-			overflow == 0 ?
-			mk_uint_small_lt(a->m_data + i - 1, b->m_data + i - 1) :
-			mk_uint_small_le(a->m_data + i - 1, b->m_data + i - 1);
-		mk_uint_small_sub(r.m_data + i, a->m_data + i, b->m_data + i);
-		if(overflow)
+		aa = a->m_data[i];
+		bb = b->m_data[i];
+		mk_uint_small_sub(&cc, &aa, &bb);
+		if(overflow == 0)
 		{
-			mk_uint_small_one(&one);
-			mk_uint_small_sub(r.m_data + i, r.m_data + i, &one);
+			overflow = mk_uint_small_lt(&aa, &bb);
 		}
+		else
+		{
+			mk_uint_small_dec(&cc);
+			overflow = mk_uint_small_le(&aa, &bb);
+		}
+		out->m_data[i] = cc;
 	}
-
-	*out = r;
 }
 
 mk_jumbo void mk_uint_mul(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b)
