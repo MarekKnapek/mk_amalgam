@@ -50,8 +50,7 @@ mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_dec, _), mk_uint_str_suffix)(
 	a = *x;
 	for(;;)
 	{
-		mk_uint_div(&b, &a, &base);
-		mk_uint_mod(&c, &a, &base);
+		mk_uint_divmod(&b, &c, &a, &base);
 		m = mk_uint_to_int(&c);
 		tmp[--i] = s_symbols[m];
 		if(mk_uint_is_zero(&b))
