@@ -57,6 +57,7 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_int.c"/>
 	</ItemGroup>
 	<ItemGroup>
+		<None Include="$(MSBuildThisFileDirectory)..\..\readme.md"/>
 		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint.inl.c"/>
 		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint.inl.h"/>
 		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_1.inl.c"/>

@@ -54,6 +54,7 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_int.c"><Filter>jumbo</Filter></ClCompile>
 	</ItemGroup>
 	<ItemGroup>
+		<None Include="$(MSBuildThisFileDirectory)..\..\readme.md"/>
 		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint.inl.c"><Filter>src\inl</Filter></None>
 		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint.inl.h"><Filter>src\inl</Filter></None>
 		<None Include="$(MSBuildThisFileDirectory)..\..\src\inl\mk_uint_1.inl.c"><Filter>src\inl</Filter></None>
