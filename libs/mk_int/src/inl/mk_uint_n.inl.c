@@ -1,4 +1,5 @@
 #include "../../../mk_utils/src/mk_assert.h"
+#include "../../../mk_utils/src/mk_inline.h"
 #include "../../../mk_utils/src/mk_jumbo.h"
 
 #include <stddef.h> /* size_t */
@@ -696,39 +697,109 @@ mk_jumbo void mk_uint_sub(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b
 	}
 }
 
+static mk_inline void mk_uint_concat_(mul_restrict)(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b)
+{
+	mk_uint_small_t lo_mask;
+	mk_uint_small_t hi_mask;
+	int ai;
+	mk_uint_small_t carry;
+	mk_uint_small_t aa;
+	int bi;
+	int idx;
+	mk_uint_small_t bb;
+	mk_uint_small_t cc;
+	mk_uint_small_t product;
+
+	mk_assert(out);
+	mk_assert(a);
+	mk_assert(b);
+	mk_assert(out != a);
+	mk_assert(out != b);
+
+	mk_uint_small_zero(&lo_mask);
+	mk_uint_small_inc(&lo_mask);
+	mk_uint_small_shl(&lo_mask, &lo_mask, mk_uint_small_bits / 2);
+	mk_uint_small_dec(&lo_mask);
+	mk_uint_small_cmplmnt(&hi_mask, &lo_mask);
+	mk_uint_zero(out);
+	for(ai = 0; ai != mk_uint_parts * 2; ++ai)
+	{
+		mk_uint_small_zero(&carry);
+		if(ai % 2 == 0)
+		{
+			mk_uint_small_and(&aa, &a->m_data[ai / 2], &lo_mask);
+		}
+		else
+		{
+			mk_uint_small_shr(&aa, &a->m_data[ai / 2], mk_uint_small_bits / 2);
+		}
+		for(bi = 0; bi != mk_uint_parts * 2 - ai; ++bi)
+		{
+			idx = ai + bi;
+			if(bi % 2 == 0)
+			{
+				mk_uint_small_and(&bb, &b->m_data[bi / 2], &lo_mask);
+			}
+			else
+			{
+				mk_uint_small_shr(&bb, &b->m_data[bi / 2], mk_uint_small_bits / 2);
+			}
+			if(idx % 2 == 0)
+			{
+				mk_uint_small_and(&cc, &out->m_data[idx / 2], &lo_mask);
+			}
+			else
+			{
+				mk_uint_small_shr(&cc, &out->m_data[idx / 2], mk_uint_small_bits / 2);
+			}
+			mk_uint_small_mul(&product, &aa, &bb);
+			mk_uint_small_add(&product, &product, &carry);
+			mk_uint_small_add(&product, &product, &cc);
+			mk_uint_small_shr(&carry, &product, mk_uint_small_bits / 2);
+			if(idx % 2 == 0)
+			{
+				mk_uint_small_and(&product, &product, &lo_mask);
+				mk_uint_small_and(&bb, &out->m_data[idx / 2], &hi_mask);
+				mk_uint_small_or(&out->m_data[idx / 2], &bb, &product);
+			}
+			else
+			{
+				mk_uint_small_shl(&product, &product, mk_uint_small_bits / 2);
+				mk_uint_small_and(&bb, &out->m_data[idx / 2], &lo_mask);
+				mk_uint_small_or(&out->m_data[idx / 2], &product, &bb);
+			}
+		}
+	}
+}
+
+static mk_inline void mk_uint_concat_(mul_norestrict)(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b)
+{
+	mk_uint_t res;
+
+	mk_assert(out);
+	mk_assert(a);
+	mk_assert(b);
+	mk_assert(out == a || out == b);
+
+	mk_uint_concat_(mul_restrict)(&res, a, b);
+
+	*out = res;
+}
+
 mk_jumbo void mk_uint_mul(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b)
 {
-	mk_uint_t r;
-	int i;
-	int j;
-	int k;
-	mk_uint_t tmp;
+	mk_assert(out);
+	mk_assert(a);
+	mk_assert(b);
 
-	mk_uint_zero(&r);
-	for(i = 0; i != mk_uint_parts; ++i)
+	if(out != a && out != b)
 	{
-		for(j = 0; j != mk_uint_parts - i - 1; ++j)
-		{
-			for(k = 0; k != j + i; ++k)
-			{
-				mk_uint_small_zero(&tmp.m_data[k]);
-			}
-			mk_uint_small_mul(&tmp.m_data[i + j + 0], &a->m_data[i], &b->m_data[j]);
-			mk_uint_small_mulhi(&tmp.m_data[i + j + 1], &a->m_data[i], &b->m_data[j]);
-			for(k = j + i + 2; k != mk_uint_parts; ++k)
-			{
-				mk_uint_small_zero(&tmp.m_data[k]);
-			}
-			mk_uint_add(&r, &r, &tmp);
-		}
-		for(k = 0; k != j + i; ++k)
-		{
-			mk_uint_small_zero(&tmp.m_data[k]);
-		}
-		mk_uint_small_mul(&tmp.m_data[i + j + 0], &a->m_data[i], &b->m_data[j]);
-		mk_uint_add(&r, &r, &tmp);
+		mk_uint_concat_(mul_restrict)(out, a, b);
 	}
-	*out = r;
+	else
+	{
+		mk_uint_concat_(mul_norestrict)(out, a, b);
+	}
 }
 
 mk_jumbo void mk_uint_div(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b)
