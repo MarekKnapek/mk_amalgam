@@ -22,6 +22,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_32.h"><Filter>src\exact</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_64.h"><Filter>src\exact</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_8.h"><Filter>src\exact</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_n.inl.h"><Filter>src\exact</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\base\mk_uint_macro_base.h"><Filter>src\macro\base</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\base\mk_uint_macro_base_128.h"><Filter>src\macro\base</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\base\mk_uint_macro_base_char.h"><Filter>src\macro\base</Filter></ClInclude>
@@ -31,11 +32,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\base\mk_uint_macro_base_short.h"><Filter>src\macro\base</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\base\mk_uint_macro_base_undef.h"><Filter>src\macro\base</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact.h"><Filter>src\macro\exact</Filter></ClInclude>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_128.h"><Filter>src\macro\exact</Filter></ClInclude>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_16.h"><Filter>src\macro\exact</Filter></ClInclude>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_32.h"><Filter>src\macro\exact</Filter></ClInclude>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_64.h"><Filter>src\macro\exact</Filter></ClInclude>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_8.h"><Filter>src\macro\exact</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_n.h"><Filter>src\macro\exact</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_undef.h"><Filter>src\macro\exact</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_int.h"><Filter>jumbo</Filter></ClInclude>
 	</ItemGroup>
@@ -51,6 +48,7 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_32.c"><Filter>src\exact</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_64.c"><Filter>src\exact</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_8.c"><Filter>src\exact</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_n.inl.c"><Filter>src\exact</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_int.c"><Filter>jumbo</Filter></ClCompile>
 	</ItemGroup>
 	<ItemGroup>

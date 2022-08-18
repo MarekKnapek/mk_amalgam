@@ -1,6 +1,9 @@
 #include "../base/mk_uint_macro_base_undef.h"
 
 
+#undef mk_uint_macro_exact_n_concat_impl
+#undef mk_uint_macro_exact_n_concat
+
 #undef mk_uint_concat_2_
 #undef mk_uint_concat_1_
 #undef mk_uint_concat_

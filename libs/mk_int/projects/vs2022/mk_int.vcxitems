@@ -25,6 +25,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_32.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_64.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_8.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_n.inl.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\base\mk_uint_macro_base.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\base\mk_uint_macro_base_128.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\base\mk_uint_macro_base_char.h"/>
@@ -34,11 +35,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\base\mk_uint_macro_base_short.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\base\mk_uint_macro_base_undef.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact.h"/>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_128.h"/>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_16.h"/>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_32.h"/>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_64.h"/>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_8.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_n.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\macro\exact\mk_uint_macro_exact_undef.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_int.h"/>
 	</ItemGroup>
@@ -54,6 +51,7 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_32.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_64.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_8.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\exact\mk_uint_n.inl.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_int.c"/>
 	</ItemGroup>
 	<ItemGroup>
