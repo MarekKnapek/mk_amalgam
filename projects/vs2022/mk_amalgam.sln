@@ -9,6 +9,8 @@ Project("{2150e333-8fdc-42a3-9474-1a3956d46de8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_crypt_hash", "..\..\libs\mk_crypt_hash\projects\vs2022\mk_crypt_hash.vcxitems", "{920cf678-e638-4c78-8e51-f1bc76525cd2}" EndProject
+Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_crypt_hash_fuzz", "..\..\libs\mk_crypt_hash_fuzz\projects\vs2022\mk_crypt_hash_fuzz.vcxproj", "{9ae99d0b-47e1-402c-b67b-201fe2c5d5a6}" EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_int", "..\..\libs\mk_int\projects\vs2022\mk_int.vcxitems", "{83700097-ac5b-4642-9b9a-2d5f5db0026c}" EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_int_fuzz", "..\..\libs\mk_int_fuzz\projects\vs2022\mk_int_fuzz.vcxproj", "{935d11b5-2b4d-43c8-99bc-a3f7bf1bffa3}" EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_utils", "..\..\libs\mk_utils\projects\vs2022\mk_utils.vcxitems", "{635870d5-81aa-4df4-8ca3-37c018fd525d}" EndProject
@@ -28,6 +30,14 @@ Global
 		{935d11b5-2b4d-43c8-99bc-a3f7bf1bffa3}.Release|x64.Build.0 = Release|x64
 		{935d11b5-2b4d-43c8-99bc-a3f7bf1bffa3}.Release|x86.ActiveCfg = Release|Win32
 		{935d11b5-2b4d-43c8-99bc-a3f7bf1bffa3}.Release|x86.Build.0 = Release|Win32
+		{9ae99d0b-47e1-402c-b67b-201fe2c5d5a6}.Debug|x64.ActiveCfg = Debug|x64
+		{9ae99d0b-47e1-402c-b67b-201fe2c5d5a6}.Debug|x64.Build.0 = Debug|x64
+		{9ae99d0b-47e1-402c-b67b-201fe2c5d5a6}.Debug|x86.ActiveCfg = Debug|Win32
+		{9ae99d0b-47e1-402c-b67b-201fe2c5d5a6}.Debug|x86.Build.0 = Debug|Win32
+		{9ae99d0b-47e1-402c-b67b-201fe2c5d5a6}.Release|x64.ActiveCfg = Release|x64
+		{9ae99d0b-47e1-402c-b67b-201fe2c5d5a6}.Release|x64.Build.0 = Release|x64
+		{9ae99d0b-47e1-402c-b67b-201fe2c5d5a6}.Release|x86.ActiveCfg = Release|Win32
+		{9ae99d0b-47e1-402c-b67b-201fe2c5d5a6}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

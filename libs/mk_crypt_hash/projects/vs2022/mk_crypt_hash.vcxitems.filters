@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<Filter Include="dependencies"><UniqueIdentifier>{09ae490b-a919-4d5a-86ba-98f0af46e4d7}</UniqueIdentifier></Filter>
+		<Filter Include="jumbo"><UniqueIdentifier>{489946fc-ac8d-4fcd-8be1-b56958cfb599}</UniqueIdentifier></Filter>
+		<Filter Include="src"><UniqueIdentifier>{d4b6243b-67e1-4bd6-84d9-855ba30a3ae2}</UniqueIdentifier></Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_handle.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_md2.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_md4.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_md5.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_pointer.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_type.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_value.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_stream.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_stream.inl.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_stream_handle.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_stream_pointer.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_stream_value.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_crypt_hash.c"><Filter>jumbo</Filter></ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_handle.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_md2.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_md4.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_md5.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_pointer.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_type.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_base_value.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_bases.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_stream.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_stream.inl.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_stream_handle.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_stream_pointer.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_stream_value.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_crypt_hash_xmacro.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_crypt_hash.h"><Filter>jumbo</Filter></ClInclude>
+	</ItemGroup>
+</Project>
