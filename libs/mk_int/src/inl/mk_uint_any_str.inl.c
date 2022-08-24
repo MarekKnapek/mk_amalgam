@@ -17,7 +17,14 @@
 
 mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_dec, _), mk_uint_str_suffix)(mk_uint_t const* x, mk_char_t* str, int str_len)
 {
-	#define worst_case_len (mk_uint_bits == 8 ? 3 : mk_uint_bits == 16 ? 5 : mk_uint_bits == 32 ? 10 : mk_uint_bits == 64 ? 20 : mk_uint_bits == 128 ? 39 : -1)
+	#define mk_private_to_uint(x) ((unsigned)(x))
+	#define mk_private_to_long(x) ((long)(x))
+	#define mk_private_le(x, y) (mk_private_to_long(x) <= mk_private_to_long(y))
+	#define mk_private_mul(x, y) (mk_private_to_long(mk_private_to_long(x) * mk_private_to_long(y)))
+	#define mk_private_shr(x, y) (mk_private_to_long(mk_private_to_long(x) >> mk_private_to_uint(y)))
+	#define mk_private_add(x, y) (mk_private_to_long(mk_private_to_long(x) + mk_private_to_long(y)))
+	#define mk_private_log_constant (19728l) /* floor(log_10(2) << 16) */
+	#define mk_private_worst_case_len (mk_private_le(mk_uint_bits, 65536l) ? (mk_private_add(mk_private_shr(mk_private_mul(mk_uint_bits, mk_private_log_constant), 16u), 1)) : (mk_private_to_long(-1)))
 
 	static mk_char_t const s_symbols[] =
 	{
@@ -39,13 +46,13 @@ mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_dec, _), mk_uint_str_suffix)(
 	mk_uint_t b;
 	mk_uint_t c;
 	unsigned m;
-	mk_char_t tmp[worst_case_len];
+	mk_char_t tmp[mk_private_worst_case_len];
 
 	mk_assert(x);
 	mk_assert(str || str_len == 0);
 	mk_assert(str_len >= 0);
 
-	i = worst_case_len;
+	i = mk_private_worst_case_len;
 	mk_uint_from_int(&base, 10);
 	a = *x;
 	for(;;)
@@ -59,30 +66,37 @@ mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_dec, _), mk_uint_str_suffix)(
 		}
 		a = b;
 	}
-	i = worst_case_len - i;
+	i = mk_private_worst_case_len - i;
 	if(i > str_len)
 	{
 		return -i;
 	}
-	memcpy(str, tmp + worst_case_len - i, i * sizeof(mk_char_t));
+	memcpy(str, tmp + mk_private_worst_case_len - i, i * sizeof(mk_char_t));
 	return i;
 
-	#undef worst_case_len
+	#undef mk_private_to_uint
+	#undef mk_private_to_long
+	#undef mk_private_le
+	#undef mk_private_mul
+	#undef mk_private_shr
+	#undef mk_private_add
+	#undef mk_private_log_constant 
+	#undef mk_private_worst_case_len 
 }
 
 mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_hex, _), mk_uint_str_suffix)(mk_uint_t const* x, mk_char_t* str, int str_len)
 {
-	#define worst_case_len (mk_uint_bits / 4)
+	#define mk_private_worst_case_len (mk_uint_bits / 4)
 
 	static mk_char_t const s_zero = mk_char_c('0');
 
-	mk_char_t tmp[worst_case_len];
+	mk_char_t tmp[mk_private_worst_case_len];
 	int i;
 	int zeros;
 	int symbols;
 
 	mk_concat(mk_concat(mk_uint_to_string_hex_full, _), mk_uint_str_suffix)(x, tmp);
-	for(i = 0; i != worst_case_len - 1; ++i)
+	for(i = 0; i != mk_private_worst_case_len - 1; ++i)
 	{
 		if(tmp[i] != s_zero)
 		{
@@ -90,7 +104,7 @@ mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_hex, _), mk_uint_str_suffix)(
 		}
 	}
 	zeros = i;
-	symbols = worst_case_len - zeros;
+	symbols = mk_private_worst_case_len - zeros;
 	if(symbols > str_len)
 	{
 		return -symbols;
@@ -98,7 +112,7 @@ mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_hex, _), mk_uint_str_suffix)(
 	memcpy(str, tmp + zeros, symbols * sizeof(mk_char_t));
 	return symbols;
 
-	#undef worst_case_len
+	#undef mk_private_worst_case_len
 }
 
 mk_jumbo void mk_concat(mk_concat(mk_uint_to_string_hex_full, _), mk_uint_str_suffix)(mk_uint_t const* x, mk_char_t* str)
