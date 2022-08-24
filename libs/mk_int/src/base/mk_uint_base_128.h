@@ -16,13 +16,13 @@
 
 #if mk_has_128bit_int
 
-#define mk_uint_tn 128
-#define mk_uint_t unsigned __int128
+#define mk_uint_base_tn 128
+#define mk_uint_base_t unsigned __int128
 
 #include "../inl/mk_uint_base.inl.h"
 
-#undef mk_uint_tn
-#undef mk_uint_t
+#undef mk_uint_base_tn
+#undef mk_uint_base_t
 
 #endif
 

@@ -13,13 +13,13 @@
 
 #if mk_has_long_long
 
-#define mk_uint_tn llong
-#define mk_uint_t unsigned long long
+#define mk_uint_base_tn llong
+#define mk_uint_base_t unsigned long long
 
 #include "../inl/mk_uint_base.inl.h"
 
-#undef mk_uint_tn
-#undef mk_uint_t
+#undef mk_uint_base_tn
+#undef mk_uint_base_t
 
 #endif
 

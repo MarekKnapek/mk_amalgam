@@ -1,9 +1,9 @@
 #undef mk_uint_small_t
 #undef mk_uint_small_tn
 
-#undef mk_uint_concat_2
-#undef mk_uint_concat_1
-#undef mk_uint_concat
+#undef mk_uint_small_concat_2
+#undef mk_uint_small_concat_1
+#undef mk_uint_small_concat
 
 #undef mk_uint_small_zero
 #undef mk_uint_small_one

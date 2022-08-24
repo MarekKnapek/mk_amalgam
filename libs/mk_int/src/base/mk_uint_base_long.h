@@ -8,13 +8,13 @@
 #endif
 
 
-#define mk_uint_tn long
-#define mk_uint_t unsigned long
+#define mk_uint_base_tn long
+#define mk_uint_base_t unsigned long
 
 #include "../inl/mk_uint_base.inl.h"
 
-#undef mk_uint_tn
-#undef mk_uint_t
+#undef mk_uint_base_tn
+#undef mk_uint_base_t
 
 
 #if defined(_MSC_VER)
