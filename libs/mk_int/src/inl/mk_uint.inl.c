@@ -1,3 +1,11 @@
+#include "../base/mk_uint_base_char.h"
+#include "../base/mk_uint_base_short.h"
+#include "../base/mk_uint_base_int.h"
+#include "../base/mk_uint_base_long.h"
+#include "../base/mk_uint_base_llong.h"
+#include "../base/mk_uint_base_128.h"
+
+
 #define mk_uint_parts ((mk_uint_bits + (mk_uint_small_bits - 1)) / mk_uint_small_bits)
 
 
