@@ -11,6 +11,7 @@
 #include "../../mk_win/src/mk_win_user_brush.h"
 #include "../../mk_win/src/mk_win_user_class.h"
 #include "../../mk_win/src/mk_win_user_cursor.h"
+#include "../../mk_win/src/mk_win_user_edit.h"
 #include "../../mk_win/src/mk_win_user_icon.h"
 #include "../../mk_win/src/mk_win_user_message.h"
 #include "../../mk_win/src/mk_win_user_window.h"
@@ -31,6 +32,7 @@ static mk_win_char_t const mk_mdi_child_private_class_name[] = mk_win_char_c("mk
 
 static mk_inline int mk_mdi_child_private_register_class(void);
 static mk_inline int mk_mdi_child_private_on_destroy(mk_mdi_child_pt child, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_child_private_on_size(mk_mdi_child_pt child, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_child_private_on_close(mk_mdi_child_pt child, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_child_private_on_message(mk_mdi_child_pt child, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_child_private_on_wndproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_user_types_lresult_t* lres);
@@ -64,17 +66,23 @@ mk_jumbo int mk_mdi_child_hwnd2object(mk_win_base_user_types_hwnd_t hwnd, mk_mdi
 	return 0;
 }
 
-mk_jumbo int mk_mdi_child_construct(mk_mdi_child_pt child, mk_mdi_parent_pt parent)
+mk_jumbo int mk_mdi_child_construct(mk_mdi_child_pt child, mk_mdi_parent_pt parent, mk_mdi_child_pt old_child)
 {
 	mk_win_user_window_mdicreate_t mdi;
 	mk_win_base_user_types_hwnd_t hwnd;
+	mk_win_user_window_create_t wi;
+	mk_win_base_types_rect_t rect;
+	mk_win_base_types_bool_t b;
+	mk_win_base_types_point_t pt;
 
 	mk_assert(child);
 	mk_assert(parent);
 	mk_assert(parent->m_mdi);
+	mk_assert(child != old_child);
 
 	child->m_parent = parent;
 	child->m_hwnd = NULL;
+	child->m_edit = NULL;
 
 	mdi.m_class_name = mk_mdi_child_private_class_name;
 	mdi.m_window_name = mk_win_char_c("Child");
@@ -88,6 +96,41 @@ mk_jumbo int mk_mdi_child_construct(mk_mdi_child_pt child, mk_mdi_parent_pt pare
 	mk_try(mk_win_user_window_send_mdicreate(parent->m_mdi, &mdi, &hwnd));
 	mk_assert(hwnd);
 	mk_assert(child->m_hwnd == hwnd);
+
+	if(old_child)
+	{
+		child->m_edit = old_child->m_edit;
+		old_child->m_edit = NULL;
+		mk_try(mk_win_user_window_set_parent(child->m_edit, child->m_hwnd, &hwnd));
+		mk_assert(hwnd == old_child->m_hwnd);
+	}
+	else
+	{
+		wi.m_extra_style = 0;
+		wi.m_class_name = mk_win_char_c("edit");
+		wi.m_window_name = NULL;
+		wi.m_style = mk_win_user_edit_style_multiline | mk_win_user_edit_style_autovscroll | mk_win_user_edit_style_autohscroll | mk_win_user_edit_style_nohidesel | mk_win_user_window_style_hscroll | mk_win_user_window_style_vscroll | mk_win_user_window_style_visible | mk_win_user_window_style_child;
+		wi.m_x = 0;
+		wi.m_y = 0;
+		wi.m_width = 0;
+		wi.m_height = 0;
+		wi.m_parent = child->m_hwnd;
+		wi.m_menu = NULL;
+		mk_try(mk_win_instance_get(&wi.m_instance));
+		wi.m_param = NULL;
+		mk_try(mk_win_user_window_create(&wi, &hwnd));
+		mk_assert(hwnd != NULL);
+		child->m_edit = hwnd;
+	}
+
+	mk_try(mk_win_user_window_get_rect(child->m_hwnd, &rect, &b)); mk_assert(b);
+	pt.m_x = rect.m_left;
+	pt.m_y = rect.m_top;
+	mk_try(mk_win_user_window_is_screen2client(parent->m_hwnd, &pt, &b)); mk_assert(b);
+	mk_try(mk_win_user_window_move(child->m_hwnd, pt.m_x, pt.m_y, rect.m_right - rect.m_left + 16, rect.m_bottom - rect.m_top + 16, 1, &b)); mk_assert(b);
+	mk_try(mk_win_user_window_move(child->m_hwnd, pt.m_x, pt.m_y, rect.m_right - rect.m_left - 16, rect.m_bottom - rect.m_top - 16, 1, &b)); mk_assert(b);
+
+	mk_try(mk_win_user_window_set_focus(child->m_edit, &hwnd)); (void)hwnd;
 
 	return 0;
 }
@@ -147,6 +190,31 @@ static mk_inline int mk_mdi_child_private_on_destroy(mk_mdi_child_pt child, int*
 	return 0;
 }
 
+static mk_inline int mk_mdi_child_private_on_size(mk_mdi_child_pt child, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	int width;
+	int height;
+	mk_win_base_types_bool_t b;
+
+	mk_assert(child);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	if(wparam == mk_win_base_user_types_window_wparam_wm_size_restored || wparam == mk_win_base_user_types_window_wparam_wm_size_maximized)
+	{
+		if(child->m_edit)
+		{
+			width = (int)(lparam & 0xfffful);
+			height = (int)((lparam >> 16) & 0xfffful);
+			b = 1;
+			mk_try(mk_win_user_window_move(child->m_edit, 0, 0, width, height, b, &b));
+			mk_assert(b);
+		}
+	}
+
+	return 0;
+}
+
 static mk_inline int mk_mdi_child_private_on_close(mk_mdi_child_pt child, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
 {
 	mk_assert(child);
@@ -167,6 +235,7 @@ static mk_inline int mk_mdi_child_private_on_message(mk_mdi_child_pt child, mk_w
 	switch(msg)
 	{
 		case mk_win_base_user_types_window_wm_destroy: mk_try(mk_mdi_child_private_on_destroy(child, override_defproc, lres)); break;
+		case mk_win_base_user_types_window_wm_size: mk_try(mk_mdi_child_private_on_size(child, wparam, lparam, override_defproc, lres)); break;
 		case mk_win_base_user_types_window_wm_close: mk_try(mk_mdi_child_private_on_close(child, override_defproc, lres)); break;
 	}
 

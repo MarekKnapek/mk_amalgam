@@ -19,27 +19,37 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_module.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_resource.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_str.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_unicode.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_brush.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_class.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_cursor.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_dialog.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_dialog_constants.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_edit.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_icon.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_listbox.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_menu.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_message.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_window.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_window_constants.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_win.h"/>
 	</ItemGroup>
 	<ItemGroup>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_module.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_resource.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_str.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_unicode.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_brush.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_class.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_cursor.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_edit.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_dialog.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_icon.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_listbox.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_menu.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_message.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_window.c"/>
