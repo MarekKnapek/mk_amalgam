@@ -252,6 +252,76 @@ mk_jumbo int mk_win_user_window_show(mk_win_base_user_types_hwnd_t hwnd, int sho
 	return 0;
 }
 
+mk_jumbo int mk_win_user_window_move(mk_win_base_user_types_hwnd_t hwnd, int x, int y, int width, int height, mk_win_base_types_bool_t repaint, mk_win_base_types_bool_t* ret)
+{
+	mk_win_base_types_bool_t b;
+
+	mk_assert(ret);
+
+	b = MoveWindow(hwnd, x, y, width, height, repaint);
+	*ret = b;
+
+	return 0;
+}
+
+mk_jumbo int mk_win_user_window_get_rect(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_rect_pt rect, mk_win_base_types_bool_t* ret)
+{
+	mk_win_base_types_bool_t b;
+
+	mk_assert(ret);
+
+#if mk_win_api == mk_win_api_old
+	GetWindowRect(hwnd, rect);
+	b = 1;
+	#else
+	b = GetWindowRect(hwnd, rect);
+	#endif
+	*ret = b;
+
+	return 0;
+}
+
+mk_jumbo int mk_win_user_window_get_client_rect(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_rect_pt rect, mk_win_base_types_bool_t* ret)
+{
+	mk_win_base_types_bool_t b;
+
+	mk_assert(ret);
+
+#if mk_win_api == mk_win_api_old
+	GetClientRect(hwnd, rect);
+	b = 1;
+	#else
+	b = GetClientRect(hwnd, rect);
+	#endif
+	*ret = b;
+
+	return 0;
+}
+
+mk_jumbo int mk_win_user_window_set_focus(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_user_types_hwnd_t* ret)
+{
+	mk_win_base_user_types_hwnd_t h;
+
+	mk_assert(ret);
+
+	h = SetFocus(hwnd);
+	*ret = h;
+
+	return 0;
+}
+
+mk_jumbo int mk_win_user_window_set_parent(mk_win_base_user_types_hwnd_t child, mk_win_base_user_types_hwnd_t new_parent, mk_win_base_user_types_hwnd_t* ret)
+{
+	mk_win_base_user_types_hwnd_t w;
+
+	mk_assert(ret);
+
+	w = SetParent(child, new_parent);
+	*ret = w;
+
+	return 0;
+}
+
 mk_jumbo int mk_win_user_window_post(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_types_bool_t* ret)
 {
 	#if mk_win_api == mk_win_api_old
@@ -319,6 +389,23 @@ mk_jumbo int mk_win_user_window_is_child(mk_win_base_user_types_hwnd_t parent, m
 	mk_assert(ret);
 
 	b = IsChild(parent, child);
+	*ret = b;
+
+	return 0;
+}
+
+mk_jumbo int mk_win_user_window_is_screen2client(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_point_pt pt, mk_win_base_types_bool_t* ret)
+{
+	mk_win_base_types_bool_t b;
+
+	mk_assert(ret);
+
+#if mk_win_api == mk_win_api_old
+	ScreenToClient(hwnd, pt);
+	b = 1;
+	#else
+	b = ScreenToClient(hwnd, pt);
+	#endif
 	*ret = b;
 
 	return 0;

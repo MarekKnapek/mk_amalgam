@@ -14,10 +14,14 @@
 
 #include "../../mk_win/src/mk_win_char.h"
 #include "../../mk_win/src/mk_win_instance.h"
+#include "../../mk_win/src/mk_win_kernel_module.h"
+#include "../../mk_win/src/mk_win_kernel_resource.h"
 #include "../../mk_win/src/mk_win_user_brush.h"
 #include "../../mk_win/src/mk_win_user_class.h"
 #include "../../mk_win/src/mk_win_user_cursor.h"
+#include "../../mk_win/src/mk_win_user_dialog.h"
 #include "../../mk_win/src/mk_win_user_icon.h"
+#include "../../mk_win/src/mk_win_user_listbox.h"
 #include "../../mk_win/src/mk_win_user_menu.h"
 #include "../../mk_win/src/mk_win_user_message.h"
 #include "../../mk_win/src/mk_win_user_window.h"
@@ -49,12 +53,19 @@ static mk_inline int mk_mdi_parent_private_on_menu_window_cascade_zorder(mk_mdi_
 static mk_inline int mk_mdi_parent_private_on_menu_window_tile_vertically(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu_window_tile_horizontally(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu_window_arrange_icons(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_parent_private_on_menu_window_transfer(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_parent_private_on_menu_window_close(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu_window_close_all(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu(mk_mdi_parent_pt parent, unsigned short menu_id, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_command(mk_mdi_parent_pt parent, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_message(mk_mdi_parent_pt parent, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_parent_private_on_dlg_initdialog(mk_mdi_parent_pt parent, mk_win_base_user_types_hwnd_t dlg, mk_win_base_types_cpu_iword_t* ret);
+static mk_inline int mk_mdi_parent_private_on_dlg_command(mk_mdi_parent_pt parent, mk_win_base_user_types_hwnd_t dlg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_types_cpu_iword_t* ret);
+static mk_inline int mk_mdi_parent_private_on_dlg_message(mk_mdi_parent_pt parent, mk_win_base_user_types_hwnd_t dlg, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_types_cpu_iword_t* ret);
 static mk_inline int mk_mdi_parent_private_on_wndproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_parent_private_on_dlgproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_types_cpu_iword_t* ret);
 static mk_win_base_user_types_lresult_t mk_win_base_keywords_calling_convention_api mk_mdi_parent_private_wndproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam);
+static mk_win_base_types_cpu_iword_t mk_win_base_keywords_calling_convention_api mk_mdi_parent_private_dlgproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam);
 
 
 mk_jumbo int mk_mdi_parent_init(void)
@@ -147,7 +158,7 @@ mk_jumbo int mk_mdi_parent_close(mk_mdi_parent_pt parent)
 	return 0;
 }
 
-mk_jumbo int mk_mdi_parent_children_add(mk_mdi_parent_pt parent)
+mk_jumbo int mk_mdi_parent_children_add(mk_mdi_parent_pt parent, mk_mdi_child_pt old_child)
 {
 	mk_mdi_child_pt child;
 
@@ -156,29 +167,53 @@ mk_jumbo int mk_mdi_parent_children_add(mk_mdi_parent_pt parent)
 	mk_try(mk_std_ptr_buff_reserve_one(&parent->m_children));
 	mk_try(mk_std_gcallocator_allocate(sizeof(*child), &child));
 	mk_try(mk_std_ptr_buff_append(&parent->m_children, child));
-	mk_try(mk_mdi_child_construct(child, parent));
+	mk_try(mk_mdi_child_construct(child, parent, old_child));
+	if(old_child)
+	{
+		mk_try(mk_mdi_child_close(old_child));
+	}
 
 	return 0;
 }
 
-mk_jumbo int mk_mdi_parent_children_close_active(mk_mdi_parent_pt parent)
+mk_jumbo int mk_mdi_parent_children_get_active(mk_mdi_parent_pt parent, mk_mdi_child_pt* child)
 {
 	mk_win_base_types_bool_t b;
 	mk_win_base_user_types_lresult_t lr;
 	mk_win_base_user_types_hwnd_t childwnd;
 	int maximized;
-	mk_mdi_child_pt child;
+	mk_mdi_child_pt chld;
 
 	mk_assert(parent);
 	mk_assert(parent->m_mdi);
+	mk_assert(child);
 
 	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mdigetactive, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_types_bool_lpt)&b, &lr));
 	if(lr != 0)
 	{
 		childwnd = (mk_win_base_user_types_hwnd_t)lr;
 		maximized = b != 0;
-		mk_try(mk_mdi_child_hwnd2object(childwnd, &child));
-		mk_assert(child);
+		mk_try(mk_mdi_child_hwnd2object(childwnd, &chld));
+		mk_assert(chld);
+		*child = chld;
+	}
+	else
+	{
+		*child = NULL;
+	}
+
+	return 0;
+}
+
+mk_jumbo int mk_mdi_parent_children_close_active(mk_mdi_parent_pt parent)
+{
+	mk_mdi_child_pt child;
+
+	mk_assert(parent);
+
+	mk_try(mk_mdi_parent_children_get_active(parent, &child));
+	if(child)
+	{
 		mk_try(mk_mdi_child_close(child));
 	}
 
@@ -246,6 +281,35 @@ mk_jumbo int mk_mdi_parent_children_arrange_icons(mk_mdi_parent_pt parent)
 
 	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mdiiconarrange, 0, 0, &r));
 	(void)r;
+
+	return 0;
+}
+
+mk_jumbo int mk_mdi_parent_children_transfer(mk_mdi_parent_pt parent)
+{
+	mk_mdi_child_pt child;
+	mk_win_base_types_hinstance_t instance;
+	mk_win_base_kernel_types_hmodule_t module;
+	mk_win_base_kernel_types_hrsrc_t resource;
+	mk_win_base_kernel_types_hglobal_t global;
+	mk_win_base_types_cpu_iword_t dlg_ret;
+	mk_mdi_parent_pt prnt;
+
+	mk_assert(parent);
+
+	mk_try(mk_mdi_parent_children_get_active(parent, &child));
+	if(child)
+	{
+		mk_try(mk_win_instance_get(&instance)); mk_assert(instance); module = (mk_win_base_kernel_types_hmodule_t)instance;
+		mk_try(mk_win_kernel_resource_find_bytypeid(module, "mk_mdi_parent_transfer", mk_win_kernel_resource_type_dialog, &resource)); mk_assert(resource);
+		mk_try(mk_win_kernel_resource_load(module, resource, &global)); mk_assert(global);
+		mk_try(mk_win_user_dialog_indirect_param(instance, global, parent->m_hwnd, &mk_mdi_parent_private_dlgproc, (mk_win_base_user_types_lparam_t)(mk_mdi_parent_lpt)parent, &dlg_ret));
+		if(dlg_ret != 0)
+		{
+			mk_try(mk_std_ptr_buff_get_element(&parent->m_app->m_parents, dlg_ret - 1, &prnt)); mk_assert(prnt);
+			mk_try(mk_mdi_parent_children_add(prnt, child));
+		}
+	}
 
 	return 0;
 }
@@ -402,7 +466,7 @@ static mk_inline int mk_mdi_parent_private_on_menu_new_file(mk_mdi_parent_pt par
 	mk_assert(override_defproc);
 	mk_assert(lres);
 
-	mk_try(mk_mdi_parent_children_add(parent));
+	mk_try(mk_mdi_parent_children_add(parent, NULL));
 
 	return 0;
 }
@@ -496,6 +560,28 @@ static mk_inline int mk_mdi_parent_private_on_menu_window_arrange_icons(mk_mdi_p
 	return 0;
 }
 
+static mk_inline int mk_mdi_parent_private_on_menu_window_transfer(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	mk_assert(parent);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	mk_try(mk_mdi_parent_children_transfer(parent));
+
+	return 0;
+}
+
+static mk_inline int mk_mdi_parent_private_on_menu_window_close(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	mk_assert(parent);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	mk_try(mk_mdi_parent_children_close_active(parent));
+
+	return 0;
+}
+
 static mk_inline int mk_mdi_parent_private_on_menu_window_close_all(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
 {
 	mk_assert(parent);
@@ -524,6 +610,8 @@ static mk_inline int mk_mdi_parent_private_on_menu(mk_mdi_parent_pt parent, unsi
 		case mk_mdi_parent_menu_id_window_tile_vertically: mk_try(mk_mdi_parent_private_on_menu_window_tile_vertically(parent, override_defproc, lres)); break;
 		case mk_mdi_parent_menu_id_window_tile_horizontally: mk_try(mk_mdi_parent_private_on_menu_window_tile_horizontally(parent, override_defproc, lres)); break;
 		case mk_mdi_parent_menu_id_window_arrange_icons: mk_try(mk_mdi_parent_private_on_menu_window_arrange_icons(parent, override_defproc, lres)); break;
+		case mk_mdi_parent_menu_id_window_transfer: mk_try(mk_mdi_parent_private_on_menu_window_transfer(parent, override_defproc, lres)); break;
+		case mk_mdi_parent_menu_id_window_close: mk_try(mk_mdi_parent_private_on_menu_window_close(parent, override_defproc, lres)); break;
 		case mk_mdi_parent_menu_id_window_close_all: mk_try(mk_mdi_parent_private_on_menu_window_close_all(parent, override_defproc, lres)); break;
 	}
 
@@ -556,6 +644,134 @@ static mk_inline int mk_mdi_parent_private_on_message(mk_mdi_parent_pt parent, m
 		case mk_win_base_user_types_window_wm_destroy: mk_try(mk_mdi_parent_private_on_destroy(parent, override_defproc, lres)); break;
 		case mk_win_base_user_types_window_wm_close: mk_try(mk_mdi_parent_private_on_close(parent, override_defproc, lres)); break;
 		case mk_win_base_user_types_window_wm_command: mk_try(mk_mdi_parent_private_on_command(parent, wparam, lparam, override_defproc, lres)); break;
+	}
+
+	return 0;
+}
+
+static mk_inline int mk_mdi_parent_private_on_dlg_initdialog(mk_mdi_parent_pt parent, mk_win_base_user_types_hwnd_t dlg, mk_win_base_types_cpu_iword_t* ret)
+{
+	mk_win_base_user_types_hwnd_t list;
+	size_t parents_count;
+	size_t i;
+	mk_mdi_parent_pt prnt;
+	wchar_t name[512];
+	mk_win_base_user_types_lresult_t lr;
+	mk_win_base_user_types_hwnd_t dummy;
+
+	mk_assert(parent);
+	mk_assert(dlg);
+	mk_assert(ret);
+
+	mk_try(mk_win_user_dialog_get_item(dlg, mk_mdi_parent_transfer_id_list, &list)); mk_assert(list);
+	mk_try(mk_std_ptr_buff_get_count(&parent->m_app->m_parents, &parents_count));
+	for(i = 0; i != parents_count; ++i)
+	{
+		mk_try(mk_std_ptr_buff_get_element(&parent->m_app->m_parents, i, &prnt)); mk_assert(prnt); mk_assert(prnt->m_hwnd);
+		if(prnt == parent)
+		{
+			continue;
+		}
+		/* TODO: Get parent name from model instead from view. */
+		mk_try(mk_win_user_window_send(prnt->m_hwnd, mk_win_base_user_types_window_wm_gettext, 512, (mk_win_base_user_types_lparam_t)(mk_win_base_types_strw_t)&name, &lr)); mk_assert(lr != 0);
+		mk_try(mk_win_user_window_send(list, mk_win_user_listbox_wm_addstring, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_types_strwc_t)&name, &lr)); mk_assert(lr >= 0);
+		mk_try(mk_win_user_window_send(list, mk_win_user_listbox_wm_setitemdata, (mk_win_base_user_types_wparam_t)lr, (mk_win_base_user_types_lparam_t)i, &lr)); mk_assert(lr != mk_win_user_listbox_error_err);
+	}
+	mk_try(mk_win_user_window_send(list, mk_win_user_listbox_wm_setcursel, 0, 0, &lr));
+	mk_try(mk_win_user_window_set_focus(list, &dummy)); mk_assert(dummy);
+
+	return 0;
+}
+
+static mk_inline int mk_mdi_parent_private_on_dlg_command(mk_mdi_parent_pt parent, mk_win_base_user_types_hwnd_t dlg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_types_cpu_iword_t* ret)
+{
+	int gud;
+	int bad;
+	mk_win_base_types_uint16_t wlo;
+	mk_win_base_types_uint16_t whi;
+	mk_win_base_types_bool_t b;
+	mk_win_base_user_types_hwnd_t control;
+	mk_win_base_user_types_lresult_t lr;
+	int prnt;
+
+	mk_assert(parent);
+	mk_assert(dlg);
+	mk_assert(ret);
+
+	gud = 0;
+	bad = 0;
+	wlo = (mk_win_base_types_uint16_t)(wparam & 0xffffu);
+	whi = (mk_win_base_types_uint16_t)((wparam >> 16) & 0xffffu);
+	if(lparam == 0)
+	{
+		if(whi == 0)
+		{
+			switch(wlo)
+			{
+				case mk_win_user_dialog_cmdid_cancel:
+				{
+					bad = 1;
+				}
+				break;
+			}
+		}
+	}
+	else
+	{
+		switch(wlo)
+		{
+			case mk_mdi_parent_transfer_id_list:
+			{
+				mk_try(mk_win_user_dialog_get_item(dlg, mk_mdi_parent_transfer_id_list, &control)); mk_assert(control); mk_assert((mk_win_base_user_types_hwnd_t)lparam == control);
+				if(whi == mk_win_user_listbox_notify_dblclk)
+				{
+					gud = 1;
+				}
+			}
+			break;
+			case mk_mdi_parent_transfer_id_ok:
+			{
+				mk_try(mk_win_user_dialog_get_item(dlg, mk_mdi_parent_transfer_id_ok, &control)); mk_assert(control); mk_assert((mk_win_base_user_types_hwnd_t)lparam == control);
+				gud = 1;
+			}
+			break;
+			case mk_mdi_parent_transfer_id_cancel:
+			{
+				mk_try(mk_win_user_dialog_get_item(dlg, mk_mdi_parent_transfer_id_cancel, &control)); mk_assert(control); mk_assert((mk_win_base_user_types_hwnd_t)lparam == control);
+				bad = 1;
+			}
+			break;
+		}
+	}
+	if(gud || bad)
+	{
+		mk_assert(!(gud && bad));
+		prnt = 0;
+		if(gud)
+		{
+			mk_try(mk_win_user_dialog_get_item(dlg, mk_mdi_parent_transfer_id_list, &control)); mk_assert(control);
+			mk_try(mk_win_user_window_send(control, mk_win_user_listbox_wm_getcursel, 0, 0, &lr));
+			if(lr >= 0)
+			{
+				mk_try(mk_win_user_window_send(control, mk_win_user_listbox_wm_getitemdata, (mk_win_base_user_types_wparam_t)lr, 0, &lr));
+				prnt = ((int)lr) + 1;
+			}
+		}
+		mk_try(mk_win_user_dialog_end(dlg, prnt, &b)); mk_assert(b);
+	}
+
+	return 0;
+}
+
+static mk_inline int mk_mdi_parent_private_on_dlg_message(mk_mdi_parent_pt parent, mk_win_base_user_types_hwnd_t dlg, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_types_cpu_iword_t* ret)
+{
+	mk_assert(parent);
+	mk_assert(ret);
+
+	switch(msg)
+	{
+		case mk_win_base_user_types_window_wm_initdialog: mk_try(mk_mdi_parent_private_on_dlg_initdialog(parent, dlg, ret)); break;
+		case mk_win_base_user_types_window_wm_command: mk_try(mk_mdi_parent_private_on_dlg_command(parent, dlg, wparam, lparam, ret)); break;
 	}
 
 	return 0;
@@ -603,6 +819,35 @@ static mk_inline int mk_mdi_parent_private_on_wndproc(mk_win_base_user_types_hwn
 	return 0;
 }
 
+static mk_inline int mk_mdi_parent_private_on_dlgproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_types_cpu_iword_t* ret)
+{
+	mk_mdi_parent_pt parent;
+	mk_win_base_types_uintptr_t nfo;
+
+	mk_assert(hwnd);
+	mk_assert(ret);
+
+	if(msg == mk_win_base_user_types_window_wm_initdialog)
+	{
+		mk_assert(lparam != 0);
+		parent = (mk_mdi_parent_pt)lparam;
+		mk_assert(parent);
+		mk_try(mk_win_user_window_set_info(hwnd, mk_win_base_user_types_window_info_id_dlg_user, (mk_win_base_types_uintptr_t)(mk_mdi_parent_lpt)parent, &nfo));
+		mk_assert(nfo == 0);
+	}
+	else
+	{
+		mk_try(mk_win_user_window_get_info(hwnd, mk_win_base_user_types_window_info_id_dlg_user, &nfo));
+		parent = (mk_mdi_parent_pt)(mk_mdi_parent_lpt)nfo;
+	}
+	if(parent)
+	{
+		mk_try(mk_mdi_parent_private_on_dlg_message(parent, hwnd, msg, wparam, lparam, ret));
+	}
+
+	return 0;
+}
+
 static mk_win_base_user_types_lresult_t mk_win_base_keywords_calling_convention_api mk_mdi_parent_private_wndproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam)
 {
 	int err;
@@ -612,4 +857,16 @@ static mk_win_base_user_types_lresult_t mk_win_base_keywords_calling_convention_
 	mk_assert(err == 0);
 
 	return lres;
+}
+
+static mk_win_base_types_cpu_iword_t mk_win_base_keywords_calling_convention_api mk_mdi_parent_private_dlgproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam)
+{
+	int err;
+	mk_win_base_types_cpu_iword_t ret;
+
+	ret = 0;
+	err = mk_mdi_parent_private_on_dlgproc(hwnd, msg, wparam, lparam, &ret);
+	mk_assert(err == 0);
+
+	return ret;
 }

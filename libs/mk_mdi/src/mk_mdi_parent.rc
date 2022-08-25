@@ -1,5 +1,9 @@
 #include "mk_mdi_parent_constants.h"
 
+#include "../../mk_win/src/mk_win_user_dialog_constants.h"
+#include "../../mk_win/src/mk_win_user_listbox.h"
+#include "../../mk_win/src/mk_win_user_window_constants.h"
+
 
 mk_mdi_parent_menu MENU
 BEGIN
@@ -18,6 +22,19 @@ BEGIN
 		MENUITEM "Tile &Vertically", mk_mdi_parent_menu_id_window_tile_vertically
 		MENUITEM "Tile &Horizontally", mk_mdi_parent_menu_id_window_tile_horizontally
 		MENUITEM "Arrange &Icons", mk_mdi_parent_menu_id_window_arrange_icons
+		MENUITEM "Trans&fer...", mk_mdi_parent_menu_id_window_transfer
+		MENUITEM "Cl&ose", mk_mdi_parent_menu_id_window_close
 		MENUITEM "Close &All", mk_mdi_parent_menu_id_window_close_all
 	END
+END
+
+
+mk_mdi_parent_transfer DIALOG 20, 20, 232, 122
+STYLE mk_win_user_dialog_style_modalframe | mk_win_user_window_style_sysmenu | mk_win_user_window_style_caption | mk_win_user_window_style_popup
+CAPTION "Select Window"
+FONT 8, "MS Shell Dlg"
+BEGIN
+	LISTBOX mk_mdi_parent_transfer_id_list, 5, 7, 222, 90, ((mk_win_user_listbox_style_notify | mk_win_user_window_style_vscroll | mk_win_user_window_style_border) | mk_win_user_listbox_style_hasstrings)
+	DEFPUSHBUTTON "OK", mk_mdi_parent_transfer_id_ok, 75, 100, 35, 14
+	PUSHBUTTON "Cancel", mk_mdi_parent_transfer_id_cancel, 120, 100, 35, 14
 END
