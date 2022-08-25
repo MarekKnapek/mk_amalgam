@@ -34,7 +34,7 @@ static mk_inline int mk_mdi_child_private_on_destroy(mk_mdi_child_pt child, int*
 static mk_inline int mk_mdi_child_private_on_close(mk_mdi_child_pt child, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_child_private_on_message(mk_mdi_child_pt child, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_child_private_on_wndproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_user_types_lresult_t* lres);
-static mk_win_base_user_types_lresult_t mk_win_base_keywords_calling_convention_api mk_mdi_child_private_wndproc2(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam);
+static mk_win_base_user_types_lresult_t mk_win_base_keywords_calling_convention_api mk_mdi_child_private_wndproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam);
 
 
 mk_jumbo int mk_mdi_child_init(void)
@@ -116,7 +116,7 @@ static mk_inline int mk_mdi_child_private_register_class(void)
 	mk_win_base_types_atom_t atom;
 
 	cls.m_style = 0;
-	cls.m_wndproc = &mk_mdi_child_private_wndproc2;
+	cls.m_wndproc = &mk_mdi_child_private_wndproc;
 	cls.m_cls_extra = 0;
 	cls.m_wnd_extra = 0;
 	mk_try(mk_win_instance_get(&cls.m_hinstance));
@@ -215,7 +215,7 @@ static mk_inline int mk_mdi_child_private_on_wndproc(mk_win_base_user_types_hwnd
 	return 0;
 }
 
-static mk_win_base_user_types_lresult_t mk_win_base_keywords_calling_convention_api mk_mdi_child_private_wndproc2(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam)
+static mk_win_base_user_types_lresult_t mk_win_base_keywords_calling_convention_api mk_mdi_child_private_wndproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam)
 {
 	int err;
 	mk_win_base_user_types_lresult_t lres;
