@@ -41,10 +41,10 @@ mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_dec, _), mk_uint_str_suffix)(
 	};
 
 	int i;
-	mk_uint_t base;
+	mk_uint_small_t base;
 	mk_uint_t a;
 	mk_uint_t b;
-	mk_uint_t c;
+	mk_uint_small_t c;
 	unsigned m;
 	mk_char_t tmp[mk_private_worst_case_len];
 
@@ -53,12 +53,12 @@ mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_dec, _), mk_uint_str_suffix)(
 	mk_assert(str_len >= 0);
 
 	i = mk_private_worst_case_len;
-	mk_uint_from_int(&base, 10);
+	mk_uint_small_from_int(&base, 10);
 	a = *x;
 	for(;;)
 	{
-		mk_uint_divmod(&b, &c, &a, &base);
-		m = mk_uint_to_int(&c);
+		mk_uint_divmodsm(&b, &c, &a, &base);
+		m = mk_uint_small_to_int(&c);
 		tmp[--i] = s_symbols[m];
 		if(mk_uint_is_zero(&b))
 		{
