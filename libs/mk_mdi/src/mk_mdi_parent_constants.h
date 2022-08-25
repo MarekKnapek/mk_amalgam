@@ -12,8 +12,14 @@
 #define mk_mdi_parent_menu_id_window_tile_vertically 202
 #define mk_mdi_parent_menu_id_window_tile_horizontally 203
 #define mk_mdi_parent_menu_id_window_arrange_icons 204
-#define mk_mdi_parent_menu_id_window_close_all 205
+#define mk_mdi_parent_menu_id_window_transfer 205
+#define mk_mdi_parent_menu_id_window_close 206
+#define mk_mdi_parent_menu_id_window_close_all 207
 #define mk_mdi_parent_menu_id_window_children 1000
+
+#define mk_mdi_parent_transfer_id_list 1000
+#define mk_mdi_parent_transfer_id_ok 1001
+#define mk_mdi_parent_transfer_id_cancel 1002
 
 
 #endif

@@ -6,20 +6,32 @@
 #include "mk_win_base_keywords.h"
 
 
-#define mk_win_base_user_types_window_info_id_userdata   ((int)-21)
-#define mk_win_base_user_types_window_info_id_exstyle    ((int)-20)
-#define mk_win_base_user_types_window_info_id_style      ((int)-16)
-#define mk_win_base_user_types_window_info_id_id         ((int)-12)
-#define mk_win_base_user_types_window_info_id_hwndparent ((int)-8)
-#define mk_win_base_user_types_window_info_id_hinstance  ((int)-6)
-#define mk_win_base_user_types_window_info_id_wndproc    ((int)-4)
+#define mk_win_base_user_types_window_info_id_userdata      ((int)-21)
+#define mk_win_base_user_types_window_info_id_exstyle       ((int)-20)
+#define mk_win_base_user_types_window_info_id_style         ((int)-16)
+#define mk_win_base_user_types_window_info_id_id            ((int)-12)
+#define mk_win_base_user_types_window_info_id_hwndparent    ((int)-8)
+#define mk_win_base_user_types_window_info_id_hinstance     ((int)-6)
+#define mk_win_base_user_types_window_info_id_wndproc       ((int)-4)
+#define mk_win_base_user_types_window_info_id_dlg_msgresult ((int)0)
+#define mk_win_base_user_types_window_info_id_dlg_dlgproc   ((int)(mk_win_base_user_types_window_info_id_dlg_msgresult + sizeof(mk_win_base_types_intptr_t)))
+#define mk_win_base_user_types_window_info_id_dlg_user      ((int)(mk_win_base_user_types_window_info_id_dlg_dlgproc + sizeof(mk_win_base_user_types_dlgproc_t)))
 
-#define mk_win_base_user_types_window_wm_null    ((unsigned short)0x0000u)
-#define mk_win_base_user_types_window_wm_create  ((unsigned short)0x0001u)
-#define mk_win_base_user_types_window_wm_destroy ((unsigned short)0x0002u)
-#define mk_win_base_user_types_window_wm_close   ((unsigned short)0x0010u)
-#define mk_win_base_user_types_window_wm_quit    ((unsigned short)0x0012u)
-#define mk_win_base_user_types_window_wm_command ((unsigned short)0x0111u)
+#define mk_win_base_user_types_window_wm_null       ((unsigned short)0x0000u)
+#define mk_win_base_user_types_window_wm_create     ((unsigned short)0x0001u)
+#define mk_win_base_user_types_window_wm_destroy    ((unsigned short)0x0002u)
+#define mk_win_base_user_types_window_wm_size       ((unsigned short)0x0005u)
+#define mk_win_base_user_types_window_wm_gettext    ((unsigned short)0x000du)
+#define mk_win_base_user_types_window_wm_close      ((unsigned short)0x0010u)
+#define mk_win_base_user_types_window_wm_quit       ((unsigned short)0x0012u)
+#define mk_win_base_user_types_window_wm_initdialog ((unsigned short)0x0110u)
+#define mk_win_base_user_types_window_wm_command    ((unsigned short)0x0111u)
+
+#define mk_win_base_user_types_window_wparam_wm_size_restored  0
+#define mk_win_base_user_types_window_wparam_wm_size_minimized 1
+#define mk_win_base_user_types_window_wparam_wm_size_maximized 2
+#define mk_win_base_user_types_window_wparam_wm_size_maxshow   3
+#define mk_win_base_user_types_window_wparam_wm_size_maxhide   4
 
 
 typedef mk_win_base_types_intptr_t mk_win_base_user_types_lresult_t;
@@ -33,6 +45,7 @@ struct mk_win_base_user_types_hmenu_s; typedef struct mk_win_base_user_types_hme
 struct mk_win_base_user_types_hwnd_s; typedef struct mk_win_base_user_types_hwnd_s const mk_win_base_keywords_near* mk_win_base_user_types_hwnd_t;
 
 typedef mk_win_base_user_types_lresult_t(mk_win_base_keywords_calling_convention_api*mk_win_base_user_types_wndproc_t)(mk_win_base_user_types_hwnd_t, mk_win_base_types_uint_t, mk_win_base_user_types_wparam_t, mk_win_base_user_types_lparam_t);
+typedef mk_win_base_types_cpu_iword_t(mk_win_base_keywords_calling_convention_api*mk_win_base_user_types_dlgproc_t)(mk_win_base_user_types_hwnd_t, mk_win_base_types_uint_t, mk_win_base_user_types_wparam_t, mk_win_base_user_types_lparam_t);
 
 
 struct mk_win_base_user_types_class_a_s
@@ -103,6 +116,22 @@ struct mk_win_base_user_types_class_exw_s
 typedef struct mk_win_base_user_types_class_exw_s mk_win_base_user_types_class_exw_t;
 typedef mk_win_base_user_types_class_exw_t mk_win_base_keywords_far* mk_win_base_user_types_class_exw_lpt;
 typedef mk_win_base_user_types_class_exw_t const mk_win_base_keywords_far* mk_win_base_user_types_class_exw_lpct;
+
+struct mk_win_base_user_types_dlg_template_s
+{
+	mk_win_base_types_dword_t m_style;
+	mk_win_base_types_dword_t m_extra_style;
+	mk_win_base_types_word_t m_item_count;
+	short m_x;
+	short m_y;
+	short m_width;
+	short m_height;
+};
+typedef struct mk_win_base_user_types_dlg_template_s mk_win_base_user_types_dlg_template_t;
+typedef mk_win_base_user_types_dlg_template_t* mk_win_base_user_types_dlg_template_pt;
+typedef mk_win_base_user_types_dlg_template_t const* mk_win_base_user_types_dlg_template_pct;
+typedef mk_win_base_user_types_dlg_template_t mk_win_base_keywords_far* mk_win_base_user_types_dlg_template_lpt;
+typedef mk_win_base_user_types_dlg_template_t mk_win_base_keywords_far const* mk_win_base_user_types_dlg_template_lpct;
 
 struct mk_win_base_user_types_msg_s
 {

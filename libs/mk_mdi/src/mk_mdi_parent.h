@@ -28,13 +28,15 @@ mk_jumbo int mk_mdi_parent_construct(mk_mdi_parent_pt parent, mk_mdi_app_pt app)
 mk_jumbo int mk_mdi_parent_destruct(mk_mdi_parent_pt parent);
 mk_jumbo int mk_mdi_parent_show(mk_mdi_parent_pt parent, int show);
 mk_jumbo int mk_mdi_parent_close(mk_mdi_parent_pt parent);
-mk_jumbo int mk_mdi_parent_children_add(mk_mdi_parent_pt parent);
+mk_jumbo int mk_mdi_parent_children_add(mk_mdi_parent_pt parent, mk_mdi_child_pt old_child);
+mk_jumbo int mk_mdi_parent_children_get_active(mk_mdi_parent_pt parent, mk_mdi_child_pt* child);
 mk_jumbo int mk_mdi_parent_children_close_active(mk_mdi_parent_pt parent);
 mk_jumbo int mk_mdi_parent_children_cascade(mk_mdi_parent_pt parent);
 mk_jumbo int mk_mdi_parent_children_cascade_zorder(mk_mdi_parent_pt parent);
 mk_jumbo int mk_mdi_parent_children_tile_vertically(mk_mdi_parent_pt parent);
 mk_jumbo int mk_mdi_parent_children_tile_horizontally(mk_mdi_parent_pt parent);
 mk_jumbo int mk_mdi_parent_children_arrange_icons(mk_mdi_parent_pt parent);
+mk_jumbo int mk_mdi_parent_children_transfer(mk_mdi_parent_pt parent);
 mk_jumbo int mk_mdi_parent_children_close_all(mk_mdi_parent_pt parent);
 mk_jumbo int mk_mdi_parent_on_child_destroy(mk_mdi_parent_pt parent, mk_mdi_child_pt child);
 
