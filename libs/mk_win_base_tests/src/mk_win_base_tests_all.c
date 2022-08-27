@@ -46,39 +46,39 @@ static mk_inline int mk_win_base_tests_types(void)
 	mk_check(sizeof(mk_win_base_types_int64_t) * CHAR_BIT == 64);
 	#endif
 
-	mk_check(sizeof(mk_win_base_types_uintptr_t) == sizeof(mk_win_base_types_void_t));
-	mk_check(sizeof(mk_win_base_types_intptr_t) == sizeof(mk_win_base_types_void_t));
+	mk_check(sizeof(mk_win_base_types_uintptr_t) == sizeof(mk_win_base_types_void_lpt));
+	mk_check(sizeof(mk_win_base_types_intptr_t) == sizeof(mk_win_base_types_void_lpt));
 
 	mk_check(sizeof(mk_win_base_types_bool_t) == sizeof(BOOL));
 	mk_check(sizeof(mk_win_base_types_atom_t) == sizeof(ATOM));
 	mk_check(sizeof(mk_win_base_types_uint_t) == sizeof(UINT));
 	mk_check(sizeof(mk_win_base_types_dword_t) == sizeof(DWORD));
 
-	mk_check(sizeof(mk_win_base_types_void_t) == sizeof(LPVOID));
-	mk_check(sizeof(mk_win_base_types_stra_t) == sizeof(LPSTR));
-	mk_check(sizeof(mk_win_base_types_strac_t) == sizeof(LPCSTR));
+	mk_check(sizeof(mk_win_base_types_void_lpt) == sizeof(LPVOID));
+	mk_check(sizeof(mk_win_base_types_char_lpt) == sizeof(LPSTR));
+	mk_check(sizeof(mk_win_base_types_char_lpct) == sizeof(LPCSTR));
 	#if mk_win_base_platform_os != mk_win_base_platform_os_win16
-	mk_check(sizeof(mk_win_base_types_strw_t) == sizeof(LPWSTR));
-	mk_check(sizeof(mk_win_base_types_strwc_t) == sizeof(LPCWSTR));
+	mk_check(sizeof(mk_win_base_types_wchar_lpt) == sizeof(LPWSTR));
+	mk_check(sizeof(mk_win_base_types_wchar_lpct) == sizeof(LPCWSTR));
 	#endif
 
 	mk_check(sizeof(mk_win_base_types_hinstance_t) == sizeof(HINSTANCE));
 
 
-	mk_check(mk_alignof(mk_win_base_types_uintptr_t) == mk_alignof(mk_win_base_types_void_t));
-	mk_check(mk_alignof(mk_win_base_types_intptr_t) == mk_alignof(mk_win_base_types_void_t));
+	mk_check(mk_alignof(mk_win_base_types_uintptr_t) == mk_alignof(mk_win_base_types_void_lpt));
+	mk_check(mk_alignof(mk_win_base_types_intptr_t) == mk_alignof(mk_win_base_types_void_lpt));
 
 	mk_check(mk_alignof(mk_win_base_types_bool_t) == mk_alignof(BOOL));
 	mk_check(mk_alignof(mk_win_base_types_atom_t) == mk_alignof(ATOM));
 	mk_check(mk_alignof(mk_win_base_types_uint_t) == mk_alignof(UINT));
 	mk_check(mk_alignof(mk_win_base_types_dword_t) == mk_alignof(DWORD));
 
-	mk_check(mk_alignof(mk_win_base_types_void_t) == mk_alignof(LPVOID));
-	mk_check(mk_alignof(mk_win_base_types_stra_t) == mk_alignof(LPSTR));
-	mk_check(mk_alignof(mk_win_base_types_strac_t) == mk_alignof(LPCSTR));
+	mk_check(mk_alignof(mk_win_base_types_void_lpt) == mk_alignof(LPVOID));
+	mk_check(mk_alignof(mk_win_base_types_char_lpt) == mk_alignof(LPSTR));
+	mk_check(mk_alignof(mk_win_base_types_char_lpct) == mk_alignof(LPCSTR));
 	#if mk_win_base_platform_os != mk_win_base_platform_os_win16
-	mk_check(mk_alignof(mk_win_base_types_strw_t) == mk_alignof(LPWSTR));
-	mk_check(mk_alignof(mk_win_base_types_strwc_t) == mk_alignof(LPCWSTR));
+	mk_check(mk_alignof(mk_win_base_types_wchar_lpt) == mk_alignof(LPWSTR));
+	mk_check(mk_alignof(mk_win_base_types_wchar_lpct) == mk_alignof(LPCWSTR));
 	#endif
 
 	mk_check(mk_alignof(mk_win_base_types_hinstance_t) == mk_alignof(HINSTANCE));

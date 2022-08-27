@@ -13,7 +13,7 @@
 #include "../../mk_win_base/src/mk_win_base_types.h"
 
 
-int mk_win_base_keywords_calling_convention_api WinMain(mk_win_base_types_hinstance_t current, mk_win_base_types_hinstance_t previous, mk_win_base_types_strac_t cmd_line, int cmd_show)
+int mk_win_base_keywords_calling_convention_api WinMain(mk_win_base_types_hinstance_t current, mk_win_base_types_hinstance_t previous, mk_win_base_types_char_lpct cmd_line, int cmd_show)
 {
 	mk_mdi_app_t app;
 	int exit_code;
