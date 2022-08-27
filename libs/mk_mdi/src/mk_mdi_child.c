@@ -20,8 +20,6 @@
 #include "../../mk_win_base/src/mk_win_base_types.h"
 #include "../../mk_win_base/src/mk_win_base_user_types.h"
 
-#include <stddef.h>
-
 
 typedef mk_mdi_child_t mk_win_base_keywords_far* mk_mdi_child_lpt;
 
@@ -81,8 +79,8 @@ mk_jumbo int mk_mdi_child_construct(mk_mdi_child_pt child, mk_mdi_parent_pt pare
 	mk_assert(child != old_child);
 
 	child->m_parent = parent;
-	child->m_hwnd = NULL;
-	child->m_edit = NULL;
+	child->m_hwnd = mk_win_base_types_null;
+	child->m_edit = mk_win_base_types_null;
 
 	mdi.m_class_name = mk_mdi_child_private_class_name;
 	mdi.m_window_name = mk_win_char_c("Child");
@@ -100,7 +98,7 @@ mk_jumbo int mk_mdi_child_construct(mk_mdi_child_pt child, mk_mdi_parent_pt pare
 	if(old_child)
 	{
 		child->m_edit = old_child->m_edit;
-		old_child->m_edit = NULL;
+		old_child->m_edit = mk_win_base_types_null;
 		mk_try(mk_win_user_window_set_parent(child->m_edit, child->m_hwnd, &hwnd));
 		mk_assert(hwnd == old_child->m_hwnd);
 	}
@@ -108,18 +106,18 @@ mk_jumbo int mk_mdi_child_construct(mk_mdi_child_pt child, mk_mdi_parent_pt pare
 	{
 		wi.m_extra_style = 0;
 		wi.m_class_name = mk_win_char_c("edit");
-		wi.m_window_name = NULL;
+		wi.m_window_name = mk_win_base_types_null;
 		wi.m_style = mk_win_user_edit_style_multiline | mk_win_user_edit_style_autovscroll | mk_win_user_edit_style_autohscroll | mk_win_user_edit_style_nohidesel | mk_win_user_window_style_hscroll | mk_win_user_window_style_vscroll | mk_win_user_window_style_visible | mk_win_user_window_style_child;
 		wi.m_x = 0;
 		wi.m_y = 0;
 		wi.m_width = 0;
 		wi.m_height = 0;
 		wi.m_parent = child->m_hwnd;
-		wi.m_menu = NULL;
+		wi.m_menu = mk_win_base_types_null;
 		mk_try(mk_win_instance_get(&wi.m_instance));
-		wi.m_param = NULL;
+		wi.m_param = mk_win_base_types_null;
 		mk_try(mk_win_user_window_create(&wi, &hwnd));
-		mk_assert(hwnd != NULL);
+		mk_assert(hwnd != mk_win_base_types_null);
 		child->m_edit = hwnd;
 	}
 
@@ -166,9 +164,9 @@ static mk_inline int mk_mdi_child_private_register_class(void)
 	mk_try(mk_win_user_icon_load_by_id(mk_win_user_icon_id_application, &cls.m_hicon));
 	mk_try(mk_win_user_cursor_load_by_id(mk_win_user_cursor_id_arrow, &cls.m_hcursor));
 	cls.m_background = (mk_win_base_user_types_hbrush_t)(mk_win_base_types_uintptr_t)(mk_win_user_color_id_window + 1);
-	cls.m_menu_name = NULL;
+	cls.m_menu_name = mk_win_base_types_null;
 	cls.m_class_name = mk_mdi_child_private_class_name;
-	cls.m_small_icon = NULL;
+	cls.m_small_icon = mk_win_base_types_null;
 	mk_try(mk_win_user_class_register(&cls, &atom));
 
 	return 0;
