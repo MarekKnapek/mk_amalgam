@@ -5,7 +5,24 @@
 #include "mk_win_base_platform.h"
 #include "mk_win_base_keywords.h"
 
+#include "../../mk_utils/src/mk_concat.h"
+
 #include <stddef.h>
+
+
+#define mk_win_base_types_make_pointers(x) \
+	typedef mk_concat(x, _t)* mk_concat(x, _pt); \
+	typedef const mk_concat(x, _t)* mk_concat(x, _pct); \
+	typedef mk_concat(x, _t) mk_win_base_keywords_far* mk_concat(x, _lpt); \
+	typedef const mk_concat(x, _t) mk_win_base_keywords_far* mk_concat(x, _lpct)
+#define mk_win_base_types_make_struct(x) \
+	typedef struct mk_concat(x, _s) mk_concat(x, _t); \
+	mk_win_base_types_make_pointers(x)
+#if mk_win_base_platform_os == mk_win_base_platform_os_win16
+#define mk_win_base_types_make_handle(x) typedef unsigned int x
+#else
+#define mk_win_base_types_make_handle(x) struct mk_concat(x, _private_s); typedef struct mk_concat(x, _private_s) const* x
+#endif
 
 
 typedef unsigned short int mk_win_base_types_uint16_t;
@@ -35,20 +52,26 @@ typedef mk_win_base_types_int64_t mk_win_base_types_intptr_t;
 #endif
 
 typedef int mk_win_base_types_bool_t;
-typedef mk_win_base_types_bool_t* mk_win_base_types_bool_pt;
-typedef mk_win_base_types_bool_t mk_win_base_keywords_far* mk_win_base_types_bool_lpt;
 typedef unsigned short int mk_win_base_types_atom_t;
 typedef unsigned int mk_win_base_types_uint_t;
-typedef mk_win_base_types_uint32_t mk_win_base_types_dword_t;
 typedef mk_win_base_types_uint16_t mk_win_base_types_word_t;
+typedef mk_win_base_types_uint32_t mk_win_base_types_dword_t;
 
-typedef void mk_win_base_keywords_far* mk_win_base_types_void_t;
-typedef char mk_win_base_keywords_far* mk_win_base_types_stra_t;
-typedef char const mk_win_base_keywords_far* mk_win_base_types_strac_t;
-typedef wchar_t mk_win_base_keywords_far* mk_win_base_types_strw_t;
-typedef wchar_t const mk_win_base_keywords_far* mk_win_base_types_strwc_t;
+typedef void mk_win_base_types_void_t;
+typedef char mk_win_base_types_char_t;
+typedef wchar_t mk_win_base_types_wchar_t;
 
-struct mk_win_base_types_hinstance_s; typedef struct mk_win_base_types_hinstance_s const mk_win_base_keywords_near* mk_win_base_types_hinstance_t;
+mk_win_base_types_make_pointers(mk_win_base_types_bool);
+mk_win_base_types_make_pointers(mk_win_base_types_atom);
+mk_win_base_types_make_pointers(mk_win_base_types_uint);
+mk_win_base_types_make_pointers(mk_win_base_types_word);
+mk_win_base_types_make_pointers(mk_win_base_types_dword);
+mk_win_base_types_make_pointers(mk_win_base_types_void);
+mk_win_base_types_make_pointers(mk_win_base_types_char);
+mk_win_base_types_make_pointers(mk_win_base_types_wchar);
+
+mk_win_base_types_make_handle(mk_win_base_types_hinstance_t);
+
 
 #if mk_win_base_platform_os == mk_win_base_platform_os_win16
 #define mk_win_base_types_null 0
@@ -62,11 +85,7 @@ struct mk_win_base_types_point_s
 	int m_x;
 	int m_y;
 };
-typedef struct mk_win_base_types_point_s mk_win_base_types_point_t;
-typedef mk_win_base_types_point_t* mk_win_base_types_point_pt;
-typedef mk_win_base_types_point_t const* mk_win_base_types_point_pct;
-typedef mk_win_base_types_point_t mk_win_base_keywords_far* mk_win_base_types_point_lpt;
-typedef mk_win_base_types_point_t const mk_win_base_keywords_far* mk_win_base_types_point_lpct;
+mk_win_base_types_make_struct(mk_win_base_types_point);
 
 struct mk_win_base_types_rect_s
 {
@@ -75,11 +94,7 @@ struct mk_win_base_types_rect_s
 	int m_right;
 	int m_bottom;
 };
-typedef struct mk_win_base_types_rect_s mk_win_base_types_rect_t;
-typedef mk_win_base_types_rect_t* mk_win_base_types_rect_pt;
-typedef mk_win_base_types_rect_t const* mk_win_base_types_rect_pct;
-typedef mk_win_base_types_rect_t mk_win_base_keywords_far* mk_win_base_types_rect_lpt;
-typedef mk_win_base_types_rect_t const mk_win_base_keywords_far* mk_win_base_types_rect_lpct;
+mk_win_base_types_make_struct(mk_win_base_types_rect);
 
 
 #endif

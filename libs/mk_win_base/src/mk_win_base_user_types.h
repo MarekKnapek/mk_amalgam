@@ -38,11 +38,11 @@ typedef mk_win_base_types_intptr_t mk_win_base_user_types_lresult_t;
 typedef mk_win_base_types_cpu_word_t mk_win_base_user_types_wparam_t;
 typedef mk_win_base_types_uintptr_t mk_win_base_user_types_lparam_t;
 
-struct mk_win_base_user_types_hbrush_s; typedef struct mk_win_base_user_types_hbrush_s const mk_win_base_keywords_near* mk_win_base_user_types_hbrush_t;
-struct mk_win_base_user_types_hcursor_s; typedef struct mk_win_base_user_types_hcursor_s const mk_win_base_keywords_near* mk_win_base_user_types_hcursor_t;
-struct mk_win_base_user_types_hicon_s; typedef struct mk_win_base_user_types_hicon_s const mk_win_base_keywords_near* mk_win_base_user_types_hicon_t;
-struct mk_win_base_user_types_hmenu_s; typedef struct mk_win_base_user_types_hmenu_s const mk_win_base_keywords_near* mk_win_base_user_types_hmenu_t;
-struct mk_win_base_user_types_hwnd_s; typedef struct mk_win_base_user_types_hwnd_s const mk_win_base_keywords_near* mk_win_base_user_types_hwnd_t;
+mk_win_base_types_make_handle(mk_win_base_user_types_hbrush_t);
+mk_win_base_types_make_handle(mk_win_base_user_types_hcursor_t);
+mk_win_base_types_make_handle(mk_win_base_user_types_hicon_t);
+mk_win_base_types_make_handle(mk_win_base_user_types_hmenu_t);
+mk_win_base_types_make_handle(mk_win_base_user_types_hwnd_t);
 
 typedef mk_win_base_user_types_lresult_t(mk_win_base_keywords_calling_convention_api*mk_win_base_user_types_wndproc_t)(mk_win_base_user_types_hwnd_t, mk_win_base_types_uint_t, mk_win_base_user_types_wparam_t, mk_win_base_user_types_lparam_t);
 typedef mk_win_base_types_cpu_iword_t(mk_win_base_keywords_calling_convention_api*mk_win_base_user_types_dlgproc_t)(mk_win_base_user_types_hwnd_t, mk_win_base_types_uint_t, mk_win_base_user_types_wparam_t, mk_win_base_user_types_lparam_t);
@@ -58,12 +58,10 @@ struct mk_win_base_user_types_class_a_s
 	mk_win_base_user_types_hicon_t m_hicon;
 	mk_win_base_user_types_hcursor_t m_hcursor;
 	mk_win_base_user_types_hbrush_t m_background;
-	mk_win_base_types_strac_t m_menu_name;
-	mk_win_base_types_strac_t m_class_name;
+	mk_win_base_types_char_lpct m_menu_name;
+	mk_win_base_types_char_lpct m_class_name;
 };
-typedef struct mk_win_base_user_types_class_a_s mk_win_base_user_types_class_a_t;
-typedef mk_win_base_user_types_class_a_t mk_win_base_keywords_far* mk_win_base_user_types_class_a_lpt;
-typedef mk_win_base_user_types_class_a_t const mk_win_base_keywords_far* mk_win_base_user_types_class_a_lpct;
+mk_win_base_types_make_struct(mk_win_base_user_types_class_a);
 struct mk_win_base_user_types_class_w_s
 {
 	mk_win_base_types_uint_t m_style;
@@ -74,12 +72,10 @@ struct mk_win_base_user_types_class_w_s
 	mk_win_base_user_types_hicon_t m_hicon;
 	mk_win_base_user_types_hcursor_t m_hcursor;
 	mk_win_base_user_types_hbrush_t m_background;
-	mk_win_base_types_strwc_t m_menu_name;
-	mk_win_base_types_strwc_t m_class_name;
+	mk_win_base_types_wchar_lpct m_menu_name;
+	mk_win_base_types_wchar_lpct m_class_name;
 };
-typedef struct mk_win_base_user_types_class_w_s mk_win_base_user_types_class_w_t;
-typedef mk_win_base_user_types_class_w_t mk_win_base_keywords_far* mk_win_base_user_types_class_w_lpt;
-typedef mk_win_base_user_types_class_w_t const mk_win_base_keywords_far* mk_win_base_user_types_class_w_lpct;
+mk_win_base_types_make_struct(mk_win_base_user_types_class_w);
 struct mk_win_base_user_types_class_exa_s
 {
 	mk_win_base_types_uint_t m_size;
@@ -91,13 +87,11 @@ struct mk_win_base_user_types_class_exa_s
 	mk_win_base_user_types_hicon_t m_hicon;
 	mk_win_base_user_types_hcursor_t m_hcursor;
 	mk_win_base_user_types_hbrush_t m_background;
-	mk_win_base_types_strac_t m_menu_name;
-	mk_win_base_types_strac_t m_class_name;
+	mk_win_base_types_char_lpct m_menu_name;
+	mk_win_base_types_char_lpct m_class_name;
 	mk_win_base_user_types_hicon_t m_small_icon;
 };
-typedef struct mk_win_base_user_types_class_exa_s mk_win_base_user_types_class_exa_t;
-typedef mk_win_base_user_types_class_exa_t mk_win_base_keywords_far* mk_win_base_user_types_class_exa_lpt;
-typedef mk_win_base_user_types_class_exa_t const mk_win_base_keywords_far* mk_win_base_user_types_class_exa_lpct;
+mk_win_base_types_make_struct(mk_win_base_user_types_class_exa);
 struct mk_win_base_user_types_class_exw_s
 {
 	mk_win_base_types_uint_t m_size;
@@ -109,13 +103,11 @@ struct mk_win_base_user_types_class_exw_s
 	mk_win_base_user_types_hicon_t m_hicon;
 	mk_win_base_user_types_hcursor_t m_hcursor;
 	mk_win_base_user_types_hbrush_t m_background;
-	mk_win_base_types_strwc_t m_menu_name;
-	mk_win_base_types_strwc_t m_class_name;
+	mk_win_base_types_wchar_lpct m_menu_name;
+	mk_win_base_types_wchar_lpct m_class_name;
 	mk_win_base_user_types_hicon_t m_small_icon;
 };
-typedef struct mk_win_base_user_types_class_exw_s mk_win_base_user_types_class_exw_t;
-typedef mk_win_base_user_types_class_exw_t mk_win_base_keywords_far* mk_win_base_user_types_class_exw_lpt;
-typedef mk_win_base_user_types_class_exw_t const mk_win_base_keywords_far* mk_win_base_user_types_class_exw_lpct;
+mk_win_base_types_make_struct(mk_win_base_user_types_class_exw);
 
 struct mk_win_base_user_types_dlg_template_s
 {
@@ -127,11 +119,7 @@ struct mk_win_base_user_types_dlg_template_s
 	short m_width;
 	short m_height;
 };
-typedef struct mk_win_base_user_types_dlg_template_s mk_win_base_user_types_dlg_template_t;
-typedef mk_win_base_user_types_dlg_template_t* mk_win_base_user_types_dlg_template_pt;
-typedef mk_win_base_user_types_dlg_template_t const* mk_win_base_user_types_dlg_template_pct;
-typedef mk_win_base_user_types_dlg_template_t mk_win_base_keywords_far* mk_win_base_user_types_dlg_template_lpt;
-typedef mk_win_base_user_types_dlg_template_t mk_win_base_keywords_far const* mk_win_base_user_types_dlg_template_lpct;
+mk_win_base_types_make_struct(mk_win_base_user_types_dlg_template);
 
 struct mk_win_base_user_types_msg_s
 {
@@ -142,13 +130,11 @@ struct mk_win_base_user_types_msg_s
 	mk_win_base_types_dword_t m_time;
 	mk_win_base_types_point_t m_point;
 };
-typedef struct mk_win_base_user_types_msg_s mk_win_base_user_types_msg_t;
-typedef mk_win_base_user_types_msg_t mk_win_base_keywords_far* mk_win_base_user_types_msg_lpt;
-typedef mk_win_base_user_types_msg_t const mk_win_base_keywords_far* mk_win_base_user_types_msg_lpct;
+mk_win_base_types_make_struct(mk_win_base_user_types_msg);
 
 struct mk_win_base_user_types_wm_create_a_s
 {
-	mk_win_base_types_void_t m_param;
+	mk_win_base_types_void_lpt m_param;
 	mk_win_base_types_hinstance_t m_instance;
 	mk_win_base_user_types_hmenu_t m_menu;
 	mk_win_base_user_types_hwnd_t m_parent;
@@ -157,15 +143,14 @@ struct mk_win_base_user_types_wm_create_a_s
 	int m_y;
 	int m_x;
 	mk_win_base_types_dword_t m_style;
-	mk_win_base_types_strac_t m_name;
-	mk_win_base_types_strac_t m_class;
+	mk_win_base_types_char_lpct m_name;
+	mk_win_base_types_char_lpct m_class;
 	mk_win_base_types_dword_t m_extra_style;
 };
-typedef struct mk_win_base_user_types_wm_create_a_s mk_win_base_user_types_wm_create_a_t;
-typedef mk_win_base_user_types_wm_create_a_t const mk_win_base_keywords_far* mk_win_base_user_types_wm_create_a_lpct;
+mk_win_base_types_make_struct(mk_win_base_user_types_wm_create_a);
 struct mk_win_base_user_types_wm_create_w_s
 {
-	mk_win_base_types_void_t m_param;
+	mk_win_base_types_void_lpt m_param;
 	mk_win_base_types_hinstance_t m_instance;
 	mk_win_base_user_types_hmenu_t m_menu;
 	mk_win_base_user_types_hwnd_t m_parent;
@@ -174,50 +159,45 @@ struct mk_win_base_user_types_wm_create_w_s
 	int m_y;
 	int m_x;
 	mk_win_base_types_dword_t m_style;
-	mk_win_base_types_strwc_t m_name;
-	mk_win_base_types_strwc_t m_class;
+	mk_win_base_types_wchar_lpct m_name;
+	mk_win_base_types_wchar_lpct m_class;
 	mk_win_base_types_dword_t m_extra_style;
 };
-typedef struct mk_win_base_user_types_wm_create_w_s mk_win_base_user_types_wm_create_w_t;
-typedef mk_win_base_user_types_wm_create_w_t const mk_win_base_keywords_far* mk_win_base_user_types_wm_create_w_lpct;
+mk_win_base_types_make_struct(mk_win_base_user_types_wm_create_w);
 
 struct mk_win_base_user_client_create_s
 {
 	mk_win_base_user_types_hmenu_t m_menu;
 	mk_win_base_types_uint_t m_first_child_id;
 };
-typedef struct mk_win_base_user_client_create_s mk_win_base_user_client_create_t;
+mk_win_base_types_make_struct(mk_win_base_user_client_create);
 
 struct mk_win_base_user_wm_mdicreate_a_s
 {
-	mk_win_base_types_strac_t m_class_name;
-	mk_win_base_types_strac_t m_window_name;
+	mk_win_base_types_char_lpct m_class_name;
+	mk_win_base_types_char_lpct m_window_name;
 	mk_win_base_types_hinstance_t m_instance;
 	int m_x;
 	int m_y;
 	int m_width;
 	int m_height;
 	mk_win_base_types_dword_t m_style;
-	mk_win_base_types_void_t m_param;
+	mk_win_base_types_void_lpt m_param;
 };
-typedef struct mk_win_base_user_wm_mdicreate_a_s mk_win_base_user_wm_mdicreate_a_t;
-typedef mk_win_base_user_wm_mdicreate_a_t const* mk_win_base_user_wm_mdicreate_a_pct;
-typedef mk_win_base_user_wm_mdicreate_a_t const mk_win_base_keywords_far* mk_win_base_user_wm_mdicreate_a_lpct;
+mk_win_base_types_make_struct(mk_win_base_user_wm_mdicreate_a);
 struct mk_win_base_user_wm_mdicreate_w_s
 {
-	mk_win_base_types_strwc_t m_class_name;
-	mk_win_base_types_strwc_t m_window_name;
+	mk_win_base_types_wchar_lpct m_class_name;
+	mk_win_base_types_wchar_lpct m_window_name;
 	mk_win_base_types_hinstance_t m_instance;
 	int m_x;
 	int m_y;
 	int m_width;
 	int m_height;
 	mk_win_base_types_dword_t m_style;
-	mk_win_base_types_void_t m_param;
+	mk_win_base_types_void_lpt m_param;
 };
-typedef struct mk_win_base_user_wm_mdicreate_w_s mk_win_base_user_wm_mdicreate_w_t;
-typedef mk_win_base_user_wm_mdicreate_w_t const* mk_win_base_user_wm_mdicreate_w_pct;
-typedef mk_win_base_user_wm_mdicreate_w_t const mk_win_base_keywords_far* mk_win_base_user_wm_mdicreate_w_lpct;
+mk_win_base_types_make_struct(mk_win_base_user_wm_mdicreate_w);
 
 
 #endif

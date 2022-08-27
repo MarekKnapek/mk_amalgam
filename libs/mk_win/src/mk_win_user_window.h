@@ -25,7 +25,7 @@ struct mk_win_user_window_create_s
 	mk_win_base_user_types_hwnd_t m_parent;
 	mk_win_base_user_types_hmenu_t m_menu;
 	mk_win_base_types_hinstance_t m_instance;
-	mk_win_base_types_void_t m_param;
+	mk_win_base_types_void_lpt m_param;
 };
 typedef struct mk_win_user_window_create_s mk_win_user_window_create_t;
 typedef mk_win_user_window_create_t* mk_win_user_window_create_pt;
@@ -41,7 +41,7 @@ struct mk_win_user_window_mdicreate_s
 	int m_width;
 	int m_height;
 	mk_win_base_types_dword_t m_style;
-	mk_win_base_types_void_t m_param;
+	mk_win_base_types_void_lpt m_param;
 };
 typedef struct mk_win_user_window_mdicreate_s mk_win_user_window_mdicreate_t;
 typedef mk_win_user_window_mdicreate_t const* mk_win_user_window_mdicreate_pct;

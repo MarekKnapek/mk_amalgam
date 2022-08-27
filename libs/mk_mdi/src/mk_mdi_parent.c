@@ -401,7 +401,7 @@ static mk_inline int mk_mdi_parent_private_on_create(mk_mdi_parent_pt parent, mk
 	wnd.m_parent = parent->m_hwnd;
 	wnd.m_menu = 0;
 	mk_try(mk_win_instance_get(&wnd.m_instance));
-	wnd.m_param = (mk_win_base_types_void_t)&client_create;
+	wnd.m_param = (mk_win_base_types_void_lpt)&client_create;
 	mk_try(mk_win_user_window_create(&wnd, &mdi));
 	mk_assert(mdi);
 	parent->m_mdi = mdi;
@@ -673,8 +673,8 @@ static mk_inline int mk_mdi_parent_private_on_dlg_initdialog(mk_mdi_parent_pt pa
 			continue;
 		}
 		/* TODO: Get parent name from model instead from view. */
-		mk_try(mk_win_user_window_send(prnt->m_hwnd, mk_win_base_user_types_window_wm_gettext, 512, (mk_win_base_user_types_lparam_t)(mk_win_base_types_strw_t)&name, &lr)); mk_assert(lr != 0);
-		mk_try(mk_win_user_window_send(list, mk_win_user_listbox_wm_addstring, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_types_strwc_t)&name, &lr)); mk_assert(lr >= 0);
+		mk_try(mk_win_user_window_send(prnt->m_hwnd, mk_win_base_user_types_window_wm_gettext, 512, (mk_win_base_user_types_lparam_t)(mk_win_base_types_void_lpt)&name, &lr)); mk_assert(lr != 0);
+		mk_try(mk_win_user_window_send(list, mk_win_user_listbox_wm_addstring, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_types_void_lpct)&name, &lr)); mk_assert(lr >= 0);
 		mk_try(mk_win_user_window_send(list, mk_win_user_listbox_wm_setitemdata, (mk_win_base_user_types_wparam_t)lr, (mk_win_base_user_types_lparam_t)i, &lr)); mk_assert(lr != mk_win_user_listbox_error_err);
 	}
 	mk_try(mk_win_user_window_send(list, mk_win_user_listbox_wm_setcursel, 0, 0, &lr));
