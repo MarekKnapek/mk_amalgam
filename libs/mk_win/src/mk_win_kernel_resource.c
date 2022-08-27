@@ -7,7 +7,7 @@
 #include "../../mk_win_base/src/mk_win_base_kernel_functions.h"
 
 
-mk_jumbo int mk_win_kernel_resource_find(mk_win_base_kernel_types_hmodule_t module, mk_win_base_types_strac_t name, mk_win_base_types_strac_t type, mk_win_base_kernel_types_hrsrc_t* resource)
+mk_jumbo int mk_win_kernel_resource_find(mk_win_base_kernel_types_hmodule_t module, mk_win_base_types_char_lpct name, mk_win_base_types_char_lpct type, mk_win_base_kernel_types_hrsrc_t* resource)
 {
 	#if mk_win_api == mk_win_api_old
 	#define FindResourceM FindResource
@@ -27,24 +27,9 @@ mk_jumbo int mk_win_kernel_resource_find(mk_win_base_kernel_types_hmodule_t modu
 	#undef FindResourceM
 }
 
-mk_jumbo int mk_win_kernel_resource_find_bytypeid(mk_win_base_kernel_types_hmodule_t module, mk_win_base_types_strac_t name, mk_win_base_types_uint16_t type, mk_win_base_kernel_types_hrsrc_t* resource)
+mk_jumbo int mk_win_kernel_resource_find_bytypeid(mk_win_base_kernel_types_hmodule_t module, mk_win_base_types_char_lpct name, mk_win_base_types_uint16_t type, mk_win_base_kernel_types_hrsrc_t* resource)
 {
-	#if mk_win_api == mk_win_api_old
-	#define FindResourceM FindResource
-	#else
-	#define FindResourceM FindResourceA
-	#endif
-
-	mk_win_base_kernel_types_hrsrc_t r;
-
-	mk_assert(resource);
-
-	r = FindResourceM(module, name, (mk_win_base_types_strac_t)(mk_win_base_types_uintptr_t)type);
-	*resource = r;
-
-	return 0;
-
-	#undef FindResourceM
+	return mk_win_kernel_resource_find(module, name, (mk_win_base_types_char_lpct)(mk_win_base_types_uintptr_t)type, resource);
 }
 
 mk_jumbo int mk_win_kernel_resource_load(mk_win_base_kernel_types_hmodule_t module, mk_win_base_kernel_types_hrsrc_t resource, mk_win_base_kernel_types_hglobal_t* global)
@@ -59,9 +44,9 @@ mk_jumbo int mk_win_kernel_resource_load(mk_win_base_kernel_types_hmodule_t modu
 	return 0;
 }
 
-mk_jumbo int mk_win_kernel_resource_lock(mk_win_base_kernel_types_hglobal_t global, mk_win_base_types_void_t* data)
+mk_jumbo int mk_win_kernel_resource_lock(mk_win_base_kernel_types_hglobal_t global, mk_win_base_types_void_lpt* data)
 {
-	mk_win_base_types_void_t d;
+	mk_win_base_types_void_lpt d;
 
 	mk_assert(data);
 
