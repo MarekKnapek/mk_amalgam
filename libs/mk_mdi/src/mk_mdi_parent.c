@@ -164,7 +164,6 @@ mk_jumbo int mk_mdi_parent_children_add(mk_mdi_parent_pt parent, mk_mdi_child_pt
 
 	mk_assert(parent);
 
-	mk_try(mk_std_ptr_buff_reserve_one(&parent->m_children));
 	mk_try(mk_std_gcallocator_allocate(sizeof(*child), (void**)&child));
 	mk_try(mk_std_ptr_buff_append(&parent->m_children, child));
 	mk_try(mk_mdi_child_construct(child, parent, old_child));
