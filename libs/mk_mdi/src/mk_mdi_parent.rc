@@ -14,6 +14,8 @@ BEGIN
 		MENUITEM SEPARATOR
 		MENUITEM "New &Window", mk_mdi_parent_menu_id_file_new_window
 		MENUITEM "Clos&e Window", mk_mdi_parent_menu_id_file_close_window
+		MENUITEM SEPARATOR
+		MENUITEM "E&xit", mk_mdi_parent_menu_id_file_exit
 	END
 	POPUP "&Window"
 	BEGIN

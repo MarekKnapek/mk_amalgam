@@ -110,6 +110,24 @@ mk_jumbo int mk_mdi_app_run(mk_mdi_app_pt app)
 	return 0;
 }
 
+mk_jumbo int mk_mdi_app_exit(mk_mdi_app_pt app)
+{
+	size_t count;
+	size_t i;
+	mk_mdi_parent_pt parent;
+
+	mk_assert(app);
+
+	mk_try(mk_std_ptr_buff_get_count(&app->m_parents, &count));
+	for(i = 0; i != count; ++i)
+	{
+		mk_try(mk_std_ptr_buff_get_element(&app->m_parents, count - 1 - i, (void**)&parent));
+		mk_try(mk_mdi_parent_close(parent));
+	}
+
+	return 0;
+}
+
 mk_jumbo int mk_mdi_app_on_parent_destroy(mk_mdi_app_pt app, mk_mdi_parent_pt parent)
 {
 	size_t count;

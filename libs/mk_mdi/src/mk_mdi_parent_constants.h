@@ -6,6 +6,7 @@
 #define mk_mdi_parent_menu_id_file_close_file 101
 #define mk_mdi_parent_menu_id_file_new_window 102
 #define mk_mdi_parent_menu_id_file_close_window 103
+#define mk_mdi_parent_menu_id_file_exit 104
 
 #define mk_mdi_parent_menu_id_window_cascade 200
 #define mk_mdi_parent_menu_id_window_cascade_zorder 201
