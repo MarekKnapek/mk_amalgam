@@ -11,11 +11,11 @@
 #endif
 
 
-#define mk_concat_(a, b) a ## b
-#define mk_concat(a, b) mk_concat_(a, b)
+#define mk_concat_q_(a, b) a ## b
+#define mk_concat_q(a, b) mk_concat_q_(a, b)
 
 
-mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_dec, _), mk_uint_str_suffix)(mk_uint_t const* x, mk_char_t* str, int str_len)
+mk_jumbo int mk_concat_q(mk_concat_q(mk_uint_to_string_dec, _), mk_uint_str_suffix)(mk_uint_t const* x, mk_char_t* str, int str_len)
 {
 	#define mk_private_to_uint(x) ((unsigned)(x))
 	#define mk_private_to_long(x) ((long)(x))
@@ -84,7 +84,7 @@ mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_dec, _), mk_uint_str_suffix)(
 	#undef mk_private_worst_case_len 
 }
 
-mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_hex, _), mk_uint_str_suffix)(mk_uint_t const* x, mk_char_t* str, int str_len)
+mk_jumbo int mk_concat_q(mk_concat_q(mk_uint_to_string_hex, _), mk_uint_str_suffix)(mk_uint_t const* x, mk_char_t* str, int str_len)
 {
 	#define mk_private_worst_case_len (mk_uint_bits / 4)
 
@@ -95,7 +95,7 @@ mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_hex, _), mk_uint_str_suffix)(
 	int zeros;
 	int symbols;
 
-	mk_concat(mk_concat(mk_uint_to_string_hex_full, _), mk_uint_str_suffix)(x, tmp);
+	mk_concat_q(mk_concat_q(mk_uint_to_string_hex_full, _), mk_uint_str_suffix)(x, tmp);
 	for(i = 0; i != mk_private_worst_case_len - 1; ++i)
 	{
 		if(tmp[i] != s_zero)
@@ -115,7 +115,7 @@ mk_jumbo int mk_concat(mk_concat(mk_uint_to_string_hex, _), mk_uint_str_suffix)(
 	#undef mk_private_worst_case_len
 }
 
-mk_jumbo void mk_concat(mk_concat(mk_uint_to_string_hex_full, _), mk_uint_str_suffix)(mk_uint_t const* x, mk_char_t* str)
+mk_jumbo void mk_concat_q(mk_concat_q(mk_uint_to_string_hex_full, _), mk_uint_str_suffix)(mk_uint_t const* x, mk_char_t* str)
 {
 	static mk_char_t const s_symbols[] =
 	{
@@ -161,8 +161,8 @@ mk_jumbo void mk_concat(mk_concat(mk_uint_to_string_hex_full, _), mk_uint_str_su
 }
 
 
-#undef mk_concat_
-#undef mk_concat
+#undef mk_concat_q_
+#undef mk_concat_q
 
 
 #if defined(_MSC_VER)
