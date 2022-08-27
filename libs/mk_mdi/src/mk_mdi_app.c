@@ -66,7 +66,7 @@ mk_jumbo int mk_mdi_app_add_parent(mk_mdi_app_pt app)
 	mk_assert(app);
 
 	mk_try(mk_std_ptr_buff_reserve_one(&app->m_parents));
-	mk_try(mk_std_gcallocator_allocate(sizeof(*parent), &parent));
+	mk_try(mk_std_gcallocator_allocate(sizeof(*parent), (void**)&parent));
 	mk_try(mk_std_ptr_buff_append(&app->m_parents, parent));
 	mk_try(mk_mdi_parent_construct(parent, app));
 
@@ -82,7 +82,7 @@ mk_jumbo int mk_mdi_app_show_last_parent(mk_mdi_app_pt app, int show)
 
 	mk_try(mk_std_ptr_buff_get_count(&app->m_parents, &count));
 	mk_assert(count != 0);
-	mk_try(mk_std_ptr_buff_get_element(&app->m_parents, count - 1, &parent));
+	mk_try(mk_std_ptr_buff_get_element(&app->m_parents, count - 1, (void**)&parent));
 	mk_try(mk_mdi_parent_show(parent, show));
 
 	return 0;
@@ -147,7 +147,7 @@ static mk_inline int mk_mdi_app_private_message_process(mk_mdi_app_pt app, mk_wi
 	mk_try(mk_std_ptr_buff_get_count(&app->m_parents, &count));
 	for(i = 0; i != count; ++i)
 	{
-		mk_try(mk_std_ptr_buff_get_element(&app->m_parents, i, &parent));
+		mk_try(mk_std_ptr_buff_get_element(&app->m_parents, i, (void**)&parent));
 		mk_try(mk_win_user_window_is_child(parent->m_hwnd, msg->m_hwnd, &is_child));
 		if(is_child != 0)
 		{

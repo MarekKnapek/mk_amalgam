@@ -165,7 +165,7 @@ mk_jumbo int mk_mdi_parent_children_add(mk_mdi_parent_pt parent, mk_mdi_child_pt
 	mk_assert(parent);
 
 	mk_try(mk_std_ptr_buff_reserve_one(&parent->m_children));
-	mk_try(mk_std_gcallocator_allocate(sizeof(*child), &child));
+	mk_try(mk_std_gcallocator_allocate(sizeof(*child), (void**)&child));
 	mk_try(mk_std_ptr_buff_append(&parent->m_children, child));
 	mk_try(mk_mdi_child_construct(child, parent, old_child));
 	if(old_child)
@@ -306,7 +306,7 @@ mk_jumbo int mk_mdi_parent_children_transfer(mk_mdi_parent_pt parent)
 		mk_try(mk_win_user_dialog_indirect_param(instance, global, parent->m_hwnd, &mk_mdi_parent_private_dlgproc, (mk_win_base_user_types_lparam_t)(mk_mdi_parent_lpt)parent, &dlg_ret));
 		if(dlg_ret != 0)
 		{
-			mk_try(mk_std_ptr_buff_get_element(&parent->m_app->m_parents, dlg_ret - 1, &prnt)); mk_assert(prnt);
+			mk_try(mk_std_ptr_buff_get_element(&parent->m_app->m_parents, dlg_ret - 1, (void**)&prnt)); mk_assert(prnt);
 			mk_try(mk_mdi_parent_children_add(prnt, child));
 		}
 	}
@@ -325,7 +325,7 @@ mk_jumbo int mk_mdi_parent_children_close_all(mk_mdi_parent_pt parent)
 	mk_try(mk_std_ptr_buff_get_count(&parent->m_children, &count));
 	for(i = 0; i != count; ++i)
 	{
-		mk_try(mk_std_ptr_buff_get_element(&parent->m_children, count - 1 - i, &child));
+		mk_try(mk_std_ptr_buff_get_element(&parent->m_children, count - 1 - i, (void**)&child));
 		mk_try(mk_mdi_child_close(child));
 	}
 
@@ -442,7 +442,7 @@ static mk_inline int mk_mdi_parent_private_on_close(mk_mdi_parent_pt parent, int
 	mk_try(mk_std_ptr_buff_get_count(&parent->m_children, &count));
 	for(i = 0; i != count; ++i)
 	{
-		mk_try(mk_std_ptr_buff_get_element(&parent->m_children, i, &child));
+		mk_try(mk_std_ptr_buff_get_element(&parent->m_children, i, (void**)&child));
 		mk_try(mk_win_user_window_send(child->m_hwnd, mk_win_user_message_id_queryendsession, 0, 0, &lr));
 		if(lr == 0)
 		{
@@ -667,7 +667,7 @@ static mk_inline int mk_mdi_parent_private_on_dlg_initdialog(mk_mdi_parent_pt pa
 	mk_try(mk_std_ptr_buff_get_count(&parent->m_app->m_parents, &parents_count));
 	for(i = 0; i != parents_count; ++i)
 	{
-		mk_try(mk_std_ptr_buff_get_element(&parent->m_app->m_parents, i, &prnt)); mk_assert(prnt); mk_assert(prnt->m_hwnd);
+		mk_try(mk_std_ptr_buff_get_element(&parent->m_app->m_parents, i, (void**)&prnt)); mk_assert(prnt); mk_assert(prnt->m_hwnd);
 		if(prnt == parent)
 		{
 			continue;
