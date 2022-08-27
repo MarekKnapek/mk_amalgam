@@ -25,6 +25,7 @@ mk_jumbo int mk_mdi_app_get_exit_code(mk_mdi_app_pt app, int* exit_code);
 mk_jumbo int mk_mdi_app_add_parent(mk_mdi_app_pt app);
 mk_jumbo int mk_mdi_app_show_last_parent(mk_mdi_app_pt app, int show);
 mk_jumbo int mk_mdi_app_run(mk_mdi_app_pt app);
+mk_jumbo int mk_mdi_app_exit(mk_mdi_app_pt app);
 mk_jumbo int mk_mdi_app_on_parent_destroy(mk_mdi_app_pt app, mk_mdi_parent_pt parent);
 
 

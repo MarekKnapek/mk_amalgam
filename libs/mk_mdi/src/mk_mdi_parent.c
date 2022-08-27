@@ -48,6 +48,7 @@ static mk_inline int mk_mdi_parent_private_on_menu_new_file(mk_mdi_parent_pt par
 static mk_inline int mk_mdi_parent_private_on_menu_close_file(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu_new_window(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu_close_window(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_mdi_parent_private_on_menu_exit(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu_window_cascade(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu_window_cascade_zorder(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_mdi_parent_private_on_menu_window_tile_vertically(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
@@ -504,6 +505,17 @@ static mk_inline int mk_mdi_parent_private_on_menu_close_window(mk_mdi_parent_pt
 	return 0;
 }
 
+static mk_inline int mk_mdi_parent_private_on_menu_exit(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	mk_assert(parent);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	mk_try(mk_mdi_app_exit(parent->m_app));
+
+	return 0;
+}
+
 static mk_inline int mk_mdi_parent_private_on_menu_window_cascade(mk_mdi_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
 {
 	mk_assert(parent);
@@ -604,6 +616,7 @@ static mk_inline int mk_mdi_parent_private_on_menu(mk_mdi_parent_pt parent, unsi
 		case mk_mdi_parent_menu_id_file_close_file: mk_try(mk_mdi_parent_private_on_menu_close_file(parent, override_defproc, lres)); break;
 		case mk_mdi_parent_menu_id_file_new_window: mk_try(mk_mdi_parent_private_on_menu_new_window(parent, override_defproc, lres)); break;
 		case mk_mdi_parent_menu_id_file_close_window: mk_try(mk_mdi_parent_private_on_menu_close_window(parent, override_defproc, lres)); break;
+		case mk_mdi_parent_menu_id_file_exit: mk_try(mk_mdi_parent_private_on_menu_exit(parent, override_defproc, lres)); break;
 		case mk_mdi_parent_menu_id_window_cascade: mk_try(mk_mdi_parent_private_on_menu_window_cascade(parent, override_defproc, lres)); break;
 		case mk_mdi_parent_menu_id_window_cascade_zorder: mk_try(mk_mdi_parent_private_on_menu_window_cascade_zorder(parent, override_defproc, lres)); break;
 		case mk_mdi_parent_menu_id_window_tile_vertically: mk_try(mk_mdi_parent_private_on_menu_window_tile_vertically(parent, override_defproc, lres)); break;
