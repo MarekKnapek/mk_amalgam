@@ -85,7 +85,7 @@ mk_jumbo int mk_std_ptr_buff_append(mk_std_ptr_buff_t* ptr_buff, void const* ptr
 
 	mk_assert(ptr_buff);
 
-	mk_try(mk_std_ptr_buff_reserve(ptr_buff, ptr_buff->m_count + 1));
+	mk_try(mk_std_ptr_buff_reserve_one(ptr_buff));
 	mk_try(mk_std_ptr_buff_private_get_data(ptr_buff, &ptrs));
 	ptrs[ptr_buff->m_count] = (void*)ptr;
 	++ptr_buff->m_count;
