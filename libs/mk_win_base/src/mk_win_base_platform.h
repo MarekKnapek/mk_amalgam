@@ -33,10 +33,10 @@
 #if defined(_M_X64) || defined(_M_AMD64) || defined(__amd64__)
 #define mk_win_base_platform_arch mk_win_base_platform_arch_x8664
 #else
-#if defined(_M_IX86) || defined(__i386__)
+#if (defined(_M_IX86) && !defined(_M_I86)) || defined(__i386__)
 #define mk_win_base_platform_arch mk_win_base_platform_arch_x8632
 #else
-#ifdef _M_I86
+#if defined(_M_I86) || defined(M_I86)
 #define mk_win_base_platform_arch mk_win_base_platform_arch_x8616
 #endif
 #endif
