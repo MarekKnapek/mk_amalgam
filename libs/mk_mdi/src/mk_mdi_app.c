@@ -66,7 +66,6 @@ mk_jumbo int mk_mdi_app_add_parent(mk_mdi_app_pt app)
 
 	mk_assert(app);
 
-	mk_try(mk_std_ptr_buff_reserve_one(&app->m_parents));
 	mk_try(mk_std_gcallocator_allocate(sizeof(*parent), (void**)&parent));
 	mk_try(mk_std_ptr_buff_append(&app->m_parents, parent));
 	mk_try(mk_mdi_parent_construct(parent, app));
