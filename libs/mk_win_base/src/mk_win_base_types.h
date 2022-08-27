@@ -50,6 +50,12 @@ typedef wchar_t const mk_win_base_keywords_far* mk_win_base_types_strwc_t;
 
 struct mk_win_base_types_hinstance_s; typedef struct mk_win_base_types_hinstance_s const mk_win_base_keywords_near* mk_win_base_types_hinstance_t;
 
+#if mk_win_base_platform_os == mk_win_base_platform_os_win16
+#define mk_win_base_types_null 0
+#else
+#define mk_win_base_types_null ((void*)0)
+#endif
+
 
 struct mk_win_base_types_point_s
 {

@@ -6,9 +6,9 @@
 #include "../../mk_utils/src/mk_jumbo.h"
 #include "../../mk_utils/src/mk_try.h"
 
+#include "../../mk_win_base/src/mk_win_base_types.h"
+#include "../../mk_win_base/src/mk_win_base_user_types.h"
 #include "../../mk_win_base/src/mk_win_base_user_functions.h"
-#include "../../mk_win_base/src/mk_win_base_user_types.h"
-#include "../../mk_win_base/src/mk_win_base_user_types.h"
 
 #include <stddef.h>
 
@@ -59,19 +59,19 @@ mk_jumbo int mk_win_user_icon_load_by_id(unsigned short id, mk_win_base_user_typ
 
 	mk_win_base_user_types_hicon_t i;
 	#if mk_win_api == mk_win_api_old || mk_win_api == mk_win_api_ansi
-	i = LoadIconA(NULL, mk_win_base_user_functions_make_int_resource_a(id));
+	i = LoadIconA(mk_win_base_types_null, mk_win_base_user_functions_make_int_resource_a(id));
 	#elif mk_win_api == mk_win_api_wide
-	i = LoadIconW(NULL, mk_win_base_user_functions_make_int_resource_w(id));
+	i = LoadIconW(mk_win_base_types_null, mk_win_base_user_functions_make_int_resource_w(id));
 	#else
 	int unicode_enabled;
 	mk_try(mk_win_unicode_enabled(&unicode_enabled));
 	if(!unicode_enabled)
 	{
-		i = LoadIconA(NULL, mk_win_base_user_functions_make_int_resource_a(id));
+		i = LoadIconA(mk_win_base_types_null, mk_win_base_user_functions_make_int_resource_a(id));
 	}
 	else
 	{
-		i = LoadIconW(NULL, mk_win_base_user_functions_make_int_resource_w(id));
+		i = LoadIconW(mk_win_base_types_null, mk_win_base_user_functions_make_int_resource_w(id));
 	}
 	#endif
 	mk_assert(icon);

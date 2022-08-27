@@ -12,6 +12,7 @@
 #include "../../mk_win/src/mk_win_user_message.h"
 #include "../../mk_win/src/mk_win_user_window.h"
 
+#include "../../mk_win_base/src/mk_win_base_types.h"
 #include "../../mk_win_base/src/mk_win_base_user_types.h"
 
 #include <stddef.h>
@@ -97,7 +98,7 @@ mk_jumbo int mk_mdi_app_run(mk_mdi_app_pt app)
 
 	for(;;)
 	{
-		mk_try(mk_win_user_message_get(&msg, NULL, 0, 0, &b));
+		mk_try(mk_win_user_message_get(&msg, mk_win_base_types_null, 0, 0, &b));
 		if(b == 0)
 		{
 			mk_assert(msg.m_msg == mk_win_user_message_id_quit);
