@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nv:AutoVisualizer xmlns:nv="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+	<nv:Type Name="mk_dacdbt_key_s">
+		<nv:Intrinsic Name="is_narrow" Expression="m_name.m_type == 0"/>
+		<nv:Intrinsic Name="namea" Expression="m_name.m_data.m_narrow"/>
+		<nv:Intrinsic Name="namew" Expression="m_name.m_data.m_wide"/>
+		<nv:Intrinsic Name="sub_keys_ptr" Expression="(mk_dacdbt_key_s**)m_sub_keys.m_ptrs.m_mem"/>
+		<nv:Intrinsic Name="sub_keys_count" Expression="m_sub_keys.m_count"/>
+		<nv:Intrinsic Name="values_ptr" Expression="(mk_dacdbt_value_s**)m_values.m_ptrs.m_mem"/>
+		<nv:Intrinsic Name="values_count" Expression="m_values.m_count"/>
+		<nv:Intrinsic Name="nocomp" Expression="m_nocomp"/>
+		<nv:DisplayString Condition="is_narrow()">{{ name = {namea()} keys = {sub_keys_count()} values = {values_count()} }}</nv:DisplayString>
+		<nv:DisplayString Condition="!is_narrow()">{{ name = {namew()} keys = {sub_keys_count()} values = {values_count()} }}</nv:DisplayString>
+		<nv:Expand>
+			<nv:Item Condition="is_narrow()" Name="[name]">namea()</nv:Item>
+			<nv:Item Condition="!is_narrow()" Name="[name]">namew()</nv:Item>
+			<nv:Synthetic Name="[keys]">
+				<nv:DisplayString>{{ count = {sub_keys_count()} }}</nv:DisplayString>
+				<nv:Expand>
+					<nv:ArrayItems>
+						<nv:Size>sub_keys_count()</nv:Size>
+						<nv:ValuePointer>sub_keys_ptr()</nv:ValuePointer>
+					</nv:ArrayItems>
+				</nv:Expand>
+			</nv:Synthetic>
+			<nv:Synthetic Name="[values]">
+				<nv:DisplayString>{{ count = {values_count()} }}</nv:DisplayString>
+				<nv:Expand>
+					<nv:ArrayItems>
+						<nv:Size>values_count()</nv:Size>
+						<nv:ValuePointer>values_ptr()</nv:ValuePointer>
+					</nv:ArrayItems>
+				</nv:Expand>
+			</nv:Synthetic>
+			<nv:Item Name="[nocomp]">nocomp()</nv:Item>
+		</nv:Expand>
+	</nv:Type>
+</nv:AutoVisualizer>
