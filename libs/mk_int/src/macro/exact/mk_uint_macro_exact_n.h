@@ -6,9 +6,15 @@
 #if mk_uint_bits <= 8
 #include "../base/mk_uint_macro_base_char.h"
 #define mk_uint_small_bits 8
+#if mk_uint_bits == 8
+#define mk_uint8_c(a) {(unsigned char)(mk_uint_cast_to_long_32(a))}
+#endif
 #elif mk_uint_bits <= 16
 #include "../base/mk_uint_macro_base_short.h"
 #define mk_uint_small_bits 16
+#if mk_uint_bits == 16
+#define mk_uint16_c(a) {(unsigned short int)(mk_uint_cast_to_long_32(a))}
+#endif
 #elif mk_uint_bits <= 32
 #if UINT_MAX >= 0xffffffffu
 #include "../base/mk_uint_macro_base_int.h"
