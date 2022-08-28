@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup Label="Globals">
+		<MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+		<HasSharedItems>true</HasSharedItems>
+		<ItemsProjectGuid>{90f79d72-c57a-4f8e-b38d-991d6831ef29}</ItemsProjectGuid>
+	</PropertyGroup>
+	<ItemDefinitionGroup>
+		<ClCompile>
+			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+		</ClCompile>
+	</ItemDefinitionGroup>
+	<ItemGroup>
+		<ProjectCapability Include="SourceItemsFromImports"/>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_doc.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_io.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_key.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_str.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_value.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbt.c"/>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_doc.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_io.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_key.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_str.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_value.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbt.h"/>
+	</ItemGroup>
+	<ItemGroup>
+		<Natvis Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_key.natvis"/>
+	</ItemGroup>
+</Project>

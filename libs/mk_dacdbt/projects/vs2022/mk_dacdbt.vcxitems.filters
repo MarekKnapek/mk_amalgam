@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<Filter Include="dependencies"><UniqueIdentifier>{d3bab417-678d-499b-8bef-051056ff6aff}</UniqueIdentifier></Filter>
+		<Filter Include="jumbo"><UniqueIdentifier>{aebeb834-cf3a-4392-8e7a-e1939fb6ccd4}</UniqueIdentifier></Filter>
+		<Filter Include="src"><UniqueIdentifier>{ffbd23fb-f481-46c9-beb9-2c96b2934ac0}</UniqueIdentifier></Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_doc.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_io.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_key.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_str.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_value.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbt.c"><Filter>jumbo</Filter></ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_doc.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_io.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_key.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_str.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_value.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbt.h"><Filter>jumbo</Filter></ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<Natvis Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_key.natvis"><Filter>src</Filter></Natvis>
+	</ItemGroup>
+</Project>
