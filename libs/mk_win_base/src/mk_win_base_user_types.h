@@ -17,16 +17,6 @@
 #define mk_win_base_user_types_window_info_id_dlg_dlgproc   ((int)(mk_win_base_user_types_window_info_id_dlg_msgresult + sizeof(mk_win_base_types_intptr_t)))
 #define mk_win_base_user_types_window_info_id_dlg_user      ((int)(mk_win_base_user_types_window_info_id_dlg_dlgproc + sizeof(mk_win_base_user_types_dlgproc_t)))
 
-#define mk_win_base_user_types_window_wm_null       ((unsigned short)0x0000u)
-#define mk_win_base_user_types_window_wm_create     ((unsigned short)0x0001u)
-#define mk_win_base_user_types_window_wm_destroy    ((unsigned short)0x0002u)
-#define mk_win_base_user_types_window_wm_size       ((unsigned short)0x0005u)
-#define mk_win_base_user_types_window_wm_gettext    ((unsigned short)0x000du)
-#define mk_win_base_user_types_window_wm_close      ((unsigned short)0x0010u)
-#define mk_win_base_user_types_window_wm_quit       ((unsigned short)0x0012u)
-#define mk_win_base_user_types_window_wm_initdialog ((unsigned short)0x0110u)
-#define mk_win_base_user_types_window_wm_command    ((unsigned short)0x0111u)
-
 #define mk_win_base_user_types_window_wparam_wm_size_restored  0
 #define mk_win_base_user_types_window_wparam_wm_size_minimized 1
 #define mk_win_base_user_types_window_wparam_wm_size_maximized 2
