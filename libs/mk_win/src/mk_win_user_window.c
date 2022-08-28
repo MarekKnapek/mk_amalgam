@@ -416,7 +416,7 @@ mk_jumbo int mk_win_user_window_post_close(mk_win_base_user_types_hwnd_t hwnd)
 {
 	mk_win_base_types_bool_t b;
 
-	mk_try(mk_win_user_window_post(hwnd, mk_win_base_user_types_window_wm_close, 0, 0, &b));
+	mk_try(mk_win_user_window_post(hwnd, mk_win_user_window_wm_close, 0, 0, &b));
 
 	return 0;
 }
@@ -426,7 +426,7 @@ mk_jumbo int mk_win_user_window_send_close(mk_win_base_user_types_hwnd_t hwnd)
 {
 	mk_win_base_user_types_lresult_t r;
 
-	mk_try(mk_win_user_window_send(hwnd, mk_win_base_user_types_window_wm_close, 0, 0, &r));
+	mk_try(mk_win_user_window_send(hwnd, mk_win_user_window_wm_close, 0, 0, &r));
 	(void)r;
 
 	return 0;
@@ -456,7 +456,7 @@ mk_jumbo int mk_win_user_window_send_mdicreate(mk_win_base_user_types_hwnd_t hwn
 	wmdi.m_height = mdi->m_height;
 	wmdi.m_style = mdi->m_style;
 	wmdi.m_param = mdi->m_param;
-	mk_try(mk_win_user_window_send(hwnd, mk_win_user_message_id_mdicreate, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_user_wm_mdicreate_a_lpct)&wmdi, &lres));
+	mk_try(mk_win_user_window_send(hwnd, mk_win_user_window_wm_mdicreate, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_user_wm_mdicreate_a_lpct)&wmdi, &lres));
 	mk_assert(mdihwnd);
 	*mdihwnd = (mk_win_base_user_types_hwnd_t)lres;
 	return 0;
@@ -476,7 +476,7 @@ mk_jumbo int mk_win_user_window_send_mdicreate(mk_win_base_user_types_hwnd_t hwn
 		wmdi.m_height = mdi->m_height;
 		wmdi.m_style = mdi->m_style;
 		wmdi.m_param = mdi->m_param;
-		mk_try(mk_win_user_window_send(hwnd, mk_win_user_message_id_mdicreate, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_user_wm_mdicreate_a_lpct)&wmdi, &lres));
+		mk_try(mk_win_user_window_send(hwnd, mk_win_user_window_wm_mdicreate, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_user_wm_mdicreate_a_lpct)&wmdi, &lres));
 		mk_assert(mdihwnd);
 		*mdihwnd = (mk_win_base_user_types_hwnd_t)lres;
 		return 0;
@@ -494,7 +494,7 @@ mk_jumbo int mk_win_user_window_send_mdicreate(mk_win_base_user_types_hwnd_t hwn
 		wmdi.m_height = mdi->m_height;
 		wmdi.m_style = mdi->m_style;
 		wmdi.m_param = mdi->m_param;
-		mk_try(mk_win_user_window_send(hwnd, mk_win_user_message_id_mdicreate, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_user_wm_mdicreate_a_lpct)&wmdi, &lres));
+		mk_try(mk_win_user_window_send(hwnd, mk_win_user_window_wm_mdicreate, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_user_wm_mdicreate_a_lpct)&wmdi, &lres));
 		mk_assert(mdihwnd);
 		*mdihwnd = (mk_win_base_user_types_hwnd_t)lres;
 		return 0;

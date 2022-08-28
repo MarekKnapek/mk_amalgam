@@ -69,6 +69,28 @@ typedef mk_win_user_window_mdicreate_t const* mk_win_user_window_mdicreate_pct;
 #define mk_win_user_window_show_forceminimize  11
 #define mk_win_user_window_show_max            11
 
+#define mk_win_user_window_wm_null            ((unsigned short)0x0000ul)
+#define mk_win_user_window_wm_create          ((unsigned short)0x0001ul)
+#define mk_win_user_window_wm_destroy         ((unsigned short)0x0002ul)
+#define mk_win_user_window_wm_size            ((unsigned short)0x0005ul)
+#define mk_win_user_window_wm_gettext         ((unsigned short)0x000dul)
+#define mk_win_user_window_wm_close           ((unsigned short)0x0010ul)
+#define mk_win_user_window_wm_queryendsession ((unsigned short)0x0011ul)
+#define mk_win_user_window_wm_quit            ((unsigned short)0x0012ul)
+#define mk_win_user_window_wm_initdialog      ((unsigned short)0x0110ul)
+#define mk_win_user_window_wm_command         ((unsigned short)0x0111ul)
+#define mk_win_user_window_wm_mdicreate       ((unsigned short)0x0220ul)
+#define mk_win_user_window_wm_mdidestroy      ((unsigned short)0x0221ul)
+#define mk_win_user_window_wm_mdiactivate     ((unsigned short)0x0222ul)
+#define mk_win_user_window_wm_mdirestore      ((unsigned short)0x0223ul)
+#define mk_win_user_window_wm_mdinext         ((unsigned short)0x0224ul)
+#define mk_win_user_window_wm_mdimaximize     ((unsigned short)0x0225ul)
+#define mk_win_user_window_wm_mditile         ((unsigned short)0x0226ul)
+#define mk_win_user_window_wm_mdicascade      ((unsigned short)0x0227ul)
+#define mk_win_user_window_wm_mdiiconarrange  ((unsigned short)0x0228ul)
+#define mk_win_user_window_wm_mdigetactive    ((unsigned short)0x0229ul)
+#define mk_win_user_window_wm_mdisetmenu      ((unsigned short)0x0230ul)
+
 
 mk_jumbo int mk_win_user_window_create(mk_win_user_window_create_pct wnd_info, mk_win_base_user_types_hwnd_t* hwnd);
 mk_jumbo int mk_win_user_window_set_info(mk_win_base_user_types_hwnd_t hwnd, int info_id, mk_win_base_types_uintptr_t info, mk_win_base_types_uintptr_t* prev_info);

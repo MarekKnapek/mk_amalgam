@@ -100,7 +100,7 @@ mk_jumbo int mk_mdi_app_run(mk_mdi_app_pt app)
 		mk_try(mk_win_user_message_get(&msg, mk_win_base_types_null, 0, 0, &b));
 		if(b == 0)
 		{
-			mk_assert(msg.m_msg == mk_win_user_message_id_quit);
+			mk_assert(msg.m_msg == mk_win_user_window_wm_quit);
 			app->m_exit_code = (int)msg.m_wparam;
 			break;
 		}
