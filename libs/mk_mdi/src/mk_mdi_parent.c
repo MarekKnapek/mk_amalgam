@@ -188,7 +188,7 @@ mk_jumbo int mk_mdi_parent_children_get_active(mk_mdi_parent_pt parent, mk_mdi_c
 	mk_assert(parent->m_mdi);
 	mk_assert(child);
 
-	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mdigetactive, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_types_bool_lpt)&b, &lr));
+	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_window_wm_mdigetactive, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_types_bool_lpt)&b, &lr));
 	if(lr != 0)
 	{
 		childwnd = (mk_win_base_user_types_hwnd_t)lr;
@@ -227,7 +227,7 @@ mk_jumbo int mk_mdi_parent_children_cascade(mk_mdi_parent_pt parent)
 	mk_assert(parent);
 	mk_assert(parent->m_mdi);
 
-	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mdicascade, 0, 0, &r));
+	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_window_wm_mdicascade, 0, 0, &r));
 	(void)r;
 
 	return 0;
@@ -240,7 +240,7 @@ mk_jumbo int mk_mdi_parent_children_cascade_zorder(mk_mdi_parent_pt parent)
 	mk_assert(parent);
 	mk_assert(parent->m_mdi);
 
-	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mdicascade, mk_win_user_message_param_mditile_zorder, 0, &r));
+	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_window_wm_mdicascade, mk_win_user_message_param_mditile_zorder, 0, &r));
 	(void)r;
 
 	return 0;
@@ -253,7 +253,7 @@ mk_jumbo int mk_mdi_parent_children_tile_vertically(mk_mdi_parent_pt parent)
 	mk_assert(parent);
 	mk_assert(parent->m_mdi);
 
-	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mditile, mk_win_user_message_param_mditile_vertical, 0, &r));
+	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_window_wm_mditile, mk_win_user_message_param_mditile_vertical, 0, &r));
 	(void)r;
 
 	return 0;
@@ -266,7 +266,7 @@ mk_jumbo int mk_mdi_parent_children_tile_horizontally(mk_mdi_parent_pt parent)
 	mk_assert(parent);
 	mk_assert(parent->m_mdi);
 
-	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mditile, mk_win_user_message_param_mditile_horizontal, 0, &r));
+	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_window_wm_mditile, mk_win_user_message_param_mditile_horizontal, 0, &r));
 	(void)r;
 
 	return 0;
@@ -279,7 +279,7 @@ mk_jumbo int mk_mdi_parent_children_arrange_icons(mk_mdi_parent_pt parent)
 	mk_assert(parent);
 	mk_assert(parent->m_mdi);
 
-	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_message_id_mdiiconarrange, 0, 0, &r));
+	mk_try(mk_win_user_window_send(parent->m_mdi, mk_win_user_window_wm_mdiiconarrange, 0, 0, &r));
 	(void)r;
 
 	return 0;
@@ -443,7 +443,7 @@ static mk_inline int mk_mdi_parent_private_on_close(mk_mdi_parent_pt parent, int
 	for(i = 0; i != count; ++i)
 	{
 		mk_try(mk_std_ptr_buff_get_element(&parent->m_children, i, (void**)&child));
-		mk_try(mk_win_user_window_send(child->m_hwnd, mk_win_user_message_id_queryendsession, 0, 0, &lr));
+		mk_try(mk_win_user_window_send(child->m_hwnd, mk_win_user_window_wm_queryendsession, 0, 0, &lr));
 		if(lr == 0)
 		{
 			ok = 0;
@@ -652,10 +652,10 @@ static mk_inline int mk_mdi_parent_private_on_message(mk_mdi_parent_pt parent, m
 
 	switch(msg)
 	{
-		case mk_win_base_user_types_window_wm_create: mk_try(mk_mdi_parent_private_on_create(parent, lparam, override_defproc, lres)); break;
-		case mk_win_base_user_types_window_wm_destroy: mk_try(mk_mdi_parent_private_on_destroy(parent, override_defproc, lres)); break;
-		case mk_win_base_user_types_window_wm_close: mk_try(mk_mdi_parent_private_on_close(parent, override_defproc, lres)); break;
-		case mk_win_base_user_types_window_wm_command: mk_try(mk_mdi_parent_private_on_command(parent, wparam, lparam, override_defproc, lres)); break;
+		case mk_win_user_window_wm_create: mk_try(mk_mdi_parent_private_on_create(parent, lparam, override_defproc, lres)); break;
+		case mk_win_user_window_wm_destroy: mk_try(mk_mdi_parent_private_on_destroy(parent, override_defproc, lres)); break;
+		case mk_win_user_window_wm_close: mk_try(mk_mdi_parent_private_on_close(parent, override_defproc, lres)); break;
+		case mk_win_user_window_wm_command: mk_try(mk_mdi_parent_private_on_command(parent, wparam, lparam, override_defproc, lres)); break;
 	}
 
 	return 0;
@@ -685,7 +685,7 @@ static mk_inline int mk_mdi_parent_private_on_dlg_initdialog(mk_mdi_parent_pt pa
 			continue;
 		}
 		/* TODO: Get parent name from model instead from view. */
-		mk_try(mk_win_user_window_send(prnt->m_hwnd, mk_win_base_user_types_window_wm_gettext, 512, (mk_win_base_user_types_lparam_t)(mk_win_base_types_void_lpt)&name, &lr)); mk_assert(lr != 0);
+		mk_try(mk_win_user_window_send(prnt->m_hwnd, mk_win_user_window_wm_gettext, 512, (mk_win_base_user_types_lparam_t)(mk_win_base_types_void_lpt)&name, &lr)); mk_assert(lr != 0);
 		mk_try(mk_win_user_window_send(list, mk_win_user_listbox_wm_addstring, 0, (mk_win_base_user_types_lparam_t)(mk_win_base_types_void_lpct)&name, &lr)); mk_assert(lr >= 0);
 		mk_try(mk_win_user_window_send(list, mk_win_user_listbox_wm_setitemdata, (mk_win_base_user_types_wparam_t)lr, (mk_win_base_user_types_lparam_t)i, &lr)); mk_assert(lr != mk_win_user_listbox_error_err);
 	}
@@ -782,8 +782,8 @@ static mk_inline int mk_mdi_parent_private_on_dlg_message(mk_mdi_parent_pt paren
 
 	switch(msg)
 	{
-		case mk_win_base_user_types_window_wm_initdialog: mk_try(mk_mdi_parent_private_on_dlg_initdialog(parent, dlg, ret)); break;
-		case mk_win_base_user_types_window_wm_command: mk_try(mk_mdi_parent_private_on_dlg_command(parent, dlg, wparam, lparam, ret)); break;
+		case mk_win_user_window_wm_initdialog: mk_try(mk_mdi_parent_private_on_dlg_initdialog(parent, dlg, ret)); break;
+		case mk_win_user_window_wm_command: mk_try(mk_mdi_parent_private_on_dlg_command(parent, dlg, wparam, lparam, ret)); break;
 	}
 
 	return 0;
@@ -798,7 +798,7 @@ static mk_inline int mk_mdi_parent_private_on_wndproc(mk_win_base_user_types_hwn
 	mk_assert(hwnd);
 	mk_assert(lres);
 
-	if(msg == mk_win_base_user_types_window_wm_create)
+	if(msg == mk_win_user_window_wm_create)
 	{
 		mk_win_base_user_types_wm_create_a_lpct create;
 		mk_mdi_parent_lpt parent_lp;
@@ -839,7 +839,7 @@ static mk_inline int mk_mdi_parent_private_on_dlgproc(mk_win_base_user_types_hwn
 	mk_assert(hwnd);
 	mk_assert(ret);
 
-	if(msg == mk_win_base_user_types_window_wm_initdialog)
+	if(msg == mk_win_user_window_wm_initdialog)
 	{
 		mk_assert(lparam != 0);
 		parent = (mk_mdi_parent_pt)lparam;

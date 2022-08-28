@@ -232,9 +232,9 @@ static mk_inline int mk_mdi_child_private_on_message(mk_mdi_child_pt child, mk_w
 
 	switch(msg)
 	{
-		case mk_win_base_user_types_window_wm_destroy: mk_try(mk_mdi_child_private_on_destroy(child, override_defproc, lres)); break;
-		case mk_win_base_user_types_window_wm_size: mk_try(mk_mdi_child_private_on_size(child, wparam, lparam, override_defproc, lres)); break;
-		case mk_win_base_user_types_window_wm_close: mk_try(mk_mdi_child_private_on_close(child, override_defproc, lres)); break;
+		case mk_win_user_window_wm_destroy: mk_try(mk_mdi_child_private_on_destroy(child, override_defproc, lres)); break;
+		case mk_win_user_window_wm_size: mk_try(mk_mdi_child_private_on_size(child, wparam, lparam, override_defproc, lres)); break;
+		case mk_win_user_window_wm_close: mk_try(mk_mdi_child_private_on_close(child, override_defproc, lres)); break;
 	}
 
 	(void)wparam;/**/
@@ -251,7 +251,7 @@ static mk_inline int mk_mdi_child_private_on_wndproc(mk_win_base_user_types_hwnd
 	mk_assert(hwnd);
 	mk_assert(lres);
 
-	if(msg == mk_win_base_user_types_window_wm_create)
+	if(msg == mk_win_user_window_wm_create)
 	{
 		mk_win_base_user_types_wm_create_a_lpct create;
 		mk_win_base_user_wm_mdicreate_a_lpct mdi_create;
