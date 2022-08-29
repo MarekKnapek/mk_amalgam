@@ -140,6 +140,16 @@ mk_jumbo int mk_std_ptr_buff_remove_idx(mk_std_ptr_buff_t* ptr_buff, size_t idx)
 	return 0;
 }
 
+mk_jumbo int mk_std_ptr_buff_remove_last(mk_std_ptr_buff_t* ptr_buff)
+{
+	mk_assert(ptr_buff);
+	mk_assert(ptr_buff->m_count != 0);
+
+	--ptr_buff->m_count;
+
+	return 0;
+}
+
 
 static mk_inline int mk_std_ptr_buff_private_get_data(mk_std_ptr_buff_t* ptr_buff, void*** data)
 {
