@@ -11,6 +11,7 @@ Project("{2150e333-8fdc-42a3-9474-1a3956d46de8}") = "Solution Items", "Solution 
 EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_dacdbt", "..\..\libs\mk_dacdbt\projects\vs2022\mk_dacdbt.vcxitems", "{90f79d72-c57a-4f8e-b38d-991d6831ef29}" EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_dacdbtc", "..\..\libs\mk_dacdbtc\projects\vs2022\mk_dacdbtc.vcxproj", "{8bb7b080-973d-45f9-8db2-2e0278641e15}" EndProject
+Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_dacdbte", "..\..\libs\mk_dacdbte\projects\vs2022\mk_dacdbte.vcxproj", "{d82a7c40-facf-4e32-890e-e0b307458766}" EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_dacdbtw", "..\..\libs\mk_dacdbtw\projects\vs2022\mk_dacdbtw.vcxitems", "{d4b667c7-8d2b-443d-bf9a-ff163d9f1537}" EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_int", "..\..\libs\mk_int\projects\vs2022\mk_int.vcxitems", "{83700097-ac5b-4642-9b9a-2d5f5db0026c}" EndProject
 Project("{8bc9ceb8-8b4a-11d0-8d11-00a0c91bc942}") = "mk_int_fuzz", "..\..\libs\mk_int_fuzz\projects\vs2022\mk_int_fuzz.vcxproj", "{935d11b5-2b4d-43c8-99bc-a3f7bf1bffa3}" EndProject
@@ -60,6 +61,14 @@ Global
 		{9eb7bb3e-d204-49ce-a249-a6db3e40ef39}.Release|x64.Build.0 = Release|x64
 		{9eb7bb3e-d204-49ce-a249-a6db3e40ef39}.Release|x86.ActiveCfg = Release|Win32
 		{9eb7bb3e-d204-49ce-a249-a6db3e40ef39}.Release|x86.Build.0 = Release|Win32
+		{d82a7c40-facf-4e32-890e-e0b307458766}.Debug|x64.ActiveCfg = Debug|x64
+		{d82a7c40-facf-4e32-890e-e0b307458766}.Debug|x64.Build.0 = Debug|x64
+		{d82a7c40-facf-4e32-890e-e0b307458766}.Debug|x86.ActiveCfg = Debug|Win32
+		{d82a7c40-facf-4e32-890e-e0b307458766}.Debug|x86.Build.0 = Debug|Win32
+		{d82a7c40-facf-4e32-890e-e0b307458766}.Release|x64.ActiveCfg = Release|x64
+		{d82a7c40-facf-4e32-890e-e0b307458766}.Release|x64.Build.0 = Release|x64
+		{d82a7c40-facf-4e32-890e-e0b307458766}.Release|x86.ActiveCfg = Release|Win32
+		{d82a7c40-facf-4e32-890e-e0b307458766}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
