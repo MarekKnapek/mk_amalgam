@@ -3,13 +3,14 @@
 
 
 #include "mk_win_base_keywords.h"
+#include "mk_win_base_platform.h"
 #include "mk_win_base_types.h"
 #include "mk_win_base_user_types.h"
 
 #include "../../mk_utils/src/mk_cpp.h"
 
 
-#if mk_win_api == mk_win_api_old
+#if mk_win_base_platform_os == mk_win_base_platform_os_win16
 typedef void mk_win_base_types_bool2_t;
 #else
 typedef mk_win_base_types_bool_t mk_win_base_types_bool2_t;
