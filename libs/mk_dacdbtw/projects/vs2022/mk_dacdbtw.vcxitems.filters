@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<Filter Include="dependencies"><UniqueIdentifier>{b8999b17-366c-459b-8c06-3413256caf7f}</UniqueIdentifier></Filter>
+		<Filter Include="jumbo"><UniqueIdentifier>{f8440879-64f8-40cb-9b20-21fd6762d41a}</UniqueIdentifier></Filter>
+		<Filter Include="src"><UniqueIdentifier>{001d3310-fb39-43bd-a597-5d3ce8365bbe}</UniqueIdentifier></Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_win\projects\jumbo\mk_win.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_win_base\projects\jumbo\mk_win_base.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtw_panel.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbtw.h"><Filter>jumbo</Filter></ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_win\projects\jumbo\mk_win.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_win_base\projects\jumbo\mk_win_base.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtw_panel.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbtw.c"><Filter>jumbo</Filter></ClCompile>
+	</ItemGroup>
+</Project>
