@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<Filter Include="dependencies"><UniqueIdentifier>{b6c9d1bc-d888-4edf-b4ab-7defb5f68b33}</UniqueIdentifier></Filter>
+		<Filter Include="jumbo"><UniqueIdentifier>{703287b9-9e8e-428b-80f1-1f0bea6445a7}</UniqueIdentifier></Filter>
+		<Filter Include="src"><UniqueIdentifier>{7c5f2a56-a54a-47ec-b216-1b93217e285b}</UniqueIdentifier></Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_dacdbt\projects\jumbo\mk_dacdbt.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbtc.h"><Filter>jumbo</Filter></ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_dacdbt\projects\jumbo\mk_dacdbt.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtc_main.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbtc.c"><Filter>jumbo</Filter></ClCompile>
+	</ItemGroup>
+</Project>
