@@ -99,6 +99,7 @@ struct mk_win_base_user_types_class_exw_s
 };
 mk_win_base_types_make_struct(mk_win_base_user_types_class_exw);
 
+#include "../../mk_utils/src/mk_pack_2.h"
 struct mk_win_base_user_types_dlg_template_s
 {
 	mk_win_base_types_dword_t m_style;
@@ -110,6 +111,7 @@ struct mk_win_base_user_types_dlg_template_s
 	short m_height;
 };
 mk_win_base_types_make_struct(mk_win_base_user_types_dlg_template);
+#include "../../mk_utils/src/mk_pack_default.h"
 
 struct mk_win_base_user_types_msg_s
 {
