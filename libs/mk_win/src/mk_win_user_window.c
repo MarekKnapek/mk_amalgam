@@ -1,6 +1,7 @@
 #include "mk_win_user_window.h"
 
 #include "mk_win_api.h"
+#include "mk_win_str.h"
 #include "mk_win_unicode.h"
 #include "mk_win_user_message.h"
 
@@ -502,4 +503,40 @@ mk_jumbo int mk_win_user_window_send_mdicreate(mk_win_base_user_types_hwnd_t hwn
 	#endif
 	#undef mk_win_base_user_wm_mdicreate_m_t
 	#undef mk_win_str_to_m_z
+}
+
+mk_jumbo int mk_win_user_window_send_set_text(mk_win_base_user_types_hwnd_t hwnd, mk_win_char_t const* text)
+{
+	#if mk_win_api != mk_win_api_both
+	mk_win_api_char_t* text_api;
+	mk_win_base_user_types_lresult_t lr;
+	mk_assert(hwnd);
+	mk_try(mk_win_str_to_api_z(text, 0, &text_api));
+	mk_try(mk_win_user_window_send(hwnd, mk_win_user_window_wm_settext, 0, (mk_win_base_user_types_lparam_t)(mk_win_api_char_t mk_win_base_keywords_far*)text_api, &lr));
+	(void)lr;
+	return 0;
+	#else
+	int unicode_enabled;
+	mk_try(mk_win_unicode_enabled(&unicode_enabled));
+	if(!unicode_enabled)
+	{
+		char* text_api;
+		mk_win_base_user_types_lresult_t lr;
+		mk_assert(hwnd);
+		mk_try(mk_win_str_to_narrow_z(text, 0, &text_api));
+		mk_try(mk_win_user_window_send(hwnd, mk_win_user_window_wm_settext, 0, (mk_win_base_user_types_lparam_t)(char mk_win_base_keywords_far*)text_api, &lr));
+		(void)lr;
+		return 0;
+	}
+	else
+	{
+		wchar_t* text_api;
+		mk_win_base_user_types_lresult_t lr;
+		mk_assert(hwnd);
+		mk_try(mk_win_str_to_wide_z(text, 0, &text_api));
+		mk_try(mk_win_user_window_send(hwnd, mk_win_user_window_wm_settext, 0, (mk_win_base_user_types_lparam_t)(wchar_t mk_win_base_keywords_far*)text_api, &lr));
+		(void)lr;
+		return 0;
+	}
+	#endif
 }
