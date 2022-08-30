@@ -9,6 +9,8 @@
 #include "../../mk_win_base/src/mk_win_base_keywords.h"
 #include "../../mk_win_base/src/mk_win_base_user_types.h"
 
+#include "../../mk_utils/src/mk_jumbo.h"
+
 
 struct mk_dacdbte_child_s
 {
