@@ -7,6 +7,7 @@
 	<ItemGroup>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_api.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_char.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comdlg_ofn.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_module.h"><Filter>src</Filter></ClInclude>
@@ -28,6 +29,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_win.h"><Filter>jumbo</Filter></ClInclude>
 	</ItemGroup>
 	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comdlg_ofn.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_module.c"><Filter>src</Filter></ClCompile>
