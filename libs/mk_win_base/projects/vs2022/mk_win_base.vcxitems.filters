@@ -5,6 +5,8 @@
 		<Filter Include="src"><UniqueIdentifier>{aaa8fb6f-05e7-413e-8365-e14dc333b9d4}</UniqueIdentifier></Filter>
 	</ItemGroup>
 	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_base_comdlg_functions.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_base_comdlg_types.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_base_kernel_functions.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_base_kernel_types.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_base_keywords.h"><Filter>src</Filter></ClInclude>
