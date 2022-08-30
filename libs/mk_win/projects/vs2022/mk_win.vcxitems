@@ -46,8 +46,8 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_brush.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_class.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_cursor.c"/>
-		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_edit.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_dialog.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_edit.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_icon.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_listbox.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_user_menu.c"/>

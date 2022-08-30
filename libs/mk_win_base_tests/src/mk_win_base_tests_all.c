@@ -1,9 +1,9 @@
 #include "mk_win_base_tests_all.h"
 
+#include "../../mk_win_base/src/mk_win_base_platform.h"
 #include "../../mk_win_base/src/mk_win_base_types.h"
 #include "../../mk_win_base/src/mk_win_base_kernel_types.h"
 #include "../../mk_win_base/src/mk_win_base_user_types.h"
-#include "../../mk_win_base/src/mk_win_base_platform.h"
 
 #include "../../mk_win/src/mk_win_user_window.h"
 
