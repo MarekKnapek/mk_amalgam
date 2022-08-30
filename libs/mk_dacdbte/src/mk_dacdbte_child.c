@@ -4,6 +4,7 @@
 
 #include "../../mk_dacdbtw/src/mk_dacdbtw_panel.h"
 
+#include "../../mk_win/src/mk_win_char.h"
 #include "../../mk_win/src/mk_win_instance.h"
 #include "../../mk_win/src/mk_win_user_brush.h"
 #include "../../mk_win/src/mk_win_user_class.h"
@@ -150,6 +151,17 @@ mk_jumbo int mk_dacdbte_child_close(mk_dacdbte_child_pt child)
 	mk_assert(child->m_hwnd);
 
 	mk_try(mk_win_user_window_send_close(child->m_hwnd));
+
+	return 0;
+}
+
+mk_jumbo int mk_dacdbte_child_set_file_name(mk_dacdbte_child_pt child, mk_win_char_t const* file_name)
+{
+	mk_win_base_user_types_lresult_t lr;
+
+	mk_assert(child);
+
+	mk_try(mk_win_user_window_send(child->m_content, mk_dacdbtw_panel_wm_set_file_name, 0, (mk_win_base_user_types_lparam_t)(mk_win_char_t const mk_win_base_keywords_far*)file_name, &lr));
 
 	return 0;
 }
