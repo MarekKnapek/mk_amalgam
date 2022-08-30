@@ -8,7 +8,7 @@
 #include <stddef.h>
 
 
-#define mk_std_str_convertor_private_idx_max 4
+#define mk_std_str_convertor_private_idx_max 8
 
 
 static struct mk_std_buffer_s mk_std_str_convertor_private_buffers[mk_std_str_convertor_private_idx_max];
