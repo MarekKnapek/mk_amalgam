@@ -124,7 +124,7 @@ mk_jumbo int mk_mdi_child_construct(mk_mdi_child_pt child, mk_mdi_parent_pt pare
 	mk_try(mk_win_user_window_get_rect(child->m_hwnd, &rect, &b)); mk_assert(b);
 	pt.m_x = rect.m_left;
 	pt.m_y = rect.m_top;
-	mk_try(mk_win_user_window_is_screen2client(parent->m_hwnd, &pt, &b)); mk_assert(b);
+	mk_try(mk_win_user_window_screen2client(parent->m_hwnd, &pt, &b)); mk_assert(b);
 	mk_try(mk_win_user_window_move(child->m_hwnd, pt.m_x, pt.m_y, rect.m_right - rect.m_left + 16, rect.m_bottom - rect.m_top + 16, 1, &b)); mk_assert(b);
 	mk_try(mk_win_user_window_move(child->m_hwnd, pt.m_x, pt.m_y, rect.m_right - rect.m_left - 16, rect.m_bottom - rect.m_top - 16, 1, &b)); mk_assert(b);
 
