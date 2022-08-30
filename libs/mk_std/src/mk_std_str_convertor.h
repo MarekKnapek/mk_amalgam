@@ -16,6 +16,10 @@ mk_jumbo int mk_std_str_convertor_narrow_to_narrow_z(char const mk_win_base_keyw
 mk_jumbo int mk_std_str_convertor_wide_to_narrow_z(wchar_t const* in, int idx, char const**  out);
 mk_jumbo int mk_std_str_convertor_narrow_to_wide_z(char const* in, int idx, wchar_t const**  out);
 
+mk_jumbo int mk_std_str_convertor_narrow_to_narrow_zz(char const mk_win_base_keywords_far* in, int idx, char const**  out);
+mk_jumbo int mk_std_str_convertor_wide_to_narrow_zz(wchar_t const* in, int idx, char const**  out);
+mk_jumbo int mk_std_str_convertor_narrow_to_wide_zz(char const* in, int idx, wchar_t const**  out);
+
 mk_jumbo int mk_std_str_convertor_narrow_to_narrow_s(char const mk_win_base_keywords_far* in, size_t len, int idx, char const**  out);
 mk_jumbo int mk_std_str_convertor_wide_to_narrow_s(wchar_t const* in, size_t len, int idx, char const**  out);
 mk_jumbo int mk_std_str_convertor_narrow_to_wide_s(char const* in, size_t len, int idx, wchar_t const**  out);
