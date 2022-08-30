@@ -90,6 +90,7 @@ typedef mk_win_user_window_mdicreate_t const* mk_win_user_window_mdicreate_pct;
 #define mk_win_user_window_wm_mdiiconarrange  ((unsigned short)0x0228ul)
 #define mk_win_user_window_wm_mdigetactive    ((unsigned short)0x0229ul)
 #define mk_win_user_window_wm_mdisetmenu      ((unsigned short)0x0230ul)
+#define mk_win_user_window_wm_user            ((unsigned short)0x0400ul)
 
 
 mk_jumbo int mk_win_user_window_create(mk_win_user_window_create_pct wnd_info, mk_win_base_user_types_hwnd_t* hwnd);
