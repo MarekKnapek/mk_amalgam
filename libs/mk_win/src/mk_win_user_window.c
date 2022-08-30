@@ -322,6 +322,35 @@ mk_jumbo int mk_win_user_window_set_parent(mk_win_base_user_types_hwnd_t child, 
 	return 0;
 }
 
+mk_jumbo int mk_win_user_window_is_child(mk_win_base_user_types_hwnd_t parent, mk_win_base_user_types_hwnd_t child, mk_win_base_types_bool_t* ret)
+{
+	mk_win_base_types_bool_t b;
+
+	mk_assert(ret);
+
+	b = IsChild(parent, child);
+	*ret = b;
+
+	return 0;
+}
+
+mk_jumbo int mk_win_user_window_screen2client(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_point_pt pt, mk_win_base_types_bool_t* ret)
+{
+	mk_win_base_types_bool_t b;
+
+	mk_assert(ret);
+
+#if mk_win_api == mk_win_api_old
+	ScreenToClient(hwnd, pt);
+	b = 1;
+	#else
+	b = ScreenToClient(hwnd, pt);
+	#endif
+	*ret = b;
+
+	return 0;
+}
+
 mk_jumbo int mk_win_user_window_post(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_types_bool_t* ret)
 {
 	#if mk_win_api == mk_win_api_old
@@ -380,35 +409,6 @@ mk_jumbo int mk_win_user_window_send(mk_win_base_user_types_hwnd_t hwnd, mk_win_
 	*ret = r;
 	return 0;
 	#undef SendMessageM
-}
-
-mk_jumbo int mk_win_user_window_is_child(mk_win_base_user_types_hwnd_t parent, mk_win_base_user_types_hwnd_t child, mk_win_base_types_bool_t* ret)
-{
-	mk_win_base_types_bool_t b;
-
-	mk_assert(ret);
-
-	b = IsChild(parent, child);
-	*ret = b;
-
-	return 0;
-}
-
-mk_jumbo int mk_win_user_window_is_screen2client(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_point_pt pt, mk_win_base_types_bool_t* ret)
-{
-	mk_win_base_types_bool_t b;
-
-	mk_assert(ret);
-
-#if mk_win_api == mk_win_api_old
-	ScreenToClient(hwnd, pt);
-	b = 1;
-	#else
-	b = ScreenToClient(hwnd, pt);
-	#endif
-	*ret = b;
-
-	return 0;
 }
 
 

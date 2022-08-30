@@ -104,10 +104,10 @@ mk_jumbo int mk_win_user_window_get_rect(mk_win_base_user_types_hwnd_t hwnd, mk_
 mk_jumbo int mk_win_user_window_get_client_rect(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_rect_pt rect, mk_win_base_types_bool_t* ret);
 mk_jumbo int mk_win_user_window_set_focus(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_user_types_hwnd_t* ret);
 mk_jumbo int mk_win_user_window_set_parent(mk_win_base_user_types_hwnd_t child, mk_win_base_user_types_hwnd_t new_parent, mk_win_base_user_types_hwnd_t* ret);
+mk_jumbo int mk_win_user_window_is_child(mk_win_base_user_types_hwnd_t parent, mk_win_base_user_types_hwnd_t child, mk_win_base_types_bool_t* ret);
+mk_jumbo int mk_win_user_window_screen2client(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_point_pt pt, mk_win_base_types_bool_t* ret);
 mk_jumbo int mk_win_user_window_post(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_types_bool_t* ret);
 mk_jumbo int mk_win_user_window_send(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_user_types_lresult_t* ret);
-mk_jumbo int mk_win_user_window_is_child(mk_win_base_user_types_hwnd_t parent, mk_win_base_user_types_hwnd_t child, mk_win_base_types_bool_t* ret);
-mk_jumbo int mk_win_user_window_is_screen2client(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_point_pt pt, mk_win_base_types_bool_t* ret);
 
 mk_jumbo int mk_win_user_window_post_close(mk_win_base_user_types_hwnd_t hwnd);
 
