@@ -7,10 +7,10 @@
 #include "../../mk_utils/src/mk_assert.h"
 #include "../../mk_utils/src/mk_jumbo.h"
 
-#include "../../mk_win_base/src/mk_win_base_user_functions.h"
-#include "../../mk_win_base/src/mk_win_base_user_types.h"
 #include "../../mk_win_base/src/mk_win_base_platform.h"
 #include "../../mk_win_base/src/mk_win_base_keywords.h"
+#include "../../mk_win_base/src/mk_win_base_user_types.h"
+#include "../../mk_win_base/src/mk_win_base_user_functions.h"
 
 
 mk_jumbo int mk_win_user_window_create(mk_win_user_window_create_pct wnd_info, mk_win_base_user_types_hwnd_t* hwnd)

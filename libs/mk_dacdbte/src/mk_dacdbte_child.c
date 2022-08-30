@@ -4,11 +4,6 @@
 
 #include "../../mk_dacdbtw/src/mk_dacdbtw_panel.h"
 
-#include "../../mk_utils/src/mk_assert.h"
-#include "../../mk_utils/src/mk_jumbo.h"
-#include "../../mk_utils/src/mk_inline.h"
-#include "../../mk_utils/src/mk_try.h"
-
 #include "../../mk_win/src/mk_win_instance.h"
 #include "../../mk_win/src/mk_win_user_brush.h"
 #include "../../mk_win/src/mk_win_user_class.h"
@@ -20,6 +15,11 @@
 #include "../../mk_win_base/src/mk_win_base_keywords.h"
 #include "../../mk_win_base/src/mk_win_base_types.h"
 #include "../../mk_win_base/src/mk_win_base_user_types.h"
+
+#include "../../mk_utils/src/mk_assert.h"
+#include "../../mk_utils/src/mk_jumbo.h"
+#include "../../mk_utils/src/mk_inline.h"
+#include "../../mk_utils/src/mk_try.h"
 
 
 typedef mk_dacdbte_child_t mk_win_base_keywords_far* mk_dacdbte_child_lpt;
