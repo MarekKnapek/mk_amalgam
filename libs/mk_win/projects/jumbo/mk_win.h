@@ -4,6 +4,7 @@
 
 #include "../../src/mk_win_api.h"
 #include "../../src/mk_win_char.h"
+#include "../../src/mk_win_comdlg_ofn.c"
 #include "../../src/mk_win_global.h"
 #include "../../src/mk_win_instance.h"
 #include "../../src/mk_win_kernel_module.h"
