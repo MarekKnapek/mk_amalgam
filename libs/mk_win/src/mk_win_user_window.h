@@ -4,6 +4,7 @@
 
 #include "mk_win_user_window_constants.h"
 #include "mk_win_str.h"
+#include "mk_win_char.h"
 
 #include "../../mk_utils/src/mk_jumbo.h"
 
@@ -73,6 +74,7 @@ typedef mk_win_user_window_mdicreate_t const* mk_win_user_window_mdicreate_pct;
 #define mk_win_user_window_wm_create          ((unsigned short)0x0001ul)
 #define mk_win_user_window_wm_destroy         ((unsigned short)0x0002ul)
 #define mk_win_user_window_wm_size            ((unsigned short)0x0005ul)
+#define mk_win_user_window_wm_settext         ((unsigned short)0x000cul)
 #define mk_win_user_window_wm_gettext         ((unsigned short)0x000dul)
 #define mk_win_user_window_wm_close           ((unsigned short)0x0010ul)
 #define mk_win_user_window_wm_queryendsession ((unsigned short)0x0011ul)
@@ -114,6 +116,7 @@ mk_jumbo int mk_win_user_window_post_close(mk_win_base_user_types_hwnd_t hwnd);
 
 mk_jumbo int mk_win_user_window_send_close(mk_win_base_user_types_hwnd_t hwnd);
 mk_jumbo int mk_win_user_window_send_mdicreate(mk_win_base_user_types_hwnd_t hwnd, mk_win_user_window_mdicreate_pct mdi, mk_win_base_user_types_hwnd_t* mdihwnd);
+mk_jumbo int mk_win_user_window_send_set_text(mk_win_base_user_types_hwnd_t hwnd, mk_win_char_t const* text);
 
 
 #endif
