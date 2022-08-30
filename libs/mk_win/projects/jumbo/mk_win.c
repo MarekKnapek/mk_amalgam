@@ -2,6 +2,7 @@
 #define mk_include_guard_win_c
 
 
+#include "../../src/mk_win_comdlg_ofn.c"
 #include "../../src/mk_win_global.c"
 #include "../../src/mk_win_instance.c"
 #include "../../src/mk_win_kernel_module.c"
