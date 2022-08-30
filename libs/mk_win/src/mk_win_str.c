@@ -75,6 +75,53 @@ mk_jumbo int mk_win_str_from_narrow_z(char const mk_win_base_keywords_far* in, i
 }
 
 
+mk_jumbo int mk_win_str_to_wide_zz(mk_win_strc_t in, int idx, wchar_t const** out)
+{
+	#if mk_win_char == mk_win_char_narrow
+	mk_try(mk_std_str_convertor_narrow_to_wide_zz(in, idx, out));
+	#elif mk_win_char == mk_win_char_wide
+	(void)idx;
+	*out = in;
+	#endif
+	return 0;
+}
+
+mk_jumbo int mk_win_str_to_narrow_zz(mk_win_strc_t in, int idx, char const mk_win_base_keywords_far** out)
+{
+	#if mk_win_char == mk_win_char_narrow
+	(void)idx;
+	*out = in;
+	#elif mk_win_char == mk_win_char_wide
+	mk_try(mk_std_str_convertor_wide_to_narrow_zz(in, idx, out));
+	#endif
+	return 0;
+}
+
+mk_jumbo int mk_win_str_from_wide_zz(wchar_t const* in, int idx, mk_win_strc_t* out)
+{
+	#if mk_win_char == mk_win_char_narrow
+	mk_try(mk_std_str_convertor_wide_to_narrow_zz(in, idx, out));
+	#elif mk_win_char == mk_win_char_wide
+	(void)idx;
+	*out = in;
+	#endif
+	return 0;
+}
+
+mk_jumbo int mk_win_str_from_narrow_zz(char const mk_win_base_keywords_far* in, int idx, mk_win_strc_t* out)
+{
+	#if mk_win_char == mk_win_char_narrow && mk_win_base_platform_os == mk_win_base_platform_os_win16
+	mk_try(mk_std_str_convertor_narrow_to_narrow_zz(in, idx, out));
+	#elif mk_win_char == mk_win_char_narrow && mk_win_base_platform_os != mk_win_base_platform_os_win16
+	(void)idx;
+	*out = in;
+	#elif mk_win_char == mk_win_char_wide
+	mk_try(mk_std_str_convertor_narrow_to_wide_zz(in, idx, out));
+	#endif
+	return 0;
+}
+
+
 mk_jumbo int mk_win_str_to_wide_s(mk_win_strc_t in, size_t length, int idx, wchar_t const** out)
 {
 	#if mk_win_char == mk_win_char_narrow
