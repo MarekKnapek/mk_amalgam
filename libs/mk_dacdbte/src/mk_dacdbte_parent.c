@@ -13,6 +13,7 @@
 #include "../../mk_utils/src/mk_try.h"
 
 #include "../../mk_win/src/mk_win_char.h"
+#include "../../mk_win/src/mk_win_comdlg_ofn.h"
 #include "../../mk_win/src/mk_win_instance.h"
 #include "../../mk_win/src/mk_win_kernel_module.h"
 #include "../../mk_win/src/mk_win_kernel_resource.h"
@@ -26,6 +27,7 @@
 #include "../../mk_win/src/mk_win_user_message.h"
 #include "../../mk_win/src/mk_win_user_window.h"
 
+#include "../../mk_win_base/src/mk_win_base_platform.h"
 #include "../../mk_win_base/src/mk_win_base_keywords.h"
 #include "../../mk_win_base/src/mk_win_base_types.h"
 #include "../../mk_win_base/src/mk_win_base_user_types.h"
@@ -159,19 +161,71 @@ mk_jumbo int mk_dacdbte_parent_close(mk_dacdbte_parent_pt parent)
 	return 0;
 }
 
-mk_jumbo int mk_dacdbte_parent_children_add(mk_dacdbte_parent_pt parent, mk_dacdbte_child_pt old_child)
+mk_jumbo int mk_dacdbte_parent_children_add(mk_dacdbte_parent_pt parent)
 {
+	static mk_win_char_t const s_filter[] =
+		mk_win_char_c("All formats (*.cal,*.cfg,*.dha,*.dsk,*.gal,*.ltb,*.met,*.mslib,*.nga,*.prj,*.prm,*.psw,*.seq,*.sst,*.sty)\0*.cal;*.cfg;*.dha;*.dsk;*.gal;*.ltb;*.met;*.mslib;*.nga;*.prj;*.prm;*.psw;*.seq;*.sst;*.sty\0")
+		mk_win_char_c("All files (*.*)\0*.*\0")
+		mk_win_char_c("Calibrations (*.cal)\0*.cal\0")
+		mk_win_char_c("Configurations (*.cfg)\0*.cfg\0")
+		mk_win_char_c("DHAs (*.dha)\0*.dha\0")
+		mk_win_char_c("Desktops (*.dsk)\0*.dsk\0")
+		mk_win_char_c("GALs (*.gal)\0*.gal\0")
+		mk_win_char_c("Link tables (*.ltb)\0*.ltb\0")
+		mk_win_char_c("Methods (*.met)\0*.met\0")
+		mk_win_char_c("MS Libraries (*.mslib)\0*.mslib\0")
+		mk_win_char_c("NGAs (*.nga)\0*.nga\0")
+		mk_win_char_c("Projects (*.prj)\0*.prj\0")
+		mk_win_char_c("Chromatograms (*.prm)\0*.prm\0")
+		mk_win_char_c("User accounts (*.psw)\0*.psw\0")
+		mk_win_char_c("Sequences (*.seq)\0*.seq\0")
+		mk_win_char_c("SSTs (*.sst)\0*.sst\0")
+		mk_win_char_c("Styles (*.sty)\0*.sty\0")
+		;
+	#if mk_win_base_platform_os == mk_win_base_platform_os_win16
+	static int const s_max_len = 512;
+	#else
+	static int const s_max_len = 64 * 1024 - 1;
+	#endif
+
+	mk_win_char_t* file_name;
+	mk_win_comdlg_ofn_t ofn;
+	mk_win_base_types_bool_t b;
 	mk_dacdbte_child_pt child;
 
 	mk_assert(parent);
+	mk_assert(parent->m_hwnd);
 
-	mk_try(mk_std_gcallocator_allocate(sizeof(*child), (void**)&child));
-	mk_try(mk_std_ptr_buff_append(&parent->m_children, child));
-	mk_try(mk_dacdbte_child_construct(child, parent, old_child));
-	if(old_child)
+	mk_try(mk_std_gcallocator_allocate(s_max_len * sizeof(mk_win_char_t), (void**)&file_name));
+	file_name[0] = mk_win_char_c('\0');
+	ofn.m_owner = parent->m_hwnd;
+	ofn.m_instance = mk_win_base_types_null;
+	ofn.m_filter = s_filter;
+	ofn.m_custom_filter = NULL;
+	ofn.m_max_custom_tfilter = 0;
+	ofn.m_filter_index = 0;
+	ofn.m_file_name_buff = file_name;
+	ofn.m_file_name_buff_len_chars = s_max_len;
+	ofn.m_file_title = NULL;
+	ofn.m_max_file_title = 0;
+	ofn.m_initial_dir = NULL;
+	ofn.m_title = NULL;
+	ofn.m_flags = mk_win_comdlg_ofn_flag_pathmustexist | mk_win_comdlg_ofn_flag_filemustexist;
+	ofn.m_file_offset = 0;
+	ofn.m_file_extension = 0;
+	ofn.m_default_extension = NULL;
+	ofn.m_custom_data = (mk_win_base_user_types_lparam_t)NULL;
+	ofn.m_hook = NULL;
+	ofn.m_template_name = NULL;
+	mk_try(mk_win_comdlg_ofn(&ofn, &b));
+	if(b != 0)
 	{
-		mk_try(mk_dacdbte_child_close(old_child));
+		mk_try(mk_std_gcallocator_allocate(sizeof(*child), (void**)&child));
+		mk_try(mk_std_ptr_buff_append(&parent->m_children, child));
+		mk_try(mk_dacdbte_child_construct(child, parent, NULL));
+		mk_try(mk_dacdbte_child_set_file_name(child, ofn.m_file_name_out));
 	}
+	mk_try(mk_std_gcallocator_deallocate(file_name));
 
 	return 0;
 }
@@ -294,6 +348,7 @@ mk_jumbo int mk_dacdbte_parent_children_transfer(mk_dacdbte_parent_pt parent)
 	mk_win_base_kernel_types_hglobal_t global;
 	mk_win_base_types_cpu_iword_t dlg_ret;
 	mk_dacdbte_parent_pt prnt;
+	mk_dacdbte_child_pt new_child;
 
 	mk_assert(parent);
 
@@ -307,7 +362,10 @@ mk_jumbo int mk_dacdbte_parent_children_transfer(mk_dacdbte_parent_pt parent)
 		if(dlg_ret != 0)
 		{
 			mk_try(mk_std_ptr_buff_get_element(&parent->m_app->m_parents, dlg_ret - 1, (void**)&prnt)); mk_assert(prnt);
-			mk_try(mk_dacdbte_parent_children_add(prnt, child));
+			mk_try(mk_std_gcallocator_allocate(sizeof(*new_child), (void**)&new_child));
+			mk_try(mk_std_ptr_buff_append(&prnt->m_children, new_child));
+			mk_try(mk_dacdbte_child_construct(new_child, prnt, child));
+			mk_try(mk_dacdbte_child_close(child));
 		}
 	}
 
@@ -466,7 +524,7 @@ static mk_inline int mk_dacdbte_parent_private_on_menu_open_file(mk_dacdbte_pare
 	mk_assert(override_defproc);
 	mk_assert(lres);
 
-	mk_try(mk_dacdbte_parent_children_add(parent, mk_win_base_types_null));
+	mk_try(mk_dacdbte_parent_children_add(parent));
 
 	return 0;
 }
