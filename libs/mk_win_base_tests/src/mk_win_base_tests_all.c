@@ -4,6 +4,7 @@
 #include "../../mk_win_base/src/mk_win_base_types.h"
 #include "../../mk_win_base/src/mk_win_base_kernel_types.h"
 #include "../../mk_win_base/src/mk_win_base_user_types.h"
+#include "../../mk_win_base/src/mk_win_base_comdlg_types.h"
 
 #include "../../mk_win/src/mk_win_user_window.h"
 
@@ -16,11 +17,13 @@
 #include <limits.h>
 
 #include <windows.h>
+#include <commdlg.h>
 
 
 static mk_inline int mk_win_base_tests_types(void);
 static mk_inline int mk_win_base_tests_kernel_types(void);
 static mk_inline int mk_win_base_tests_user_types(void);
+static mk_inline int mk_win_base_tests_comdlg_types(void);
 
 
 mk_jumbo int mk_win_base_tests_all(void)
@@ -28,6 +31,7 @@ mk_jumbo int mk_win_base_tests_all(void)
 	mk_try(mk_win_base_tests_types());
 	mk_try(mk_win_base_tests_kernel_types());
 	mk_try(mk_win_base_tests_user_types());
+	mk_try(mk_win_base_tests_comdlg_types());
 
 	return 0;
 }
@@ -508,6 +512,136 @@ static mk_inline int mk_win_base_tests_user_types(void)
 	mk_check(sizeof(mk_win_base_user_wm_mdicreate_w_t) == sizeof(MDICREATESTRUCTW));
 	mk_check(mk_alignof(mk_win_base_user_wm_mdicreate_w_t) == mk_alignof(MDICREATESTRUCTW));
 	#endif
+
+	return 0;
+}
+
+static mk_inline int mk_win_base_tests_comdlg_types(void)
+{
+	mk_check(sizeof(mk_win_base_comdlg_types_open_file_name_hook_t) == sizeof(LPOFNHOOKPROC));
+	mk_check(mk_alignof(mk_win_base_comdlg_types_open_file_name_hook_t) == mk_alignof(LPOFNHOOKPROC));
+
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_size) == sizeof(((OPENFILENAMEA*)NULL)->lStructSize));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_owner) == sizeof(((OPENFILENAMEA*)NULL)->hwndOwner));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_instance) == sizeof(((OPENFILENAMEA*)NULL)->hInstance));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_filter) == sizeof(((OPENFILENAMEA*)NULL)->lpstrFilter));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_custom_filter) == sizeof(((OPENFILENAMEA*)NULL)->lpstrCustomFilter));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_max_custom_tfilter) == sizeof(((OPENFILENAMEA*)NULL)->nMaxCustFilter));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_filter_index) == sizeof(((OPENFILENAMEA*)NULL)->nFilterIndex));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_file) == sizeof(((OPENFILENAMEA*)NULL)->lpstrFile));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_max_file) == sizeof(((OPENFILENAMEA*)NULL)->nMaxFile));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_file_title) == sizeof(((OPENFILENAMEA*)NULL)->lpstrFileTitle));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_max_file_title) == sizeof(((OPENFILENAMEA*)NULL)->nMaxFileTitle));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_initial_dir) == sizeof(((OPENFILENAMEA*)NULL)->lpstrInitialDir));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_title) == sizeof(((OPENFILENAMEA*)NULL)->lpstrTitle));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_flags) == sizeof(((OPENFILENAMEA*)NULL)->Flags));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_file_offset) == sizeof(((OPENFILENAMEA*)NULL)->nFileOffset));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_file_extension) == sizeof(((OPENFILENAMEA*)NULL)->nFileExtension));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_default_extension) == sizeof(((OPENFILENAMEA*)NULL)->lpstrDefExt));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_custom_data) == sizeof(((OPENFILENAMEA*)NULL)->lCustData));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_hook) == sizeof(((OPENFILENAMEA*)NULL)->lpfnHook));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_template_name) == sizeof(((OPENFILENAMEA*)NULL)->lpTemplateName));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_size) == mk_alignof(((OPENFILENAMEA*)NULL)->lStructSize));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_owner) == mk_alignof(((OPENFILENAMEA*)NULL)->hwndOwner));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_instance) == mk_alignof(((OPENFILENAMEA*)NULL)->hInstance));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_filter) == mk_alignof(((OPENFILENAMEA*)NULL)->lpstrFilter));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_custom_filter) == mk_alignof(((OPENFILENAMEA*)NULL)->lpstrCustomFilter));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_max_custom_tfilter) == mk_alignof(((OPENFILENAMEA*)NULL)->nMaxCustFilter));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_filter_index) == mk_alignof(((OPENFILENAMEA*)NULL)->nFilterIndex));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_file) == mk_alignof(((OPENFILENAMEA*)NULL)->lpstrFile));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_max_file) == mk_alignof(((OPENFILENAMEA*)NULL)->nMaxFile));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_file_title) == mk_alignof(((OPENFILENAMEA*)NULL)->lpstrFileTitle));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_max_file_title) == mk_alignof(((OPENFILENAMEA*)NULL)->nMaxFileTitle));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_initial_dir) == mk_alignof(((OPENFILENAMEA*)NULL)->lpstrInitialDir));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_title) == mk_alignof(((OPENFILENAMEA*)NULL)->lpstrTitle));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_flags) == mk_alignof(((OPENFILENAMEA*)NULL)->Flags));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_file_offset) == mk_alignof(((OPENFILENAMEA*)NULL)->nFileOffset));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_file_extension) == mk_alignof(((OPENFILENAMEA*)NULL)->nFileExtension));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_default_extension) == mk_alignof(((OPENFILENAMEA*)NULL)->lpstrDefExt));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_custom_data) == mk_alignof(((OPENFILENAMEA*)NULL)->lCustData));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_hook) == mk_alignof(((OPENFILENAMEA*)NULL)->lpfnHook));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_a_t*)NULL)->m_template_name) == mk_alignof(((OPENFILENAMEA*)NULL)->lpTemplateName));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_size) == offsetof(OPENFILENAMEA, lStructSize));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_owner) == offsetof(OPENFILENAMEA, hwndOwner));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_instance) == offsetof(OPENFILENAMEA, hInstance));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_filter) == offsetof(OPENFILENAMEA, lpstrFilter));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_custom_filter) == offsetof(OPENFILENAMEA, lpstrCustomFilter));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_max_custom_tfilter) == offsetof(OPENFILENAMEA, nMaxCustFilter));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_filter_index) == offsetof(OPENFILENAMEA, nFilterIndex));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_file) == offsetof(OPENFILENAMEA, lpstrFile));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_max_file) == offsetof(OPENFILENAMEA, nMaxFile));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_file_title) == offsetof(OPENFILENAMEA, lpstrFileTitle));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_max_file_title) == offsetof(OPENFILENAMEA, nMaxFileTitle));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_initial_dir) == offsetof(OPENFILENAMEA, lpstrInitialDir));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_title) == offsetof(OPENFILENAMEA, lpstrTitle));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_flags) == offsetof(OPENFILENAMEA, Flags));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_file_offset) == offsetof(OPENFILENAMEA, nFileOffset));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_file_extension) == offsetof(OPENFILENAMEA, nFileExtension));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_default_extension) == offsetof(OPENFILENAMEA, lpstrDefExt));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_custom_data) == offsetof(OPENFILENAMEA, lCustData));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_hook) == offsetof(OPENFILENAMEA, lpfnHook));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_a_t, m_template_name) == offsetof(OPENFILENAMEA, lpTemplateName));
+
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_size) == sizeof(((OPENFILENAMEW*)NULL)->lStructSize));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_owner) == sizeof(((OPENFILENAMEW*)NULL)->hwndOwner));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_instance) == sizeof(((OPENFILENAMEW*)NULL)->hInstance));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_filter) == sizeof(((OPENFILENAMEW*)NULL)->lpstrFilter));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_custom_filter) == sizeof(((OPENFILENAMEW*)NULL)->lpstrCustomFilter));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_max_custom_tfilter) == sizeof(((OPENFILENAMEW*)NULL)->nMaxCustFilter));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_filter_index) == sizeof(((OPENFILENAMEW*)NULL)->nFilterIndex));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_file) == sizeof(((OPENFILENAMEW*)NULL)->lpstrFile));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_max_file) == sizeof(((OPENFILENAMEW*)NULL)->nMaxFile));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_file_title) == sizeof(((OPENFILENAMEW*)NULL)->lpstrFileTitle));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_max_file_title) == sizeof(((OPENFILENAMEW*)NULL)->nMaxFileTitle));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_initial_dir) == sizeof(((OPENFILENAMEW*)NULL)->lpstrInitialDir));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_title) == sizeof(((OPENFILENAMEW*)NULL)->lpstrTitle));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_flags) == sizeof(((OPENFILENAMEW*)NULL)->Flags));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_file_offset) == sizeof(((OPENFILENAMEW*)NULL)->nFileOffset));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_file_extension) == sizeof(((OPENFILENAMEW*)NULL)->nFileExtension));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_default_extension) == sizeof(((OPENFILENAMEW*)NULL)->lpstrDefExt));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_custom_data) == sizeof(((OPENFILENAMEW*)NULL)->lCustData));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_hook) == sizeof(((OPENFILENAMEW*)NULL)->lpfnHook));
+	mk_check(sizeof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_template_name) == sizeof(((OPENFILENAMEW*)NULL)->lpTemplateName));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_size) == mk_alignof(((OPENFILENAMEW*)NULL)->lStructSize));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_owner) == mk_alignof(((OPENFILENAMEW*)NULL)->hwndOwner));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_instance) == mk_alignof(((OPENFILENAMEW*)NULL)->hInstance));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_filter) == mk_alignof(((OPENFILENAMEW*)NULL)->lpstrFilter));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_custom_filter) == mk_alignof(((OPENFILENAMEW*)NULL)->lpstrCustomFilter));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_max_custom_tfilter) == mk_alignof(((OPENFILENAMEW*)NULL)->nMaxCustFilter));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_filter_index) == mk_alignof(((OPENFILENAMEW*)NULL)->nFilterIndex));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_file) == mk_alignof(((OPENFILENAMEW*)NULL)->lpstrFile));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_max_file) == mk_alignof(((OPENFILENAMEW*)NULL)->nMaxFile));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_file_title) == mk_alignof(((OPENFILENAMEW*)NULL)->lpstrFileTitle));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_max_file_title) == mk_alignof(((OPENFILENAMEW*)NULL)->nMaxFileTitle));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_initial_dir) == mk_alignof(((OPENFILENAMEW*)NULL)->lpstrInitialDir));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_title) == mk_alignof(((OPENFILENAMEW*)NULL)->lpstrTitle));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_flags) == mk_alignof(((OPENFILENAMEW*)NULL)->Flags));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_file_offset) == mk_alignof(((OPENFILENAMEW*)NULL)->nFileOffset));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_file_extension) == mk_alignof(((OPENFILENAMEW*)NULL)->nFileExtension));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_default_extension) == mk_alignof(((OPENFILENAMEW*)NULL)->lpstrDefExt));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_custom_data) == mk_alignof(((OPENFILENAMEW*)NULL)->lCustData));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_hook) == mk_alignof(((OPENFILENAMEW*)NULL)->lpfnHook));
+	mk_check(mk_alignof(((mk_win_base_comdlg_types_open_file_name_v1_w_t*)NULL)->m_template_name) == mk_alignof(((OPENFILENAMEW*)NULL)->lpTemplateName));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_size) == offsetof(OPENFILENAMEW, lStructSize));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_owner) == offsetof(OPENFILENAMEW, hwndOwner));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_instance) == offsetof(OPENFILENAMEW, hInstance));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_filter) == offsetof(OPENFILENAMEW, lpstrFilter));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_custom_filter) == offsetof(OPENFILENAMEW, lpstrCustomFilter));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_max_custom_tfilter) == offsetof(OPENFILENAMEW, nMaxCustFilter));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_filter_index) == offsetof(OPENFILENAMEW, nFilterIndex));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_file) == offsetof(OPENFILENAMEW, lpstrFile));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_max_file) == offsetof(OPENFILENAMEW, nMaxFile));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_file_title) == offsetof(OPENFILENAMEW, lpstrFileTitle));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_max_file_title) == offsetof(OPENFILENAMEW, nMaxFileTitle));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_initial_dir) == offsetof(OPENFILENAMEW, lpstrInitialDir));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_title) == offsetof(OPENFILENAMEW, lpstrTitle));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_flags) == offsetof(OPENFILENAMEW, Flags));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_file_offset) == offsetof(OPENFILENAMEW, nFileOffset));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_file_extension) == offsetof(OPENFILENAMEW, nFileExtension));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_default_extension) == offsetof(OPENFILENAMEW, lpstrDefExt));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_custom_data) == offsetof(OPENFILENAMEW, lCustData));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_hook) == offsetof(OPENFILENAMEW, lpfnHook));
+	mk_check(offsetof(mk_win_base_comdlg_types_open_file_name_v1_w_t, m_template_name) == offsetof(OPENFILENAMEW, lpTemplateName));
 
 	return 0;
 }
