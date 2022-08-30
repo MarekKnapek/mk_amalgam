@@ -12,6 +12,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_win_base\projects\jumbo\mk_win_base.h"><Filter>dependencies</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtw_panel.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbtw.h"><Filter>jumbo</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_dacdbt\projects\jumbo\mk_dacdbt.h"><Filter>dependencies</Filter></ClInclude>
 	</ItemGroup>
 	<ItemGroup>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.c"><Filter>dependencies</Filter></ClCompile>
@@ -20,5 +21,6 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_win_base\projects\jumbo\mk_win_base.c"><Filter>dependencies</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtw_panel.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbtw.c"><Filter>jumbo</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_dacdbt\projects\jumbo\mk_dacdbt.c"><Filter>dependencies</Filter></ClCompile>
 	</ItemGroup>
 </Project>
