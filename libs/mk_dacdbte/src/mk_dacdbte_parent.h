@@ -28,7 +28,7 @@ mk_jumbo int mk_dacdbte_parent_construct(mk_dacdbte_parent_pt parent, mk_dacdbte
 mk_jumbo int mk_dacdbte_parent_destruct(mk_dacdbte_parent_pt parent);
 mk_jumbo int mk_dacdbte_parent_show(mk_dacdbte_parent_pt parent, int show);
 mk_jumbo int mk_dacdbte_parent_close(mk_dacdbte_parent_pt parent);
-mk_jumbo int mk_dacdbte_parent_children_add(mk_dacdbte_parent_pt parent, mk_dacdbte_child_pt old_child);
+mk_jumbo int mk_dacdbte_parent_children_add(mk_dacdbte_parent_pt parent);
 mk_jumbo int mk_dacdbte_parent_children_get_active(mk_dacdbte_parent_pt parent, mk_dacdbte_child_pt* child);
 mk_jumbo int mk_dacdbte_parent_children_close_active(mk_dacdbte_parent_pt parent);
 mk_jumbo int mk_dacdbte_parent_children_cascade(mk_dacdbte_parent_pt parent);
