@@ -47,13 +47,7 @@
 #endif
 #endif
 #elif mk_uint_bits <= 64
-#if ULONG_MAX >= 0xfffffffffffffffful
-#include "../base/mk_uint_macro_base_long.h"
-#define mk_uint_small_bits 64
-#if mk_uint_bits == 64
-#define mk_uint64_c(a, b) {mk_uint_cast_to_long(mk_uint_cast_to_long_hi(a) | mk_uint_cast_to_long_lo(b))}
-#endif
-#elif mk_has_long_long
+#if mk_has_long_long
 #include "../base/mk_uint_macro_base_llong.h"
 #define mk_uint_small_bits 64
 #if mk_uint_bits == 64
@@ -76,9 +70,6 @@
 #if mk_has_128bit_int
 #include "../base/mk_uint_macro_base_128.h"
 #define mk_uint_small_bits 128
-#elif ULONG_MAX >= 0xfffffffffffffffful
-#include "../base/mk_uint_macro_base_long.h"
-#define mk_uint_small_bits 64
 #elif mk_has_long_long
 #include "../base/mk_uint_macro_base_llong.h"
 #define mk_uint_small_bits 64
