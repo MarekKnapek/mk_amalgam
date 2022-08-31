@@ -46,6 +46,7 @@ typedef struct mk_dacdbt_doc_s mk_dacdbt_doc_t;
 mk_jumbo int mk_dacdbt_doc_construct(mk_dacdbt_doc_t* doc);
 mk_jumbo int mk_dacdbt_doc_construct_parse(mk_dacdbt_doc_t* doc, mk_std_input_stream_t* is);
 mk_jumbo int mk_dacdbt_doc_destruct(mk_dacdbt_doc_t* doc);
+mk_jumbo int mk_dacdbt_doc_get_max(mk_dacdbt_doc_t* doc, unsigned long* keys, unsigned long* values);
 
 
 #endif

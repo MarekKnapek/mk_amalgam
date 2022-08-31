@@ -25,6 +25,7 @@ typedef struct mk_dacdbt_key_s mk_dacdbt_key_t;
 mk_jumbo int mk_dacdbt_key_construct(mk_dacdbt_key_t* key);
 mk_jumbo int mk_dacdbt_key_construct_parse(mk_dacdbt_key_t* key, mk_std_input_stream_t* is);
 mk_jumbo int mk_dacdbt_key_destruct(mk_dacdbt_key_t* key);
+mk_jumbo int mk_dacdbt_key_get_max(mk_dacdbt_key_t* key, unsigned long* keys, unsigned long* values);
 
 
 #endif
