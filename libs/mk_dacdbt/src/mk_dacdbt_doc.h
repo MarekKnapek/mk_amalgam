@@ -37,7 +37,7 @@ struct mk_dacdbt_doc_s
 	{
 		mk_dacdbt_doc_hdr_v1_t m_hdr1;
 		mk_dacdbt_doc_hdr_v2_t m_hdr2;
-	};
+	} m_hdr;
 	mk_dacdbt_key_t m_root;
 };
 typedef struct mk_dacdbt_doc_s mk_dacdbt_doc_t;
