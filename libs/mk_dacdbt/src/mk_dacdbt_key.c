@@ -157,3 +157,32 @@ mk_jumbo int mk_dacdbt_key_destruct(mk_dacdbt_key_t* key)
 
 	return 0;
 }
+
+mk_jumbo int mk_dacdbt_key_get_max(mk_dacdbt_key_t* key, unsigned long* keys, unsigned long* values)
+{
+	size_t cnt;
+	size_t i;
+	mk_dacdbt_key_t* k;
+
+	mk_assert(key);
+	mk_assert(keys);
+	mk_assert(values);
+
+	mk_try(mk_std_ptr_buff_get_count(&key->m_values, &cnt));
+	if(cnt > *values)
+	{
+		*values = (unsigned long)cnt;
+	}
+	mk_try(mk_std_ptr_buff_get_count(&key->m_sub_keys, &cnt));
+	if(cnt > *keys)
+	{
+		*keys = (unsigned long)cnt;
+	}
+	for(i = 0; i != cnt; ++i)
+	{
+		mk_try(mk_std_ptr_buff_get_element(&key->m_sub_keys, i, &k));
+		mk_try(mk_dacdbt_key_get_max(k, keys, values));
+	}
+
+	return 0;
+}
