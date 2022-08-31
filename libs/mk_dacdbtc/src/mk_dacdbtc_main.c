@@ -56,12 +56,17 @@ int main(int argc, char** argv)
 	FILE* file;
 	mk_std_input_stream_t is;
 	mk_dacdbt_doc_t doc;
+	unsigned long keys;
+	unsigned long values;
+	int printed;
 	int closed;
 
 	mk_check(argc == 2);
 	file = fopen(argv[1], "rb"); mk_check(file);
 	mk_try(mk_std_input_stream_construct_file(&is, file));
 	mk_try(mk_dacdbt_doc_construct_parse(&doc, &is));
+	mk_try(mk_dacdbt_doc_get_max(&doc, &keys, &values));
+	printed = printf("keys: %lu, values: %lu\n", keys, values);
 	mk_try(mk_dacdbt_doc_destruct(&doc));
 	mk_try(mk_std_input_stream_destruct(&is));
 	closed = fclose(file); mk_check(closed == 0);
