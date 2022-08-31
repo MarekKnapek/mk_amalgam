@@ -57,6 +57,8 @@ int main(int argc, char** argv)
 	mk_std_input_stream_t is;
 	mk_dacdbt_doc_t doc;
 	unsigned long keys;
+	unsigned long max_values;
+	unsigned long max_keys;
 	unsigned long values;
 	int printed;
 	int closed;
@@ -65,8 +67,9 @@ int main(int argc, char** argv)
 	file = fopen(argv[1], "rb"); mk_check(file);
 	mk_try(mk_std_input_stream_construct_file(&is, file));
 	mk_try(mk_dacdbt_doc_construct_parse(&doc, &is));
-	mk_try(mk_dacdbt_doc_get_max(&doc, &keys, &values));
-	printed = printf("keys: %lu, values: %lu\n", keys, values);
+	mk_try(mk_dacdbt_doc_get_count(&doc, &keys, &values));
+	mk_try(mk_dacdbt_doc_get_max(&doc, &max_keys, &max_values));
+	printed = printf("keys: %lu, values: %lu, max keys: %lu, max values: %lu\n", keys, values, max_keys, max_values);
 	mk_try(mk_dacdbt_doc_destruct(&doc));
 	mk_try(mk_std_input_stream_destruct(&is));
 	closed = fclose(file); mk_check(closed == 0);
