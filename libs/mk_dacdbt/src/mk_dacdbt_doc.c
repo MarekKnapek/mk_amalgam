@@ -86,6 +86,19 @@ mk_jumbo int mk_dacdbt_doc_destruct(mk_dacdbt_doc_t* doc)
 	return 0;
 }
 
+mk_jumbo int mk_dacdbt_doc_get_max(mk_dacdbt_doc_t* doc, unsigned long* keys, unsigned long* values)
+{
+	mk_assert(doc);
+	mk_assert(keys);
+	mk_assert(values);
+
+	*keys = 1;
+	*values = 0;
+	mk_try(mk_dacdbt_key_get_max(&doc->m_root, keys, values));
+
+	return 0;
+}
+
 
 static mk_inline int mk_dacdbt_doc_private_hdr_v2_verify(mk_dacdbt_doc_hdr_v2_t const* hdr)
 {
