@@ -64,13 +64,13 @@ mk_jumbo int mk_dacdbt_doc_construct_parse(mk_dacdbt_doc_t* doc, mk_std_input_st
 	if(mk_uint32_eq(&magic, &mk_dacdbt_doc_private_magic5))
 	{
 		doc->m_format = 0;
-		mk_try(mk_dacdbt_io_read_buff(is, &doc->m_hdr1, sizeof(doc->m_hdr1)));
+		mk_try(mk_dacdbt_io_read_buff(is, &doc->m_hdr.m_hdr1, sizeof(doc->m_hdr.m_hdr1)));
 	}
 	else
 	{
 		doc->m_format = 1;
-		mk_try(mk_dacdbt_io_read_buff(is, &doc->m_hdr2, sizeof(doc->m_hdr2)));
-		mk_try(mk_dacdbt_doc_private_hdr_v2_verify(&doc->m_hdr2));
+		mk_try(mk_dacdbt_io_read_buff(is, &doc->m_hdr.m_hdr2, sizeof(doc->m_hdr.m_hdr2)));
+		mk_try(mk_dacdbt_doc_private_hdr_v2_verify(&doc->m_hdr.m_hdr2));
 	}
 	mk_try(mk_dacdbt_key_construct_parse(&doc->m_root, is));
 
