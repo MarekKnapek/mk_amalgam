@@ -121,7 +121,7 @@ static mk_inline int mk_dacdbt_str_private_parse_len(mk_std_input_stream_t* is, 
 		return 0;
 	}
 	mk_try(mk_dacdbt_io_read_u64(is, &len64));
-	mk_check(sizeof(size_t) >= 8 || (sizeof(size_t) >= 4 && mk_uint64_le(&len64, &s_len_max64)));
+	mk_check((sizeof(size_t) >= 4 && mk_uint64_le(&len64, &s_len_max64)) || sizeof(size_t) >= 8);
 	*len = mk_uint64_to_sizet(&len64);
 	*unicode = unc;
 	return 0;
