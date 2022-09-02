@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<ItemGroup>
+		<Filter Include="dependencies"><UniqueIdentifier>{f5fbc1b5-32fc-4ab6-bebb-ecb884cfd194}</UniqueIdentifier></Filter>
 		<Filter Include="jumbo"><UniqueIdentifier>{0f701e1d-c9a6-4426-a99d-d973ad30d677}</UniqueIdentifier></Filter>
 		<Filter Include="src"><UniqueIdentifier>{9a90553f-9a14-4fd2-85e8-9b3c2d9996f5}</UniqueIdentifier></Filter>
 	</ItemGroup>
 	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"><Filter>dependencies</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_buffer.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_gcallocator.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_global.h"><Filter>src</Filter></ClInclude>
@@ -14,6 +16,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_std.h"><Filter>jumbo</Filter></ClInclude>
 	</ItemGroup>
 	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"><Filter>dependencies</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_buffer.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_gcallocator.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_global.c"><Filter>src</Filter></ClCompile>
