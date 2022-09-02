@@ -14,21 +14,29 @@
 		<ProjectCapability Include="SourceItemsFromImports"/>
 	</ItemGroup>
 	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_buffer.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_gcallocator.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_global.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_input_stream.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_istr.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_istr_storage.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_istrg.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_ptr_buff.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_str_convertor.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_std.h"/>
 	</ItemGroup>
 	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_buffer.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_gcallocator.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_global.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_input_stream.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_istr.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_istr_storage.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_istrg.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_ptr_buff.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_str_convertor.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_std.c"/>
