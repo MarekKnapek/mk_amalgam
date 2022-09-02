@@ -10,6 +10,7 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.c"><Filter>dependencies</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"><Filter>dependencies</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_doc.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_global.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_io.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_key.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_str.c"><Filter>src</Filter></ClCompile>
@@ -21,6 +22,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.h"><Filter>dependencies</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"><Filter>dependencies</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_doc.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_global.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_io.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_key.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_str.h"><Filter>src</Filter></ClInclude>

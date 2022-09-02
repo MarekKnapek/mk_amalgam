@@ -5,6 +5,7 @@
 #include "mk_dacdbt.h"
 
 #include "../../src/mk_dacdbt_doc.c"
+#include "../../src/mk_dacdbt_global.c"
 #include "../../src/mk_dacdbt_io.c"
 #include "../../src/mk_dacdbt_key.c"
 #include "../../src/mk_dacdbt_str.c"
