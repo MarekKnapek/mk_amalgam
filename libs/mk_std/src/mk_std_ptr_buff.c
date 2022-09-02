@@ -128,6 +128,15 @@ mk_jumbo int mk_std_ptr_buff_find_first(mk_std_ptr_buff_t* ptr_buff, void const*
 	return 0;
 }
 
+mk_jumbo int mk_std_ptr_buff_remove_all(mk_std_ptr_buff_t* ptr_buff)
+{
+	mk_assert(ptr_buff);
+
+	ptr_buff->m_count = 0;
+
+	return 0;
+}
+
 mk_jumbo int mk_std_ptr_buff_remove_val(mk_std_ptr_buff_t* ptr_buff, void const* ptr)
 {
 	size_t idx;

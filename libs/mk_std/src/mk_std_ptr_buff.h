@@ -28,6 +28,7 @@ mk_jumbo int mk_std_ptr_buff_reserve_one(mk_std_ptr_buff_t* ptr_buff);
 mk_jumbo int mk_std_ptr_buff_reserve(mk_std_ptr_buff_t* ptr_buff, size_t count);
 mk_jumbo int mk_std_ptr_buff_append(mk_std_ptr_buff_t* ptr_buff, void const* ptr);
 mk_jumbo int mk_std_ptr_buff_find_first(mk_std_ptr_buff_t* ptr_buff, void const* ptr, size_t* idx);
+mk_jumbo int mk_std_ptr_buff_remove_all(mk_std_ptr_buff_t* ptr_buff);
 mk_jumbo int mk_std_ptr_buff_remove_val(mk_std_ptr_buff_t* ptr_buff, void const* ptr);
 mk_jumbo int mk_std_ptr_buff_remove_idx(mk_std_ptr_buff_t* ptr_buff, size_t idx);
 mk_jumbo int mk_std_ptr_buff_remove_last(mk_std_ptr_buff_t* ptr_buff);
