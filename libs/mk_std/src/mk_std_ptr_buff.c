@@ -44,6 +44,20 @@ mk_jumbo int mk_std_ptr_buff_get_count(mk_std_ptr_buff_t* ptr_buff, size_t* coun
 	return 0;
 }
 
+mk_jumbo int mk_std_ptr_buff_get_last(mk_std_ptr_buff_t* ptr_buff, void** element)
+{
+	void** data;
+
+	mk_assert(ptr_buff);
+	mk_assert(ptr_buff->m_count != 0);
+	mk_assert(element);
+
+	mk_try(mk_std_ptr_buff_private_get_data(ptr_buff, &data));
+	*element = data[ptr_buff->m_count - 1];
+
+	return 0;
+}
+
 mk_jumbo int mk_std_ptr_buff_get_element(mk_std_ptr_buff_t* ptr_buff, size_t idx, void** element)
 {
 	void** data;
