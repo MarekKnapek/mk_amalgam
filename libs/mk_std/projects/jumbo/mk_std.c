@@ -9,5 +9,6 @@
 #include "../../src/mk_std_ptr_buff.c"
 #include "../../src/mk_std_str_convertor.c"
 
+#include "../../../mk_utils/projects/jumbo/mk_utils.c"
 
 #endif
