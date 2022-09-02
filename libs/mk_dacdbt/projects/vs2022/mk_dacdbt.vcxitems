@@ -18,6 +18,7 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_doc.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_global.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_io.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_key.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_str.c"/>
@@ -29,6 +30,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_std\projects\jumbo\mk_std.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_doc.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_global.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_io.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_key.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbt_str.h"/>
