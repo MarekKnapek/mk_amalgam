@@ -2,8 +2,10 @@
 
 #include "mk_dacdbt_io.h"
 
-#include "../../mk_std/src/mk_std_gcallocator.h"
+#include "../../mk_std/src/mk_std_buffer.h"
 #include "../../mk_std/src/mk_std_input_stream.h"
+#include "../../mk_std/src/mk_std_istr.h"
+#include "../../mk_std/src/mk_std_istrg.h"
 
 #include "../../mk_int/src/exact/mk_uint_8.h"
 #include "../../mk_int/src/exact/mk_uint_16.h"
@@ -19,16 +21,31 @@
 #include <stddef.h>
 
 
+static mk_std_buffer_t mk_dacdbt_str_private_buff;
+
+
 static mk_inline int mk_dacdbt_str_private_parse_len(mk_std_input_stream_t* is, size_t* len, int* unicode);
 
+
+mk_jumbo int mk_dacdbt_str_init(void)
+{
+	mk_try(mk_std_buffer_init(&mk_dacdbt_str_private_buff));
+
+	return 0;
+}
+
+mk_jumbo int mk_dacdbt_str_deinit(void)
+{
+	mk_try(mk_std_buffer_deinit(&mk_dacdbt_str_private_buff));
+
+	return 0;
+}
 
 mk_jumbo int mk_dacdbt_str_construct(mk_dacdbt_str_t* str)
 {
 	mk_assert(str);
 
-	str->m_type = 0;
-	str->m_len = 0;
-	str->m_data.m_narrow = NULL;
+	mk_try(mk_std_istr_construct(&str->m_istr));
 
 	return 0;
 }
@@ -38,6 +55,7 @@ mk_jumbo int mk_dacdbt_str_construct_parse(mk_dacdbt_str_t* str, mk_std_input_st
 	size_t len;
 	int unicode;
 	int multiplier;
+	void* buff;
 
 	mk_assert(sizeof(wchar_t) == 2);
 
@@ -47,13 +65,18 @@ mk_jumbo int mk_dacdbt_str_construct_parse(mk_dacdbt_str_t* str, mk_std_input_st
 	mk_try(mk_dacdbt_str_construct(str));
 	mk_try(mk_dacdbt_str_private_parse_len(is, &len, &unicode));
 	mk_assert(unicode == 0 || unicode == 1);
-	mk_check(len <= 64ul * 1024ul * 1024ul);
-	str->m_type = unicode;
-	str->m_len = len;
 	multiplier = (int)((unicode == 0) ? sizeof(char) : sizeof(wchar_t));
-	mk_try(mk_std_gcallocator_allocate((len + 1) * multiplier, (void**)&str->m_data));
-	mk_try(mk_dacdbt_io_read_buff(is, str->m_data.m_narrow, len * multiplier));
-	if(unicode == 0) str->m_data.m_narrow[len] = '\0'; else str->m_data.m_wide[len] = L'\0';
+	mk_try(mk_std_buffer_reserve(&mk_dacdbt_str_private_buff, len * multiplier));
+	mk_try(mk_std_buffer_get_mem(&mk_dacdbt_str_private_buff, &buff));
+	mk_try(mk_dacdbt_io_read_buff(is, buff, len * multiplier));
+	if(unicode == 0)
+	{
+		mk_try(mk_std_istrg_insert_narrow((char const*)buff, len, &str->m_istr));
+	}
+	else
+	{
+		mk_try(mk_std_istrg_insert_wide((wchar_t const*)buff, len, &str->m_istr));
+	}
 
 	return 0;
 }
@@ -62,7 +85,19 @@ mk_jumbo int mk_dacdbt_str_destruct(mk_dacdbt_str_t* str)
 {
 	mk_assert(str);
 
-	mk_try(mk_std_gcallocator_deallocate(str->m_data.m_narrow));
+	mk_try(mk_std_istrg_remove(&str->m_istr));
+
+	return 0;
+}
+
+mk_jumbo int mk_dacdbt_str_get(mk_dacdbt_str_t const* str, int* is_wide, void const** data, size_t* len)
+{
+	mk_assert(str);
+	mk_assert(is_wide);
+	mk_assert(data);
+	mk_assert(len);
+
+	mk_try(mk_std_istrg_get(&str->m_istr, is_wide, data, len));
 
 	return 0;
 }

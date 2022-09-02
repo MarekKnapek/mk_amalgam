@@ -3,6 +3,7 @@
 
 
 #include "../../src/mk_dacdbt_doc.h"
+#include "../../src/mk_dacdbt_global.h"
 #include "../../src/mk_dacdbt_io.h"
 #include "../../src/mk_dacdbt_key.h"
 #include "../../src/mk_dacdbt_str.h"
