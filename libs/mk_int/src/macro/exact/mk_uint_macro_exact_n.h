@@ -79,6 +79,7 @@
 
 
 #define mk_uint_t struct mk_uint_macro_exact_concat(mk_uint_macro_exact_concat(mk_uint, mk_uint_bits), _s)
+typedef mk_uint_t mk_uint_macro_exact_concat(mk_uint_macro_exact_concat(mk_uint, mk_uint_bits), _t);
 
 
 #include "mk_uint_macro_exact.h"
