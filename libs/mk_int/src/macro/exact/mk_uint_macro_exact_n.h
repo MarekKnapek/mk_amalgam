@@ -16,7 +16,7 @@
 #define mk_uint16_c(a) {(unsigned short int)(mk_uint_cast_to_long_32(a))}
 #endif
 #elif mk_uint_bits <= 32
-#if UINT_MAX >= 0xffffffffu
+#if UINT_MAX >= 0xfffffffful
 #include "../base/mk_uint_macro_base_int.h"
 #define mk_uint_small_bits 32
 #else
@@ -27,7 +27,7 @@
 #if mk_has_long_long
 #include "../base/mk_uint_macro_base_llong.h"
 #define mk_uint_small_bits 64
-#elif UINT_MAX >= 0xffffffffu
+#elif UINT_MAX >= 0xfffffffful
 #include "../base/mk_uint_macro_base_int.h"
 #define mk_uint_small_bits 32
 #else
@@ -41,7 +41,7 @@
 #elif mk_has_long_long
 #include "../base/mk_uint_macro_base_llong.h"
 #define mk_uint_small_bits 64
-#elif UINT_MAX >= 0xffffffffu
+#elif UINT_MAX >= 0xfffffffful
 #include "../base/mk_uint_macro_base_int.h"
 #define mk_uint_small_bits 32
 #else
@@ -55,7 +55,7 @@
 #elif mk_has_long_long
 #include "../base/mk_uint_macro_base_llong.h"
 #define mk_uint_small_bits 64
-#elif UINT_MAX >= 0xffffffffu
+#elif UINT_MAX >= 0xfffffffful
 #include "../base/mk_uint_macro_base_int.h"
 #define mk_uint_small_bits 32
 #else
