@@ -2,9 +2,10 @@
 
 #include "../../mk_int/src/exact/mk_uint_32.h"
 
-#include "mk_std_ptr_buff.h"
-#include "mk_std_istr.h"
 #include "mk_std_gcallocator.h"
+#include "mk_std_istr.h"
+#include "mk_std_ptr_buff.h"
+#include "mk_std_str_convertor.h"
 
 #include "../../mk_utils/src/mk_assert.h"
 #include "../../mk_utils/src/mk_clobber.h"
@@ -17,7 +18,7 @@
 
 struct mk_std_istr_string_s
 {
-	mk_uint32_t m_ref_count; /* msb ? wide : narrow */
+	mk_uint32_t m_ref_count;
 	mk_uint32_t m_length;
 	/* flexible char[] or wchar_t[] */
 };
@@ -93,39 +94,50 @@ mk_jumbo int mk_std_istr_storage_insert_narrow(mk_std_istr_storage_t* istr_stora
 
 mk_jumbo int mk_std_istr_storage_insert_wide(mk_std_istr_storage_t* istr_storage, wchar_t const* str, size_t len, mk_std_istr_t* istr)
 {
+	size_t i;
+	int is_ascii;
+	char const* ascii;
 	mk_std_istr_string_t* elem;
 	size_t count;
-	size_t i;
 	mk_uint32_t is_wide;
 
 	mk_assert(istr_storage);
 	mk_assert(str);
 	mk_assert(istr);
 
-	mk_clobber(&elem);
-	mk_try(mk_std_ptr_buff_get_count(&istr_storage->m_strings, &count));
-	for(i = 0; i != count; ++i)
+	mk_try(mk_std_str_convertor_is_ascii_s(str, len, &is_ascii));
+	if(is_ascii)
 	{
-		mk_try(mk_std_ptr_buff_get_element(&istr_storage->m_strings, i, (void**)&elem)); mk_assert(elem);
-		mk_uint32_shr(&elem->m_ref_count, &is_wide, 31);
-		if(mk_uint32_to_sizet(&elem->m_length) == len && mk_uint32_to_int(&is_wide) == 1 && memcmp(str, ((char*)(((unsigned char*)(elem)) + sizeof(*elem))), len * sizeof(wchar_t)) == 0)
+		mk_try(mk_std_str_convertor_wide_to_narrow_s(str, len, 0, &ascii));
+		mk_try(mk_std_istr_storage_insert_narrow(istr_storage, ascii, len, istr));
+	}
+	else
+	{
+		mk_clobber(&elem);
+		mk_try(mk_std_ptr_buff_get_count(&istr_storage->m_strings, &count));
+		for(i = 0; i != count; ++i)
 		{
-			break;
+			mk_try(mk_std_ptr_buff_get_element(&istr_storage->m_strings, i, (void**)&elem)); mk_assert(elem);
+			mk_uint32_shr(&elem->m_ref_count, &is_wide, 31);
+			if(mk_uint32_to_sizet(&elem->m_length) == len && mk_uint32_to_int(&is_wide) == 1 && memcmp(str, ((char*)(((unsigned char*)(elem)) + sizeof(*elem))), len * sizeof(wchar_t)) == 0)
+			{
+				break;
+			}
 		}
+		if(i == count)
+		{
+			mk_try(mk_std_ptr_buff_reserve_one(&istr_storage->m_strings));
+			mk_try(mk_std_gcallocator_allocate(sizeof(*elem) + (len + 1) * sizeof(wchar_t), (void**)&elem)); mk_assert(elem);
+			mk_try(mk_std_ptr_buff_append(&istr_storage->m_strings, elem));
+			mk_uint32_from_int(&elem->m_ref_count, 1);
+			mk_uint32_shl(&elem->m_ref_count, &elem->m_ref_count, 31);
+			mk_uint32_from_sizet(&elem->m_length, len);
+			memcpy(((unsigned char*)(elem)) + sizeof(*elem), str, (len + 1) * sizeof(char));
+		}
+		mk_assert(!mk_uint32_is_max(&elem->m_ref_count));
+		mk_uint32_inc(&elem->m_ref_count);
+		mk_uint32_from_sizet(&istr->m_idx, i);
 	}
-	if(i == count)
-	{
-		mk_try(mk_std_ptr_buff_reserve_one(&istr_storage->m_strings));
-		mk_try(mk_std_gcallocator_allocate(sizeof(*elem) + (len + 1) * sizeof(wchar_t), (void**)&elem)); mk_assert(elem);
-		mk_try(mk_std_ptr_buff_append(&istr_storage->m_strings, elem));
-		mk_uint32_from_int(&elem->m_ref_count, 1);
-		mk_uint32_shl(&elem->m_ref_count, &elem->m_ref_count, 31);
-		mk_uint32_from_sizet(&elem->m_length, len);
-		memcpy(((unsigned char*)(elem)) + sizeof(*elem), str, (len + 1) * sizeof(char));
-	}
-	mk_assert(!mk_uint32_is_max(&elem->m_ref_count));
-	mk_uint32_inc(&elem->m_ref_count);
-	mk_uint32_from_sizet(&istr->m_idx, i);
 
 	return 0;
 }

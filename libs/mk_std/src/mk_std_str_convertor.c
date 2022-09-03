@@ -2,6 +2,7 @@
 
 #include "mk_std_buffer.h"
 
+#include "../../mk_utils/src/mk_inline.h"
 #include "../../mk_utils/src/mk_jumbo.h"
 #include "../../mk_utils/src/mk_try.h"
 
@@ -12,6 +13,9 @@
 
 
 static struct mk_std_buffer_s mk_std_str_convertor_private_buffers[mk_std_str_convertor_private_idx_max];
+
+
+static mk_inline int mk_std_str_convertor_private_is_ascii(wchar_t chr);
 
 
 mk_jumbo int mk_std_str_convertor_init(void)
@@ -34,6 +38,41 @@ mk_jumbo int mk_std_str_convertor_deinit(void)
 	{
 		mk_try(mk_std_buffer_deinit(&mk_std_str_convertor_private_buffers[i]));
 	}
+
+	return 0;
+}
+
+
+mk_jumbo int mk_std_str_convertor_is_ascii_z(wchar_t const* str, int* is_ascii)
+{
+	size_t len;
+	wchar_t const* in;
+
+	mk_assert(str);
+
+	len = 0;
+	in = str;
+	while(*in++) ++len;
+	mk_try(mk_std_str_convertor_is_ascii_s(str, len, is_ascii));
+
+	return 0;
+}
+
+mk_jumbo int mk_std_str_convertor_is_ascii_s(wchar_t const* str, size_t len, int* is_ascii)
+{
+	size_t i;
+
+	mk_assert(str);
+	mk_assert(is_ascii);
+
+	for(i = 0; i != len; ++i)
+	{
+		if(!mk_std_str_convertor_private_is_ascii(str[i]))
+		{
+			break;
+		}
+	}
+	*is_ascii = i == len;
 
 	return 0;
 }
@@ -246,4 +285,10 @@ mk_jumbo int mk_std_str_convertor_narrow_to_wide_s(char const* in, size_t len, i
 	*out = str;
 
 	return 0;
+}
+
+
+static mk_inline int mk_std_str_convertor_private_is_ascii(wchar_t chr)
+{
+	return chr >= 0x20 && chr <= 0x7e;
 }
