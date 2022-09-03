@@ -34,6 +34,7 @@ mk_jumbo int mk_dacdbt_value_construct_parse(mk_dacdbt_value_t* value, mk_std_in
 {
 	static mk_uint32_t const s_max_len = mk_uint32_c(0x04000000ul);
 
+	int empty;
 	mk_uint8_t type;
 	unsigned typeu;
 	mk_uint32_t bin_len;
@@ -42,7 +43,9 @@ mk_jumbo int mk_dacdbt_value_construct_parse(mk_dacdbt_value_t* value, mk_std_in
 	mk_assert(is);
 
 	mk_try(mk_dacdbt_value_construct(value));
-	mk_try(mk_dacdbt_str_construct_parse(&value->m_name, is)); mk_check(value->m_name.m_len != 0);
+	mk_try(mk_dacdbt_str_construct_parse(&value->m_name, is));
+	mk_try(mk_dacdbt_str_is_empty(&value->m_name, &empty));
+	mk_check(!empty);
 	mk_try(mk_dacdbt_io_read_u8(is, &type));
 	typeu = mk_uint8_to_int(&type);
 	mk_check

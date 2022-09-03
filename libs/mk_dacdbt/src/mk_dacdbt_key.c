@@ -33,18 +33,24 @@ mk_jumbo int mk_dacdbt_key_construct_parse(mk_dacdbt_key_t* key, mk_std_input_st
 {
 	static mk_uint32_t const s_max_items = mk_uint32_c(0x04000000);
 
+	int empty;
 	mk_uint32_t sub_keys_count;
 	mk_uint32_t values_count;
 	mk_uint32_t i;
 	mk_dacdbt_key_t* sub_key;
 	mk_dacdbt_value_t* value;
 	int next_nocomp;
+	int name_is_wide;
+	char const* name;
+	size_t name_len;
 
 	mk_assert(key);
 	mk_assert(is);
 
 	mk_try(mk_dacdbt_key_construct(key));
-	mk_try(mk_dacdbt_str_construct_parse(&key->m_name, is)); /*mk_check(key->m_name.m_len != 0);*/
+	mk_try(mk_dacdbt_str_construct_parse(&key->m_name, is));
+	mk_try(mk_dacdbt_str_is_empty(&key->m_name, &empty));
+	mk_check(!empty);
 	mk_try(mk_dacdbt_io_read_u32(is, &sub_keys_count)); mk_check(mk_uint32_le(&sub_keys_count, &s_max_items));
 	mk_try(mk_dacdbt_io_read_u32(is, &values_count)); mk_check(mk_uint32_le(&values_count, &s_max_items));
 	/*mk_try(mk_std_ptr_buff_reserve(&key->m_sub_keys, mk_uint32_to_sizet(&sub_keys_count)));*/
@@ -64,13 +70,14 @@ mk_jumbo int mk_dacdbt_key_construct_parse(mk_dacdbt_key_t* key, mk_std_input_st
 		mk_try(mk_dacdbt_value_construct(value));
 		mk_try(mk_std_ptr_buff_append(&key->m_values, value));
 		mk_try(mk_dacdbt_value_construct_parse(value, is));
+		mk_try(mk_dacdbt_str_get(&value->m_name, &name_is_wide, (void const**)&name, &name_len));
 		if
 		(
 			value->m_type == mk_dacdbt_value_type_e_u32 &&
-			value->m_name.m_type == 0 &&
-			value->m_name.m_len == 2 &&
-			value->m_name.m_data.m_narrow[0] == '%' &&
-			value->m_name.m_data.m_narrow[1] == '%'
+			name_is_wide == 0 &&
+			name_len == 2 &&
+			name[0] == '%' &&
+			name[1] == '%'
 		)
 		{
 			if(mk_uint32_is_zero(&value->m_data.m_u32))
@@ -89,10 +96,10 @@ mk_jumbo int mk_dacdbt_key_construct_parse(mk_dacdbt_key_t* key, mk_std_input_st
 		else if
 		(
 			value->m_type == mk_dacdbt_value_type_e_u32 &&
-			value->m_name.m_type == 0 &&
-			value->m_name.m_len >= 2 &&
-			value->m_name.m_data.m_narrow[0] == '@' &&
-			value->m_name.m_data.m_narrow[1] == '@'
+			name_is_wide == 0 &&
+			name_len >= 2 &&
+			name[0] == '@' &&
+			name[1] == '@'
 		)
 		{
 			if(mk_uint32_is_zero(&value->m_data.m_u32))
