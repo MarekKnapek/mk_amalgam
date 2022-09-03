@@ -22,7 +22,8 @@ mk_jumbo int mk_dacdbt_str_deinit(void);
 mk_jumbo int mk_dacdbt_str_construct(mk_dacdbt_str_t* str);
 mk_jumbo int mk_dacdbt_str_construct_parse(mk_dacdbt_str_t* str, mk_std_input_stream_t* is);
 mk_jumbo int mk_dacdbt_str_destruct(mk_dacdbt_str_t* str);
-mk_jumbo int mk_dacdbt_str_get(mk_dacdbt_str_t const* str, int* is_wide, void const** data, size_t* len);
+mk_jumbo int mk_dacdbt_str_get(mk_dacdbt_str_t* str, int* is_wide, void const** data, size_t* len);
+mk_jumbo int mk_dacdbt_str_is_empty(mk_dacdbt_str_t* str, int* is_empty);
 
 
 #endif

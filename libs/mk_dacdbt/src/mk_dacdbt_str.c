@@ -90,7 +90,7 @@ mk_jumbo int mk_dacdbt_str_destruct(mk_dacdbt_str_t* str)
 	return 0;
 }
 
-mk_jumbo int mk_dacdbt_str_get(mk_dacdbt_str_t const* str, int* is_wide, void const** data, size_t* len)
+mk_jumbo int mk_dacdbt_str_get(mk_dacdbt_str_t* str, int* is_wide, void const** data, size_t* len)
 {
 	mk_assert(str);
 	mk_assert(is_wide);
@@ -98,6 +98,23 @@ mk_jumbo int mk_dacdbt_str_get(mk_dacdbt_str_t const* str, int* is_wide, void co
 	mk_assert(len);
 
 	mk_try(mk_std_istrg_get(&str->m_istr, is_wide, data, len));
+
+	return 0;
+}
+
+mk_jumbo int mk_dacdbt_str_is_empty(mk_dacdbt_str_t* str, int* is_empty)
+{
+	int is_wide;
+	void const* data;
+	size_t len;
+
+	mk_assert(str);
+	mk_assert(is_empty);
+
+	mk_try(mk_dacdbt_str_get(str, &is_wide, &data, &len));
+	(void)is_wide;
+	(void)data;
+	*is_empty = len == 0;
 
 	return 0;
 }
