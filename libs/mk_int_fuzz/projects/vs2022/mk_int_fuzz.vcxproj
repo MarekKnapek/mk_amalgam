@@ -19,20 +19,22 @@
 		</ProjectConfiguration>
 	</ItemGroup>
 	<ItemGroup>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_128.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_c.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_8.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_16.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_32.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_64.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_8.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_128.h"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClInclude>
 	</ItemGroup>
 	<ItemGroup>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
-		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_128.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_c.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_8.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_16.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_32.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_64.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
-		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_8.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_uint_fuzz_128.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Release'">true</ExcludedFromBuild></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_int_fuzz.c"><ExcludedFromBuild Condition="'$(Configuration)'=='Debug'">true</ExcludedFromBuild></ClCompile>
 	</ItemGroup>
 	<ItemGroup>

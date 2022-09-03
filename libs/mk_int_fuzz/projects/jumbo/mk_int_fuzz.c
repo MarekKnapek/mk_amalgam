@@ -9,6 +9,7 @@
 
 
 #include "../../src/mk_uint_fuzz.c"
+#include "../../src/mk_uint_fuzz_c.c"
 #include "../../src/mk_uint_fuzz_8.c"
 #include "../../src/mk_uint_fuzz_16.c"
 #include "../../src/mk_uint_fuzz_32.c"

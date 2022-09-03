@@ -1,3 +1,4 @@
+#include "mk_uint_fuzz_c.h"
 #include "mk_uint_fuzz_8.h"
 #include "mk_uint_fuzz_16.h"
 #include "mk_uint_fuzz_32.h"
@@ -27,6 +28,7 @@ mk_extern_c int LLVMFuzzerTestOneInput(unsigned char const* data, size_t size)
 		return 0;
 	}
 
+	mk_uint_fuzz_c(data);
 	mk_uint_fuzz_8(data);
 	mk_uint_fuzz_16(data);
 	mk_uint_fuzz_32(data);
