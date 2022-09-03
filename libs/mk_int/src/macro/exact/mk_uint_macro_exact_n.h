@@ -1,6 +1,6 @@
 #include "../../../../mk_utils/src/mk_setup.h"
 
-#include <limits.h> /* UINT_MAX ULONG_MAX */
+#include <limits.h> /* UINT_MAX */
 
 
 #if mk_uint_bits <= 8
@@ -24,10 +24,7 @@
 #define mk_uint_small_bits 32
 #endif
 #elif mk_uint_bits <= 64
-#if ULONG_MAX >= 0xfffffffffffffffful
-#include "../base/mk_uint_macro_base_long.h"
-#define mk_uint_small_bits 64
-#elif mk_has_long_long
+#if mk_has_long_long
 #include "../base/mk_uint_macro_base_llong.h"
 #define mk_uint_small_bits 64
 #elif UINT_MAX >= 0xffffffffu
@@ -41,9 +38,6 @@
 #if mk_has_128bit_int
 #include "../base/mk_uint_macro_base_128.h"
 #define mk_uint_small_bits 128
-#elif ULONG_MAX >= 0xfffffffffffffffful
-#include "../base/mk_uint_macro_base_long.h"
-#define mk_uint_small_bits 64
 #elif mk_has_long_long
 #include "../base/mk_uint_macro_base_llong.h"
 #define mk_uint_small_bits 64
@@ -58,9 +52,6 @@
 #if mk_has_128bit_int
 #include "../base/mk_uint_macro_base_128.h"
 #define mk_uint_small_bits 128
-#elif ULONG_MAX >= 0xfffffffffffffffful
-#include "../base/mk_uint_macro_base_long.h"
-#define mk_uint_small_bits 64
 #elif mk_has_long_long
 #include "../base/mk_uint_macro_base_llong.h"
 #define mk_uint_small_bits 64
