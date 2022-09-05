@@ -69,6 +69,8 @@ mk_jumbo void mk_uint_divmodsm(mk_uint_t* div, mk_uint_small_t* mod, mk_uint_t c
 mk_jumbo void mk_uint_div(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b);
 mk_jumbo void mk_uint_mod(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b);
 
+mk_jumbo int mk_uint_log2(mk_uint_t const* x);
+
 mk_jumbo int mk_uint_to_string_dec_n(mk_uint_t const* x, char* str, int str_len);
 mk_jumbo int mk_uint_to_string_dec_w(mk_uint_t const* x, wchar_t* str, int str_len);
 mk_jumbo int mk_uint_to_string_hex_n(mk_uint_t const* x, char* str, int str_len);

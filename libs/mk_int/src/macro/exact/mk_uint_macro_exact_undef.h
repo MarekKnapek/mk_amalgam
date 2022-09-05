@@ -57,6 +57,8 @@
 #undef mk_uint_div
 #undef mk_uint_mod
 
+#undef mk_uint_log2
+
 #undef mk_uint_to_string_dec_n
 #undef mk_uint_to_string_dec_w
 #undef mk_uint_to_string_hex_n

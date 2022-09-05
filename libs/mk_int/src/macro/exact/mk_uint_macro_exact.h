@@ -47,6 +47,8 @@
 #define mk_uint_div mk_uint_concat_(div)
 #define mk_uint_mod mk_uint_concat_(mod)
 
+#define mk_uint_log2 mk_uint_concat_(log2)
+
 #define mk_uint_to_string_dec_n mk_uint_concat_(to_string_dec_n)
 #define mk_uint_to_string_dec_w mk_uint_concat_(to_string_dec_w)
 #define mk_uint_to_string_hex_n mk_uint_concat_(to_string_hex_n)

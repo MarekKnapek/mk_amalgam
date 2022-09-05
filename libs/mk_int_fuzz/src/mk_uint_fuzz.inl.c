@@ -563,6 +563,41 @@ static mk_inline void mk_uint_func_fuzz(mod)(unsigned char const* data)
 }
 
 
+static mk_inline void mk_uint_func_fuzz(log2)(unsigned char const* data)
+{
+	mk_uint_type_native bi;
+	mk_uint_type_native bw;
+	int br;
+	mk_uint_type_my mi;
+	int mr;
+
+	memcpy(&bi, data + 0 / CHAR_BIT, mk_uint_n / CHAR_BIT);
+	bw = bi;
+	if(bw == 0)
+	{
+		br = -1;
+	}
+	else if(bw == 1)
+	{
+		br = 0;
+	}
+	else
+	{
+		br = 0;
+		while(bw > 1)
+		{
+			bw >>= 1;
+			++br;
+		}
+	}
+
+	memcpy(&mi, data + 0 / CHAR_BIT, mk_uint_n / CHAR_BIT);
+	mr = mk_uint_func_my(log2)(&mi);
+
+	test(mr == br);
+}
+
+
 static mk_inline void mk_uint_func_fuzz(to_string_dec_n)(unsigned char const* data)
 {
 #if mk_uint_n <= 32
@@ -693,6 +728,8 @@ void mk_uint_concat(mk_uint_fuzz_, mk_uint_n)(unsigned char const* data)
 	mk_uint_func_fuzz(mul)(data);
 	mk_uint_func_fuzz(div)(data);
 	mk_uint_func_fuzz(mod)(data);
+
+	mk_uint_func_fuzz(log2)(data);
 
 	mk_uint_func_fuzz(to_string_dec_n)(data);
 	mk_uint_func_fuzz(to_string_dec_w)(data);

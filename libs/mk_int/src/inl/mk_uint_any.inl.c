@@ -175,6 +175,129 @@ mk_jumbo void mk_uint_divmodsm(mk_uint_t* div, mk_uint_small_t* mod, mk_uint_t c
 #endif
 
 
+#include "../../../mk_utils/src/mk_assert.h"
+#include "../../../mk_utils/src/mk_jumbo.h"
+
+#if defined(_MSC_VER) && _MSC_VER >= 1400
+#include <intrin.h>
+#endif
+
+
+mk_jumbo int mk_uint_log2(mk_uint_t const* x)
+{
+	#if defined(_MSC_VER) && _MSC_VER >= 1400 && (defined(_M_IA64) || defined(_M_AMD64) || defined(_M_ARM64) || defined(_M_X64)) && mk_uint_small_bits <= 64 && mk_uint_parts == 1
+	unsigned __int64 mask;
+	unsigned char bsr;
+	unsigned long index;
+	int ret;
+
+	mk_assert(x);
+
+	mask = (unsigned __int64)(x->m_data);
+	bsr = _BitScanReverse64(&index, mask);
+	if(bsr == 0)
+	{
+		ret = -1;
+	}
+	else
+	{
+		mk_assert(index >= 0 && index <= (mk_uint_small_bits - 1));
+		ret = (int)index;
+	}
+	return ret;
+	#elif defined(_MSC_VER) && _MSC_VER >= 1400 && (defined(_M_IA64) || defined(_M_AMD64) || defined(_M_ARM64) || defined(_M_X64)) && mk_uint_small_bits <= 64 && mk_uint_parts != 1
+	int ret;
+	int i;
+	unsigned __int64 mask;
+	unsigned char bsr;
+	unsigned long index;
+
+	mk_assert(x);
+
+	ret = -1;
+	for(i = 0; i != mk_uint_parts; ++i)
+	{
+		mask = (unsigned __int64)(x->m_data[mk_uint_parts - 1 - i]);
+		bsr = _BitScanReverse64(&index, mask);
+		if(bsr != 0)
+		{
+			mk_assert(index >= 0 && index <= (mk_uint_small_bits - 1));
+			ret = ((int)(index)) + (mk_uint_parts - 1 - i) * mk_uint_small_bits;
+			break;
+		}
+	}
+	return ret;
+	#elif defined(_MSC_VER) && _MSC_VER >= 1400 && mk_uint_small_bits <= 32 && mk_uint_parts == 1
+	unsigned long mask;
+	unsigned char bsr;
+	unsigned long index;
+	int ret;
+
+	mk_assert(x);
+
+	mask = (unsigned long)(x->m_data);
+	bsr = _BitScanReverse(&index, mask);
+	if(bsr == 0)
+	{
+		ret = -1;
+	}
+	else
+	{
+		mk_assert(index >= 0 && index <= (mk_uint_small_bits - 1));
+		ret = (int)index;
+	}
+	return ret;
+	#elif defined(_MSC_VER) && _MSC_VER >= 1400 && mk_uint_small_bits <= 32 && mk_uint_parts != 1
+	int ret;
+	int i;
+	unsigned long mask;
+	unsigned char bsr;
+	unsigned long index;
+
+	mk_assert(x);
+
+	ret = -1;
+	for(i = 0; i != mk_uint_parts; ++i)
+	{
+		mask = (unsigned long)(x->m_data[mk_uint_parts - 1 - i]);
+		bsr = _BitScanReverse(&index, mask);
+		if(bsr != 0)
+		{
+			mk_assert(index >= 0 && index <= (mk_uint_small_bits - 1));
+			ret = ((int)(index)) + (mk_uint_parts - 1 - i) * mk_uint_small_bits;
+			break;
+		}
+	}
+	return ret;
+	#else
+	mk_uint_t n;
+	int ret;
+	int bits;
+	mk_uint_t max;
+
+	mk_assert(x);
+
+	n = *x;
+	ret = -mk_uint_is_zero(&n);
+	bits = mk_uint_bits / 2;
+	while(bits != 0)
+	{
+		mk_uint_zero(&max);
+		mk_uint_inc(&max);
+		mk_uint_shl(&max, &max, bits);
+		if(mk_uint_ge(&n, &max))
+		{
+			ret += bits;
+			mk_uint_shr(&n, &n, bits);
+		}
+		bits /= 2;
+	}
+
+	return ret;
+	#endif
+}
+
+
 #define mk_uint_str_suffix n
 #define mk_char_t char
 #define mk_char_c(x) x
