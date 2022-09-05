@@ -23,6 +23,8 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_cpp.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_inline.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_jumbo.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_pack_2.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_pack_default.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_setup.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_try.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_utils.h"/>
