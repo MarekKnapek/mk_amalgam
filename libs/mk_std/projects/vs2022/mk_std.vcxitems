@@ -23,8 +23,14 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_istr.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_istr_storage.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_istrg.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_platform.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_ptr_buff.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood.inl.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood_strn.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood_strw.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_size_max.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_str_convertor.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_uintp.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_std.h"/>
 	</ItemGroup>
 	<ItemGroup>
@@ -38,7 +44,11 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_istr_storage.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_istrg.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_ptr_buff.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood.inl.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood_strn.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood_strw.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_str_convertor.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_uintp.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_std.c"/>
 	</ItemGroup>
 </Project>
