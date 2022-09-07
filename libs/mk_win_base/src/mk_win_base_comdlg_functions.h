@@ -1,5 +1,5 @@
-#ifndef mk_win_base_comdlg_functions
-#define mk_win_base_comdlg_functions
+#ifndef mk_include_guard_win_base_comdlg_functions
+#define mk_include_guard_win_base_comdlg_functions
 
 
 #include "mk_win_base_keywords.h"

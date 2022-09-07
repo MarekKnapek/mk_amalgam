@@ -1,5 +1,5 @@
-#ifndef mk_win_base_keywords
-#define mk_win_base_keywords
+#ifndef mk_include_guard_win_base_keywords
+#define mk_include_guard_win_base_keywords
 
 
 #include "mk_win_base_platform.h"
