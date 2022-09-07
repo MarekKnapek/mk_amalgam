@@ -31,7 +31,7 @@ mk_jumbo int mk_dacdbt_key_construct(mk_dacdbt_key_t* key)
 
 mk_jumbo int mk_dacdbt_key_construct_parse(mk_dacdbt_key_t* key, mk_std_input_stream_t* is)
 {
-	static mk_uint32_t const s_max_items = mk_uint32_c(0x04000000);
+	/*static mk_uint32_t const s_max_items = mk_uint32_c(0x04000000);*/
 
 	int empty;
 	mk_uint32_t sub_keys_count;
@@ -51,8 +51,8 @@ mk_jumbo int mk_dacdbt_key_construct_parse(mk_dacdbt_key_t* key, mk_std_input_st
 	mk_try(mk_dacdbt_str_construct_parse(&key->m_name, is));
 	mk_try(mk_dacdbt_str_is_empty(&key->m_name, &empty));
 	mk_check(!empty);
-	mk_try(mk_dacdbt_io_read_u32(is, &sub_keys_count)); mk_check(mk_uint32_le(&sub_keys_count, &s_max_items));
-	mk_try(mk_dacdbt_io_read_u32(is, &values_count)); mk_check(mk_uint32_le(&values_count, &s_max_items));
+	mk_try(mk_dacdbt_io_read_u32(is, &sub_keys_count)); /*mk_check(mk_uint32_le(&sub_keys_count, &s_max_items));*/
+	mk_try(mk_dacdbt_io_read_u32(is, &values_count)); /*mk_check(mk_uint32_le(&values_count, &s_max_items));*/
 	/*mk_try(mk_std_ptr_buff_reserve(&key->m_sub_keys, mk_uint32_to_sizet(&sub_keys_count)));*/
 	for(mk_uint32_zero(&i); mk_uint32_neq(&i, &sub_keys_count); mk_uint32_inc(&i))
 	{
