@@ -4,7 +4,8 @@
 
 #include "mk_std_gcallocator.h"
 #include "mk_std_istr.h"
-#include "mk_std_ptr_buff.h"
+#include "mk_std_robin_hood_strn.h"
+#include "mk_std_robin_hood_strw.h"
 #include "mk_std_str_convertor.h"
 
 #include "../../mk_utils/src/mk_assert.h"
@@ -29,77 +30,46 @@ mk_jumbo int mk_std_istr_storage_construct(mk_std_istr_storage_t* istr_storage)
 {
 	mk_assert(istr_storage);
 
-	mk_try(mk_std_ptr_buff_construct(&istr_storage->m_strings));
+	mk_try(mk_std_robin_hood_strn_construct(&istr_storage->m_n));
+	mk_try(mk_std_robin_hood_strw_construct(&istr_storage->m_w));
 
 	return 0;
 }
 
 mk_jumbo int mk_std_istr_storage_destruct(mk_std_istr_storage_t* istr_storage)
 {
-	size_t count;
-	size_t i;
-	mk_std_istr_string_t* elem;
-
 	mk_assert(istr_storage);
 
-	mk_try(mk_std_ptr_buff_get_count(&istr_storage->m_strings, &count));
-	for(i = 0; i != count; ++i)
-	{
-		mk_try(mk_std_ptr_buff_get_last(&istr_storage->m_strings, (void**)&elem));
-		mk_try(mk_std_gcallocator_deallocate(elem));
-	}
-	mk_try(mk_std_ptr_buff_remove_all(&istr_storage->m_strings));
-	mk_try(mk_std_ptr_buff_destruct(&istr_storage->m_strings));
+	mk_try(mk_std_robin_hood_strw_destruct(&istr_storage->m_w));
+	mk_try(mk_std_robin_hood_strn_destruct(&istr_storage->m_n));
 
 	return 0;
 }
 
 mk_jumbo int mk_std_istr_storage_insert_narrow(mk_std_istr_storage_t* istr_storage, char const* str, size_t len, mk_std_istr_t* istr)
 {
-	mk_std_istr_string_t* elem;
-	size_t count;
-	size_t i;
-	mk_uint32_t is_wide;
+	mk_std_robin_hood_strn_incomming_t incomming;
+	char const* inserted;
 
 	mk_assert(istr_storage);
 	mk_assert(str);
 	mk_assert(istr);
 
-	mk_clobber(&elem);
-	mk_try(mk_std_ptr_buff_get_count(&istr_storage->m_strings, &count));
-	for(i = 0; i != count; ++i)
-	{
-		mk_try(mk_std_ptr_buff_get_element(&istr_storage->m_strings, i, (void**)&elem)); mk_assert(elem);
-		mk_uint32_shr(&elem->m_ref_count, &is_wide, 31);
-		if(mk_uint32_to_sizet(&elem->m_length) == len && mk_uint32_to_int(&is_wide) == 0 && memcmp(str, ((char*)(((unsigned char*)(elem)) + sizeof(*elem))), len * sizeof(char)) == 0)
-		{
-			break;
-		}
-	}
-	if(i == count)
-	{
-		mk_try(mk_std_ptr_buff_reserve_one(&istr_storage->m_strings));
-		mk_try(mk_std_gcallocator_allocate(sizeof(*elem) + (len + 1) * sizeof(char), (void**)&elem)); mk_assert(elem);
-		mk_try(mk_std_ptr_buff_append(&istr_storage->m_strings, elem));
-		mk_uint32_from_int(&elem->m_ref_count, 0);
-		mk_uint32_from_sizet(&elem->m_length, len);
-		memcpy(((unsigned char*)(elem)) + sizeof(*elem), str, (len + 1) * sizeof(char));
-	}
-	mk_assert(!mk_uint32_is_max(&elem->m_ref_count));
-	mk_uint32_inc(&elem->m_ref_count);
-	mk_uint32_from_sizet(&istr->m_idx, i);
+	incomming.m_strn = str;
+	incomming.m_len = len;
+	mk_try(mk_std_robin_hood_strn_insert(&istr_storage->m_n, &incomming, &inserted));
+	istr->m_idx.m_n = inserted;
+	mk_assert((mk_uintp_to_int(&istr->m_idx.m_i) & 0x01) == 0);
 
 	return 0;
 }
 
 mk_jumbo int mk_std_istr_storage_insert_wide(mk_std_istr_storage_t* istr_storage, wchar_t const* str, size_t len, mk_std_istr_t* istr)
 {
-	size_t i;
 	int is_ascii;
 	char const* ascii;
-	mk_std_istr_string_t* elem;
-	size_t count;
-	mk_uint32_t is_wide;
+	mk_std_robin_hood_strw_incomming_t incomming;
+	wchar_t const* inserted;
 
 	mk_assert(istr_storage);
 	mk_assert(str);
@@ -113,30 +83,12 @@ mk_jumbo int mk_std_istr_storage_insert_wide(mk_std_istr_storage_t* istr_storage
 	}
 	else
 	{
-		mk_clobber(&elem);
-		mk_try(mk_std_ptr_buff_get_count(&istr_storage->m_strings, &count));
-		for(i = 0; i != count; ++i)
-		{
-			mk_try(mk_std_ptr_buff_get_element(&istr_storage->m_strings, i, (void**)&elem)); mk_assert(elem);
-			mk_uint32_shr(&elem->m_ref_count, &is_wide, 31);
-			if(mk_uint32_to_sizet(&elem->m_length) == len && mk_uint32_to_int(&is_wide) == 1 && memcmp(str, ((char*)(((unsigned char*)(elem)) + sizeof(*elem))), len * sizeof(wchar_t)) == 0)
-			{
-				break;
-			}
-		}
-		if(i == count)
-		{
-			mk_try(mk_std_ptr_buff_reserve_one(&istr_storage->m_strings));
-			mk_try(mk_std_gcallocator_allocate(sizeof(*elem) + (len + 1) * sizeof(wchar_t), (void**)&elem)); mk_assert(elem);
-			mk_try(mk_std_ptr_buff_append(&istr_storage->m_strings, elem));
-			mk_uint32_from_int(&elem->m_ref_count, 1);
-			mk_uint32_shl(&elem->m_ref_count, &elem->m_ref_count, 31);
-			mk_uint32_from_sizet(&elem->m_length, len);
-			memcpy(((unsigned char*)(elem)) + sizeof(*elem), str, (len + 1) * sizeof(char));
-		}
-		mk_assert(!mk_uint32_is_max(&elem->m_ref_count));
-		mk_uint32_inc(&elem->m_ref_count);
-		mk_uint32_from_sizet(&istr->m_idx, i);
+		incomming.m_strw = str;
+		incomming.m_len = len;
+		mk_try(mk_std_robin_hood_strw_insert(&istr_storage->m_w, &incomming, &inserted));
+		istr->m_idx.m_w = inserted;
+		mk_assert((mk_uintp_to_int(&istr->m_idx.m_i) & 0x01) == 0);
+		mk_uintp_inc(&istr->m_idx.m_i);
 	}
 
 	return 0;
@@ -144,68 +96,43 @@ mk_jumbo int mk_std_istr_storage_insert_wide(mk_std_istr_storage_t* istr_storage
 
 mk_jumbo int mk_std_istr_storage_get(mk_std_istr_storage_t* istr_storage, mk_std_istr_t const* istr, int* is_wide, void const** str, size_t* len)
 {
-	unsigned long int idxf;
-	unsigned long int idx;
-	int wide;
-	mk_std_istr_string_t* elem;
+	mk_std_istr_t copy;
 
 	mk_assert(istr_storage);
 	mk_assert(istr);
-	mk_assert(!mk_uint32_is_max(&istr->m_idx));
 	mk_assert(is_wide);
 	mk_assert(str);
 	mk_assert(len);
 
-	idxf = mk_uint32_to_long(&istr->m_idx);
-	idx = (idxf << 1) >> 1;
-	wide = idxf >> 31;
-	mk_try(mk_std_ptr_buff_get_element(&istr_storage->m_strings, (size_t)idx, (void**)&elem)); mk_assert(elem);
-	*is_wide = wide;
-	*str = (void const*)(((unsigned char*)(elem)) + sizeof(*elem));
-	*len = mk_uint32_to_sizet(&elem->m_length);
+	if((mk_uintp_to_int(&istr->m_idx.m_i) & 0x01) == 0)
+	{
+		is_wide = 0;
+		*str = istr->m_idx.m_n;
+		*len = ((size_t const*)(istr->m_idx.m_n))[-1];
+	}
+	else
+	{
+		copy = *istr;
+		mk_uintp_dec(&copy.m_idx.m_i);
+		*is_wide = 1;
+		*str = copy.m_idx.m_w;
+		*len = ((size_t const*)(copy.m_idx.m_w))[-1];
+	}
 
 	return 0;
 }
 
 mk_jumbo int mk_std_istr_storage_remove(mk_std_istr_storage_t* istr_storage, mk_std_istr_t const* istr)
 {
-	unsigned long int idxf;
-	unsigned long int idx;
-	mk_std_istr_string_t* elem;
-
 	mk_assert(istr_storage);
 	mk_assert(istr);
-
-	if(!mk_uint32_is_max(&istr->m_idx))
-	{
-		idxf = mk_uint32_to_long(&istr->m_idx);
-		idx = (idxf << 1) >> 1;
-		mk_try(mk_std_ptr_buff_get_element(&istr_storage->m_strings, (size_t)idx, (void**)&elem)); mk_assert(elem);
-		mk_assert(!mk_uint32_is_zero(&elem->m_ref_count));
-		mk_uint32_dec(&elem->m_ref_count);
-	}
-
 
 	return 0;
 }
 
 mk_jumbo int mk_std_istr_storage_purge(mk_std_istr_storage_t* istr_storage)
 {
-	size_t count;
-	size_t i;
-	mk_std_istr_string_t* elem;
-
 	mk_assert(istr_storage);
-
-	mk_try(mk_std_ptr_buff_get_count(&istr_storage->m_strings, &count));
-	for(i = 0; i != count; ++i)
-	{
-		mk_try(mk_std_ptr_buff_get_element(&istr_storage->m_strings, count - 1 - i, (void**)&elem)); mk_assert(elem);
-		if(mk_uint32_is_zero(&elem->m_ref_count))
-		{
-			mk_try(mk_std_ptr_buff_remove_idx(&istr_storage->m_strings, count - 1 - i));
-		}
-	}
 
 	return 0;
 }

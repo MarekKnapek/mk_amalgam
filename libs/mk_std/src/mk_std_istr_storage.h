@@ -3,7 +3,8 @@
 
 
 #include "mk_std_istr.h"
-#include "mk_std_ptr_buff.h"
+#include "mk_std_robin_hood_strn.h"
+#include "mk_std_robin_hood_strw.h"
 
 #include "../../mk_utils/src/mk_jumbo.h"
 
@@ -12,7 +13,8 @@
 
 struct mk_std_istr_storage_s
 {
-	mk_std_ptr_buff_t m_strings;
+	mk_std_robin_hood_strn_t m_n;
+	mk_std_robin_hood_strw_t m_w;
 };
 typedef struct mk_std_istr_storage_s mk_std_istr_storage_t;
 
