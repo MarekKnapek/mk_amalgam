@@ -1,5 +1,5 @@
-#ifndef mk_win_base_kernel_functions
-#define mk_win_base_kernel_functions
+#ifndef mk_include_guard_win_base_kernel_functions
+#define mk_include_guard_win_base_kernel_functions
 
 
 #include "mk_win_base_kernel_types.h"
