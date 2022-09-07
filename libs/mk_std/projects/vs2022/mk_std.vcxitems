@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup Label="Globals">
+		<MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+		<HasSharedItems>true</HasSharedItems>
+		<ItemsProjectGuid>{4347c505-9db0-4190-aca5-9a2c74dee7cb}</ItemsProjectGuid>
+	</PropertyGroup>
+	<ItemDefinitionGroup>
+		<ClCompile>
+			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+		</ClCompile>
+	</ItemDefinitionGroup>
+	<ItemGroup>
+		<ProjectCapability Include="SourceItemsFromImports"/>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_gcallocator.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_global.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_platform.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood.inl.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood_strn.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood_strw.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_size_max.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_uintp.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_std.h"/>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_gcallocator.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_global.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood.inl.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood_strn.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood_strw.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_uintp.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_std.c"/>
+	</ItemGroup>
+</Project>

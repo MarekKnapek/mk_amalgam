@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<ItemGroup>
+		<Filter Include="dependencies"><UniqueIdentifier>{f5fbc1b5-32fc-4ab6-bebb-ecb884cfd194}</UniqueIdentifier></Filter>
+		<Filter Include="jumbo"><UniqueIdentifier>{0f701e1d-c9a6-4426-a99d-d973ad30d677}</UniqueIdentifier></Filter>
+		<Filter Include="src"><UniqueIdentifier>{9a90553f-9a14-4fd2-85e8-9b3c2d9996f5}</UniqueIdentifier></Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_gcallocator.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_global.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_platform.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood.inl.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood_strn.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood_strw.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_size_max.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_uintp.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_std.h"><Filter>jumbo</Filter></ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_gcallocator.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_global.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood.inl.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood_strn.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_robin_hood_strw.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_uintp.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_std.c"><Filter>jumbo</Filter></ClCompile>
+	</ItemGroup>
+</Project>
