@@ -1,5 +1,5 @@
-#ifndef mk_win_base_user_types
-#define mk_win_base_user_types
+#ifndef mk_include_guard_win_base_user_types
+#define mk_include_guard_win_base_user_types
 
 
 #include "mk_win_base_types.h"
