@@ -30,6 +30,7 @@ static mk_inline int mk_dacdbt_str_private_parse_len(mk_std_input_stream_t* is, 
 mk_jumbo int mk_dacdbt_str_init(void)
 {
 	mk_try(mk_std_buffer_init(&mk_dacdbt_str_private_buff));
+	mk_try(mk_std_buffer_reserve(&mk_dacdbt_str_private_buff, 1));
 
 	return 0;
 }
