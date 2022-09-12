@@ -25,6 +25,7 @@ mk_jumbo int mk_std_str_convertor_init(void)
 	for(i = 0; i != mk_std_str_convertor_private_idx_max; ++i)
 	{
 		mk_try(mk_std_buffer_init(&mk_std_str_convertor_private_buffers[i]));
+		mk_try(mk_std_buffer_reserve(&mk_std_str_convertor_private_buffers[i], 1));
 	}
 
 	return 0;
