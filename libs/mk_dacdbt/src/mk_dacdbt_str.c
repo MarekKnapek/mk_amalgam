@@ -53,6 +53,8 @@ mk_jumbo int mk_dacdbt_str_construct(mk_dacdbt_str_t* str)
 
 mk_jumbo int mk_dacdbt_str_construct_parse(mk_dacdbt_str_t* str, mk_std_input_stream_t* is)
 {
+	static size_t const s_max_str_len = 256 * 1024 * 1024;
+
 	size_t len;
 	int unicode;
 	int multiplier;
@@ -65,6 +67,7 @@ mk_jumbo int mk_dacdbt_str_construct_parse(mk_dacdbt_str_t* str, mk_std_input_st
 
 	mk_try(mk_dacdbt_str_construct(str));
 	mk_try(mk_dacdbt_str_private_parse_len(is, &len, &unicode));
+	mk_check(len <= s_max_str_len);
 	mk_assert(unicode == 0 || unicode == 1);
 	multiplier = (int)((unicode == 0) ? sizeof(char) : sizeof(wchar_t));
 	mk_try(mk_std_buffer_reserve(&mk_dacdbt_str_private_buff, len * multiplier));
