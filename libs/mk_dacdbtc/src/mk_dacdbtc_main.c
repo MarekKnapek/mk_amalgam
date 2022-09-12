@@ -1,5 +1,7 @@
 #include "../../mk_dacdbt/src/mk_dacdbt_doc.h"
+#include "../../mk_dacdbt/src/mk_dacdbt_global.h"
 
+#include "../../mk_std/src/mk_std_global.h"
 #include "../../mk_std/src/mk_std_input_stream.h"
 
 #include "../../mk_utils/src/mk_assert.h"
@@ -29,10 +31,14 @@ static mk_inline int llvm_fuzzer_test_one_input_2(unsigned char const* data, siz
 	mk_dacdbt_doc_t doc;
 	int err;
 
+	mk_try(mk_std_global_init());
+	mk_try(mk_dacdbt_global_init());
 	mk_try(mk_std_input_stream_construct_buffer(&is, data, size));
 	err = llvm_fuzzer_test_one_input_3(&doc, &is); (void)err;
 	mk_try(mk_dacdbt_doc_destruct(&doc));
 	mk_try(mk_std_input_stream_destruct(&is));
+	mk_try(mk_dacdbt_global_deinit());
+	mk_try(mk_std_global_deinit());
 
 	return 0;
 }
