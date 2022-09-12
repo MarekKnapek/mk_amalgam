@@ -9,10 +9,14 @@
 #include "../../mk_utils/src/mk_inline.h"
 #include "../../mk_utils/src/mk_try.h"
 
+#include <stddef.h>
 #include <stdio.h>
 
 
 #ifdef __SANITIZE_ADDRESS__
+
+
+#define test(x) do{ if(!(x)){ int volatile* volatile ptr; ptr = NULL; *ptr = 0; } }while(0)
 
 
 static mk_inline int llvm_fuzzer_test_one_input_3(mk_dacdbt_doc_t* doc, mk_std_input_stream_t* is)
@@ -48,10 +52,13 @@ extern int LLVMFuzzerTestOneInput(unsigned char const* data, size_t size)
 	int ret;
 
 	ret = llvm_fuzzer_test_one_input_2(data, size);
-	mk_assert(ret == 0);
+	test(ret == 0);
 
 	return 0;
 }
+
+
+#undef test
 
 
 #else
