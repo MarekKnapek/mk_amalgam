@@ -79,6 +79,7 @@ typedef mk_win_user_window_mdicreate_t const* mk_win_user_window_mdicreate_pct;
 #define mk_win_user_window_wm_close           ((unsigned short)0x0010ul)
 #define mk_win_user_window_wm_queryendsession ((unsigned short)0x0011ul)
 #define mk_win_user_window_wm_quit            ((unsigned short)0x0012ul)
+#define mk_win_user_window_wm_notify          ((unsigned short)0x004eul)
 #define mk_win_user_window_wm_initdialog      ((unsigned short)0x0110ul)
 #define mk_win_user_window_wm_command         ((unsigned short)0x0111ul)
 #define mk_win_user_window_wm_mdicreate       ((unsigned short)0x0220ul)
