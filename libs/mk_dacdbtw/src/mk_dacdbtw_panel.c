@@ -1,6 +1,7 @@
 #include "mk_dacdbtw_panel.h"
 
 #include "../../mk_win/src/mk_win_char.h"
+#include "../../mk_win/src/mk_win_comctl.h"
 #include "../../mk_win/src/mk_win_instance.h"
 #include "../../mk_win/src/mk_win_user_brush.h"
 #include "../../mk_win/src/mk_win_user_class.h"
@@ -62,6 +63,8 @@ mk_jumbo int mk_dacdbtw_panel_init(void)
 	cls.m_small_icon = mk_win_base_types_null;
 	mk_try(mk_win_user_class_register(&cls, &atom));
 	mk_assert(atom != 0);
+
+	mk_try(mk_win_comctl_init());
 
 	return 0;
 }
