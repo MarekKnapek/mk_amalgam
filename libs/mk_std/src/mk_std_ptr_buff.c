@@ -34,7 +34,7 @@ mk_jumbo int mk_std_ptr_buff_destruct(mk_std_ptr_buff_t* ptr_buff)
 }
 
 
-mk_jumbo int mk_std_ptr_buff_get_count(mk_std_ptr_buff_t* ptr_buff, size_t* count)
+mk_jumbo int mk_std_ptr_buff_get_count(mk_std_ptr_buff_t const* ptr_buff, size_t* count)
 {
 	mk_assert(ptr_buff);
 	mk_assert(count);

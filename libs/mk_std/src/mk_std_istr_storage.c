@@ -94,7 +94,7 @@ mk_jumbo int mk_std_istr_storage_insert_wide(mk_std_istr_storage_t* istr_storage
 	return 0;
 }
 
-mk_jumbo int mk_std_istr_storage_get(mk_std_istr_storage_t* istr_storage, mk_std_istr_t const* istr, int* is_wide, void const** str, size_t* len)
+mk_jumbo int mk_std_istr_storage_get(mk_std_istr_storage_t const* istr_storage, mk_std_istr_t const* istr, int* is_wide, void const** str, size_t* len)
 {
 	mk_std_istr_t copy;
 
@@ -106,7 +106,7 @@ mk_jumbo int mk_std_istr_storage_get(mk_std_istr_storage_t* istr_storage, mk_std
 
 	if((mk_uintp_to_int(&istr->m_idx.m_i) & 0x01) == 0)
 	{
-		is_wide = 0;
+		*is_wide = 0;
 		*str = istr->m_idx.m_n;
 		*len = ((size_t const*)(istr->m_idx.m_n))[-1];
 	}
