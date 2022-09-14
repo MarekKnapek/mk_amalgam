@@ -21,6 +21,8 @@ struct mk_dacdbtw_panel_s
 	int m_state;
 	mk_win_char_t* m_file_name;
 	mk_dacdbt_doc_t m_doc;
+	mk_std_buffer_t m_tree_callback_texts[4];
+	unsigned int m_tree_callback_texts_idx;
 };
 mk_win_base_types_make_struct(mk_dacdbtw_panel);
 
