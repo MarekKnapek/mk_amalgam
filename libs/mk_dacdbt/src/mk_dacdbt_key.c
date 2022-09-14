@@ -165,7 +165,7 @@ mk_jumbo int mk_dacdbt_key_destruct(mk_dacdbt_key_t* key)
 	return 0;
 }
 
-mk_jumbo int mk_dacdbt_key_get_name(mk_dacdbt_key_t const* key, int* is_wide, void const** data, size_t* len)
+mk_jumbo int mk_dacdbt_key_get_name(mk_dacdbt_key_t* key, int* is_wide, void const** data, size_t* len)
 {
 	mk_assert(key);
 
@@ -183,6 +183,16 @@ mk_jumbo int mk_dacdbt_key_get_sub_keys_count(mk_dacdbt_key_t const* key, unsign
 
 	mk_try(mk_std_ptr_buff_get_count(&key->m_sub_keys, &cnt));
 	*count = ((unsigned long)(cnt));
+
+	return 0;
+}
+
+mk_jumbo int mk_dacdbt_key_get_sub_key(mk_dacdbt_key_t* key, unsigned long idx, mk_dacdbt_key_t** sub_key)
+{
+	mk_assert(key);
+	mk_assert(sub_key);
+
+	mk_try(mk_std_ptr_buff_get_element(&key->m_sub_keys, idx, (void**)sub_key));
 
 	return 0;
 }
