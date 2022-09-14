@@ -16,6 +16,7 @@
 struct mk_dacdbtw_panel_s
 {
 	mk_win_base_user_types_hwnd_t m_hwnd;
+	mk_win_base_user_types_hwnd_t m_tree;
 	mk_win_base_user_types_hwnd_t m_label;
 	int m_state;
 	mk_win_char_t* m_file_name;

@@ -5,6 +5,7 @@
 #include "../../src/mk_win_api.h"
 #include "../../src/mk_win_char.h"
 #include "../../src/mk_win_comctl.h"
+#include "../../src/mk_win_comctl_treeview.h"
 #include "../../src/mk_win_comdlg_ofn.c"
 #include "../../src/mk_win_global.h"
 #include "../../src/mk_win_instance.h"

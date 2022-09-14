@@ -3,6 +3,7 @@
 
 
 #include "../../src/mk_win_comctl.c"
+#include "../../src/mk_win_comctl_treeview.c"
 #include "../../src/mk_win_comdlg_ofn.c"
 #include "../../src/mk_win_global.c"
 #include "../../src/mk_win_instance.c"
