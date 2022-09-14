@@ -18,6 +18,7 @@
 
 #include <windows.h>
 #include <commdlg.h>
+#include <commctrl.h>
 
 
 static mk_inline int mk_win_base_tests_types(void);
@@ -32,7 +33,7 @@ mk_jumbo int mk_win_base_tests_all(void)
 	mk_try(mk_win_base_tests_kernel_types());
 	mk_try(mk_win_base_tests_user_types());
 	mk_try(mk_win_base_tests_comdlg_types());
-
+	
 	return 0;
 }
 

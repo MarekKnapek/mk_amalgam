@@ -2,6 +2,7 @@
 
 #include "../../mk_win/src/mk_win_char.h"
 #include "../../mk_win/src/mk_win_comctl.h"
+#include "../../mk_win/src/mk_win_comctl_treeview.h"
 #include "../../mk_win/src/mk_win_instance.h"
 #include "../../mk_win/src/mk_win_user_brush.h"
 #include "../../mk_win/src/mk_win_user_class.h"
@@ -35,6 +36,8 @@ enum mk_dacdbtw_panel_private_state
 static mk_win_char_t const mk_dacdbtw_panel_private_class_name[] = mk_win_char_c("mkdacdbtwp");
 
 
+static mk_inline int mk_dacdbtw_panel_private_populate_tree(mk_dacdbtw_panel_t* panel);
+static mk_inline int mk_dacdbtw_panel_private_create_tree(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret);
 static mk_inline int mk_dacdbtw_panel_private_create_label(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_create(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_destroy(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
@@ -84,6 +87,50 @@ mk_jumbo int mk_dacdbtw_panel_get_class_name(mk_win_char_t const** name)
 }
 
 
+static mk_inline int mk_dacdbtw_panel_private_populate_tree(mk_dacdbtw_panel_t* panel)
+{
+	mk_win_comctl_treeview_insert_t insert;
+	mk_win_comctl_treeview_htreeitem_t hti;
+
+	mk_assert(panel);
+	mk_assert(panel->m_tree);
+	mk_assert(panel->m_state == mk_dacdbtw_panel_private_state_ok);
+
+	insert.m_parent = mk_win_comctl_treeview_parent_root;
+	insert.m_insert_after = mk_win_comctl_treeview_parent_root;
+	mk_try(mk_win_comctl_treeview_insert(panel->m_tree, &insert, &hti));
+
+	return 0;
+}
+
+static mk_inline int mk_dacdbtw_panel_private_create_tree(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret)
+{
+	mk_win_user_window_create_t wi;
+	mk_win_base_user_types_hwnd_t hwnd;
+
+	mk_assert(panel);
+	mk_assert(panel->m_hwnd);
+	mk_assert(ret);
+
+	wi.m_extra_style = mk_win_user_window_style_ex_clientedge;
+	wi.m_class_name = mk_win_char_c("SysTreeView32");
+	wi.m_window_name = NULL;
+	wi.m_style = mk_win_user_window_style_tabstop | mk_win_user_window_style_border | mk_win_user_window_style_child;
+	wi.m_x = 0;
+	wi.m_y = 0;
+	wi.m_width = 0;
+	wi.m_height = 0;
+	wi.m_parent = panel->m_hwnd;
+	wi.m_menu = mk_win_base_types_null;
+	mk_try(mk_win_instance_get(&wi.m_instance));
+	wi.m_param = NULL;
+	mk_try(mk_win_user_window_create(&wi, &hwnd));
+	mk_assert(hwnd);
+	*ret = hwnd;
+
+	return 0;
+}
+
 static mk_inline int mk_dacdbtw_panel_private_create_label(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret)
 {
 	mk_win_user_window_create_t wi;
@@ -96,7 +143,7 @@ static mk_inline int mk_dacdbtw_panel_private_create_label(mk_dacdbtw_panel_t* p
 	wi.m_extra_style = 0;
 	wi.m_class_name = mk_win_char_c("static");
 	wi.m_window_name = NULL;
-	wi.m_style = mk_win_user_window_style_visible | mk_win_user_window_style_child;
+	wi.m_style = mk_win_user_window_style_child;
 	wi.m_x = 0;
 	wi.m_y = 0;
 	wi.m_width = 0;
@@ -125,6 +172,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_create(mk_win_base_user_type
 	mk_try(mk_std_gcallocator_allocate(sizeof(*panel), (void**)&panel));
 	mk_try(mk_win_user_window_set_info(hwnd, 0, (mk_win_base_types_uintptr_t)(mk_dacdbtw_panel_lpt)panel, &prev)); mk_assert(prev == 0);
 	panel->m_hwnd = hwnd;
+	mk_try(mk_dacdbtw_panel_private_create_tree(panel, &panel->m_tree));
 	mk_try(mk_dacdbtw_panel_private_create_label(panel, &panel->m_label));
 	panel->m_state = mk_dacdbtw_panel_private_state_empty;
 	mk_try(mk_win_user_window_send_set_text(panel->m_label, mk_win_char_c("empty")));
@@ -159,9 +207,11 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_size(mk_dacdbtw_panel_t* pan
 {
 	unsigned short width;
 	unsigned short height;
+	mk_win_base_user_types_hwnd_t wnd;
 	mk_win_base_types_bool_t b;
 
 	mk_assert(panel);
+	mk_assert(panel->m_tree);
 	mk_assert(panel->m_label);
 	(void)(wparam);
 	mk_assert(skip_defproc);
@@ -169,7 +219,8 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_size(mk_dacdbtw_panel_t* pan
 
 	width = (unsigned short)((lparam) & 0xfffful);
 	height = (unsigned short)((lparam >> 16) & 0xfffful);
-	mk_try(mk_win_user_window_move(panel->m_label, 0, 0, width, height, 1, &b)); (void)b;
+	wnd = (panel->m_state == mk_dacdbtw_panel_private_state_ok) ? panel->m_tree : panel->m_label;
+	mk_try(mk_win_user_window_move(wnd, 0, 0, width, height, 1, &b)); (void)b;
 
 	return 0;
 }
@@ -184,6 +235,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_set_file_name(mk_dacdbtw_pan
 	FILE* file;
 	mk_std_input_stream_t is;
 	int parsed;
+	mk_win_base_types_bool_t b;
 	int closed;
 
 	mk_assert(panel);
@@ -231,6 +283,17 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_set_file_name(mk_dacdbtw_pan
 		mk_try(mk_std_gcallocator_deallocate(panel->m_file_name)); panel->m_file_name = NULL;
 		mk_try(mk_dacdbt_doc_destruct(&panel->m_doc));
 		mk_try(mk_dacdbt_doc_construct(&panel->m_doc));
+	}
+	if(panel->m_state == mk_dacdbtw_panel_private_state_ok)
+	{
+		mk_try(mk_dacdbtw_panel_private_populate_tree(panel));
+		mk_try(mk_win_user_window_show(panel->m_label, mk_win_user_window_show_hide, &b)); (void)b;
+		mk_try(mk_win_user_window_show(panel->m_tree, mk_win_user_window_show_show, &b)); (void)b;
+	}
+	else
+	{
+		mk_try(mk_win_user_window_show(panel->m_tree, mk_win_user_window_show_hide, &b)); (void)b;
+		mk_try(mk_win_user_window_show(panel->m_label, mk_win_user_window_show_show, &b)); (void)b;
 	}
 
 	return 0;
