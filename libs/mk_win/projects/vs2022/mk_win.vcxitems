@@ -16,6 +16,7 @@
 	<ItemGroup>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_api.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_char.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comctl.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comdlg_ofn.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.h"/>
@@ -38,6 +39,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_win.h"/>
 	</ItemGroup>
 	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comctl.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comdlg_ofn.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.c"/>
