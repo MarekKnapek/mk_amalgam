@@ -191,5 +191,14 @@ struct mk_win_base_user_wm_mdicreate_w_s
 };
 mk_win_base_types_make_struct(mk_win_base_user_wm_mdicreate_w);
 
+struct mk_win_base_user_nmhdr_s
+{
+	mk_win_base_user_types_hwnd_t m_from;
+	mk_win_base_types_uintptr_t m_from_id;
+	mk_win_base_types_uint_t m_code;
+
+};
+mk_win_base_types_make_struct(mk_win_base_user_nmhdr);
+
 
 #endif

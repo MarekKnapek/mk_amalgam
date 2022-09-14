@@ -153,6 +153,31 @@ struct mk_win_comctl_treeview_insert_s
 };
 mk_win_base_types_make_struct(mk_win_comctl_treeview_insert);
 
+struct mk_win_comctl_treeview_nm_dispinfoa_s
+{
+	mk_win_base_user_nmhdr_t m_nmhdr;
+	mk_win_comctl_treeview_item_a_t m_itema;
+};
+mk_win_base_types_make_struct(mk_win_comctl_treeview_nm_dispinfoa);
+
+struct mk_win_comctl_treeview_nm_dispinfow_s
+{
+	mk_win_base_user_nmhdr_t m_nmhdr;
+	mk_win_comctl_treeview_item_w_t m_itemw;
+};
+mk_win_base_types_make_struct(mk_win_comctl_treeview_nm_dispinfow);
+
+struct mk_win_comctl_treeview_nm_dispinfom_s
+{
+	mk_win_base_user_nmhdr_t m_nmhdr;
+	union
+	{
+		mk_win_comctl_treeview_item_a_t m_item_a;
+		mk_win_comctl_treeview_item_w_t m_item_w;
+	} m_item;
+};
+mk_win_base_types_make_struct(mk_win_comctl_treeview_nm_dispinfom);
+
 
 #define mk_win_comctl_treeview_wm_first               ((unsigned short)(0x1100ul))
 #define mk_win_comctl_treeview_wm_insertitema         ((unsigned short)(mk_win_comctl_treeview_wm_first +  0))
@@ -210,10 +235,58 @@ mk_win_base_types_make_struct(mk_win_comctl_treeview_insert);
 #define mk_win_comctl_treeview_wm_showinfotip         ((unsigned short)(mk_win_comctl_treeview_wm_first + 71))
 #define mk_win_comctl_treeview_wm_getitempartrect     ((unsigned short)(mk_win_comctl_treeview_wm_first + 72))
 
-#define mk_win_comctl_treeview_parent_root  ((mk_win_comctl_treeview_htreeitem_t)((mk_win_base_types_uintptr_t)(-0x10000ul)))
-#define mk_win_comctl_treeview_parent_first ((mk_win_comctl_treeview_htreeitem_t)((mk_win_base_types_uintptr_t)(-0x0fffful)))
-#define mk_win_comctl_treeview_parent_last  ((mk_win_comctl_treeview_htreeitem_t)((mk_win_base_types_uintptr_t)(-0x0fffeul)))
-#define mk_win_comctl_treeview_parent_sort  ((mk_win_comctl_treeview_htreeitem_t)((mk_win_base_types_uintptr_t)(-0x0fffdul)))
+#define mk_win_comctl_treeview_notify_first               ((unsigned int)(0u - 400u))
+#define mk_win_comctl_treeview_notify_last                ((unsigned int)(0u - 499u))
+#define mk_win_comctl_treeview_notify_selchanginga        ((unsigned int)(mk_win_comctl_treeview_notify_first -  1u))
+#define mk_win_comctl_treeview_notify_selchangeda         ((unsigned int)(mk_win_comctl_treeview_notify_first -  2u))
+#define mk_win_comctl_treeview_notify_getdispinfoa        ((unsigned int)(mk_win_comctl_treeview_notify_first -  3u))
+#define mk_win_comctl_treeview_notify_setdispinfoa        ((unsigned int)(mk_win_comctl_treeview_notify_first -  4u))
+#define mk_win_comctl_treeview_notify_itemexpandinga      ((unsigned int)(mk_win_comctl_treeview_notify_first -  5u))
+#define mk_win_comctl_treeview_notify_itemexpandeda       ((unsigned int)(mk_win_comctl_treeview_notify_first -  6u))
+#define mk_win_comctl_treeview_notify_begindraga          ((unsigned int)(mk_win_comctl_treeview_notify_first -  7u))
+#define mk_win_comctl_treeview_notify_beginrdraga         ((unsigned int)(mk_win_comctl_treeview_notify_first -  8u))
+#define mk_win_comctl_treeview_notify_deleteitema         ((unsigned int)(mk_win_comctl_treeview_notify_first -  9u))
+#define mk_win_comctl_treeview_notify_beginlabeledita     ((unsigned int)(mk_win_comctl_treeview_notify_first - 10u))
+#define mk_win_comctl_treeview_notify_endlabeledita       ((unsigned int)(mk_win_comctl_treeview_notify_first - 11u))
+#define mk_win_comctl_treeview_notify_keydown             ((unsigned int)(mk_win_comctl_treeview_notify_first - 12u))
+#define mk_win_comctl_treeview_notify_getinfotipa         ((unsigned int)(mk_win_comctl_treeview_notify_first - 13u))
+#define mk_win_comctl_treeview_notify_getinfotipw         ((unsigned int)(mk_win_comctl_treeview_notify_first - 14u))
+#define mk_win_comctl_treeview_notify_singleexpand        ((unsigned int)(mk_win_comctl_treeview_notify_first - 15u))
+#define mk_win_comctl_treeview_notify_itemchanginga       ((unsigned int)(mk_win_comctl_treeview_notify_first - 16u))
+#define mk_win_comctl_treeview_notify_itemchangingw       ((unsigned int)(mk_win_comctl_treeview_notify_first - 17u))
+#define mk_win_comctl_treeview_notify_itemchangeda        ((unsigned int)(mk_win_comctl_treeview_notify_first - 18u))
+#define mk_win_comctl_treeview_notify_itemchangedw        ((unsigned int)(mk_win_comctl_treeview_notify_first - 19u))
+#define mk_win_comctl_treeview_notify_asyncdraw           ((unsigned int)(mk_win_comctl_treeview_notify_first - 20u))
+#define mk_win_comctl_treeview_notify_selchangingw        ((unsigned int)(mk_win_comctl_treeview_notify_first - 50u))
+#define mk_win_comctl_treeview_notify_selchangedw         ((unsigned int)(mk_win_comctl_treeview_notify_first - 51u))
+#define mk_win_comctl_treeview_notify_getdispinfow        ((unsigned int)(mk_win_comctl_treeview_notify_first - 52u))
+#define mk_win_comctl_treeview_notify_setdispinfow        ((unsigned int)(mk_win_comctl_treeview_notify_first - 53u))
+#define mk_win_comctl_treeview_notify_itemexpandingw      ((unsigned int)(mk_win_comctl_treeview_notify_first - 54u))
+#define mk_win_comctl_treeview_notify_itemexpandedw       ((unsigned int)(mk_win_comctl_treeview_notify_first - 55u))
+#define mk_win_comctl_treeview_notify_begindragw          ((unsigned int)(mk_win_comctl_treeview_notify_first - 56u))
+#define mk_win_comctl_treeview_notify_beginrdragw         ((unsigned int)(mk_win_comctl_treeview_notify_first - 57u))
+#define mk_win_comctl_treeview_notify_deleteitemw         ((unsigned int)(mk_win_comctl_treeview_notify_first - 58u))
+#define mk_win_comctl_treeview_notify_beginlabeleditw     ((unsigned int)(mk_win_comctl_treeview_notify_first - 59u))
+#define mk_win_comctl_treeview_notify_endlabeleditw       ((unsigned int)(mk_win_comctl_treeview_notify_first - 60u))
+
+#define mk_win_comctl_treeview_hti_root  ((mk_win_comctl_treeview_htreeitem_t)(((mk_win_base_types_uintptr_t)(0)) - ((mk_win_base_types_uintptr_t)(0x10000ul))))
+#define mk_win_comctl_treeview_hti_first ((mk_win_comctl_treeview_htreeitem_t)(((mk_win_base_types_uintptr_t)(0)) - ((mk_win_base_types_uintptr_t)(0x0fffful))))
+#define mk_win_comctl_treeview_hti_last  ((mk_win_comctl_treeview_htreeitem_t)(((mk_win_base_types_uintptr_t)(0)) - ((mk_win_base_types_uintptr_t)(0x0fffeul))))
+#define mk_win_comctl_treeview_hti_sort  ((mk_win_comctl_treeview_htreeitem_t)(((mk_win_base_types_uintptr_t)(0)) - ((mk_win_base_types_uintptr_t)(0x0fffdul))))
+
+#define mk_win_comctl_treeview_mask_text          0x0001
+#define mk_win_comctl_treeview_mask_image         0x0002
+#define mk_win_comctl_treeview_mask_param         0x0004
+#define mk_win_comctl_treeview_mask_state         0x0008
+#define mk_win_comctl_treeview_mask_handle        0x0010
+#define mk_win_comctl_treeview_mask_selectedimage 0x0020
+#define mk_win_comctl_treeview_mask_children      0x0040
+#define mk_win_comctl_treeview_mask_integral      0x0080
+#define mk_win_comctl_treeview_mask_stateex       0x0100 /* ie >= 0x0600 */
+#define mk_win_comctl_treeview_mask_expandedimage 0x0200 /* ie >= 0x0600 */
+
+#define mk_win_comctl_treeview_text_callback ((mk_win_char_t*)(((unsigned char*)(0)) - ((unsigned char*)(1)))) /*TODO:far*/
+#define mk_win_comctl_treeview_children_callback (-1)
 
 
 mk_jumbo int mk_win_comctl_treeview_insert(mk_win_base_user_types_hwnd_t tree_view, mk_win_comctl_treeview_insert_t* insert, mk_win_comctl_treeview_htreeitem_t* ret);

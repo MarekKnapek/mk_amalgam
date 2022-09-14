@@ -91,7 +91,7 @@ mk_jumbo int mk_dacdbt_str_destruct(mk_dacdbt_str_t* str)
 	return 0;
 }
 
-mk_jumbo int mk_dacdbt_str_get(mk_dacdbt_str_t* str, int* is_wide, void const** data, size_t* len)
+mk_jumbo int mk_dacdbt_str_get(mk_dacdbt_str_t const* str, int* is_wide, void const** data, size_t* len)
 {
 	mk_assert(str);
 	mk_assert(is_wide);
@@ -103,7 +103,7 @@ mk_jumbo int mk_dacdbt_str_get(mk_dacdbt_str_t* str, int* is_wide, void const** 
 	return 0;
 }
 
-mk_jumbo int mk_dacdbt_str_is_empty(mk_dacdbt_str_t* str, int* is_empty)
+mk_jumbo int mk_dacdbt_str_is_empty(mk_dacdbt_str_t const* str, int* is_empty)
 {
 	int is_wide;
 	void const* data;

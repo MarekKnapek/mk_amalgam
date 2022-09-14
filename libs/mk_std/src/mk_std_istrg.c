@@ -41,7 +41,7 @@ mk_jumbo int mk_std_istrg_insert_wide(wchar_t const* str, size_t len, mk_std_ist
 	return 0;
 }
 
-mk_jumbo int mk_std_istrg_get(mk_std_istr_t* istr, int* is_wide, void const** str, size_t* len)
+mk_jumbo int mk_std_istrg_get(mk_std_istr_t const* istr, int* is_wide, void const** str, size_t* len)
 {
 	mk_try(mk_std_istr_storage_get(&mk_std_istrg_private_storage, istr, is_wide, str, len));
 
