@@ -136,14 +136,21 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_create(mk_win_base_user_type
 
 static mk_inline int mk_dacdbtw_panel_private_on_wm_destroy(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr)
 {
+	mk_win_base_types_uintptr_t prev;
+
 	mk_assert(panel);
+	mk_assert(panel->m_hwnd);
 	(void)(wparam);
 	(void)(lparam);
 	mk_assert(skip_defproc);
 	mk_assert(lr);
 
+	mk_try(mk_win_user_window_set_info(panel->m_hwnd, 0, 0, &prev));
+	mk_assert((mk_dacdbtw_panel_pt)(mk_dacdbtw_panel_lpt)prev == panel);
+
 	mk_try(mk_dacdbt_doc_destruct(&panel->m_doc));
 	mk_try(mk_std_gcallocator_deallocate(panel->m_file_name));
+	mk_try(mk_std_gcallocator_deallocate(panel));
 
 	return 0;
 }
@@ -261,8 +268,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wndproc(mk_win_base_user_types_
 	mk_try(mk_win_user_window_get_info(hwnd, 0, &info));
 	if(info != 0)
 	{
-		panel = (mk_dacdbtw_panel_pt)(mk_dacdbtw_panel_lpt)info;
-		mk_assert(panel);
+		panel = (mk_dacdbtw_panel_pt)(mk_dacdbtw_panel_lpt)info; mk_assert(panel);
 		mk_try(mk_dacdbtw_panel_private_on_msg(panel, msg, wparam, lparam, &skip_defproc, lr));
 	}
 	if(skip_defproc == 0)
