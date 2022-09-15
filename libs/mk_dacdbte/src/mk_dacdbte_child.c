@@ -31,6 +31,7 @@ static mk_win_char_t const mk_dacdbte_child_private_class_name[] = mk_win_char_c
 
 
 static mk_inline int mk_dacdbte_child_private_register_class(void);
+static mk_inline int mk_dacdbte_child_private_reposition(mk_dacdbte_child_pt child);
 static mk_inline int mk_dacdbte_child_private_on_destroy(mk_dacdbte_child_pt child, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_dacdbte_child_private_on_size(mk_dacdbte_child_pt child, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_dacdbte_child_private_on_close(mk_dacdbte_child_pt child, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
@@ -74,9 +75,6 @@ mk_jumbo int mk_dacdbte_child_construct(mk_dacdbte_child_pt child, mk_dacdbte_pa
 	mk_win_user_window_mdicreate_t mdi;
 	mk_win_base_user_types_hwnd_t hwnd;
 	mk_win_user_window_create_t wi;
-	mk_win_base_types_rect_t rect;
-	mk_win_base_types_bool_t b;
-	mk_win_base_types_point_t pt;
 
 	mk_assert(child);
 	mk_assert(parent);
@@ -99,7 +97,6 @@ mk_jumbo int mk_dacdbte_child_construct(mk_dacdbte_child_pt child, mk_dacdbte_pa
 	mk_try(mk_win_user_window_send_mdicreate(parent->m_mdi, &mdi, &hwnd));
 	mk_assert(hwnd);
 	mk_assert(child->m_hwnd == hwnd);
-
 	if(old_child)
 	{
 		child->m_content = old_child->m_content;
@@ -125,14 +122,7 @@ mk_jumbo int mk_dacdbte_child_construct(mk_dacdbte_child_pt child, mk_dacdbte_pa
 		mk_assert(hwnd != mk_win_base_types_null);
 		child->m_content = hwnd;
 	}
-
-	mk_try(mk_win_user_window_get_rect(child->m_hwnd, &rect, &b)); mk_assert(b);
-	pt.m_x = rect.m_left;
-	pt.m_y = rect.m_top;
-	mk_try(mk_win_user_window_screen2client(parent->m_hwnd, &pt, &b)); mk_assert(b);
-	mk_try(mk_win_user_window_move(child->m_hwnd, pt.m_x, pt.m_y, rect.m_right - rect.m_left + 16, rect.m_bottom - rect.m_top + 16, 1, &b)); mk_assert(b);
-	mk_try(mk_win_user_window_move(child->m_hwnd, pt.m_x, pt.m_y, rect.m_right - rect.m_left - 16, rect.m_bottom - rect.m_top - 16, 1, &b)); mk_assert(b);
-
+	mk_try(mk_dacdbte_child_private_reposition(child));
 	mk_try(mk_win_user_window_set_focus(child->m_content, &hwnd)); (void)hwnd;
 
 	return 0;
@@ -188,6 +178,27 @@ static mk_inline int mk_dacdbte_child_private_register_class(void)
 	return 0;
 }
 
+static mk_inline int mk_dacdbte_child_private_reposition(mk_dacdbte_child_pt child)
+{
+	mk_win_base_types_rect_t rect;
+	mk_win_base_types_bool_t b;
+	int width;
+	int height;
+
+	mk_assert(child);
+	mk_assert(child->m_hwnd);
+	mk_assert(child->m_content);
+
+	mk_try(mk_win_user_window_get_client_rect(child->m_hwnd, &rect, &b)); mk_assert(b != 0);
+	mk_assert(rect.m_left == 0);
+	mk_assert(rect.m_top == 0);
+	width = rect.m_right;
+	height = rect.m_bottom;
+	mk_try(mk_win_user_window_move(child->m_content, 0, 0, width, height, 1, &b)); mk_assert(b != 0);
+
+	return 0;
+}
+
 static mk_inline int mk_dacdbte_child_private_on_destroy(mk_dacdbte_child_pt child, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
 {
 	mk_win_base_types_uintptr_t prev;
@@ -206,11 +217,8 @@ static mk_inline int mk_dacdbte_child_private_on_destroy(mk_dacdbte_child_pt chi
 
 static mk_inline int mk_dacdbte_child_private_on_size(mk_dacdbte_child_pt child, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
 {
-	int width;
-	int height;
-	mk_win_base_types_bool_t b;
-
 	mk_assert(child);
+	mk_assert(lparam);
 	mk_assert(override_defproc);
 	mk_assert(lres);
 
@@ -218,11 +226,7 @@ static mk_inline int mk_dacdbte_child_private_on_size(mk_dacdbte_child_pt child,
 	{
 		if(child->m_content)
 		{
-			width = (int)(lparam & 0xfffful);
-			height = (int)((lparam >> 16) & 0xfffful);
-			b = 1;
-			mk_try(mk_win_user_window_move(child->m_content, 0, 0, width, height, b, &b));
-			mk_assert(b);
+			mk_try(mk_dacdbte_child_private_reposition(child));
 		}
 	}
 
