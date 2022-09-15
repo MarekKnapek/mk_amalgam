@@ -42,6 +42,7 @@ static mk_win_char_t const mk_dacdbtw_panel_private_class_name[] = mk_win_char_c
 static mk_inline int mk_dacdbtw_panel_private_populate_tree(mk_dacdbtw_panel_t* panel);
 static mk_inline int mk_dacdbtw_panel_private_create_tree(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret);
 static mk_inline int mk_dacdbtw_panel_private_create_label(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret);
+static mk_inline int mk_dacdbtw_panel_private_reposition(mk_dacdbtw_panel_t* panel);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_create(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_destroy(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_size(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
@@ -180,6 +181,30 @@ static mk_inline int mk_dacdbtw_panel_private_create_label(mk_dacdbtw_panel_t* p
 	return 0;
 }
 
+static mk_inline int mk_dacdbtw_panel_private_reposition(mk_dacdbtw_panel_t* panel)
+{
+	mk_win_base_types_rect_t rect;
+	mk_win_base_types_bool_t b;
+	int width;
+	int height;
+	mk_win_base_user_types_hwnd_t wnd;
+
+	mk_assert(panel);
+	mk_assert(panel->m_hwnd);
+	mk_assert(panel->m_tree);
+	mk_assert(panel->m_label);
+
+	mk_try(mk_win_user_window_get_client_rect(panel->m_hwnd, &rect, &b)); mk_assert(b != 0);
+	mk_assert(rect.m_left == 0);
+	mk_assert(rect.m_top == 0);
+	width = rect.m_right;
+	height = rect.m_bottom;
+	wnd = (panel->m_state == mk_dacdbtw_panel_private_state_ok) ? panel->m_tree : panel->m_label;
+	mk_try(mk_win_user_window_move(wnd, 0, 0, width, height, 1, &b)); mk_assert(b != 0);
+
+	return 0;
+}
+
 static mk_inline int mk_dacdbtw_panel_private_on_wm_create(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam)
 {
 	mk_dacdbtw_panel_t* panel;
@@ -203,6 +228,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_create(mk_win_base_user_type
 	mk_try(mk_std_buffer_init(&panel->m_tree_callback_texts[2]));
 	mk_try(mk_std_buffer_init(&panel->m_tree_callback_texts[3]));
 	panel->m_tree_callback_texts_idx = 0;
+	mk_try(mk_dacdbtw_panel_private_reposition(panel));
 
 	return 0;
 }
@@ -234,22 +260,13 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_destroy(mk_dacdbtw_panel_t* 
 
 static mk_inline int mk_dacdbtw_panel_private_on_wm_size(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr)
 {
-	unsigned short width;
-	unsigned short height;
-	mk_win_base_user_types_hwnd_t wnd;
-	mk_win_base_types_bool_t b;
-
 	mk_assert(panel);
-	mk_assert(panel->m_tree);
-	mk_assert(panel->m_label);
-	(void)(wparam);
-	mk_assert(skip_defproc);
-	mk_assert(lr);
+	(void)wparam;
+	(void)lparam;
+	(void)skip_defproc;
+	(void)lr;
 
-	width = (unsigned short)((lparam) & 0xfffful);
-	height = (unsigned short)((lparam >> 16) & 0xfffful);
-	wnd = (panel->m_state == mk_dacdbtw_panel_private_state_ok) ? panel->m_tree : panel->m_label;
-	mk_try(mk_win_user_window_move(wnd, 0, 0, width, height, 1, &b)); (void)b;
+	mk_try(mk_dacdbtw_panel_private_reposition(panel));
 
 	return 0;
 }
@@ -466,6 +483,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_set_file_name(mk_dacdbtw_pan
 		mk_try(mk_win_user_window_show(panel->m_tree, mk_win_user_window_show_hide, &b)); (void)b;
 		mk_try(mk_win_user_window_show(panel->m_label, mk_win_user_window_show_show, &b)); (void)b;
 	}
+	mk_try(mk_dacdbtw_panel_private_reposition(panel));
 
 	return 0;
 }
