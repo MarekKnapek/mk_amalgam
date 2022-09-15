@@ -366,7 +366,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_notify(mk_dacdbtw_panel_t* p
 				mk_assert(nm->m_new.m_a.m_param != 0);
 				key = ((mk_dacdbt_key_t*)(nm->m_new.m_a.m_param));
 				insert.m_parent = nm->m_new.m_a.m_hitem;
-				insert.m_insert_after = mk_win_comctl_treeview_hti_last;
+				insert.m_insert_after = mk_win_comctl_treeview_hti_first;
 				insert.m_item.m_item_ex.m_mask = mk_win_comctl_treeview_item_flag_text | mk_win_comctl_treeview_item_flag_param | mk_win_comctl_treeview_item_flag_children;
 				insert.m_item.m_item_ex.m_hitem = 0;
 				insert.m_item.m_item_ex.m_state = 0;
@@ -384,7 +384,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_notify(mk_dacdbtw_panel_t* p
 				mk_try(mk_dacdbt_key_get_sub_keys_count(key, &count));
 				for(i = 0; i != count; ++i)
 				{
-					mk_try(mk_dacdbt_key_get_sub_key(key, i, &sub_key)); mk_assert(sub_key);
+					mk_try(mk_dacdbt_key_get_sub_key(key, count - 1 - i, &sub_key)); mk_assert(sub_key);
 					insert.m_item.m_item_ex.m_param = ((mk_win_base_user_types_lparam_t)(sub_key));
 					mk_try(mk_win_comctl_treeview_insert(panel->m_tree, &insert, &hti));
 					mk_assert(hti);
