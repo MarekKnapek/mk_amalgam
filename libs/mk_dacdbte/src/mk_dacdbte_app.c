@@ -112,13 +112,36 @@ mk_jumbo int mk_dacdbte_app_run(mk_dacdbte_app_pt app)
 
 mk_jumbo int mk_dacdbte_app_exit(mk_dacdbte_app_pt app)
 {
+	int bad;
 	size_t count;
 	size_t i;
 	mk_dacdbte_parent_pt parent;
+	mk_win_base_user_types_lresult_t lr;
+	mk_win_base_types_bool_t b;
 
 	mk_assert(app);
 
+	bad = 0;
 	mk_try(mk_std_ptr_buff_get_count(&app->m_parents, &count));
+	for(i = 0; i != count; ++i)
+	{
+		mk_try(mk_std_ptr_buff_get_element(&app->m_parents, i, (void**)&parent));
+		mk_try(mk_win_user_window_send(parent->m_hwnd, mk_win_user_window_wm_queryendsession, 0, 0, &lr));
+		if(lr == 0)
+		{
+			++bad;
+			break;
+		}
+	}
+	if(bad == 0)
+	{
+		for(i = 0; i != count; ++i)
+		{
+			mk_try(mk_std_ptr_buff_get_element(&app->m_parents, i, (void**)&parent));
+			mk_try(mk_win_user_window_show(parent->m_hwnd, mk_win_user_window_show_hide, &b));
+		}
+		
+	}
 	for(i = 0; i != count; ++i)
 	{
 		mk_try(mk_std_ptr_buff_get_element(&app->m_parents, count - 1 - i, (void**)&parent));
