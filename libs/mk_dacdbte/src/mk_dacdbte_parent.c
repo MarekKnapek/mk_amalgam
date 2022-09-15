@@ -485,7 +485,7 @@ static mk_inline int mk_dacdbte_parent_private_on_destroy(mk_dacdbte_parent_pt p
 
 static mk_inline int mk_dacdbte_parent_private_on_close(mk_dacdbte_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
 {
-	int ok;
+	int bad;
 	size_t count;
 	size_t i;
 	mk_dacdbte_child_pt child;
@@ -496,7 +496,7 @@ static mk_inline int mk_dacdbte_parent_private_on_close(mk_dacdbte_parent_pt par
 	mk_assert(override_defproc);
 	mk_assert(lres);
 
-	ok = 1;
+	bad = 0;
 	mk_try(mk_std_ptr_buff_get_count(&parent->m_children, &count));
 	for(i = 0; i != count; ++i)
 	{
@@ -504,11 +504,11 @@ static mk_inline int mk_dacdbte_parent_private_on_close(mk_dacdbte_parent_pt par
 		mk_try(mk_win_user_window_send(child->m_hwnd, mk_win_user_window_wm_queryendsession, 0, 0, &lr));
 		if(lr == 0)
 		{
-			ok = 0;
+			++bad;
 			break;
 		}
 	}
-	if(ok != 0)
+	if(bad == 0)
 	{
 		mk_try(mk_win_user_window_show(parent->m_hwnd, mk_win_user_window_show_hide, &b));
 		
