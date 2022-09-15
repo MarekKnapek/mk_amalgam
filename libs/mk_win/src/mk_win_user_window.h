@@ -104,6 +104,7 @@ mk_jumbo int mk_win_user_window_defframeproc(mk_win_base_user_types_hwnd_t hwnd,
 mk_jumbo int mk_win_user_window_defmdichildproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_user_types_lresult_t* lres);
 mk_jumbo int mk_win_user_window_show(mk_win_base_user_types_hwnd_t hwnd, int show, mk_win_base_types_bool_t* ret);
 mk_jumbo int mk_win_user_window_move(mk_win_base_user_types_hwnd_t hwnd, int x, int y, int width, int height, mk_win_base_types_bool_t repaint, mk_win_base_types_bool_t* ret);
+mk_jumbo int mk_win_user_window_get_parent(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_user_types_hwnd_t* ret);
 mk_jumbo int mk_win_user_window_get_rect(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_rect_pt rect, mk_win_base_types_bool_t* ret);
 mk_jumbo int mk_win_user_window_get_client_rect(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_rect_pt rect, mk_win_base_types_bool_t* ret);
 mk_jumbo int mk_win_user_window_set_focus(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_user_types_hwnd_t* ret);

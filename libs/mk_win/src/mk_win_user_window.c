@@ -265,6 +265,15 @@ mk_jumbo int mk_win_user_window_move(mk_win_base_user_types_hwnd_t hwnd, int x, 
 	return 0;
 }
 
+mk_jumbo int mk_win_user_window_get_parent(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_user_types_hwnd_t* ret)
+{
+	mk_assert(ret);
+
+	*ret = GetParent(hwnd);
+
+	return 0;
+}
+
 mk_jumbo int mk_win_user_window_get_rect(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_rect_pt rect, mk_win_base_types_bool_t* ret)
 {
 	mk_win_base_types_bool_t b;
