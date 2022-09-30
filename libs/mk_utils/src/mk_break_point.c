@@ -21,7 +21,7 @@ mk_jumbo void mk_break_point(void)
 	#else
 	/* TODO 1900 (VS2015) has it, 1200 (VS6) doesn't has it, don't know in between */
 	#if defined(_MSC_VER) && _MSC_VER >= 1900
-	__debugbreak();
+	/*__debugbreak();*/
 	#endif
 	#endif
 }
