@@ -1,5 +1,6 @@
 #include "mk_dacdbt_io.h"
 
+#include "../../mk_std/src/mk_std_buffer.h"
 #include "../../mk_std/src/mk_std_input_stream.h"
 
 #include "../../mk_int/src/exact/mk_uint_8.h"
@@ -34,6 +35,38 @@ mk_jumbo int mk_dacdbt_io_read_buff(mk_std_input_stream_t* is, void* buff, size_
 		remaining -= read;
 		mk_memcpy(buff, data, read);
 		buff = ((void*)(((unsigned char*)(buff)) + read));
+	}
+
+	return 0;
+
+	#undef mk_memcpy
+}
+
+mk_jumbo int mk_dacdbt_io_read_buffer(mk_std_input_stream_t* is, mk_std_buffer_t* buffer, size_t len)
+{
+	#define mk_memcpy(xdst, xsrc, xlen) do{ unsigned char* xd; unsigned char const* xs; size_t xl; size_t i; xd = ((unsigned char*)(xdst)); xs = ((unsigned char const*)(xsrc)); xl = (xlen); for(i = 0; i != xl; ++i, ++xd, ++xs){ *xd = *xs; } }while(0)
+
+	mk_assert(is);
+	mk_assert(buffer);
+
+	size_t remaining;
+	size_t read;
+	void const* data;
+	void* mem;
+
+	mk_assert(is);
+
+	remaining = len;
+	while(remaining != 0)
+	{
+		read = remaining;
+		mk_try(mk_std_input_stream_read(is, &data, &read));
+		mk_check(read != 0);
+		remaining -= read;
+		mk_try(mk_std_buffer_reserve(buffer, len - remaining));
+		mk_try(mk_std_buffer_get_mem(buffer, &mem));
+		mem = ((void*)(((unsigned char*)(mem)) + len - remaining - read));
+		mk_memcpy(mem, data, read);
 	}
 
 	return 0;
