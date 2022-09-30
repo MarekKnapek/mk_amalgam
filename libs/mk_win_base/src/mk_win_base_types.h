@@ -70,6 +70,7 @@ mk_win_base_types_make_pointers(mk_win_base_types_void);
 mk_win_base_types_make_pointers(mk_win_base_types_char);
 mk_win_base_types_make_pointers(mk_win_base_types_wchar);
 
+mk_win_base_types_make_handle(mk_win_base_types_handle_t);
 mk_win_base_types_make_handle(mk_win_base_types_hinstance_t);
 
 
