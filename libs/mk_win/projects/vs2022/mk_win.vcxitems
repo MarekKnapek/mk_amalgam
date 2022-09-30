@@ -22,6 +22,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_file.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_mapping.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_module.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_resource.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_str.h"/>
@@ -47,6 +48,7 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_file.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_mapping.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_module.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_resource.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_str.c"/>
