@@ -201,7 +201,7 @@ mk_jumbo int mk_uint_log2(mk_uint_t const* x)
 	}
 	else
 	{
-		mk_assert(index >= 0 && index <= (mk_uint_small_bits - 1));
+		mk_assert(index <= (mk_uint_small_bits - 1));
 		ret = (int)index;
 	}
 	return ret;
@@ -221,7 +221,7 @@ mk_jumbo int mk_uint_log2(mk_uint_t const* x)
 		bsr = _BitScanReverse64(&index, mask);
 		if(bsr != 0)
 		{
-			mk_assert(index >= 0 && index <= (mk_uint_small_bits - 1));
+			mk_assert(index <= (mk_uint_small_bits - 1));
 			ret = ((int)(index)) + (mk_uint_parts - 1 - i) * mk_uint_small_bits;
 			break;
 		}
@@ -243,7 +243,7 @@ mk_jumbo int mk_uint_log2(mk_uint_t const* x)
 	}
 	else
 	{
-		mk_assert(index >= 0 && index <= (mk_uint_small_bits - 1));
+		mk_assert(index <= (mk_uint_small_bits - 1));
 		ret = (int)index;
 	}
 	return ret;
@@ -263,7 +263,7 @@ mk_jumbo int mk_uint_log2(mk_uint_t const* x)
 		bsr = _BitScanReverse(&index, mask);
 		if(bsr != 0)
 		{
-			mk_assert(index >= 0 && index <= (mk_uint_small_bits - 1));
+			mk_assert(index <= (mk_uint_small_bits - 1));
 			ret = ((int)(index)) + (mk_uint_parts - 1 - i) * mk_uint_small_bits;
 			break;
 		}
