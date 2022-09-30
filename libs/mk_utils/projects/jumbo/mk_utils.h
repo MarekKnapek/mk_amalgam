@@ -12,7 +12,9 @@
 #include "../../src/mk_inline.h"
 #include "../../src/mk_jumbo.h"
 #include "../../src/mk_setup.h"
+#include "../../src/mk_sizet.h"
 #include "../../src/mk_try.h"
+#include "../../src/mk_utils_platform.h"
 
 
 #endif
