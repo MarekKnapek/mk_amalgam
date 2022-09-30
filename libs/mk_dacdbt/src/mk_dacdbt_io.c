@@ -16,15 +16,29 @@
 
 mk_jumbo int mk_dacdbt_io_read_buff(mk_std_input_stream_t* is, void* buff, size_t len)
 {
+	#define mk_memcpy(xdst, xsrc, xlen) do{ unsigned char* xd; unsigned char const* xs; size_t xl; size_t i; xd = ((unsigned char*)(xdst)); xs = ((unsigned char const*)(xsrc)); xl = (xlen); for(i = 0; i != xl; ++i, ++xd, ++xs){ *xd = *xs; } }while(0)
+
+	size_t remaining;
 	size_t read;
+	void const* data;
 
 	mk_assert(is);
 	mk_assert(buff || len == 0);
 
-	mk_try(mk_std_input_stream_read(is, buff, len, &read));
-	mk_check(read == len);
+	remaining = len;
+	while(remaining != 0)
+	{
+		read = remaining;
+		mk_try(mk_std_input_stream_read(is, &data, &read));
+		mk_check(read != 0);
+		remaining -= read;
+		mk_memcpy(buff, data, read);
+		buff = ((void*)(((unsigned char*)(buff)) + read));
+	}
 
 	return 0;
+
+	#undef mk_memcpy
 }
 
 mk_jumbo int mk_dacdbt_io_read_u8(mk_std_input_stream_t* is, mk_uint8_t* u8)
