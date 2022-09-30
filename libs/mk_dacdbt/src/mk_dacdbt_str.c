@@ -6,6 +6,7 @@
 #include "../../mk_std/src/mk_std_input_stream.h"
 #include "../../mk_std/src/mk_std_istr.h"
 #include "../../mk_std/src/mk_std_istrg.h"
+#include "../../mk_std/src/mk_std_size_max.h"
 
 #include "../../mk_int/src/exact/mk_uint_8.h"
 #include "../../mk_int/src/exact/mk_uint_16.h"
@@ -67,9 +68,9 @@ mk_jumbo int mk_dacdbt_str_construct_parse(mk_dacdbt_str_t* str, mk_std_input_st
 	mk_try(mk_dacdbt_str_private_parse_len(is, &len, &unicode));
 	mk_assert(unicode == 0 || unicode == 1);
 	multiplier = (int)((unicode == 0) ? sizeof(char) : sizeof(wchar_t));
-	mk_try(mk_std_buffer_reserve(&mk_dacdbt_str_private_buff, len * multiplier));
+	mk_check(len <= mk_std_size_max / multiplier);
+	mk_try(mk_dacdbt_io_read_buffer(is, &mk_dacdbt_str_private_buff, len * multiplier));
 	mk_try(mk_std_buffer_get_mem(&mk_dacdbt_str_private_buff, &buff));
-	mk_try(mk_dacdbt_io_read_buff(is, buff, len * multiplier));
 	if(unicode == 0)
 	{
 		mk_try(mk_std_istrg_insert_narrow((char const*)buff, len, &str->m_istr));
