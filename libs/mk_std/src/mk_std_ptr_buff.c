@@ -1,6 +1,7 @@
 #include "mk_std_ptr_buff.h"
 
 #include "mk_std_buffer.h"
+#include "mk_std_size_max.h"
 
 #include "../../mk_utils/src/mk_assert.h"
 #include "../../mk_utils/src/mk_inline.h"
@@ -74,9 +75,19 @@ mk_jumbo int mk_std_ptr_buff_get_element(mk_std_ptr_buff_t* ptr_buff, size_t idx
 
 mk_jumbo int mk_std_ptr_buff_reserve_one(mk_std_ptr_buff_t* ptr_buff)
 {
+	size_t needed;
+	size_t size;
+
 	mk_assert(ptr_buff);
 
-	mk_try(mk_std_ptr_buff_reserve(ptr_buff, ptr_buff->m_count + 1));
+	mk_assert(ptr_buff->m_count <= mk_std_size_max / sizeof(void*) - 1);
+	needed = (ptr_buff->m_count + 1) * sizeof(void*);
+	mk_try(mk_std_buffer_get_size(&ptr_buff->m_ptrs, &size));
+	if(needed > size)
+	{
+		mk_assert(needed <= mk_std_size_max / 2);
+		mk_try(mk_std_buffer_reserve(&ptr_buff->m_ptrs, needed * 2));
+	}
 
 	return 0;
 }
@@ -87,6 +98,7 @@ mk_jumbo int mk_std_ptr_buff_reserve(mk_std_ptr_buff_t* ptr_buff, size_t count)
 
 	mk_assert(ptr_buff);
 
+	mk_assert(count <= mk_std_size_max / sizeof(void*));
 	needed = count * sizeof(void*);
 	mk_try(mk_std_buffer_reserve(&ptr_buff->m_ptrs, needed));
 
