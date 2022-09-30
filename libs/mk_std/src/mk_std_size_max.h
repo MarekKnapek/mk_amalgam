@@ -10,7 +10,11 @@
 #define mk_std_size_max SIZE_MAX
 #else
 #include <stddef.h>
+#ifdef SIZE_MAX
+#define mk_std_size_max SIZE_MAX
+#else
 #define mk_std_size_max ((size_t)(65535))
+#endif
 #endif
 
 
