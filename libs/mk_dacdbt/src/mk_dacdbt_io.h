@@ -21,6 +21,7 @@ mk_jumbo int mk_dacdbt_io_read_u8(mk_std_input_stream_t* is, mk_uint8_t* u8);
 mk_jumbo int mk_dacdbt_io_read_u16(mk_std_input_stream_t* is, mk_uint16_t* u16);
 mk_jumbo int mk_dacdbt_io_read_u32(mk_std_input_stream_t* is, mk_uint32_t* u32);
 mk_jumbo int mk_dacdbt_io_read_u64(mk_std_input_stream_t* is, mk_uint64_t* u64);
+mk_jumbo int mk_dacdbt_io_read_f64(mk_std_input_stream_t* is, double* f64);
 
 
 #endif

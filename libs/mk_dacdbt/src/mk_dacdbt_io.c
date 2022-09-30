@@ -125,3 +125,14 @@ mk_jumbo int mk_dacdbt_io_read_u64(mk_std_input_stream_t* is, mk_uint64_t* u64)
 
 	return 0;
 }
+
+mk_jumbo int mk_dacdbt_io_read_f64(mk_std_input_stream_t* is, double* f64)
+{
+	mk_assert(is);
+	mk_assert(f64);
+
+	mk_assert(sizeof(*f64) == 8);
+	mk_try(mk_dacdbt_io_read_buff(is, f64, sizeof(*f64)));
+
+	return 0;
+}
