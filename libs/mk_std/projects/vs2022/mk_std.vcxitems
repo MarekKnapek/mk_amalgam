@@ -16,6 +16,7 @@
 	<ItemGroup>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_win\projects\jumbo\mk_win.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_buffer.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_gcallocator.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_global.h"/>
@@ -36,6 +37,7 @@
 	<ItemGroup>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_int\projects\jumbo\mk_int.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_win\projects\jumbo\mk_win.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_buffer.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_gcallocator.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_std_global.c"/>
