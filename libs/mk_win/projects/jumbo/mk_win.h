@@ -10,6 +10,7 @@
 #include "../../src/mk_win_global.h"
 #include "../../src/mk_win_instance.h"
 #include "../../src/mk_win_kernel_file.h"
+#include "../../src/mk_win_kernel_input_stream.h"
 #include "../../src/mk_win_kernel_mapping.h"
 #include "../../src/mk_win_kernel_mapping_view.h"
 #include "../../src/mk_win_kernel_module.h"
