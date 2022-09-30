@@ -9,6 +9,7 @@
 #include "../../src/mk_win_instance.c"
 #include "../../src/mk_win_kernel_file.c"
 #include "../../src/mk_win_kernel_mapping.c"
+#include "../../src/mk_win_kernel_mapping_view.c"
 #include "../../src/mk_win_kernel_module.c"
 #include "../../src/mk_win_kernel_resource.c"
 #include "../../src/mk_win_str.c"
