@@ -70,8 +70,7 @@ mk_jumbo int mk_dacdbt_value_construct_parse(mk_dacdbt_value_t* value, mk_std_in
 		break;
 		case mk_dacdbt_value_type_e_f64:
 		{
-			mk_assert(sizeof(value->m_data.m_f64) == 8);
-			mk_try(mk_dacdbt_io_read_buff(is, &value->m_data.m_f64, sizeof(value->m_data.m_f64)));
+			mk_try(mk_dacdbt_io_read_f64(is, &value->m_data.m_f64));
 		}
 		break;
 		case mk_dacdbt_value_type_e_str:
