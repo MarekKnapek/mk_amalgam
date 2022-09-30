@@ -37,6 +37,7 @@ mk_jumbo int mk_dacdbt_value_construct_parse(mk_dacdbt_value_t* value, mk_std_in
 	int empty;
 	mk_uint8_t type;
 	unsigned typeu;
+	mk_dacdbt_value_type_t typee;
 	mk_uint32_t bin_len;
 
 	mk_assert(value);
@@ -59,17 +60,17 @@ mk_jumbo int mk_dacdbt_value_construct_parse(mk_dacdbt_value_t* value, mk_std_in
 		typeu == 7 ||
 		typeu == 8
 	);
-	typeu = (typeu == 7) ? (mk_dacdbt_value_type_e_str) : ((typeu == 8) ? (mk_dacdbt_value_type_e_str) : ((mk_dacdbt_value_type_t)typeu));
-	switch(typeu)
+	typee = (typeu == 7) ? (mk_dacdbt_value_type_e_str) : ((typeu == 8) ? (mk_dacdbt_value_type_e_str) : ((mk_dacdbt_value_type_t)(typeu)));
+	switch(typee)
 	{
 		case mk_dacdbt_value_type_e_u32: mk_try(mk_dacdbt_io_read_u32(is, &value->m_data.m_u32)); break;
 		case mk_dacdbt_value_type_e_f64: mk_assert(sizeof(value->m_data.m_f64) == 8); mk_try(mk_dacdbt_io_read_buff(is, &value->m_data.m_f64, sizeof(value->m_data.m_f64))); break;
-		case mk_dacdbt_value_type_e_str: value->m_type = typeu; mk_try(mk_dacdbt_str_construct_parse(&value->m_data.m_str, is)); break;
-		case mk_dacdbt_value_type_e_bin: mk_try(mk_dacdbt_io_read_u32(is, &bin_len)); mk_check(mk_uint32_le(&bin_len, &s_max_len)); value->m_data.m_bin.m_len = mk_uint32_to_sizet(&bin_len); mk_try(mk_std_gcallocator_allocate(value->m_data.m_bin.m_len, &value->m_data.m_bin.m_data)); value->m_type = typeu; mk_try(mk_dacdbt_io_read_buff(is, value->m_data.m_bin.m_data, value->m_data.m_bin.m_len)); break;
-		case mk_dacdbt_value_type_e_file: mk_try(mk_dacdbt_io_read_u32(is, &bin_len)); mk_check(mk_uint32_le(&bin_len, &s_max_len)); value->m_data.m_file.m_len = mk_uint32_to_sizet(&bin_len); mk_try(mk_std_gcallocator_allocate(value->m_data.m_file.m_len, &value->m_data.m_file.m_data)); value->m_type = typeu; mk_try(mk_dacdbt_io_read_buff(is, value->m_data.m_file.m_data, value->m_data.m_file.m_len)); break;
+		case mk_dacdbt_value_type_e_str: value->m_type = typee; mk_try(mk_dacdbt_str_construct_parse(&value->m_data.m_str, is)); break;
+		case mk_dacdbt_value_type_e_bin: mk_try(mk_dacdbt_io_read_u32(is, &bin_len)); mk_check(mk_uint32_le(&bin_len, &s_max_len)); value->m_data.m_bin.m_len = mk_uint32_to_sizet(&bin_len); mk_try(mk_std_gcallocator_allocate(value->m_data.m_bin.m_len, &value->m_data.m_bin.m_data)); value->m_type = typee; mk_try(mk_dacdbt_io_read_buff(is, value->m_data.m_bin.m_data, value->m_data.m_bin.m_len)); break;
+		case mk_dacdbt_value_type_e_file: mk_try(mk_dacdbt_io_read_u32(is, &bin_len)); mk_check(mk_uint32_le(&bin_len, &s_max_len)); value->m_data.m_file.m_len = mk_uint32_to_sizet(&bin_len); mk_try(mk_std_gcallocator_allocate(value->m_data.m_file.m_len, &value->m_data.m_file.m_data)); value->m_type = typee; mk_try(mk_dacdbt_io_read_buff(is, value->m_data.m_file.m_data, value->m_data.m_file.m_len)); break;
 		case mk_dacdbt_value_type_e_u64: mk_try(mk_dacdbt_io_read_u64(is, &value->m_data.m_u64)); break;
 	}
-	value->m_type = typeu;
+	value->m_type = typee;
 
 	return 0;
 }
