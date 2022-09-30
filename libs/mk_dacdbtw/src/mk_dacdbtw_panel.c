@@ -419,12 +419,10 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_set_file_name(mk_dacdbtw_pan
 	mk_win_char_t const mk_win_base_keywords_far* str; /* TODO: strlen */
 	size_t file_name_len;
 	size_t i;
-	char* file_name_c;
-	FILE* file;
+	int err;
 	mk_std_input_stream_t is;
 	int parsed;
 	mk_win_base_types_bool_t b;
-	int closed;
 
 	mk_assert(panel);
 	mk_assert(wparam == 0);
@@ -439,12 +437,11 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_set_file_name(mk_dacdbtw_pan
 		while(*str++) ++file_name_len;
 		mk_try(mk_std_gcallocator_reallocate((void**)&panel->m_file_name, (file_name_len + 1) * sizeof(mk_win_char_t)));
 		for(i = 0; i != file_name_len + 1; ++i) panel->m_file_name[i] = file_name[i];
-		mk_try(mk_win_str_to_narrow_z(panel->m_file_name, 0, &file_name_c));
-		file = fopen(file_name_c, "rb"); /* TODO: Wrapper around C file IO and Windows file IO and Windows mapped file IO. */
-		if(file)
+		err = mk_std_input_stream_construct_mapping(&is, file_name);
+		if(err == 0)
 		{
-			mk_try(mk_std_input_stream_construct_file(&is, file));
 			parsed = mk_dacdbt_doc_construct_parse(&panel->m_doc, &is);
+			mk_try(mk_std_input_stream_destruct(&is));
 			if(parsed == 0)
 			{
 				panel->m_state = mk_dacdbtw_panel_private_state_ok;
@@ -455,8 +452,6 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_set_file_name(mk_dacdbtw_pan
 				panel->m_state = mk_dacdbtw_panel_private_state_fail_parse;
 				mk_try(mk_win_user_window_send_set_text(panel->m_label, mk_win_char_c("failed to parse")));
 			}
-			mk_try(mk_std_input_stream_destruct(&is));
-			closed = fclose(file); mk_check(closed == 0);
 		}
 		else
 		{
