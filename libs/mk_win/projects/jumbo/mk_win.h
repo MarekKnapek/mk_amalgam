@@ -9,6 +9,7 @@
 #include "../../src/mk_win_comdlg_ofn.c"
 #include "../../src/mk_win_global.h"
 #include "../../src/mk_win_instance.h"
+#include "../../src/mk_win_kernel_file.h"
 #include "../../src/mk_win_kernel_module.h"
 #include "../../src/mk_win_kernel_resource.h"
 #include "../../src/mk_win_str.h"
