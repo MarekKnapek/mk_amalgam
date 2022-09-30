@@ -4,6 +4,7 @@
 
 #include "mk_dacdbt_str.h"
 
+#include "../../mk_std/src/mk_std_buffer.h"
 #include "../../mk_std/src/mk_std_input_stream.h"
 
 #include "../../mk_int/src/exact/mk_uint_32.h"
@@ -25,20 +26,13 @@ enum mk_dacdbt_value_type_e
 };
 typedef enum mk_dacdbt_value_type_e mk_dacdbt_value_type_t;
 
-struct mk_dacdbt_value_binary_s
-{
-	void* m_data;
-	size_t m_len;
-};
-typedef struct mk_dacdbt_value_binary_s mk_dacdbt_value_binary_t;
-
 union mk_dacdbt_value_data_u
 {
 	mk_uint32_t m_u32;
 	double m_f64;
 	mk_dacdbt_str_t m_str;
-	mk_dacdbt_value_binary_t m_bin;
-	mk_dacdbt_value_binary_t m_file;
+	mk_std_buffer_t m_bin;
+	mk_std_buffer_t m_file;
 	mk_uint64_t m_u64;
 };
 typedef union mk_dacdbt_value_data_u mk_dacdbt_value_data_t;
