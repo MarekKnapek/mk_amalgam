@@ -47,6 +47,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_create(mk_win_base_user_type
 static mk_inline int mk_dacdbtw_panel_private_on_wm_destroy(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_size(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_notify(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
+static mk_inline int mk_dacdbtw_panel_private_on_wm_idle(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_set_file_name(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
 static mk_inline int mk_dacdbtw_panel_private_on_msg(mk_dacdbtw_panel_t* panel, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
 static mk_inline int mk_dacdbtw_panel_private_on_wndproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_user_types_lresult_t* lr);
@@ -413,6 +414,22 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_notify(mk_dacdbtw_panel_t* p
 	return 0;
 }
 
+static mk_inline int mk_dacdbtw_panel_private_on_wm_idle(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr)
+{
+	int* did_something;
+
+	mk_assert(panel);
+	mk_assert(wparam == 0);
+	mk_assert(lparam != 0);
+	mk_assert(skip_defproc);
+	mk_assert(lr);
+
+	did_something = ((int*)((mk_win_base_types_void_lpt)(lparam)));
+	mk_assert(*did_something == 0);
+
+	return 0;
+}
+
 static mk_inline int mk_dacdbtw_panel_private_on_wm_set_file_name(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr)
 {
 	mk_win_char_t const mk_win_base_keywords_far* file_name;
@@ -494,6 +511,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_msg(mk_dacdbtw_panel_t* panel, 
 		case mk_win_user_window_wm_destroy: mk_try(mk_dacdbtw_panel_private_on_wm_destroy(panel, wparam, lparam, skip_defproc, lr)); break;
 		case mk_win_user_window_wm_size: mk_try(mk_dacdbtw_panel_private_on_wm_size(panel, wparam, lparam, skip_defproc, lr)); break;
 		case mk_win_user_window_wm_notify: mk_try(mk_dacdbtw_panel_private_on_wm_notify(panel, wparam, lparam, skip_defproc, lr)); break;
+		case mk_dacdbtw_panel_wm_on_idle: mk_try(mk_dacdbtw_panel_private_on_wm_idle(panel, wparam, lparam, skip_defproc, lr)); break;
 		case mk_dacdbtw_panel_wm_set_file_name: mk_try(mk_dacdbtw_panel_private_on_wm_set_file_name(panel, wparam, lparam, skip_defproc, lr)); break;
 	}
 
