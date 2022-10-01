@@ -115,3 +115,74 @@ mk_jumbo int mk_win_comctl_treeview_insert(mk_win_base_user_types_hwnd_t tree_vi
 
 	#undef mk_win_comctl_treeview_wm_insertitem
 }
+
+mk_jumbo int mk_win_comctl_treeview_get_item_param(mk_win_base_user_types_hwnd_t tree_view, mk_win_comctl_treeview_htreeitem_t item, void** ret)
+{
+	#if mk_win_api == mk_win_api_old
+	#define mk_win_comctl_treeview_item_m_t mk_win_comctl_treeview_item_a_t
+	#define mk_win_comctl_treeview_item_m_lpt mk_win_comctl_treeview_item_a_lpt
+	#define mk_win_comctl_treeview_wm_getitemm mk_win_comctl_treeview_wm_getitema
+	#elif mk_win_api == mk_win_api_ansi
+	#define mk_win_comctl_treeview_item_m_t mk_win_comctl_treeview_item_a_t
+	#define mk_win_comctl_treeview_item_m_lpt mk_win_comctl_treeview_item_a_lpt
+	#define mk_win_comctl_treeview_wm_getitemm mk_win_comctl_treeview_wm_getitema
+	#elif mk_win_api == mk_win_api_wide
+	#define mk_win_comctl_treeview_item_m_t mk_win_comctl_treeview_item_w_t
+	#define mk_win_comctl_treeview_item_m_lpt mk_win_comctl_treeview_item_w_lpt
+	#define mk_win_comctl_treeview_wm_getitemm mk_win_comctl_treeview_wm_getitemw
+	#elif mk_win_api == mk_win_api_both
+	#endif
+
+	#if mk_win_api != mk_win_api_both
+	mk_win_comctl_treeview_item_m_t it;
+	mk_win_base_user_types_lresult_t lr;
+	mk_assert(tree_view);
+	mk_assert(item);
+	mk_assert(ret);
+	it.m_mask = mk_win_comctl_treeview_item_flag_param;
+	it.m_hitem = item;
+	it.m_param = 0;
+	mk_try(mk_win_user_window_send(tree_view, mk_win_comctl_treeview_wm_getitemm, 0, ((mk_win_base_user_types_lparam_t)(((mk_win_comctl_treeview_item_m_lpt)(&it)))), &lr));
+	mk_assert(lr != 0);
+	mk_assert(it.m_param != 0);
+	*ret = ((void*)((mk_win_base_types_void_lpt)(it.m_param)));
+	#else
+	int unicode_enabled;
+	mk_try(mk_win_unicode_enabled(&unicode_enabled));
+	if(!unicode_enabled)
+	{
+		mk_win_comctl_treeview_item_a_t it;
+		mk_win_base_user_types_lresult_t lr;
+		mk_assert(tree_view);
+		mk_assert(item);
+		mk_assert(ret);
+		it.m_mask = mk_win_comctl_treeview_item_flag_param;
+		it.m_hitem = item;
+		it.m_param = 0;
+		mk_try(mk_win_user_window_send(tree_view, mk_win_comctl_treeview_wm_getitema, 0, ((mk_win_base_user_types_lparam_t)(((mk_win_comctl_treeview_item_a_lpt)(&it)))), &lr));
+		mk_assert(lr != 0);
+		mk_assert(it.m_param != 0);
+		*ret = ((void*)((mk_win_base_types_void_lpt)(it.m_param)));
+	}
+	else
+	{
+		mk_win_comctl_treeview_item_w_t it;
+		mk_win_base_user_types_lresult_t lr;
+		mk_assert(tree_view);
+		mk_assert(item);
+		mk_assert(ret);
+		it.m_mask = mk_win_comctl_treeview_item_flag_param;
+		it.m_hitem = item;
+		it.m_param = 0;
+		mk_try(mk_win_user_window_send(tree_view, mk_win_comctl_treeview_wm_getitemw, 0, ((mk_win_base_user_types_lparam_t)(((mk_win_comctl_treeview_item_w_lpt)(&it)))), &lr));
+		mk_assert(lr != 0);
+		mk_assert(it.m_param != 0);
+		*ret = ((void*)((mk_win_base_types_void_lpt)(it.m_param)));
+	}
+	#endif
+	return 0;
+
+	#undef mk_win_comctl_treeview_item_m_t
+	#undef mk_win_comctl_treeview_item_m_lpt
+	#undef mk_win_comctl_treeview_wm_getitemm
+}

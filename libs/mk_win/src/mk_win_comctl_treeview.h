@@ -369,12 +369,25 @@ mk_win_base_types_make_struct(mk_win_comctl_treeview_nm);
 #define mk_win_comctl_treeview_item_state_stateimagemask ((unsigned short)(0xf000ul))
 #define mk_win_comctl_treeview_item_state_usermask       ((unsigned short)(0xf000ul))
 
+#define mk_win_comctl_treeview_getnextitem_root            ((unsigned short)(0x0000ul))
+#define mk_win_comctl_treeview_getnextitem_next            ((unsigned short)(0x0001ul))
+#define mk_win_comctl_treeview_getnextitem_previous        ((unsigned short)(0x0002ul))
+#define mk_win_comctl_treeview_getnextitem_parent          ((unsigned short)(0x0003ul))
+#define mk_win_comctl_treeview_getnextitem_child           ((unsigned short)(0x0004ul))
+#define mk_win_comctl_treeview_getnextitem_firstvisible    ((unsigned short)(0x0005ul))
+#define mk_win_comctl_treeview_getnextitem_nextvisible     ((unsigned short)(0x0006ul))
+#define mk_win_comctl_treeview_getnextitem_previousvisible ((unsigned short)(0x0007ul))
+#define mk_win_comctl_treeview_getnextitem_drophilite      ((unsigned short)(0x0008ul))
+#define mk_win_comctl_treeview_getnextitem_caret           ((unsigned short)(0x0009ul))
+#define mk_win_comctl_treeview_getnextitem_lastvisible     ((unsigned short)(0x000aul))
+#define mk_win_comctl_treeview_getnextitem_nextselected    ((unsigned short)(0x000bul)) /* ie >= 0x0600 */
 
 #define mk_win_comctl_treeview_text_callback ((mk_win_char_t*)(((unsigned char*)(0)) - ((unsigned char*)(1)))) /*TODO:far*/
 #define mk_win_comctl_treeview_children_callback (-1)
 
 
 mk_jumbo int mk_win_comctl_treeview_insert(mk_win_base_user_types_hwnd_t tree_view, mk_win_comctl_treeview_insert_t* insert, mk_win_comctl_treeview_htreeitem_t* ret);
+mk_jumbo int mk_win_comctl_treeview_get_item_param(mk_win_base_user_types_hwnd_t tree_view, mk_win_comctl_treeview_htreeitem_t item, void** ret);
 
 
 #endif
