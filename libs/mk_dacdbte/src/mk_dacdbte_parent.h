@@ -6,6 +6,8 @@
 
 #include "../../mk_std/src/mk_std_ptr_buff.h"
 
+#include "../../mk_win/src/mk_win_user_window.h"
+
 #include "../../mk_utils/src/mk_jumbo.h"
 
 #include "../../mk_win_base/src/mk_win_base_keywords.h"
@@ -19,6 +21,9 @@ struct mk_dacdbte_parent_s
 	mk_win_base_user_types_hwnd_t m_mdi;
 	mk_std_ptr_buff_t m_children;
 };
+
+
+#define mk_dacdbte_parent_wm_on_idle ((unsigned short)(mk_win_user_window_wm_user + 0x0001ul))
 
 
 mk_jumbo int mk_dacdbte_parent_init(void);

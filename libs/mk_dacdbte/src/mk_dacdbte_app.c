@@ -19,6 +19,7 @@
 
 
 static mk_inline int mk_dacdbte_app_private_message_process(mk_dacdbte_app_pt app, mk_win_base_user_types_msg_t const* msg);
+static mk_inline int mk_dacdbte_app_private_on_idle(mk_dacdbte_app_pt app, int* did_something);
 
 
 mk_jumbo int mk_dacdbte_app_init(void)
@@ -92,6 +93,7 @@ mk_jumbo int mk_dacdbte_app_run(mk_dacdbte_app_pt app)
 {
 	mk_win_base_user_types_msg_t msg;
 	mk_win_base_types_bool_t b;
+	int did_something;
 
 	mk_assert(app);
 
@@ -105,7 +107,30 @@ mk_jumbo int mk_dacdbte_app_run(mk_dacdbte_app_pt app)
 			break;
 		}
 		mk_try(mk_dacdbte_app_private_message_process(app, &msg));
+		for(;;)
+		{
+			mk_try(mk_win_user_message_peek(&msg, mk_win_base_types_null, 0, 0, mk_win_user_message_peek_remove | mk_win_user_message_peek_noyield, &b));
+			if(b != 0)
+			{
+				if(msg.m_msg == mk_win_user_window_wm_quit)
+				{
+					app->m_exit_code = (int)msg.m_wparam;
+					goto out;
+				}
+				mk_try(mk_dacdbte_app_private_message_process(app, &msg));
+			}
+			else
+			{
+				did_something = 0;
+				mk_try(mk_dacdbte_app_private_on_idle(app, &did_something));
+				if(did_something == 0)
+				{
+					break;
+				}
+			}
+		}
 	}
+	out:;
 
 	return 0;
 }
@@ -200,6 +225,36 @@ static mk_inline int mk_dacdbte_app_private_message_process(mk_dacdbte_app_pt ap
 	{
 		mk_try(mk_win_user_message_translate(msg, &translated));
 		mk_try(mk_win_user_message_dispatch(msg, &lres));
+	}
+
+	return 0;
+}
+
+static mk_inline int mk_dacdbte_app_private_on_idle(mk_dacdbte_app_pt app, int* did_something)
+{
+	int did_ret;
+	size_t count;
+	size_t i;
+	int did;
+	mk_dacdbte_parent_pt parent;
+	mk_win_base_user_types_lresult_t lr;
+
+	mk_assert(app);
+	mk_assert(did_something);
+	mk_assert(*did_something == 0);
+
+	did_ret = 0;
+	mk_try(mk_std_ptr_buff_get_count(&app->m_parents, &count));
+	for(i = 0; i != count; ++i)
+	{
+		did = 0;
+		mk_try(mk_std_ptr_buff_get_element(&app->m_parents, i, (void**)&parent));
+		mk_try(mk_win_user_window_send(parent->m_hwnd, mk_dacdbte_parent_wm_on_idle, 0, ((mk_win_base_user_types_lparam_t)(((mk_win_base_types_void_lpt)(&did)))), &lr)); ((void)(lr));
+		if(did_ret == 0 && did != 0)
+		{
+			++did_ret;
+			*did_something = did_ret;
+		}
 	}
 
 	return 0;

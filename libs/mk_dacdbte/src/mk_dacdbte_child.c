@@ -35,6 +35,7 @@ static mk_inline int mk_dacdbte_child_private_reposition(mk_dacdbte_child_pt chi
 static mk_inline int mk_dacdbte_child_private_on_destroy(mk_dacdbte_child_pt child, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_dacdbte_child_private_on_size(mk_dacdbte_child_pt child, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_dacdbte_child_private_on_close(mk_dacdbte_child_pt child, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
+static mk_inline int mk_dacdbte_child_private_on_idle(mk_dacdbte_child_pt child, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_dacdbte_child_private_on_message(mk_dacdbte_child_pt child, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_dacdbte_child_private_on_wndproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, mk_win_base_user_types_lresult_t* lres);
 static mk_win_base_user_types_lresult_t mk_win_base_keywords_calling_convention_api mk_dacdbte_child_private_wndproc(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam);
@@ -244,6 +245,30 @@ static mk_inline int mk_dacdbte_child_private_on_close(mk_dacdbte_child_pt child
 	return 0;
 }
 
+static mk_inline int mk_dacdbte_child_private_on_idle(mk_dacdbte_child_pt child, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
+{
+	int* did_something;
+	int did;
+	mk_win_base_user_types_lresult_t lr;
+
+	mk_assert(child);
+	mk_assert(wparam == 0);
+	mk_assert(lparam != 0);
+	mk_assert(override_defproc);
+	mk_assert(lres);
+
+	did_something = ((int*)((mk_win_base_types_void_lpt)(lparam)));
+	mk_assert(*did_something == 0);
+	did = 0;
+	mk_try(mk_win_user_window_send(child->m_content, mk_dacdbte_child_wm_on_idle, 0, ((mk_win_base_user_types_lparam_t)(((mk_win_base_types_void_lpt)(&did)))), &lr)); ((void)(lr));
+	if(did != 0)
+	{
+		*did_something = did;
+	}
+
+	return 0;
+}
+
 static mk_inline int mk_dacdbte_child_private_on_message(mk_dacdbte_child_pt child, mk_win_base_types_uint_t msg, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
 {
 	mk_assert(child);
@@ -255,10 +280,8 @@ static mk_inline int mk_dacdbte_child_private_on_message(mk_dacdbte_child_pt chi
 		case mk_win_user_window_wm_destroy: mk_try(mk_dacdbte_child_private_on_destroy(child, override_defproc, lres)); break;
 		case mk_win_user_window_wm_size: mk_try(mk_dacdbte_child_private_on_size(child, wparam, lparam, override_defproc, lres)); break;
 		case mk_win_user_window_wm_close: mk_try(mk_dacdbte_child_private_on_close(child, override_defproc, lres)); break;
+		case mk_dacdbte_child_wm_on_idle: mk_try(mk_dacdbte_child_private_on_idle(child, wparam, lparam, override_defproc, lres)); break;
 	}
-
-	(void)wparam;/**/
-	(void)lparam;/**/
 
 	return 0;
 }

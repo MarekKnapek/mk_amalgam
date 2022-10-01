@@ -27,7 +27,8 @@ struct mk_dacdbtw_panel_s
 mk_win_base_types_make_struct(mk_dacdbtw_panel);
 
 
-#define mk_dacdbtw_panel_wm_set_file_name ((unsigned short)(mk_win_user_window_wm_user + 0x0001ul))
+#define mk_dacdbtw_panel_wm_on_idle       ((unsigned short)(mk_win_user_window_wm_user + 0x0001ul))
+#define mk_dacdbtw_panel_wm_set_file_name ((unsigned short)(mk_win_user_window_wm_user + 0x0002ul))
 
 
 mk_jumbo int mk_dacdbtw_panel_init(void);

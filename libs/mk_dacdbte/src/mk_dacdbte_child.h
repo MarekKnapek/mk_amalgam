@@ -5,6 +5,7 @@
 #include "mk_dacdbte_forward.h"
 
 #include "../../mk_win/src/mk_win_char.h"
+#include "../../mk_win/src/mk_win_user_window.h"
 
 #include "../../mk_win_base/src/mk_win_base_keywords.h"
 #include "../../mk_win_base/src/mk_win_base_user_types.h"
@@ -18,6 +19,9 @@ struct mk_dacdbte_child_s
 	mk_win_base_user_types_hwnd_t m_hwnd;
 	mk_win_base_user_types_hwnd_t m_content;
 };
+
+
+#define mk_dacdbte_child_wm_on_idle ((unsigned short)(mk_win_user_window_wm_user + 0x0001ul))
 
 
 mk_jumbo int mk_dacdbte_child_init(void);
