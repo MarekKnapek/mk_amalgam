@@ -40,7 +40,41 @@ mk_jumbo int mk_win_user_message_get(mk_win_base_user_types_msg_t* msg, mk_win_b
 	*ret = b;
 
 	return 0;
+
 	#undef GetMessageM
+}
+
+mk_jumbo int mk_win_user_message_peek(mk_win_base_user_types_msg_t* msg, mk_win_base_user_types_hwnd_t hwnd, mk_win_base_types_uint_t msg_min, mk_win_base_types_uint_t msg_max, mk_win_base_types_uint_t remove, mk_win_base_types_bool_t* ret)
+{
+	#if mk_win_api == mk_win_api_old
+	#define PeekMessageM PeekMessage
+	#elif mk_win_api == mk_win_api_ansi
+	#define PeekMessageM PeekMessageA
+	#elif mk_win_api == mk_win_api_wide
+	#define PeekMessageM PeekMessageW
+	#endif
+
+	mk_win_base_types_bool_t b;
+	#if mk_win_api != mk_win_api_both
+	b = PeekMessageM(msg, hwnd, msg_min, msg_max, remove);
+	#else
+	int unicode_enabled;
+	mk_try(mk_win_unicode_enabled(&unicode_enabled));
+	if(!unicode_enabled)
+	{
+		b = PeekMessageA(msg, hwnd, msg_min, msg_max, remove);
+	}
+	else
+	{
+		b = PeekMessageW(msg, hwnd, msg_min, msg_max, remove);
+	}
+	#endif
+	mk_assert(ret);
+	*ret = b;
+
+	return 0;
+
+	#undef PeekMessageM
 }
 
 mk_jumbo int mk_win_user_message_translate(mk_win_base_user_types_msg_t const* msg, mk_win_base_types_bool_t* ret)
