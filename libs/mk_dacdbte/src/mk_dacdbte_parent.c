@@ -33,6 +33,7 @@
 #include "../../mk_win_base/src/mk_win_base_user_types.h"
 
 #include <stddef.h>
+#include <string.h>
 
 
 typedef mk_dacdbte_parent_t mk_win_base_keywords_far* mk_dacdbte_parent_lpt;
@@ -43,6 +44,7 @@ static mk_win_char_t const mk_dacdbte_parent_private_class_name[] = mk_win_char_
 
 
 static mk_inline int mk_dacdbte_parent_private_register_class(void);
+static mk_inline int mk_dacdbte_parent_private_add_child(mk_dacdbte_parent_pt parent, mk_win_strc_t file_name);
 static mk_inline int mk_dacdbte_parent_private_on_create(mk_dacdbte_parent_pt parent, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_dacdbte_parent_private_on_destroy(mk_dacdbte_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
 static mk_inline int mk_dacdbte_parent_private_on_close(mk_dacdbte_parent_pt parent, int* override_defproc, mk_win_base_user_types_lresult_t* lres);
@@ -192,7 +194,8 @@ mk_jumbo int mk_dacdbte_parent_children_add(mk_dacdbte_parent_pt parent)
 	mk_win_char_t* file_name;
 	mk_win_comdlg_ofn_t ofn;
 	mk_win_base_types_bool_t b;
-	mk_dacdbte_child_pt child;
+	mk_win_str_t str1;
+	mk_win_str_t str2;
 
 	mk_assert(parent);
 	mk_assert(parent->m_hwnd);
@@ -211,7 +214,7 @@ mk_jumbo int mk_dacdbte_parent_children_add(mk_dacdbte_parent_pt parent)
 	ofn.m_max_file_title = 0;
 	ofn.m_initial_dir = NULL;
 	ofn.m_title = NULL;
-	ofn.m_flags = mk_win_comdlg_ofn_flag_pathmustexist | mk_win_comdlg_ofn_flag_filemustexist;
+	ofn.m_flags = mk_win_comdlg_ofn_flag_allowmultiselect | mk_win_comdlg_ofn_flag_pathmustexist | mk_win_comdlg_ofn_flag_filemustexist | mk_win_comdlg_ofn_flag_explorer;
 	ofn.m_file_offset = 0;
 	ofn.m_file_extension = 0;
 	ofn.m_default_extension = NULL;
@@ -221,10 +224,25 @@ mk_jumbo int mk_dacdbte_parent_children_add(mk_dacdbte_parent_pt parent)
 	mk_try(mk_win_comdlg_ofn(&ofn, &b));
 	if(b != 0)
 	{
-		mk_try(mk_std_gcallocator_allocate(sizeof(*child), (void**)&child));
-		mk_try(mk_std_ptr_buff_append(&parent->m_children, child));
-		mk_try(mk_dacdbte_child_construct(child, parent, NULL));
-		mk_try(mk_dacdbte_child_set_file_name(child, ofn.m_file_name_out));
+		if(ofn.m_file_offset != 0 && ofn.m_file_name_out[ofn.m_file_offset - 1] == mk_win_char_c('\0'))
+		{
+			str1 = ofn.m_file_name_out + ofn.m_file_offset - 1;
+			*str1 = mk_win_char_c('\\');
+			while(*str1 != mk_win_char_c('\0')) ++str1;
+			for(;;)
+			{
+				mk_try(mk_dacdbte_parent_private_add_child(parent, ofn.m_file_name_out));
+				++str1;
+				if(*str1 == mk_win_char_c('\0')) break;
+				str2 = str1;
+				while(*str1 != mk_win_char_c('\0')) ++str1;
+				memmove(ofn.m_file_name_out + ofn.m_file_offset, str2, (str1 - str2 + 1) * sizeof(mk_win_char_t));
+			}
+		}
+		else
+		{
+			mk_try(mk_dacdbte_parent_private_add_child(parent, ofn.m_file_name_out));
+		}
 	}
 	mk_try(mk_std_gcallocator_deallocate(file_name));
 
@@ -422,6 +440,22 @@ static mk_inline int mk_dacdbte_parent_private_register_class(void)
 	cls.m_small_icon = mk_win_base_types_null;
 	mk_try(mk_win_user_class_register(&cls, &atom));
 	mk_assert(atom != 0);
+
+	return 0;
+}
+
+static mk_inline int mk_dacdbte_parent_private_add_child(mk_dacdbte_parent_pt parent, mk_win_strc_t file_name)
+{
+	mk_dacdbte_child_pt child;
+
+	mk_assert(parent);
+	mk_assert(file_name);
+	mk_assert(*file_name);
+
+	mk_try(mk_std_gcallocator_allocate(sizeof(*child), (void**)&child));
+	mk_try(mk_std_ptr_buff_append(&parent->m_children, child));
+	mk_try(mk_dacdbte_child_construct(child, parent, NULL));
+	mk_try(mk_dacdbte_child_set_file_name(child, file_name));
 
 	return 0;
 }

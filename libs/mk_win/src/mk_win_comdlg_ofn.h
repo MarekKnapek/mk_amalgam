@@ -42,25 +42,25 @@
 struct mk_win_comdlg_ofn_s
 {
 	mk_win_base_user_types_hwnd_t m_owner;
-  mk_win_base_types_hinstance_t m_instance;
+	mk_win_base_types_hinstance_t m_instance;
 	mk_win_strc_t m_filter;
-  mk_win_str_t m_custom_filter;
-  mk_win_base_types_dword_t m_max_custom_tfilter;
-  mk_win_base_types_dword_t m_filter_index;
-  mk_win_strc_t m_file_name_buff;
-  mk_win_base_types_dword_t m_file_name_buff_len_chars;
-	mk_win_strc_t m_file_name_out;
-  mk_win_str_t m_file_title;
-  mk_win_base_types_dword_t m_max_file_title;
-  mk_win_strc_t m_initial_dir;
-  mk_win_strc_t m_title;
-  mk_win_base_types_dword_t m_flags;
-  mk_win_base_types_word_t m_file_offset;
-  mk_win_base_types_word_t m_file_extension;
-  mk_win_strc_t m_default_extension;
-  mk_win_base_user_types_lparam_t m_custom_data;
-  mk_win_base_comdlg_types_open_file_name_hook_t m_hook;
-  mk_win_strc_t m_template_name;
+	mk_win_str_t m_custom_filter;
+	mk_win_base_types_dword_t m_max_custom_tfilter;
+	mk_win_base_types_dword_t m_filter_index;
+	mk_win_strc_t m_file_name_buff;
+	mk_win_base_types_dword_t m_file_name_buff_len_chars;
+	mk_win_str_t m_file_name_out;
+	mk_win_str_t m_file_title;
+	mk_win_base_types_dword_t m_max_file_title;
+	mk_win_strc_t m_initial_dir;
+	mk_win_strc_t m_title;
+	mk_win_base_types_dword_t m_flags;
+	mk_win_base_types_word_t m_file_offset;
+	mk_win_base_types_word_t m_file_extension;
+	mk_win_strc_t m_default_extension;
+	mk_win_base_user_types_lparam_t m_custom_data;
+	mk_win_base_comdlg_types_open_file_name_hook_t m_hook;
+	mk_win_strc_t m_template_name;
 };
 mk_win_base_types_make_struct(mk_win_comdlg_ofn);
 
