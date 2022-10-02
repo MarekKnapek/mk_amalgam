@@ -148,11 +148,28 @@ mk_jumbo int mk_dacdbte_child_close(mk_dacdbte_child_pt child)
 
 mk_jumbo int mk_dacdbte_child_set_file_name(mk_dacdbte_child_pt child, mk_win_char_t const* file_name)
 {
+	size_t last_slash_idx;
+	mk_win_char_t const* str;
 	mk_win_base_user_types_lresult_t lr;
 
 	mk_assert(child);
+	mk_assert(file_name);
+	mk_assert(*file_name);
 
-	mk_try(mk_win_user_window_send(child->m_content, mk_dacdbtw_panel_wm_set_file_name, 0, (mk_win_base_user_types_lparam_t)(mk_win_char_t const mk_win_base_keywords_far*)file_name, &lr));
+	last_slash_idx = 0;
+	str = file_name;
+	while(*str)
+	{
+		if(*str == mk_win_char_c('\\') || *str == mk_win_char_c('/'))
+		{
+			last_slash_idx = ((size_t)(str - file_name + 1));
+		}
+		++str;
+	}
+	str = file_name + last_slash_idx;
+	mk_try(mk_win_user_window_send_set_text(child->m_hwnd, str));
+
+	mk_try(mk_win_user_window_send(child->m_content, mk_dacdbtw_panel_wm_set_file_name, 0, (mk_win_base_user_types_lparam_t)(mk_win_char_t const mk_win_base_keywords_far*)file_name, &lr)); ((void)(lr));
 
 	return 0;
 }
