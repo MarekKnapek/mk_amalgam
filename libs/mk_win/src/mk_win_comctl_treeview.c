@@ -116,7 +116,7 @@ mk_jumbo int mk_win_comctl_treeview_insert(mk_win_base_user_types_hwnd_t tree_vi
 	#undef mk_win_comctl_treeview_wm_insertitem
 }
 
-mk_jumbo int mk_win_comctl_treeview_get_item_param(mk_win_base_user_types_hwnd_t tree_view, mk_win_comctl_treeview_htreeitem_t item, void** ret)
+mk_jumbo int mk_win_comctl_treeview_item_get_param(mk_win_base_user_types_hwnd_t tree_view, mk_win_comctl_treeview_htreeitem_t item, void** ret)
 {
 	#if mk_win_api == mk_win_api_old
 	#define mk_win_comctl_treeview_item_m_t mk_win_comctl_treeview_item_a_t

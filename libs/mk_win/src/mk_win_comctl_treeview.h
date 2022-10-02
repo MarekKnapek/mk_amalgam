@@ -387,7 +387,7 @@ mk_win_base_types_make_struct(mk_win_comctl_treeview_nm);
 
 
 mk_jumbo int mk_win_comctl_treeview_insert(mk_win_base_user_types_hwnd_t tree_view, mk_win_comctl_treeview_insert_t* insert, mk_win_comctl_treeview_htreeitem_t* ret);
-mk_jumbo int mk_win_comctl_treeview_get_item_param(mk_win_base_user_types_hwnd_t tree_view, mk_win_comctl_treeview_htreeitem_t item, void** ret);
+mk_jumbo int mk_win_comctl_treeview_item_get_param(mk_win_base_user_types_hwnd_t tree_view, mk_win_comctl_treeview_htreeitem_t item, void** ret);
 
 
 #endif
