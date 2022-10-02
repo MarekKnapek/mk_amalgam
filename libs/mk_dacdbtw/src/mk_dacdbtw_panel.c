@@ -65,6 +65,13 @@ static mk_inline int mk_dacdbtw_panel_private_reposition(mk_dacdbtw_panel_t* pan
 static mk_inline int mk_dacdbtw_panel_private_on_wm_create(mk_win_base_user_types_hwnd_t hwnd, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_destroy(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_size(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree_selchanged(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree_itemexpanding_firsttime(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree_itemexpanding(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree_getdispinfo_children(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree_getdispinfo_text(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree_getdispinfo(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_notify(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_idle(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
 static mk_inline int mk_dacdbtw_panel_private_on_wm_set_file_name(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr);
@@ -331,6 +338,338 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_size(mk_dacdbtw_panel_t* pan
 	return 0;
 }
 
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree_selchanged(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr)
+{
+	mk_win_base_user_nmhdr_lpt nmhdr;
+
+	mk_win_comctl_treeview_nm_lpt nm;
+	mk_dacdbt_key_t* key;
+	mk_std_ptr_buff_t keys;
+	mk_win_comctl_treeview_htreeitem_t item;
+	mk_win_base_user_types_lresult_t lres;
+	size_t total_len;
+	mk_std_buffer_t buff;
+	size_t count;
+	size_t i;
+	int is_wide;
+	void const* data;
+	size_t len;
+	mk_win_strc_t name;
+	mk_win_str_t path;
+
+	mk_assert(panel);
+	mk_assert(panel->m_tree);
+	((void)(wparam));
+	mk_assert(lparam != 0);
+	mk_assert(skip_defproc);
+	mk_assert(lr);
+
+	nmhdr = ((mk_win_base_user_nmhdr_lpt)(lparam));
+	mk_assert(nmhdr->m_from == panel->m_tree);
+	mk_assert(nmhdr->m_code == mk_win_comctl_treeview_notify_selchangeda || nmhdr->m_code == mk_win_comctl_treeview_notify_selchangedw);
+
+	nm = ((mk_win_comctl_treeview_nm_lpt)(nmhdr));
+	mk_assert(nm->m_new.m_a.m_param != 0);
+	key = ((mk_dacdbt_key_t*)(nm->m_new.m_a.m_param));
+	mk_try(mk_std_ptr_buff_construct(&keys));
+	item = nm->m_new.m_a.m_hitem;
+	mk_assert(item);
+	mk_try(mk_std_ptr_buff_append(&keys, key));
+	while(key != &panel->m_doc.m_root)
+	{
+		mk_try(mk_win_user_window_send(panel->m_tree, mk_win_comctl_treeview_wm_getnextitem, mk_win_comctl_treeview_getnextitem_parent, ((mk_win_base_user_types_lparam_t)(item)), &lres));
+		mk_assert(lres != 0);
+		item = ((mk_win_comctl_treeview_htreeitem_t)(lres));
+		mk_try(mk_win_comctl_treeview_item_get_param(panel->m_tree, item, ((void**)(&key))));
+		mk_try(mk_std_ptr_buff_append(&keys, key));
+	}
+	total_len = 0;
+	mk_try(mk_std_buffer_init(&buff));
+	mk_try(mk_std_ptr_buff_get_count(&keys, &count));
+	for(i = 0; i != count; ++i)
+	{
+		mk_try(mk_std_ptr_buff_get_element(&keys, count - 1 - i, ((void**)(&key))));
+		mk_try(mk_dacdbt_key_get_name(key, &is_wide, &data, &len));
+		if(is_wide == 0)
+		{
+			mk_try(mk_win_str_from_narrow_s(((char*)(data)), len, 0, &name));
+		}
+		else
+		{
+			mk_try(mk_win_str_from_wide_s(((wchar_t*)(data)), len, 0, &name));
+		}
+		mk_try(mk_std_buffer_reserve(&buff, total_len + (1 + len) * sizeof(mk_win_char_t)));
+		mk_try(mk_std_buffer_get_mem(&buff, ((void**)(&path))));
+		path += total_len / sizeof(mk_win_char_t);
+		path[0] = mk_win_char_c('/');
+		++path;
+		memcpy(path, name, len * sizeof(mk_win_char_t));
+		total_len += (1 + len) * sizeof(mk_win_char_t);
+	}
+	mk_try(mk_std_buffer_reserve(&buff, total_len + sizeof(mk_win_char_t)));
+	mk_try(mk_std_buffer_get_mem(&buff, ((void**)(&path))));
+	path[total_len / sizeof(mk_win_char_t)] = mk_win_char_c('\0');
+	mk_try(mk_win_comctl_statusbar_set_text(panel->m_status, mk_win_comctl_statusbar_settext_param_simpleid, mk_win_comctl_statusbar_settext_param_notabparsing, path));
+	mk_try(mk_std_buffer_deinit(&buff));
+	mk_try(mk_std_ptr_buff_remove_all(&keys));
+	mk_try(mk_std_ptr_buff_destruct(&keys));
+
+	return 0;
+}
+
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree_itemexpanding_firsttime(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr)
+{
+	mk_win_base_user_nmhdr_lpt nmhdr;
+	mk_win_comctl_treeview_nm_lpt nm;
+
+	mk_dacdbt_key_t* key;
+	mk_win_comctl_treeview_insert_t insert;
+	unsigned long count;
+	unsigned long i;
+	mk_dacdbt_key_t* sub_key;
+	mk_win_comctl_treeview_htreeitem_t hti;
+
+	mk_assert(panel);
+	mk_assert(panel->m_tree);
+	((void)(wparam));
+	mk_assert(lparam != 0);
+	mk_assert(skip_defproc);
+	mk_assert(lr);
+
+	nmhdr = ((mk_win_base_user_nmhdr_lpt)(lparam));
+	mk_assert(nmhdr->m_from == panel->m_tree);
+	mk_assert(nmhdr->m_code == mk_win_comctl_treeview_notify_itemexpandinga || nmhdr->m_code == mk_win_comctl_treeview_notify_itemexpandingw);
+	nm = ((mk_win_comctl_treeview_nm_lpt)(nmhdr));
+
+	mk_assert(nm->m_new.m_a.m_param != 0);
+	key = ((mk_dacdbt_key_t*)(nm->m_new.m_a.m_param));
+	mk_assert(nm->m_new.m_a.m_hitem != 0);
+	insert.m_parent = nm->m_new.m_a.m_hitem;
+	insert.m_insert_after = mk_win_comctl_treeview_hti_first;
+	insert.m_item.m_item_ex.m_mask = mk_win_comctl_treeview_item_flag_text | mk_win_comctl_treeview_item_flag_param | mk_win_comctl_treeview_item_flag_children;
+	insert.m_item.m_item_ex.m_hitem = 0;
+	insert.m_item.m_item_ex.m_state = 0;
+	insert.m_item.m_item_ex.m_state_mask = 0;
+	insert.m_item.m_item_ex.m_text = mk_win_comctl_treeview_text_callback;
+	insert.m_item.m_item_ex.m_text_len = 0;
+	insert.m_item.m_item_ex.m_image_idx = 0;
+	insert.m_item.m_item_ex.m_selected_image_idx = 0;
+	insert.m_item.m_item_ex.m_children_count = mk_win_comctl_treeview_children_callback;
+	insert.m_item.m_item_ex.m_integral = 0; /* 1 */
+	insert.m_item.m_item_ex.m_state_ex = 0;
+	insert.m_item.m_item_ex.m_hwnd = 0;
+	insert.m_item.m_item_ex.m_expanded_image_idx = 0;
+	insert.m_item.m_item_ex.m_reserved = 0;
+	mk_try(mk_dacdbt_key_get_sub_keys_count(key, &count));
+	for(i = 0; i != count; ++i)
+	{
+		mk_try(mk_dacdbt_key_get_sub_key(key, count - 1 - i, &sub_key)); mk_assert(sub_key);
+		insert.m_item.m_item_ex.m_param = ((mk_win_base_user_types_lparam_t)(sub_key));
+		mk_try(mk_win_comctl_treeview_insert(panel->m_tree, &insert, &hti));
+		mk_assert(hti);
+	}
+
+	return 0;
+}
+
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree_itemexpanding(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr)
+{
+	mk_win_base_user_nmhdr_lpt nmhdr;
+
+	mk_win_comctl_treeview_nm_lpt nm;
+
+	mk_assert(panel);
+	mk_assert(panel->m_tree);
+	((void)(wparam));
+	mk_assert(lparam != 0);
+	mk_assert(skip_defproc);
+	mk_assert(lr);
+
+	nmhdr = ((mk_win_base_user_nmhdr_lpt)(lparam));
+	mk_assert(nmhdr->m_from == panel->m_tree);
+	mk_assert(nmhdr->m_code == mk_win_comctl_treeview_notify_itemexpandinga || nmhdr->m_code == mk_win_comctl_treeview_notify_itemexpandingw);
+
+	nm = ((mk_win_comctl_treeview_nm_lpt)(nmhdr));
+	if((nm->m_new.m_a.m_state & mk_win_comctl_treeview_item_state_expandedonce) == 0)
+	{
+		mk_try(mk_dacdbtw_panel_private_on_wm_notify_tree_itemexpanding_firsttime(panel, wparam, lparam, skip_defproc, lr));
+	}
+
+	return 0;
+}
+
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree_getdispinfo_children(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr)
+{
+	mk_win_base_user_nmhdr_lpt nmhdr;
+	mk_win_comctl_treeview_nm_dispinfom_lpt dispinfo;
+
+	mk_dacdbt_key_t* key;
+	unsigned long count;
+
+	mk_assert(panel);
+	mk_assert(panel->m_tree);
+	((void)(wparam));
+	mk_assert(lparam != 0);
+	mk_assert(skip_defproc);
+	mk_assert(lr);
+
+	nmhdr = ((mk_win_base_user_nmhdr_lpt)(lparam));
+	mk_assert(nmhdr->m_from == panel->m_tree);
+	mk_assert(nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfoa || nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfow);
+	dispinfo = ((mk_win_comctl_treeview_nm_dispinfom_lpt)(nmhdr));
+	mk_assert((dispinfo->m_item.m_item_a.m_mask & mk_win_comctl_treeview_item_flag_children) != 0);
+
+	mk_assert(dispinfo->m_item.m_item_a.m_param != 0);
+	key = ((mk_dacdbt_key_t*)(dispinfo->m_item.m_item_a.m_param));
+	mk_try(mk_dacdbt_key_get_sub_keys_count(key, &count));
+	dispinfo->m_item.m_item_a.m_children_count = (count != 0);
+
+	return 0;
+}
+
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree_getdispinfo_text(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr)
+{
+	mk_win_base_user_nmhdr_lpt nmhdr;
+	mk_win_comctl_treeview_nm_dispinfom_lpt dispinfo;
+
+	mk_dacdbt_key_t* key;
+	int is_wide;
+	void const* data;
+	size_t len;
+	char* narrow;
+	void* mem;
+	wchar_t* wide;
+
+	mk_assert(panel);
+	mk_assert(panel->m_tree);
+	((void)(wparam));
+	mk_assert(lparam != 0);
+	mk_assert(skip_defproc);
+	mk_assert(lr);
+
+	nmhdr = ((mk_win_base_user_nmhdr_lpt)(lparam));
+	mk_assert(nmhdr->m_from == panel->m_tree);
+	mk_assert(nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfoa || nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfow);
+	dispinfo = ((mk_win_comctl_treeview_nm_dispinfom_lpt)(nmhdr));
+	mk_assert((dispinfo->m_item.m_item_a.m_mask & mk_win_comctl_treeview_item_flag_text) != 0);
+
+	mk_assert(dispinfo->m_item.m_item_a.m_param != 0);
+	key = ((mk_dacdbt_key_t*)(dispinfo->m_item.m_item_a.m_param));
+	mk_try(mk_dacdbt_key_get_name(key, &is_wide, &data, &len));
+	#define mk_min(a, b) (((b) < (a)) ? (b) : (a))
+	if(is_wide == 0)
+	{
+		if(nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfoa)
+		{
+			narrow = ((char*)(data));
+			mk_try(mk_std_buffer_reserve(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], mk_min(len + 1, 512) * sizeof(char)));
+			mk_try(mk_std_buffer_get_mem(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], &mem));
+			memcpy(mem, narrow, mk_min(len, 512 - 1) * sizeof(char));
+			((char*)(mem))[mk_min(len, 512 - 1)] = '\0';
+			dispinfo->m_item.m_item_a.m_text = ((char*)(mem));
+		}
+		else
+		{
+			mk_try(mk_std_str_convertor_narrow_to_wide_s(((char const*)(data)), mk_min(len, 512), 0, &wide));
+			mk_try(mk_std_buffer_reserve(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], mk_min(len + 1, 512) * sizeof(wchar_t)));
+			mk_try(mk_std_buffer_get_mem(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], &mem));
+			memcpy(mem, wide, mk_min(len, 512 - 1) * sizeof(wchar_t));
+			((wchar_t*)(mem))[mk_min(len, 512 - 1)] = L'\0';
+			dispinfo->m_item.m_item_w.m_text = ((wchar_t*)(mem));
+		}
+	}
+	else
+	{
+		if(nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfoa)
+		{
+			mk_try(mk_std_str_convertor_wide_to_narrow_s(((wchar_t const*)(data)), mk_min(len, 512), 0, &narrow));
+			mk_try(mk_std_buffer_reserve(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], mk_min(len + 1, 512) * sizeof(char)));
+			mk_try(mk_std_buffer_get_mem(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], &mem));
+			memcpy(mem, narrow, mk_min(len, 512 - 1) * sizeof(char));
+			((char*)(mem))[mk_min(len, 512 - 1)] = '\0';
+			dispinfo->m_item.m_item_a.m_text = ((char*)(mem));
+		}
+		else
+		{
+			wide = ((wchar_t*)(((wchar_t const*)(data))));
+			mk_try(mk_std_buffer_reserve(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], mk_min(len + 1, 512) * sizeof(wchar_t)));
+			mk_try(mk_std_buffer_get_mem(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], &mem));
+			memcpy(mem, wide, mk_min(len, 512 - 1) * sizeof(wchar_t));
+			((wchar_t*)(mem))[mk_min(len, 512 - 1)] = L'\0';
+			dispinfo->m_item.m_item_w.m_text = ((wchar_t*)(mem));
+		}
+	}
+	#undef mk_min
+	panel->m_tree_callback_texts_idx = (panel->m_tree_callback_texts_idx + 1) % 4;
+
+	return 0;
+}
+
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree_getdispinfo(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr)
+{
+	mk_win_base_user_nmhdr_lpt nmhdr;
+
+	mk_win_comctl_treeview_nm_dispinfom_lpt dispinfo;
+
+	mk_assert(panel);
+	mk_assert(panel->m_tree);
+	((void)(wparam));
+	mk_assert(lparam != 0);
+	mk_assert(skip_defproc);
+	mk_assert(lr);
+
+	nmhdr = ((mk_win_base_user_nmhdr_lpt)(lparam));
+	mk_assert(nmhdr->m_from == panel->m_tree);
+	mk_assert(nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfoa || nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfow);
+
+	dispinfo = ((mk_win_comctl_treeview_nm_dispinfom_lpt)(nmhdr));
+	mk_assert
+	(
+		((dispinfo->m_item.m_item_a.m_mask & mk_win_comctl_treeview_item_flag_text) != 0) ||
+		((dispinfo->m_item.m_item_a.m_mask & mk_win_comctl_treeview_item_flag_children) != 0)
+	);
+	if((dispinfo->m_item.m_item_a.m_mask & mk_win_comctl_treeview_item_flag_text) != 0)
+	{
+		mk_try(mk_dacdbtw_panel_private_on_wm_notify_tree_getdispinfo_text(panel, wparam, lparam, skip_defproc, lr));
+	}
+	if((dispinfo->m_item.m_item_a.m_mask & mk_win_comctl_treeview_item_flag_children) != 0)
+	{
+		mk_try(mk_dacdbtw_panel_private_on_wm_notify_tree_getdispinfo_children(panel, wparam, lparam, skip_defproc, lr));
+	}
+
+	return 0;
+}
+
+static mk_inline int mk_dacdbtw_panel_private_on_wm_notify_tree(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr)
+{
+	mk_win_base_user_nmhdr_lpt nmhdr;
+
+	mk_assert(panel);
+	mk_assert(panel->m_tree);
+	((void)(wparam));
+	mk_assert(lparam != 0);
+	mk_assert(skip_defproc);
+	mk_assert(lr);
+
+	nmhdr = ((mk_win_base_user_nmhdr_lpt)(lparam));
+	mk_assert(nmhdr->m_from == panel->m_tree);
+
+	if(nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfoa || nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfow)
+	{
+		mk_try(mk_dacdbtw_panel_private_on_wm_notify_tree_getdispinfo(panel, wparam, lparam, skip_defproc, lr));
+	}
+	else if(nmhdr->m_code == mk_win_comctl_treeview_notify_itemexpandinga || nmhdr->m_code == mk_win_comctl_treeview_notify_itemexpandingw)
+	{
+		mk_try(mk_dacdbtw_panel_private_on_wm_notify_tree_itemexpanding(panel, wparam, lparam, skip_defproc, lr));
+	}
+	else if(nmhdr->m_code == mk_win_comctl_treeview_notify_selchangeda ||nmhdr->m_code == mk_win_comctl_treeview_notify_selchangedw)
+	{
+		mk_try(mk_dacdbtw_panel_private_on_wm_notify_tree_selchanged(panel, wparam, lparam, skip_defproc, lr));
+	}
+
+	return 0;
+}
+
 static mk_inline int mk_dacdbtw_panel_private_on_wm_notify(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* skip_defproc, mk_win_base_user_types_lresult_t* lr)
 {
 	mk_win_base_user_nmhdr_lpt nmhdr;
@@ -345,191 +684,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_notify(mk_dacdbtw_panel_t* p
 	nmhdr = ((mk_win_base_user_nmhdr_lpt)(lparam));
 	if(nmhdr->m_from == panel->m_tree)
 	{
-		if(nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfoa || nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfow)
-		{
-			mk_win_comctl_treeview_nm_dispinfom_lpt dispinfo;
-			mk_dacdbt_key_t* key;
-
-			dispinfo = ((mk_win_comctl_treeview_nm_dispinfom_lpt)(nmhdr));
-			mk_assert(((dispinfo->m_item.m_item_a.m_mask & mk_win_comctl_treeview_item_flag_text) != 0) || ((dispinfo->m_item.m_item_a.m_mask & mk_win_comctl_treeview_item_flag_children) != 0));
-			mk_assert(dispinfo->m_item.m_item_a.m_param != 0);
-			key = ((mk_dacdbt_key_t*)(dispinfo->m_item.m_item_a.m_param));
-			if((dispinfo->m_item.m_item_a.m_mask & mk_win_comctl_treeview_item_flag_text) != 0)
-			{
-				int is_wide;
-				void const* data;
-				size_t len;
-				char* narrow;
-				void* mem;
-				wchar_t* wide;
-
-				mk_try(mk_dacdbt_key_get_name(key, &is_wide, &data, &len));
-				#define mk_min(a, b) (((b) < (a)) ? (b) : (a))
-				if(is_wide == 0)
-				{
-					if(nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfoa)
-					{
-						narrow = ((char*)(data));
-						mk_try(mk_std_buffer_reserve(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], mk_min(len + 1, 512) * sizeof(char)));
-						mk_try(mk_std_buffer_get_mem(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], &mem));
-						memcpy(mem, narrow, mk_min(len, 512 - 1) * sizeof(char));
-						((char*)(mem))[mk_min(len, 512 - 1)] = '\0';
-						dispinfo->m_item.m_item_a.m_text = ((char*)(mem));
-					}
-					else
-					{
-						mk_try(mk_std_str_convertor_narrow_to_wide_s(((char const*)(data)), mk_min(len, 512), 0, &wide));
-						mk_try(mk_std_buffer_reserve(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], mk_min(len + 1, 512) * sizeof(wchar_t)));
-						mk_try(mk_std_buffer_get_mem(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], &mem));
-						memcpy(mem, wide, mk_min(len, 512 - 1) * sizeof(wchar_t));
-						((wchar_t*)(mem))[mk_min(len, 512 - 1)] = L'\0';
-						dispinfo->m_item.m_item_w.m_text = ((wchar_t*)(mem));
-					}
-				}
-				else
-				{
-					if(nmhdr->m_code == mk_win_comctl_treeview_notify_getdispinfoa)
-					{
-						mk_try(mk_std_str_convertor_wide_to_narrow_s(((wchar_t const*)(data)), mk_min(len, 512), 0, &narrow));
-						mk_try(mk_std_buffer_reserve(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], mk_min(len + 1, 512) * sizeof(char)));
-						mk_try(mk_std_buffer_get_mem(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], &mem));
-						memcpy(mem, narrow, mk_min(len, 512 - 1) * sizeof(char));
-						((char*)(mem))[mk_min(len, 512 - 1)] = '\0';
-						dispinfo->m_item.m_item_a.m_text = ((char*)(mem));
-					}
-					else
-					{
-						wide = ((wchar_t*)(((wchar_t const*)(data))));
-						mk_try(mk_std_buffer_reserve(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], mk_min(len + 1, 512) * sizeof(wchar_t)));
-						mk_try(mk_std_buffer_get_mem(&panel->m_tree_callback_texts[panel->m_tree_callback_texts_idx], &mem));
-						memcpy(mem, wide, mk_min(len, 512 - 1) * sizeof(wchar_t));
-						((wchar_t*)(mem))[mk_min(len, 512 - 1)] = L'\0';
-						dispinfo->m_item.m_item_w.m_text = ((wchar_t*)(mem));
-					}
-				}
-				#undef mk_min
-				panel->m_tree_callback_texts_idx = (panel->m_tree_callback_texts_idx + 1) % 4;
-			}
-			if((dispinfo->m_item.m_item_a.m_mask & mk_win_comctl_treeview_item_flag_children) != 0)
-			{
-				unsigned long count;
-
-				mk_try(mk_dacdbt_key_get_sub_keys_count(key, &count));
-				dispinfo->m_item.m_item_a.m_children_count = (count == 0) ? 0 : 1;
-			}
-		}
-		else if(nmhdr->m_code == mk_win_comctl_treeview_notify_itemexpandinga || nmhdr->m_code == mk_win_comctl_treeview_notify_itemexpandingw)
-		{
-			mk_win_comctl_treeview_nm_lpt nm;
-			mk_win_comctl_treeview_insert_t insert;
-			unsigned long i;
-			mk_dacdbt_key_t* sub_key;
-			mk_win_comctl_treeview_htreeitem_t hti;
-
-			nm = ((mk_win_comctl_treeview_nm_lpt)(nmhdr));
-			if
-			(
-				((nm->m_new.m_a.m_state & mk_win_comctl_treeview_item_state_expandedonce) == 0) &&
-				(
-					((nm->m_action & mk_win_comctl_treeview_action_expand) == mk_win_comctl_treeview_action_expand) ||
-					((nm->m_action & mk_win_comctl_treeview_action_toggle) == mk_win_comctl_treeview_action_toggle)
-				)
-			)
-			{
-				mk_dacdbt_key_t* key;
-				unsigned long count;
-
-				mk_assert(nm->m_new.m_a.m_hitem != 0);
-				mk_assert(nm->m_new.m_a.m_param != 0);
-				key = ((mk_dacdbt_key_t*)(nm->m_new.m_a.m_param));
-				insert.m_parent = nm->m_new.m_a.m_hitem;
-				insert.m_insert_after = mk_win_comctl_treeview_hti_first;
-				insert.m_item.m_item_ex.m_mask = mk_win_comctl_treeview_item_flag_text | mk_win_comctl_treeview_item_flag_param | mk_win_comctl_treeview_item_flag_children;
-				insert.m_item.m_item_ex.m_hitem = 0;
-				insert.m_item.m_item_ex.m_state = 0;
-				insert.m_item.m_item_ex.m_state_mask = 0;
-				insert.m_item.m_item_ex.m_text = mk_win_comctl_treeview_text_callback;
-				insert.m_item.m_item_ex.m_text_len = 0;
-				insert.m_item.m_item_ex.m_image_idx = 0;
-				insert.m_item.m_item_ex.m_selected_image_idx = 0;
-				insert.m_item.m_item_ex.m_children_count = mk_win_comctl_treeview_children_callback;
-				insert.m_item.m_item_ex.m_integral = 0; /* 1 */
-				insert.m_item.m_item_ex.m_state_ex = 0;
-				insert.m_item.m_item_ex.m_hwnd = 0;
-				insert.m_item.m_item_ex.m_expanded_image_idx = 0;
-				insert.m_item.m_item_ex.m_reserved = 0;
-				mk_try(mk_dacdbt_key_get_sub_keys_count(key, &count));
-				for(i = 0; i != count; ++i)
-				{
-					mk_try(mk_dacdbt_key_get_sub_key(key, count - 1 - i, &sub_key)); mk_assert(sub_key);
-					insert.m_item.m_item_ex.m_param = ((mk_win_base_user_types_lparam_t)(sub_key));
-					mk_try(mk_win_comctl_treeview_insert(panel->m_tree, &insert, &hti));
-					mk_assert(hti);
-				}
-			}
-		}
-		else if(nmhdr->m_code == mk_win_comctl_treeview_notify_selchangeda ||nmhdr->m_code == mk_win_comctl_treeview_notify_selchangedw)
-		{
-			mk_win_comctl_treeview_nm_lpt nm;
-			mk_std_ptr_buff_t keys;
-			mk_win_comctl_treeview_htreeitem_t item;
-			mk_dacdbt_key_t* key;
-			mk_win_base_user_types_lresult_t lres;
-			size_t total_len;
-			mk_std_buffer_t buff;
-			size_t count;
-			size_t i;
-			int is_wide;
-			void const* data;
-			size_t len;
-			mk_win_strc_t name;
-			mk_win_str_t path;
-
-			nm = ((mk_win_comctl_treeview_nm_lpt)(nmhdr));
-			mk_try(mk_std_ptr_buff_construct(&keys));
-			mk_assert(nm->m_new.m_a.m_param != 0);
-			item = nm->m_new.m_a.m_hitem;
-			key = ((mk_dacdbt_key_t*)(nm->m_new.m_a.m_param));
-			mk_try(mk_std_ptr_buff_append(&keys, key));
-			while(key != &panel->m_doc.m_root)
-			{
-				mk_try(mk_win_user_window_send(panel->m_tree, mk_win_comctl_treeview_wm_getnextitem, mk_win_comctl_treeview_getnextitem_parent, ((mk_win_base_user_types_lparam_t)(item)), &lres));
-				mk_assert(lres != 0);
-				item = ((mk_win_comctl_treeview_htreeitem_t)(lres));
-				mk_try(mk_win_comctl_treeview_get_item_param(panel->m_tree, item, ((void**)(&key))));
-				mk_try(mk_std_ptr_buff_append(&keys, key));
-			}
-			total_len = 0;
-			mk_try(mk_std_buffer_init(&buff));
-			mk_try(mk_std_ptr_buff_get_count(&keys, &count));
-			for(i = 0; i != count; ++i)
-			{
-				mk_try(mk_std_ptr_buff_get_element(&keys, count - 1 - i, ((void**)(&key))));
-				mk_try(mk_dacdbt_key_get_name(key, &is_wide, &data, &len));
-				if(is_wide == 0)
-				{
-					mk_try(mk_win_str_from_narrow_s(((char*)(data)), len, 0, &name));
-				}
-				else
-				{
-					mk_try(mk_win_str_from_wide_s(((wchar_t*)(data)), len, 0, &name));
-				}
-				mk_try(mk_std_buffer_reserve(&buff, total_len + (1 + len) * sizeof(mk_win_char_t)));
-				mk_try(mk_std_buffer_get_mem(&buff, ((void**)(&path))));
-				path += total_len / sizeof(mk_win_char_t);
-				path[0] = mk_win_char_c('/');
-				++path;
-				memcpy(path, name, len * sizeof(mk_win_char_t));
-				total_len += (1 + len) * sizeof(mk_win_char_t);
-			}
-			mk_try(mk_std_buffer_reserve(&buff, total_len + sizeof(mk_win_char_t)));
-			mk_try(mk_std_buffer_get_mem(&buff, ((void**)(&path))));
-			path[total_len / sizeof(mk_win_char_t)] = mk_win_char_c('\0');
-			mk_try(mk_win_comctl_statusbar_set_text(panel->m_status, mk_win_comctl_statusbar_settext_param_simpleid, mk_win_comctl_statusbar_settext_param_notabparsing, path));
-			mk_try(mk_std_buffer_deinit(&buff));
-			mk_try(mk_std_ptr_buff_remove_all(&keys));
-			mk_try(mk_std_ptr_buff_destruct(&keys));
-		}
+		mk_try(mk_dacdbtw_panel_private_on_wm_notify_tree(panel, wparam, lparam, skip_defproc, lr));
 	}
 
 	return 0;
