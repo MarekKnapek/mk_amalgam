@@ -53,6 +53,7 @@ mk_jumbo int mk_win_comdlg_ofn(mk_win_comdlg_ofn_t* ofn, mk_win_base_types_bool_
 	ofnr.m_hook = ofn->m_hook;
 	mk_try(mk_win_str_to_api_z(ofn->m_template_name, 7, &ofnr.m_template_name));
 	b = GetOpenFileNameM(&ofnr);
+	ofn->m_file_offset = ofnr.m_file_offset;
 	mk_try(mk_win_str_from_api_z(ofnr.m_custom_filter, 5, &ofn->m_custom_filter));
 	mk_try(mk_win_str_from_api_z(ofnr.m_file, 6, &ofn->m_file_name_out));
 	mk_try(mk_win_str_from_api_z(ofnr.m_file_title, 7, &ofn->m_file_title));
@@ -89,6 +90,7 @@ mk_jumbo int mk_win_comdlg_ofn(mk_win_comdlg_ofn_t* ofn, mk_win_base_types_bool_
 		ofnr.m_hook = ofn->m_hook;
 		mk_try(mk_win_str_to_narrow_z(ofn->m_template_name, 7, &ofnr.m_template_name));
 		b = GetOpenFileNameA(&ofnr);
+		ofn->m_file_offset = ofnr.m_file_offset;
 		mk_try(mk_win_str_from_narrow_z(ofnr.m_custom_filter, 5, &ofn->m_custom_filter));
 		mk_try(mk_win_str_from_narrow_z(ofnr.m_file, 6, &ofn->m_file_name_out));
 		mk_try(mk_win_str_from_narrow_z(ofnr.m_file_title, 7, &ofn->m_file_title));
@@ -123,6 +125,7 @@ mk_jumbo int mk_win_comdlg_ofn(mk_win_comdlg_ofn_t* ofn, mk_win_base_types_bool_
 		ofnr.m_hook = ofn->m_hook;
 		mk_try(mk_win_str_to_wide_z(ofn->m_template_name, 7, &ofnr.m_template_name));
 		b = GetOpenFileNameW(&ofnr);
+		ofn->m_file_offset = ofnr.m_file_offset;
 		mk_try(mk_win_str_from_wide_z(ofnr.m_custom_filter, 5, &ofn->m_custom_filter));
 		mk_try(mk_win_str_from_wide_z(ofnr.m_file, 6, &ofn->m_file_name_out));
 		mk_try(mk_win_str_from_wide_z(ofnr.m_file_title, 7, &ofn->m_file_title));
