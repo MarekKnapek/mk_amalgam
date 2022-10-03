@@ -226,7 +226,7 @@ mk_jumbo int mk_dacdbt_key_get_count(mk_dacdbt_key_t* key, unsigned long* keys, 
 	*keys += (unsigned long)cnt;
 	for(i = 0; i != cnt; ++i)
 	{
-		mk_try(mk_std_ptr_buff_get_element(&key->m_sub_keys, i, &k));
+		mk_try(mk_std_ptr_buff_get_element(&key->m_sub_keys, i, ((void**)(&k))));
 		mk_try(mk_dacdbt_key_get_count(k, keys, values));
 	}
 
@@ -255,7 +255,7 @@ mk_jumbo int mk_dacdbt_key_get_max(mk_dacdbt_key_t* key, unsigned long* keys, un
 	}
 	for(i = 0; i != cnt; ++i)
 	{
-		mk_try(mk_std_ptr_buff_get_element(&key->m_sub_keys, i, &k));
+		mk_try(mk_std_ptr_buff_get_element(&key->m_sub_keys, i, ((void**)(&k))));
 		mk_try(mk_dacdbt_key_get_max(k, keys, values));
 	}
 

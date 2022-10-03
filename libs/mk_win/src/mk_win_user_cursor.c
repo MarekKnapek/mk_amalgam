@@ -54,21 +54,21 @@ mk_jumbo int mk_win_user_cursor_load_by_id(unsigned short id, mk_win_base_user_t
 {
 	mk_win_base_user_types_hcursor_t i;
 	#if mk_win_api == mk_win_api_old
-	i = LoadCursor(mk_win_base_types_null, mk_win_base_user_functions_make_int_resource_a(id));
+	i = LoadCursor(((mk_win_base_types_hinstance_t)(mk_win_base_types_null)), mk_win_base_user_functions_make_int_resource_a(id));
 	#elif mk_win_api == mk_win_api_ansi
-	i = LoadCursorA(mk_win_base_types_null, mk_win_base_user_functions_make_int_resource_a(id));
+	i = LoadCursorA(((mk_win_base_types_hinstance_t)(mk_win_base_types_null)), mk_win_base_user_functions_make_int_resource_a(id));
 	#elif mk_win_api == mk_win_api_wide
-	i = LoadCursorW(mk_win_base_types_null, mk_win_base_user_functions_make_int_resource_w(id));
+	i = LoadCursorW(((mk_win_base_types_hinstance_t)(mk_win_base_types_null)), mk_win_base_user_functions_make_int_resource_w(id));
 	#elif mk_win_api == mk_win_api_both
 	int unicode_enabled;
 	mk_try(mk_win_unicode_enabled(&unicode_enabled));
 	if(!unicode_enabled)
 	{
-		i = LoadCursorA(mk_win_base_types_null, mk_win_base_user_functions_make_int_resource_a(id));
+		i = LoadCursorA(((mk_win_base_types_hinstance_t)(mk_win_base_types_null)), mk_win_base_user_functions_make_int_resource_a(id));
 	}
 	else
 	{
-		i = LoadCursorW(mk_win_base_types_null, mk_win_base_user_functions_make_int_resource_w(id));
+		i = LoadCursorW(((mk_win_base_types_hinstance_t)(mk_win_base_types_null)), mk_win_base_user_functions_make_int_resource_w(id));
 	}
 	#endif
 	mk_assert(cursor);

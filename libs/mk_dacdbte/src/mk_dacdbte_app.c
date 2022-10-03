@@ -99,7 +99,7 @@ mk_jumbo int mk_dacdbte_app_run(mk_dacdbte_app_pt app)
 
 	for(;;)
 	{
-		mk_try(mk_win_user_message_get(&msg, mk_win_base_types_null, 0, 0, &b));
+		mk_try(mk_win_user_message_get(&msg, ((mk_win_base_user_types_hwnd_t)(mk_win_base_types_null)), 0, 0, &b));
 		if(b == 0)
 		{
 			mk_assert(msg.m_msg == mk_win_user_window_wm_quit);
@@ -109,7 +109,7 @@ mk_jumbo int mk_dacdbte_app_run(mk_dacdbte_app_pt app)
 		mk_try(mk_dacdbte_app_private_message_process(app, &msg));
 		for(;;)
 		{
-			mk_try(mk_win_user_message_peek(&msg, mk_win_base_types_null, 0, 0, mk_win_user_message_peek_remove | mk_win_user_message_peek_noyield, &b));
+			mk_try(mk_win_user_message_peek(&msg, ((mk_win_base_user_types_hwnd_t)(mk_win_base_types_null)), 0, 0, mk_win_user_message_peek_remove | mk_win_user_message_peek_noyield, &b));
 			if(b != 0)
 			{
 				if(msg.m_msg == mk_win_user_window_wm_quit)

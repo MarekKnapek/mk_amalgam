@@ -90,12 +90,12 @@ mk_jumbo int mk_dacdbtw_panel_init(void)
 	cls.m_cls_extra = 0;
 	cls.m_wnd_extra = sizeof(mk_dacdbtw_panel_lpt);
 	mk_try(mk_win_instance_get(&cls.m_hinstance));
-	cls.m_hicon = mk_win_base_types_null;
+	cls.m_hicon = ((mk_win_base_user_types_hicon_t)(mk_win_base_types_null));
 	mk_try(mk_win_user_cursor_load_by_id(mk_win_user_cursor_id_arrow, &cls.m_hcursor));
 	cls.m_background = (mk_win_base_user_types_hbrush_t)(mk_win_base_types_uintptr_t)(mk_win_user_color_id_window + 1);
-	cls.m_menu_name = mk_win_base_types_null;
+	cls.m_menu_name = ((mk_win_strc_t)(mk_win_base_types_null));
 	cls.m_class_name = mk_dacdbtw_panel_private_class_name;
-	cls.m_small_icon = mk_win_base_types_null;
+	cls.m_small_icon = ((mk_win_base_user_types_hicon_t)(mk_win_base_types_null));
 	mk_try(mk_win_user_class_register(&cls, &atom));
 	mk_assert(atom != 0);
 
@@ -137,7 +137,7 @@ static mk_inline int mk_dacdbtw_panel_private_create_label(mk_dacdbtw_panel_t* p
 	wi.m_width = 0;
 	wi.m_height = 0;
 	wi.m_parent = panel->m_hwnd;
-	wi.m_menu = mk_win_base_types_null;
+	wi.m_menu = ((mk_win_base_user_types_hmenu_t)(mk_win_base_types_null));
 	mk_try(mk_win_instance_get(&wi.m_instance));
 	wi.m_param = NULL;
 	mk_try(mk_win_user_window_create(&wi, &hwnd));
@@ -166,7 +166,7 @@ static mk_inline int mk_dacdbtw_panel_private_create_tree(mk_dacdbtw_panel_t* pa
 	wi.m_width = 0;
 	wi.m_height = 0;
 	wi.m_parent = panel->m_hwnd;
-	wi.m_menu = mk_win_base_types_null;
+	wi.m_menu = ((mk_win_base_user_types_hmenu_t)(mk_win_base_types_null));
 	mk_try(mk_win_instance_get(&wi.m_instance));
 	wi.m_param = NULL;
 	mk_try(mk_win_user_window_create(&wi, &hwnd));
@@ -195,7 +195,7 @@ static mk_inline int mk_dacdbtw_panel_private_create_status(mk_dacdbtw_panel_t* 
 	wi.m_width = 0;
 	wi.m_height = 0;
 	wi.m_parent = panel->m_hwnd;
-	wi.m_menu = mk_win_base_types_null;
+	wi.m_menu = ((mk_win_base_user_types_hmenu_t)(mk_win_base_types_null));
 	mk_try(mk_win_instance_get(&wi.m_instance));
 	wi.m_param = NULL;
 	mk_try(mk_win_user_window_create(&wi, &hwnd));

@@ -83,8 +83,8 @@ mk_jumbo int mk_dacdbte_child_construct(mk_dacdbte_child_pt child, mk_dacdbte_pa
 	mk_assert(child != old_child);
 
 	child->m_parent = parent;
-	child->m_hwnd = mk_win_base_types_null;
-	child->m_content = mk_win_base_types_null;
+	child->m_hwnd = ((mk_win_base_user_types_hwnd_t)(mk_win_base_types_null));
+	child->m_content = ((mk_win_base_user_types_hwnd_t)(mk_win_base_types_null));
 
 	mdi.m_class_name = mk_dacdbte_child_private_class_name;
 	mdi.m_window_name = mk_win_char_c("Child");
@@ -101,7 +101,7 @@ mk_jumbo int mk_dacdbte_child_construct(mk_dacdbte_child_pt child, mk_dacdbte_pa
 	if(old_child)
 	{
 		child->m_content = old_child->m_content;
-		old_child->m_content = mk_win_base_types_null;
+		old_child->m_content = ((mk_win_base_user_types_hwnd_t)(mk_win_base_types_null));
 		mk_try(mk_win_user_window_set_parent(child->m_content, child->m_hwnd, &hwnd));
 		mk_assert(hwnd == old_child->m_hwnd);
 	}
@@ -109,14 +109,14 @@ mk_jumbo int mk_dacdbte_child_construct(mk_dacdbte_child_pt child, mk_dacdbte_pa
 	{
 		wi.m_extra_style = 0;
 		mk_try(mk_dacdbtw_panel_get_class_name(&wi.m_class_name));
-		wi.m_window_name = mk_win_base_types_null;
+		wi.m_window_name = ((mk_win_strc_t)(mk_win_base_types_null));
 		wi.m_style = mk_win_user_window_style_visible | mk_win_user_window_style_child;
 		wi.m_x = 0;
 		wi.m_y = 0;
 		wi.m_width = 0;
 		wi.m_height = 0;
 		wi.m_parent = child->m_hwnd;
-		wi.m_menu = mk_win_base_types_null;
+		wi.m_menu = ((mk_win_base_user_types_hmenu_t)(mk_win_base_types_null));
 		mk_try(mk_win_instance_get(&wi.m_instance));
 		wi.m_param = mk_win_base_types_null;
 		mk_try(mk_win_user_window_create(&wi, &hwnd));
@@ -188,9 +188,9 @@ static mk_inline int mk_dacdbte_child_private_register_class(void)
 	mk_try(mk_win_user_icon_load_by_id(mk_win_user_icon_id_application, &cls.m_hicon));
 	mk_try(mk_win_user_cursor_load_by_id(mk_win_user_cursor_id_arrow, &cls.m_hcursor));
 	cls.m_background = (mk_win_base_user_types_hbrush_t)(mk_win_base_types_uintptr_t)(mk_win_user_color_id_window + 1);
-	cls.m_menu_name = mk_win_base_types_null;
+	cls.m_menu_name = ((mk_win_strc_t)(mk_win_base_types_null));
 	cls.m_class_name = mk_dacdbte_child_private_class_name;
-	cls.m_small_icon = mk_win_base_types_null;
+	cls.m_small_icon = ((mk_win_base_user_types_hicon_t)(mk_win_base_types_null));
 	mk_try(mk_win_user_class_register(&cls, &atom));
 
 	return 0;

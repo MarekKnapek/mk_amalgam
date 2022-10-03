@@ -110,8 +110,8 @@ mk_jumbo int mk_dacdbte_parent_construct(mk_dacdbte_parent_pt parent, mk_dacdbte
 	mk_assert(app);
 
 	parent->m_app = app;
-	parent->m_hwnd = mk_win_base_types_null;
-	parent->m_mdi = mk_win_base_types_null;
+	parent->m_hwnd = ((mk_win_base_user_types_hwnd_t)(mk_win_base_types_null));
+	parent->m_mdi = ((mk_win_base_user_types_hwnd_t)(mk_win_base_types_null));
 	mk_try(mk_std_ptr_buff_construct(&parent->m_children));
 
 	wnd.m_extra_style = mk_win_user_window_style_ex_overlappedwindow;
@@ -122,8 +122,8 @@ mk_jumbo int mk_dacdbte_parent_construct(mk_dacdbte_parent_pt parent, mk_dacdbte
 	wnd.m_y = mk_win_user_window_default_value;
 	wnd.m_width = mk_win_user_window_default_value;
 	wnd.m_height = mk_win_user_window_default_value;
-	wnd.m_parent = mk_win_base_types_null;
-	wnd.m_menu = mk_win_base_types_null;
+	wnd.m_parent = ((mk_win_base_user_types_hwnd_t)(mk_win_base_types_null));
+	wnd.m_menu = ((mk_win_base_user_types_hmenu_t)(mk_win_base_types_null));
 	mk_try(mk_win_instance_get(&wnd.m_instance));
 	wnd.m_param = parent;
 	mk_try(mk_win_user_window_create(&wnd, &hwnd));
@@ -203,7 +203,7 @@ mk_jumbo int mk_dacdbte_parent_children_add(mk_dacdbte_parent_pt parent)
 	mk_try(mk_std_gcallocator_allocate(s_max_len * sizeof(mk_win_char_t), (void**)&file_name));
 	file_name[0] = mk_win_char_c('\0');
 	ofn.m_owner = parent->m_hwnd;
-	ofn.m_instance = mk_win_base_types_null;
+	ofn.m_instance = ((mk_win_base_types_hinstance_t)(mk_win_base_types_null));
 	ofn.m_filter = s_filter;
 	ofn.m_custom_filter = NULL;
 	ofn.m_max_custom_tfilter = 0;
@@ -272,7 +272,7 @@ mk_jumbo int mk_dacdbte_parent_children_get_active(mk_dacdbte_parent_pt parent, 
 	}
 	else
 	{
-		*child = mk_win_base_types_null;
+		*child = ((mk_dacdbte_child_pt)(mk_win_base_types_null));
 	}
 
 	return 0;
@@ -437,7 +437,7 @@ static mk_inline int mk_dacdbte_parent_private_register_class(void)
 	cls.m_background = (mk_win_base_user_types_hbrush_t)(mk_win_base_types_uintptr_t)(mk_win_user_color_id_appworkspace + 1);
 	cls.m_menu_name = mk_dacdbte_parent_private_menu_name;
 	cls.m_class_name = mk_dacdbte_parent_private_class_name;
-	cls.m_small_icon = mk_win_base_types_null;
+	cls.m_small_icon = ((mk_win_base_user_types_hicon_t)(mk_win_base_types_null));
 	mk_try(mk_win_user_class_register(&cls, &atom));
 	mk_assert(atom != 0);
 
@@ -485,7 +485,7 @@ static mk_inline int mk_dacdbte_parent_private_on_create(mk_dacdbte_parent_pt pa
 	client_create.m_first_child_id = mk_dacdbte_parent_menu_id_window_children;
 	wnd.m_extra_style = 0;
 	wnd.m_class_name = mk_win_char_c("mdiclient");
-	wnd.m_window_name = mk_win_base_types_null;
+	wnd.m_window_name = ((mk_win_strc_t)(mk_win_base_types_null));
 	wnd.m_style = mk_win_user_window_style_hscroll | mk_win_user_window_style_vscroll | mk_win_user_window_style_clipchildren | mk_win_user_window_style_visible | mk_win_user_window_style_child;
 	wnd.m_x = 0;
 	wnd.m_y = 0;
@@ -950,7 +950,7 @@ static mk_inline int mk_dacdbte_parent_private_on_wndproc(mk_win_base_user_types
 	}
 	else
 	{
-		mdi = mk_win_base_types_null;
+		mdi = ((mk_win_base_user_types_hwnd_t)(mk_win_base_types_null));
 	}
 	if(!override_defproc)
 	{
