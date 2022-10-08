@@ -9,7 +9,7 @@
 
 
 #define mk_uint_base_tn short
-#define mk_uint_base_t unsigned short
+#define mk_uint_base_t unsigned short int
 
 #include "../inl/mk_uint_base.inl.h"
 

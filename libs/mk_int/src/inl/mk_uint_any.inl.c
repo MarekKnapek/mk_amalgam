@@ -22,7 +22,7 @@ static mk_inline void mk_uint_concat_(divmod_classic)(mk_uint_t* div, mk_uint_t*
 	int ai;
 	int bi;
 	int i;
-	unsigned bit;
+	unsigned int bit;
 	int diff;
 
 	mk_assert(div);
@@ -199,7 +199,7 @@ mk_jumbo int mk_uint_log2(mk_uint_t const* x)
 	#if defined(_MSC_VER) && _MSC_VER >= 1400 && (defined(_M_IA64) || defined(_M_AMD64) || defined(_M_ARM64) || defined(_M_X64)) && mk_uint_small_bits <= 64 && mk_uint_parts == 1
 	unsigned __int64 mask;
 	unsigned char bsr;
-	unsigned long index;
+	unsigned long int index;
 	int ret;
 
 	mk_assert(x);
@@ -221,7 +221,7 @@ mk_jumbo int mk_uint_log2(mk_uint_t const* x)
 	int i;
 	unsigned __int64 mask;
 	unsigned char bsr;
-	unsigned long index;
+	unsigned long int index;
 
 	mk_assert(x);
 
@@ -239,14 +239,14 @@ mk_jumbo int mk_uint_log2(mk_uint_t const* x)
 	}
 	return ret;
 	#elif defined(_MSC_VER) && _MSC_VER >= 1400 && mk_uint_small_bits <= 32 && mk_uint_parts == 1
-	unsigned long mask;
+	unsigned long int mask;
 	unsigned char bsr;
-	unsigned long index;
+	unsigned long int index;
 	int ret;
 
 	mk_assert(x);
 
-	mask = (unsigned long)(x->m_data);
+	mask = (unsigned long int)(x->m_data);
 	bsr = _BitScanReverse(&index, mask);
 	if(bsr == 0)
 	{
@@ -261,16 +261,16 @@ mk_jumbo int mk_uint_log2(mk_uint_t const* x)
 	#elif defined(_MSC_VER) && _MSC_VER >= 1400 && mk_uint_small_bits <= 32 && mk_uint_parts != 1
 	int ret;
 	int i;
-	unsigned long mask;
+	unsigned long int mask;
 	unsigned char bsr;
-	unsigned long index;
+	unsigned long int index;
 
 	mk_assert(x);
 
 	ret = -1;
 	for(i = 0; i != mk_uint_parts; ++i)
 	{
-		mask = (unsigned long)(x->m_data[mk_uint_parts - 1 - i]);
+		mask = (unsigned long int)(x->m_data[mk_uint_parts - 1 - i]);
 		bsr = _BitScanReverse(&index, mask);
 		if(bsr != 0)
 		{

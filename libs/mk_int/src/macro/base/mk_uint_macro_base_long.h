@@ -1,4 +1,4 @@
-#define mk_uint_small_t unsigned long
+#define mk_uint_small_t unsigned long int
 #define mk_uint_small_tn long
 
 

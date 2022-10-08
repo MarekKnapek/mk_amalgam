@@ -25,28 +25,28 @@ mk_jumbo void mk_uint_one(mk_uint_t* out)
 	mk_uint_small_one(&out->m_data);
 }
 
-mk_jumbo void mk_uint_from_int(mk_uint_t* out, unsigned in)
+mk_jumbo void mk_uint_from_int(mk_uint_t* out, unsigned int in)
 {
 	mk_assert(out);
 
 	mk_uint_small_from_int(&out->m_data, in);
 }
 
-mk_jumbo unsigned mk_uint_to_int(mk_uint_t const* x)
+mk_jumbo unsigned int mk_uint_to_int(mk_uint_t const* x)
 {
 	mk_assert(x);
 
 	return mk_uint_small_to_int(&x->m_data);
 }
 
-mk_jumbo void mk_uint_from_long(mk_uint_t* out, unsigned long in)
+mk_jumbo void mk_uint_from_long(mk_uint_t* out, unsigned long int in)
 {
 	mk_assert(out);
 
 	mk_uint_small_from_long(&out->m_data, in);
 }
 
-mk_jumbo unsigned long mk_uint_to_long(mk_uint_t const* x)
+mk_jumbo unsigned long int mk_uint_to_long(mk_uint_t const* x)
 {
 	mk_assert(x);
 

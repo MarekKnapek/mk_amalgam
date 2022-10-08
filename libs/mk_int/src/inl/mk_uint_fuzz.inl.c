@@ -66,11 +66,11 @@ static mk_inline void mk_uint_func_fuzz(one)(void)
 
 static mk_inline void mk_uint_func_fuzz(from_int)(unsigned char const* data)
 {
-	unsigned n;
+	unsigned int n;
 	mk_uint_type_native br;
 	mk_uint_type_my mr;
 	
-	memcpy(&n, data, sizeof(unsigned));
+	memcpy(&n, data, sizeof(unsigned int));
 
 	br = (mk_uint_type_native)n;
 	mk_uint_func_my(from_int)(&mr, n);
@@ -81,26 +81,26 @@ static mk_inline void mk_uint_func_fuzz(from_int)(unsigned char const* data)
 static mk_inline void mk_uint_func_fuzz(to_int)(unsigned char const* data)
 {
 	mk_uint_type_native bx;
-	unsigned br;
+	unsigned int br;
 	mk_uint_type_my mx;
-	unsigned mr;
+	unsigned int mr;
 
 	memcpy(&bx, data, mk_uint_n / CHAR_BIT);
-	br = (unsigned)bx;
+	br = (unsigned int)bx;
 
 	memcpy(&mx, data, mk_uint_n / CHAR_BIT);
 	mr = mk_uint_func_my(to_int)(&mx);
 
-	test(memcmp(&br, &mr, sizeof(unsigned)) == 0);
+	test(memcmp(&br, &mr, sizeof(unsigned int)) == 0);
 }
 
 static mk_inline void mk_uint_func_fuzz(from_long)(unsigned char const* data)
 {
-	unsigned long n;
+	unsigned long int n;
 	mk_uint_type_native br;
 	mk_uint_type_my mr;
 	
-	memcpy(&n, data, sizeof(unsigned long));
+	memcpy(&n, data, sizeof(unsigned long int));
 
 	br = (mk_uint_type_native)n;
 	mk_uint_func_my(from_long)(&mr, n);
@@ -111,17 +111,17 @@ static mk_inline void mk_uint_func_fuzz(from_long)(unsigned char const* data)
 static mk_inline void mk_uint_func_fuzz(to_long)(unsigned char const* data)
 {
 	mk_uint_type_native bx;
-	unsigned long br;
+	unsigned long int br;
 	mk_uint_type_my mx;
-	unsigned long mr;
+	unsigned long int mr;
 
 	memcpy(&bx, data, mk_uint_n / CHAR_BIT);
-	br = (unsigned long)bx;
+	br = (unsigned long int)bx;
 
 	memcpy(&mx, data, mk_uint_n / CHAR_BIT);
 	mr = mk_uint_func_my(to_long)(&mx);
 
-	test(memcmp(&br, &mr, sizeof(unsigned long)) == 0);
+	test(memcmp(&br, &mr, sizeof(unsigned long int)) == 0);
 }
 
 static mk_inline void mk_uint_func_fuzz(from_sizet)(unsigned char const* data)
@@ -268,10 +268,10 @@ static mk_inline void mk_uint_func_fuzz(xor)(unsigned char const* data)
 static mk_inline void mk_uint_func_fuzz(shl)(unsigned char const* data)
 {
 	mk_uint_type_native bx;
-	unsigned bn;
+	unsigned int bn;
 	mk_uint_type_native br;
 	mk_uint_type_my mx;
-	unsigned mn;
+	unsigned int mn;
 	mk_uint_type_my mr;
 
 	memcpy(&bx, data + 0 / CHAR_BIT, mk_uint_n / CHAR_BIT);
@@ -290,10 +290,10 @@ static mk_inline void mk_uint_func_fuzz(shl)(unsigned char const* data)
 static mk_inline void mk_uint_func_fuzz(shr)(unsigned char const* data)
 {
 	mk_uint_type_native bx;
-	unsigned bn;
+	unsigned int bn;
 	mk_uint_type_native br;
 	mk_uint_type_my mx;
-	unsigned mn;
+	unsigned int mn;
 	mk_uint_type_my mr;
 
 	memcpy(&bx, data + 0 / CHAR_BIT, mk_uint_n / CHAR_BIT);
@@ -574,7 +574,7 @@ static mk_inline void mk_uint_func_fuzz(to_string_dec_n)(unsigned char const* da
 	char mstr[40];
 
 	memcpy(&ba, data + 0 / CHAR_BIT, mk_uint_n / CHAR_BIT);
-	br = sprintf(bstr, "%lu", (unsigned long)ba);
+	br = sprintf(bstr, "%lu", (unsigned long int)ba);
 
 	memcpy(&ma, data + 0 / CHAR_BIT, mk_uint_n / CHAR_BIT);
 	mr = mk_uint_func_my(to_string_dec_n)(&ma, mstr, (int)(sizeof(mstr) / sizeof(mstr[0])));
@@ -597,7 +597,7 @@ static mk_inline void mk_uint_func_fuzz(to_string_dec_w)(unsigned char const* da
 	wchar_t mstr[40];
 
 	memcpy(&ba, data + 0 / CHAR_BIT, mk_uint_n / CHAR_BIT);
-	br = swprintf(bstr, sizeof(bstr), L"%lu", (unsigned long)ba);
+	br = swprintf(bstr, sizeof(bstr), L"%lu", (unsigned long int)ba);
 
 	memcpy(&ma, data + 0 / CHAR_BIT, mk_uint_n / CHAR_BIT);
 	mr = mk_uint_func_my(to_string_dec_w)(&ma, mstr, (int)(sizeof(mstr) / sizeof(mstr[0])));
@@ -620,7 +620,7 @@ static mk_inline void mk_uint_func_fuzz(to_string_hex_n)(unsigned char const* da
 	char mstr[40];
 
 	memcpy(&ba, data + 0 / CHAR_BIT, mk_uint_n / CHAR_BIT);
-	br = sprintf(bstr, "%lx", (unsigned long)ba);
+	br = sprintf(bstr, "%lx", (unsigned long int)ba);
 
 	memcpy(&ma, data + 0 / CHAR_BIT, mk_uint_n / CHAR_BIT);
 	mr = mk_uint_func_my(to_string_hex_n)(&ma, mstr, (int)(sizeof(mstr) / sizeof(mstr[0])));
@@ -643,7 +643,7 @@ static mk_inline void mk_uint_func_fuzz(to_string_hex_w)(unsigned char const* da
 	wchar_t mstr[40];
 
 	memcpy(&ba, data + 0 / CHAR_BIT, mk_uint_n / CHAR_BIT);
-	br = swprintf(bstr, sizeof(bstr), L"%lx", (unsigned long)ba);
+	br = swprintf(bstr, sizeof(bstr), L"%lx", (unsigned long int)ba);
 
 	memcpy(&ma, data + 0 / CHAR_BIT, mk_uint_n / CHAR_BIT);
 	mr = mk_uint_func_my(to_string_hex_w)(&ma, mstr, (int)(sizeof(mstr) / sizeof(mstr[0])));

@@ -28,7 +28,7 @@ mk_jumbo void mk_uint_one(mk_uint_t* out)
 	mk_uint_small_zero(&out->m_data[1]);
 }
 
-mk_jumbo void mk_uint_from_int(mk_uint_t* out, unsigned in)
+mk_jumbo void mk_uint_from_int(mk_uint_t* out, unsigned int in)
 {
 	#if defined(_MSC_VER)
 	#pragma warning(push)
@@ -39,7 +39,7 @@ mk_jumbo void mk_uint_from_int(mk_uint_t* out, unsigned in)
 	#pragma GCC diagnostic push
 	#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left/right shift count >= width of type [-Wshift-count-overflow] */
 	#endif
-	if(mk_uint_small_bits < sizeof(unsigned) * CHAR_BIT)
+	if(mk_uint_small_bits < sizeof(unsigned int) * CHAR_BIT)
 	{
 		mk_uint_small_from_int(&out->m_data[0], in);
 		mk_uint_small_from_int(&out->m_data[1], in >> mk_uint_small_bits);
@@ -57,7 +57,7 @@ mk_jumbo void mk_uint_from_int(mk_uint_t* out, unsigned in)
 	#endif
 }
 
-mk_jumbo unsigned mk_uint_to_int(mk_uint_t const* x)
+mk_jumbo unsigned int mk_uint_to_int(mk_uint_t const* x)
 {
 	#if defined(_MSC_VER)
 	#pragma warning(push)
@@ -68,7 +68,7 @@ mk_jumbo unsigned mk_uint_to_int(mk_uint_t const* x)
 	#pragma GCC diagnostic push
 	#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left/right shift count >= width of type [-Wshift-count-overflow] */
 	#endif
-	if(mk_uint_small_bits < sizeof(unsigned) * CHAR_BIT)
+	if(mk_uint_small_bits < sizeof(unsigned int) * CHAR_BIT)
 	{
 		return mk_uint_small_to_int(&x->m_data[0]) | mk_uint_small_to_int(&x->m_data[1]) << mk_uint_small_bits;
 	}
@@ -84,7 +84,7 @@ mk_jumbo unsigned mk_uint_to_int(mk_uint_t const* x)
 	#endif
 }
 
-mk_jumbo void mk_uint_from_long(mk_uint_t* out, unsigned long in)
+mk_jumbo void mk_uint_from_long(mk_uint_t* out, unsigned long int in)
 {
 	#if defined(_MSC_VER)
 	#pragma warning(push)
@@ -95,7 +95,7 @@ mk_jumbo void mk_uint_from_long(mk_uint_t* out, unsigned long in)
 	#pragma GCC diagnostic push
 	#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left/right shift count >= width of type [-Wshift-count-overflow] */
 	#endif
-	if(mk_uint_small_bits < sizeof(unsigned long) * CHAR_BIT)
+	if(mk_uint_small_bits < sizeof(unsigned long int) * CHAR_BIT)
 	{
 		mk_uint_small_from_long(&out->m_data[0], in);
 		mk_uint_small_from_long(&out->m_data[1], in >> mk_uint_small_bits);
@@ -113,7 +113,7 @@ mk_jumbo void mk_uint_from_long(mk_uint_t* out, unsigned long in)
 	#endif
 }
 
-mk_jumbo unsigned long mk_uint_to_long(mk_uint_t const* x)
+mk_jumbo unsigned long int mk_uint_to_long(mk_uint_t const* x)
 {
 	#if defined(_MSC_VER)
 	#pragma warning(push)
@@ -124,7 +124,7 @@ mk_jumbo unsigned long mk_uint_to_long(mk_uint_t const* x)
 	#pragma GCC diagnostic push
 	#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left/right shift count >= width of type [-Wshift-count-overflow] */
 	#endif
-	if(mk_uint_small_bits < sizeof(unsigned long) * CHAR_BIT)
+	if(mk_uint_small_bits < sizeof(unsigned long int) * CHAR_BIT)
 	{
 		return mk_uint_small_to_long(&x->m_data[0]) | mk_uint_small_to_long(&x->m_data[1]) << mk_uint_small_bits;
 	}

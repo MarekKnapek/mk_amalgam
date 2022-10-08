@@ -38,7 +38,7 @@ mk_jumbo void mk_uint_one(mk_uint_t* out)
 	}
 }
 
-mk_jumbo void mk_uint_from_int(mk_uint_t* out, unsigned in)
+mk_jumbo void mk_uint_from_int(mk_uint_t* out, unsigned int in)
 {
 	int parts;
 	int i;
@@ -58,16 +58,16 @@ mk_jumbo void mk_uint_from_int(mk_uint_t* out, unsigned in)
 	}
 }
 
-mk_jumbo unsigned mk_uint_to_int(mk_uint_t const* x)
+mk_jumbo unsigned int mk_uint_to_int(mk_uint_t const* x)
 {
-	unsigned r;
+	unsigned int r;
 	int parts;
 	int i;
 
 	mk_assert(x);
 
 	r = 0;
-	parts = sizeof(unsigned) / sizeof(mk_uint_small_t);
+	parts = sizeof(unsigned int) / sizeof(mk_uint_small_t);
 	parts = parts < mk_uint_parts ? parts : mk_uint_parts;
 	parts = parts == 0 ? 1 : parts;
 	for(i = 0; i != parts; ++i)
@@ -78,7 +78,7 @@ mk_jumbo unsigned mk_uint_to_int(mk_uint_t const* x)
 	return r;
 }
 
-mk_jumbo void mk_uint_from_long(mk_uint_t* out, unsigned long in)
+mk_jumbo void mk_uint_from_long(mk_uint_t* out, unsigned long int in)
 {
 	int parts;
 	int i;
@@ -98,16 +98,16 @@ mk_jumbo void mk_uint_from_long(mk_uint_t* out, unsigned long in)
 	}
 }
 
-mk_jumbo unsigned long mk_uint_to_long(mk_uint_t const* x)
+mk_jumbo unsigned long int mk_uint_to_long(mk_uint_t const* x)
 {
-	unsigned r;
+	unsigned int r;
 	int parts;
 	int i;
 
 	mk_assert(x);
 
 	r = 0;
-	parts = sizeof(unsigned long) / sizeof(mk_uint_small_t);
+	parts = sizeof(unsigned long int) / sizeof(mk_uint_small_t);
 	parts = parts < mk_uint_parts ? parts : mk_uint_parts;
 	parts = parts == 0 ? 1 : parts;
 	for(i = 0; i != parts; ++i)

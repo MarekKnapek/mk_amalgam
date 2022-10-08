@@ -9,10 +9,10 @@
 
 mk_jumbo void mk_uint_concat(mk_uint_base_tn, zero)(mk_uint_base_t* out);
 mk_jumbo void mk_uint_concat(mk_uint_base_tn, one)(mk_uint_base_t* out);
-mk_jumbo void mk_uint_concat(mk_uint_base_tn, from_int)(mk_uint_base_t* out, unsigned in);
-mk_jumbo unsigned mk_uint_concat(mk_uint_base_tn, to_int)(mk_uint_base_t const* x);
-mk_jumbo void mk_uint_concat(mk_uint_base_tn, from_long)(mk_uint_base_t* out, unsigned long in);
-mk_jumbo unsigned long mk_uint_concat(mk_uint_base_tn, to_long)(mk_uint_base_t const* x);
+mk_jumbo void mk_uint_concat(mk_uint_base_tn, from_int)(mk_uint_base_t* out, unsigned int in);
+mk_jumbo unsigned int mk_uint_concat(mk_uint_base_tn, to_int)(mk_uint_base_t const* x);
+mk_jumbo void mk_uint_concat(mk_uint_base_tn, from_long)(mk_uint_base_t* out, unsigned long int in);
+mk_jumbo unsigned long int mk_uint_concat(mk_uint_base_tn, to_long)(mk_uint_base_t const* x);
 mk_jumbo void mk_uint_concat(mk_uint_base_tn, from_sizet)(mk_uint_base_t* out, size_t in);
 mk_jumbo size_t mk_uint_concat(mk_uint_base_tn, to_sizet)(mk_uint_base_t const* x);
 mk_jumbo void mk_uint_concat(mk_uint_base_tn, from_buff_le)(mk_uint_base_t* out, void const* buff);

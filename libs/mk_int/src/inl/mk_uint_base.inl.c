@@ -40,32 +40,32 @@ mk_jumbo void mk_uint_concat(mk_uint_tn, one)(mk_uint_t* out)
 	*out = 1;
 }
 
-mk_jumbo void mk_uint_concat(mk_uint_tn, from_int)(mk_uint_t* out, unsigned in)
+mk_jumbo void mk_uint_concat(mk_uint_tn, from_int)(mk_uint_t* out, unsigned int in)
 {
 	mk_assert(out);
 
 	*out = (mk_uint_t)in;
 }
 
-mk_jumbo unsigned mk_uint_concat(mk_uint_tn, to_int)(mk_uint_t const* x)
+mk_jumbo unsigned int mk_uint_concat(mk_uint_tn, to_int)(mk_uint_t const* x)
 {
 	mk_assert(x);
 
-	return (unsigned)*x;
+	return (unsigned int)*x;
 }
 
-mk_jumbo void mk_uint_concat(mk_uint_tn, from_long)(mk_uint_t* out, unsigned long in)
+mk_jumbo void mk_uint_concat(mk_uint_tn, from_long)(mk_uint_t* out, unsigned long int in)
 {
 	mk_assert(out);
 
 	*out = (mk_uint_t)in;
 }
 
-mk_jumbo unsigned long mk_uint_concat(mk_uint_tn, to_long)(mk_uint_t const* x)
+mk_jumbo unsigned long int mk_uint_concat(mk_uint_tn, to_long)(mk_uint_t const* x)
 {
 	mk_assert(x);
 
-	return (unsigned long)*x;
+	return (unsigned long int)*x;
 }
 
 mk_jumbo void mk_uint_concat(mk_uint_tn, from_sizet)(mk_uint_t* out, size_t in)

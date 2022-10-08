@@ -17,8 +17,8 @@
 
 mk_jumbo int mk_concat_q(mk_concat_q(mk_uint_to_string_dec, _), mk_uint_str_suffix)(mk_uint_t const* x, mk_char_t* str, int str_len)
 {
-	#define mk_private_to_uint(x) ((unsigned)(x))
-	#define mk_private_to_long(x) ((long)(x))
+	#define mk_private_to_uint(x) ((unsigned int)(x))
+	#define mk_private_to_long(x) ((long int)(x))
 	#define mk_private_le(x, y) (mk_private_to_long(x) <= mk_private_to_long(y))
 	#define mk_private_mul(x, y) (mk_private_to_long(mk_private_to_long(x) * mk_private_to_long(y)))
 	#define mk_private_shr(x, y) (mk_private_to_long(mk_private_to_long(x) >> mk_private_to_uint(y)))
@@ -45,7 +45,7 @@ mk_jumbo int mk_concat_q(mk_concat_q(mk_uint_to_string_dec, _), mk_uint_str_suff
 	mk_uint_t a;
 	mk_uint_t b;
 	mk_uint_small_t c;
-	unsigned m;
+	unsigned int m;
 	mk_char_t tmp[mk_private_worst_case_len];
 
 	mk_assert(x);
@@ -140,8 +140,8 @@ mk_jumbo void mk_concat_q(mk_concat_q(mk_uint_to_string_hex_full, _), mk_uint_st
 	mk_uint_t a;
 	mk_char_t* output;
 	int i;
-	unsigned m;
-	unsigned idx;
+	unsigned int m;
+	unsigned int idx;
 
 	a = *x;
 	output = str + mk_uint_bits / 4;

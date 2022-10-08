@@ -46,12 +46,12 @@ mk_extern_c int LLVMFuzzerTestOneInput(unsigned char const* data, size_t size)
 #include <time.h>
 int main(void)
 {
-	static long const rep = 1000000;
+	static long int const rep = 1000000;
 	unsigned char buff[32];
-	long i;
+	long int i;
 	int j;
 	int tested;
-	srand((unsigned)time(NULL));
+	srand((unsigned int)time(NULL));
 	for(i = 0; i != rep; ++i)
 	{
 		for(j = 0; j != (int)sizeof(buff); ++j)
