@@ -104,12 +104,13 @@
 	<PropertyGroup Label="UserMacros"/>
 	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
 		<ClCompile>
-			<WarningLevel>Level4</WarningLevel>
+			<WarningLevel>EnableAllWarnings</WarningLevel>
 			<SDLCheck>true</SDLCheck>
-			<PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;__STDC_WANT_SECURE_LIB__=0;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ConformanceMode>true</ConformanceMode>
 			<MultiProcessorCompilation>true</MultiProcessorCompilation>
 			<InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+			<TreatWarningAsError>true</TreatWarningAsError>
 		</ClCompile>
 		<Link>
 			<SubSystem>Console</SubSystem>
@@ -118,7 +119,7 @@
 	</ItemDefinitionGroup>
 	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
 		<ClCompile>
-			<WarningLevel>Level4</WarningLevel>
+			<WarningLevel>EnableAllWarnings</WarningLevel>
 			<FunctionLevelLinking>true</FunctionLevelLinking>
 			<IntrinsicFunctions>true</IntrinsicFunctions>
 			<SDLCheck>true</SDLCheck>
@@ -126,22 +127,25 @@
 			<ConformanceMode>true</ConformanceMode>
 			<MultiProcessorCompilation>true</MultiProcessorCompilation>
 			<InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+			<TreatWarningAsError>true</TreatWarningAsError>
 		</ClCompile>
 		<Link>
 			<SubSystem>Console</SubSystem>
 			<EnableCOMDATFolding>true</EnableCOMDATFolding>
 			<OptimizeReferences>true</OptimizeReferences>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
+			<LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
 		</Link>
 	</ItemDefinitionGroup>
 	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
 		<ClCompile>
-			<WarningLevel>Level4</WarningLevel>
+			<WarningLevel>EnableAllWarnings</WarningLevel>
 			<SDLCheck>true</SDLCheck>
-			<PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+			<PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;__STDC_WANT_SECURE_LIB__=0;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ConformanceMode>true</ConformanceMode>
 			<MultiProcessorCompilation>true</MultiProcessorCompilation>
 			<InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+			<TreatWarningAsError>true</TreatWarningAsError>
 		</ClCompile>
 		<Link>
 			<SubSystem>Console</SubSystem>
@@ -150,7 +154,7 @@
 	</ItemDefinitionGroup>
 	<ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
 		<ClCompile>
-			<WarningLevel>Level4</WarningLevel>
+			<WarningLevel>EnableAllWarnings</WarningLevel>
 			<FunctionLevelLinking>true</FunctionLevelLinking>
 			<IntrinsicFunctions>true</IntrinsicFunctions>
 			<SDLCheck>true</SDLCheck>
@@ -158,12 +162,14 @@
 			<ConformanceMode>true</ConformanceMode>
 			<MultiProcessorCompilation>true</MultiProcessorCompilation>
 			<InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+			<TreatWarningAsError>true</TreatWarningAsError>
 		</ClCompile>
 		<Link>
 			<SubSystem>Console</SubSystem>
 			<EnableCOMDATFolding>true</EnableCOMDATFolding>
 			<OptimizeReferences>true</OptimizeReferences>
 			<GenerateDebugInformation>true</GenerateDebugInformation>
+			<LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
 		</Link>
 	</ItemDefinitionGroup>
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets"/>

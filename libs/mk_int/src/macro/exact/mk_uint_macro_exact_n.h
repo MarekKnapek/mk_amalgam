@@ -56,13 +56,13 @@
 #include "../base/mk_uint_macro_base_int.h"
 #define mk_uint_small_bits 32
 #if mk_uint_bits == 64
-#define mk_uint64_c(a, b) {((unsigned int)(mk_uint_private_cast_to_long_32(b))), ((unsigned int)(mk_uint_private_cast_to_long_32(a)))}
+#define mk_uint64_c(a, b) {{((unsigned int)(mk_uint_private_cast_to_long_32(b))), ((unsigned int)(mk_uint_private_cast_to_long_32(a)))}}
 #endif
 #else
 #include "../base/mk_uint_macro_base_long.h"
 #define mk_uint_small_bits 32
 #if mk_uint_bits == 64
-#define mk_uint64_c(a, b) {((unsigned long int)(mk_uint_private_cast_to_long_32(b))), ((unsigned long int)(mk_uint_private_cast_to_long_32(a)))}
+#define mk_uint64_c(a, b) {{((unsigned long int)(mk_uint_private_cast_to_long_32(b))), ((unsigned long int)(mk_uint_private_cast_to_long_32(a)))}}
 #endif
 #endif
 #elif mk_uint_bits <= 128
@@ -76,19 +76,19 @@
 #include "../base/mk_uint_macro_base_llong.h"
 #define mk_uint_small_bits 64
 #if mk_uint_bits == 128
-#define mk_uint128_c(a, b, c, d) {((unsigned long long int)(mk_uint_private_cast_to_llong(mk_uint_private_cast_to_llong_hi(c) | mk_uint_private_cast_to_llong_lo(d)))), ((unsigned long long int)(mk_uint_private_cast_to_llong(mk_uint_private_cast_to_llong_hi(a) | mk_uint_private_cast_to_llong_lo(b))))}
+#define mk_uint128_c(a, b, c, d) {{((unsigned long long int)(mk_uint_private_cast_to_llong(mk_uint_private_cast_to_llong_hi(c) | mk_uint_private_cast_to_llong_lo(d)))), ((unsigned long long int)(mk_uint_private_cast_to_llong(mk_uint_private_cast_to_llong_hi(a) | mk_uint_private_cast_to_llong_lo(b))))}}
 #endif
 #elif UINT_MAX >= 0xfffffffful
 #include "../base/mk_uint_macro_base_int.h"
 #define mk_uint_small_bits 32
 #if mk_uint_bits == 128
-#define mk_uint128_c(a, b, c, d) {((unsigned int)(mk_uint_private_cast_to_long_32(d))), ((unsigned int)(mk_uint_private_cast_to_long_32(c))), ((unsigned int)(mk_uint_private_cast_to_long_32(b))), ((unsigned int)(mk_uint_private_cast_to_long_32(a)))}
+#define mk_uint128_c(a, b, c, d) {{((unsigned int)(mk_uint_private_cast_to_long_32(d))), ((unsigned int)(mk_uint_private_cast_to_long_32(c))), ((unsigned int)(mk_uint_private_cast_to_long_32(b))), ((unsigned int)(mk_uint_private_cast_to_long_32(a)))}}
 #endif
 #else
 #include "../base/mk_uint_macro_base_long.h"
 #define mk_uint_small_bits 32
 #if mk_uint_bits == 128
-#define mk_uint128_c(a, b, c, d) {((unsigned long int)(mk_uint_private_cast_to_long_32(d))), ((unsigned long int)(mk_uint_private_cast_to_long_32(c))), ((unsigned long int)(mk_uint_private_cast_to_long_32(b))), ((unsigned long int)(mk_uint_private_cast_to_long_32(a)))}
+#define mk_uint128_c(a, b, c, d) {{((unsigned long int)(mk_uint_private_cast_to_long_32(d))), ((unsigned long int)(mk_uint_private_cast_to_long_32(c))), ((unsigned long int)(mk_uint_private_cast_to_long_32(b))), ((unsigned long int)(mk_uint_private_cast_to_long_32(a)))}}
 #endif
 #endif
 #else
@@ -113,7 +113,6 @@
 
 
 #define mk_uint_t struct mk_uint_macro_exact_concat(mk_uint_macro_exact_concat(mk_uint, mk_uint_bits), _s)
-typedef mk_uint_t mk_uint_macro_exact_concat(mk_uint_macro_exact_concat(mk_uint, mk_uint_bits), _t);
 
 
 #include "mk_uint_macro_exact.h"

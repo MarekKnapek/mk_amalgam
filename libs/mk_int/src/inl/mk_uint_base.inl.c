@@ -5,7 +5,6 @@
 #if defined(_MSC_VER)
 #pragma warning(push)
 #pragma warning(disable:4464) /* warning C4464: relative include path contains '..' */
-#pragma warning(disable:4711) /* warning C4711: function 'xxx' selected for automatic inline expansion */
 #endif
 
 
@@ -14,6 +13,17 @@
 
 #include <stddef.h> /* size_t */
 #include <limits.h> /* CHAR_BIT */
+
+
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
+
+
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable:4711) /* warning C4711: function 'xxx' selected for automatic inline expansion */
+#endif
 
 
 mk_jumbo void mk_uint_concat(mk_uint_tn, zero)(mk_uint_t* out)

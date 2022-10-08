@@ -4,9 +4,10 @@
 #if defined(_MSC_VER)
 #pragma warning(push)
 #pragma warning(disable:4464) /* warning C4464: relative include path contains '..' */
-#elif defined(__GNUC__)
+#endif
+#if defined(__GNUC__)
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wpedantic"
+#pragma GCC diagnostic ignored "-Wpedantic" /* warning: ISO C does not support '__int128' types [-Wpedantic] */
 #endif
 
 
@@ -28,6 +29,7 @@
 
 #if defined(_MSC_VER)
 #pragma warning(pop)
-#elif defined(__GNUC__)
+#endif
+#if defined(__GNUC__)
 #pragma GCC diagnostic pop
 #endif

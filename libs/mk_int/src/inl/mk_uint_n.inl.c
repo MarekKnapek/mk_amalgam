@@ -1,4 +1,5 @@
 #include "../../../mk_utils/src/mk_assert.h"
+#include "../../../mk_utils/src/mk_clobber.h"
 #include "../../../mk_utils/src/mk_inline.h"
 #include "../../../mk_utils/src/mk_jumbo.h"
 
@@ -7,8 +8,6 @@
 
 #if defined(_MSC_VER)
 #pragma warning(push)
-#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
-#pragma warning(disable:4701) /* warning C4701: potentially uninitialized local variable 'xxx' used */
 #pragma warning(disable:4710) /* warning C4710: 'xxx': function not inlined */
 #pragma warning(disable:4711) /* warning C4711: function 'xxx' selected for automatic inline expansion */
 #endif
@@ -337,6 +336,7 @@ mk_jumbo void mk_uint_shl(mk_uint_t* out, mk_uint_t const* x, int n)
 	mk_assert(x);
 	mk_assert(n >= 0 && n < mk_uint_bits);
 
+	mk_clobber(&r);
 	parts = n / mk_uint_small_bits;
 	bits = n % mk_uint_small_bits;
 	for(i = 0; i != parts; ++i)
@@ -377,6 +377,7 @@ mk_jumbo void mk_uint_shr(mk_uint_t* out, mk_uint_t const* x, int n)
 	mk_assert(x);
 	mk_assert(n >= 0 && n < mk_uint_bits);
 
+	mk_clobber(&r);
 	parts = n / mk_uint_small_bits;
 	bits = n % mk_uint_small_bits;
 	for(i = 0; i != parts; ++i)

@@ -6,6 +6,12 @@
 #include "../../../mk_utils/src/mk_jumbo.h"
 
 
+#if defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable:4711) /* warning C4711: function 'xxx' selected for automatic inline expansion */
+#endif
+
+
 static mk_inline void mk_uint_concat_(divmod_classic)(mk_uint_t* div, mk_uint_t* mod, mk_uint_t const* a, mk_uint_t const* b)
 {
 	mk_uint_t r_div;
@@ -172,6 +178,11 @@ mk_jumbo void mk_uint_divmodsm(mk_uint_t* div, mk_uint_small_t* mod, mk_uint_t c
 }
 
 
+#if defined(_MSC_VER)
+#pragma warning(pop)
+#endif
+
+
 #endif
 
 
@@ -201,7 +212,7 @@ mk_jumbo int mk_uint_log2(mk_uint_t const* x)
 	}
 	else
 	{
-		mk_assert(index >= 0 && index <= (mk_uint_small_bits - 1));
+		mk_assert(index <= (mk_uint_small_bits - 1));
 		ret = (int)index;
 	}
 	return ret;
@@ -221,7 +232,7 @@ mk_jumbo int mk_uint_log2(mk_uint_t const* x)
 		bsr = _BitScanReverse64(&index, mask);
 		if(bsr != 0)
 		{
-			mk_assert(index >= 0 && index <= (mk_uint_small_bits - 1));
+			mk_assert(index <= (mk_uint_small_bits - 1));
 			ret = ((int)(index)) + (mk_uint_parts - 1 - i) * mk_uint_small_bits;
 			break;
 		}
@@ -243,7 +254,7 @@ mk_jumbo int mk_uint_log2(mk_uint_t const* x)
 	}
 	else
 	{
-		mk_assert(index >= 0 && index <= (mk_uint_small_bits - 1));
+		mk_assert(index <= (mk_uint_small_bits - 1));
 		ret = (int)index;
 	}
 	return ret;
@@ -263,7 +274,7 @@ mk_jumbo int mk_uint_log2(mk_uint_t const* x)
 		bsr = _BitScanReverse(&index, mask);
 		if(bsr != 0)
 		{
-			mk_assert(index >= 0 && index <= (mk_uint_small_bits - 1));
+			mk_assert(index <= (mk_uint_small_bits - 1));
 			ret = ((int)(index)) + (mk_uint_parts - 1 - i) * mk_uint_small_bits;
 			break;
 		}

@@ -23,6 +23,7 @@ mk_uint_t
 
 
 #endif
+typedef mk_uint_t mk_uint_macro_exact_concat(mk_uint_macro_exact_concat(mk_uint, mk_uint_bits), _t);
 
 
 mk_jumbo void mk_uint_zero(mk_uint_t* out);

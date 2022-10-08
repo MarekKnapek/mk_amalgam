@@ -6,6 +6,10 @@
 #pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
 #pragma warning(disable:4464) /* warning C4464: relative include path contains '..' */
 #endif
+#if defined(__GNUC__)
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wpedantic" /* warning: ISO C does not support '__int128' types [-Wpedantic] */
+#endif
 
 
 #include "../../mk_int/src/exact/mk_uint_8.h"
@@ -57,6 +61,9 @@ void mk_uint_fuzz_c(unsigned char const* data)
 #undef test
 
 
+#if defined(__GNUC__)
+#pragma GCC diagnostic pop
+#endif
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif

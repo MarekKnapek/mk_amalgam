@@ -6,15 +6,9 @@
 
 #if defined(_MSC_VER)
 #pragma warning(push)
-#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
-#pragma warning(disable:4293) /* warning C4293: '>>' '<<': shift count negative or too big, undefined behavior */
-#pragma warning(disable:4701) /* warning C4701: potentially uninitialized local variable 'xxx' used */
 #pragma warning(disable:4710) /* warning C4710: 'xxx': function not inlined */
 #pragma warning(disable:4711) /* warning C4711: function 'xxx' selected for automatic inline expansion */
 #pragma warning(disable:5045) /* warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified */
-#elif defined(__GNUC__)
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wshift-count-overflow"
 #endif
 
 
@@ -36,6 +30,15 @@ mk_jumbo void mk_uint_one(mk_uint_t* out)
 
 mk_jumbo void mk_uint_from_int(mk_uint_t* out, unsigned in)
 {
+	#if defined(_MSC_VER)
+	#pragma warning(push)
+	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
+	#pragma warning(disable:4293) /* warning C4293: '>>' '<<': shift count negative or too big, undefined behavior */
+	#endif
+	#if defined(__GNUC__)
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left/right shift count >= width of type [-Wshift-count-overflow] */
+	#endif
 	if(mk_uint_small_bits < sizeof(unsigned) * CHAR_BIT)
 	{
 		mk_uint_small_from_int(&out->m_data[0], in);
@@ -46,10 +49,25 @@ mk_jumbo void mk_uint_from_int(mk_uint_t* out, unsigned in)
 		mk_uint_small_from_int(&out->m_data[0], in);
 		mk_uint_small_zero(&out->m_data[1]);
 	}
+	#if defined(__GNUC__)
+	#pragma GCC diagnostic pop
+	#endif
+	#if defined(_MSC_VER)
+	#pragma warning(pop)
+	#endif
 }
 
 mk_jumbo unsigned mk_uint_to_int(mk_uint_t const* x)
 {
+	#if defined(_MSC_VER)
+	#pragma warning(push)
+	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
+	#pragma warning(disable:4293) /* warning C4293: '>>' '<<': shift count negative or too big, undefined behavior */
+	#endif
+	#if defined(__GNUC__)
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left/right shift count >= width of type [-Wshift-count-overflow] */
+	#endif
 	if(mk_uint_small_bits < sizeof(unsigned) * CHAR_BIT)
 	{
 		return mk_uint_small_to_int(&x->m_data[0]) | mk_uint_small_to_int(&x->m_data[1]) << mk_uint_small_bits;
@@ -58,10 +76,25 @@ mk_jumbo unsigned mk_uint_to_int(mk_uint_t const* x)
 	{
 		return mk_uint_small_to_int(&x->m_data[0]);
 	}
+	#if defined(__GNUC__)
+	#pragma GCC diagnostic pop
+	#endif
+	#if defined(_MSC_VER)
+	#pragma warning(pop)
+	#endif
 }
 
 mk_jumbo void mk_uint_from_long(mk_uint_t* out, unsigned long in)
 {
+	#if defined(_MSC_VER)
+	#pragma warning(push)
+	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
+	#pragma warning(disable:4293) /* warning C4293: '>>' '<<': shift count negative or too big, undefined behavior */
+	#endif
+	#if defined(__GNUC__)
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left/right shift count >= width of type [-Wshift-count-overflow] */
+	#endif
 	if(mk_uint_small_bits < sizeof(unsigned long) * CHAR_BIT)
 	{
 		mk_uint_small_from_long(&out->m_data[0], in);
@@ -72,10 +105,25 @@ mk_jumbo void mk_uint_from_long(mk_uint_t* out, unsigned long in)
 		mk_uint_small_from_long(&out->m_data[0], in);
 		mk_uint_small_zero(&out->m_data[1]);
 	}
+	#if defined(__GNUC__)
+	#pragma GCC diagnostic pop
+	#endif
+	#if defined(_MSC_VER)
+	#pragma warning(pop)
+	#endif
 }
 
 mk_jumbo unsigned long mk_uint_to_long(mk_uint_t const* x)
 {
+	#if defined(_MSC_VER)
+	#pragma warning(push)
+	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
+	#pragma warning(disable:4293) /* warning C4293: '>>' '<<': shift count negative or too big, undefined behavior */
+	#endif
+	#if defined(__GNUC__)
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left/right shift count >= width of type [-Wshift-count-overflow] */
+	#endif
 	if(mk_uint_small_bits < sizeof(unsigned long) * CHAR_BIT)
 	{
 		return mk_uint_small_to_long(&x->m_data[0]) | mk_uint_small_to_long(&x->m_data[1]) << mk_uint_small_bits;
@@ -84,10 +132,25 @@ mk_jumbo unsigned long mk_uint_to_long(mk_uint_t const* x)
 	{
 		return mk_uint_small_to_long(&x->m_data[0]);
 	}
+	#if defined(__GNUC__)
+	#pragma GCC diagnostic pop
+	#endif
+	#if defined(_MSC_VER)
+	#pragma warning(pop)
+	#endif
 }
 
 mk_jumbo void mk_uint_from_sizet(mk_uint_t* out, size_t in)
 {
+	#if defined(_MSC_VER)
+	#pragma warning(push)
+	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
+	#pragma warning(disable:4293) /* warning C4293: '>>' '<<': shift count negative or too big, undefined behavior */
+	#endif
+	#if defined(__GNUC__)
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left/right shift count >= width of type [-Wshift-count-overflow] */
+	#endif
 	if(mk_uint_small_bits < sizeof(size_t) * CHAR_BIT)
 	{
 		mk_uint_small_from_sizet(&out->m_data[0], in);
@@ -98,10 +161,25 @@ mk_jumbo void mk_uint_from_sizet(mk_uint_t* out, size_t in)
 		mk_uint_small_from_sizet(&out->m_data[0], in);
 		mk_uint_small_zero(&out->m_data[1]);
 	}
+	#if defined(__GNUC__)
+	#pragma GCC diagnostic pop
+	#endif
+	#if defined(_MSC_VER)
+	#pragma warning(pop)
+	#endif
 }
 
 mk_jumbo size_t mk_uint_to_sizet(mk_uint_t const* x)
 {
+	#if defined(_MSC_VER)
+	#pragma warning(push)
+	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
+	#pragma warning(disable:4293) /* warning C4293: '>>' '<<': shift count negative or too big, undefined behavior */
+	#endif
+	#if defined(__GNUC__)
+	#pragma GCC diagnostic push
+	#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left/right shift count >= width of type [-Wshift-count-overflow] */
+	#endif
 	if(mk_uint_small_bits < sizeof(size_t) * CHAR_BIT)
 	{
 		return mk_uint_small_to_sizet(&x->m_data[0]) | mk_uint_small_to_sizet(&x->m_data[1]) << mk_uint_small_bits;
@@ -110,6 +188,12 @@ mk_jumbo size_t mk_uint_to_sizet(mk_uint_t const* x)
 	{
 		return mk_uint_small_to_sizet(&x->m_data[0]);
 	}
+	#if defined(__GNUC__)
+	#pragma GCC diagnostic pop
+	#endif
+	#if defined(_MSC_VER)
+	#pragma warning(pop)
+	#endif
 }
 
 mk_jumbo void mk_uint_from_buff_le(mk_uint_t* out, void const* buff)
@@ -465,6 +549,4 @@ mk_jumbo void mk_uint_mod(mk_uint_t* out, mk_uint_t const* a, mk_uint_t const* b
 
 #if defined(_MSC_VER)
 #pragma warning(pop)
-#elif defined(__GNUC__)
-#pragma GCC diagnostic pop
 #endif
