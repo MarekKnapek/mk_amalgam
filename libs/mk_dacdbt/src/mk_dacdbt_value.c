@@ -54,7 +54,7 @@ mk_jumbo int mk_dacdbt_value_construct_parse(mk_dacdbt_value_t* value, mk_std_in
 		typeu == mk_dacdbt_value_type_e_f64 ||
 		typeu == mk_dacdbt_value_type_e_str ||
 		typeu == mk_dacdbt_value_type_e_bin ||
-		typeu == mk_dacdbt_value_type_e_file ||
+		typeu == mk_dacdbt_value_type_e_fil ||
 		typeu == mk_dacdbt_value_type_e_u64 ||
 		typeu == 7 ||
 		typeu == 8
@@ -84,7 +84,7 @@ mk_jumbo int mk_dacdbt_value_construct_parse(mk_dacdbt_value_t* value, mk_std_in
 			mk_try(mk_dacdbt_io_read_buffer(is, &value->m_data.m_bin, mk_uint32_to_sizet(&bin_len)));
 		}
 		break;
-		case mk_dacdbt_value_type_e_file:
+		case mk_dacdbt_value_type_e_fil:
 		{
 			mk_try(mk_dacdbt_io_read_u32(is, &bin_len));
 			mk_try(mk_std_buffer_init(&value->m_data.m_file));
@@ -111,7 +111,7 @@ mk_jumbo int mk_dacdbt_value_destruct(mk_dacdbt_value_t* value)
 		value->m_type == mk_dacdbt_value_type_e_f64 ||
 		value->m_type == mk_dacdbt_value_type_e_str ||
 		value->m_type == mk_dacdbt_value_type_e_bin ||
-		value->m_type == mk_dacdbt_value_type_e_file ||
+		value->m_type == mk_dacdbt_value_type_e_fil ||
 		value->m_type == mk_dacdbt_value_type_e_u64
 	);
 
@@ -121,10 +121,83 @@ mk_jumbo int mk_dacdbt_value_destruct(mk_dacdbt_value_t* value)
 		case mk_dacdbt_value_type_e_f64: break;
 		case mk_dacdbt_value_type_e_str: mk_try(mk_dacdbt_str_destruct(&value->m_data.m_str)); break;
 		case mk_dacdbt_value_type_e_bin: mk_try(mk_std_buffer_deinit(&value->m_data.m_bin)); break;
-		case mk_dacdbt_value_type_e_file: mk_try(mk_std_buffer_deinit(&value->m_data.m_file)); break;
+		case mk_dacdbt_value_type_e_fil: mk_try(mk_std_buffer_deinit(&value->m_data.m_file)); break;
 		case mk_dacdbt_value_type_e_u64: break;
 	}
 	mk_try(mk_dacdbt_str_destruct(&value->m_name));
+
+	return 0;
+}
+
+mk_jumbo int mk_dacdbt_value_get_name(mk_dacdbt_value_t const* value, int* is_wide, void const** data, size_t* len)
+{
+	mk_assert(value);
+
+	mk_try(mk_dacdbt_str_get(&value->m_name, is_wide, data, len));
+
+	return 0;
+}
+
+mk_jumbo int mk_dacdbt_value_get_type(mk_dacdbt_value_t const* value, mk_dacdbt_value_type_t* type)
+{
+	mk_assert(value);
+	mk_assert(type);
+
+	*type = value->m_type;
+
+	return 0;
+}
+
+mk_jumbo int mk_dacdbt_value_get_len(mk_dacdbt_value_t const* value, size_t* len)
+{
+	int wide;
+	void const* data;
+
+	mk_assert(value);
+	mk_assert(len);
+
+	switch(value->m_type)
+	{
+		case mk_dacdbt_value_type_e_u32: mk_assert(0); break;
+		case mk_dacdbt_value_type_e_f64: mk_assert(0); break;
+		case mk_dacdbt_value_type_e_str: mk_try(mk_dacdbt_str_get(&value->m_data.m_str, &wide, &data, len)); break;
+		case mk_dacdbt_value_type_e_bin: mk_try(mk_std_buffer_get_size(&value->m_data.m_bin, len)); break;
+		case mk_dacdbt_value_type_e_fil: mk_try(mk_std_buffer_get_size(&value->m_data.m_file, len)); break;
+		case mk_dacdbt_value_type_e_u64: mk_assert(0); break;
+	}
+
+	return 0;
+}
+
+mk_jumbo int mk_dacdbt_value_get_u32(mk_dacdbt_value_t const* value, mk_uint32_t const** u32)
+{
+	mk_assert(value);
+	mk_assert(u32);
+	mk_assert(value->m_type == mk_dacdbt_value_type_e_u32);
+
+	*u32 = &value->m_data.m_u32;
+
+	return 0;
+}
+
+mk_jumbo int mk_dacdbt_value_get_str(mk_dacdbt_value_t const* value, mk_dacdbt_str_t const** str)
+{
+	mk_assert(value);
+	mk_assert(str);
+	mk_assert(value->m_type == mk_dacdbt_value_type_e_str);
+
+	*str = &value->m_data.m_str;
+
+	return 0;
+}
+
+mk_jumbo int mk_dacdbt_value_get_u64(mk_dacdbt_value_t const* value, mk_uint64_t const** u64)
+{
+	mk_assert(value);
+	mk_assert(u64);
+	mk_assert(value->m_type == mk_dacdbt_value_type_e_u64);
+
+	*u64 = &value->m_data.m_u64;
 
 	return 0;
 }

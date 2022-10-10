@@ -33,7 +33,7 @@ mk_jumbo int mk_win_base_tests_all(void)
 	mk_try(mk_win_base_tests_kernel_types());
 	mk_try(mk_win_base_tests_user_types());
 	mk_try(mk_win_base_tests_comdlg_types());
-	
+
 	return 0;
 }
 

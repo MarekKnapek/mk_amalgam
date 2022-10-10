@@ -236,7 +236,7 @@ static mk_inline int mk_dacdbte_child_private_on_destroy(mk_dacdbte_child_pt chi
 static mk_inline int mk_dacdbte_child_private_on_size(mk_dacdbte_child_pt child, mk_win_base_user_types_wparam_t wparam, mk_win_base_user_types_lparam_t lparam, int* override_defproc, mk_win_base_user_types_lresult_t* lres)
 {
 	mk_assert(child);
-	mk_assert(lparam);
+	((void)(lparam));
 	mk_assert(override_defproc);
 	mk_assert(lres);
 
