@@ -1,0 +1,117 @@
+#undef mk_num_composite_base_bits
+#undef mk_num_composite_un_parts
+
+#undef mk_num_composite_un_s
+#undef mk_num_composite_un_t
+
+#undef mk_num_composite_un_normalize
+#undef mk_num_composite_un_normalize_msd
+
+#undef mk_num_composite_un_set_zero
+#undef mk_num_composite_un_set_one
+#undef mk_num_composite_un_set_mask
+
+#undef mk_num_composite_un_from_char
+#undef mk_num_composite_un_from_uchar
+#undef mk_num_composite_un_from_schar
+#undef mk_num_composite_un_from_ushort
+#undef mk_num_composite_un_from_sshort
+#undef mk_num_composite_un_from_uint
+#undef mk_num_composite_un_from_sint
+#undef mk_num_composite_un_from_ulong
+#undef mk_num_composite_un_from_slong
+#undef mk_num_composite_un_from_ullong
+#undef mk_num_composite_un_from_sllong
+#undef mk_num_composite_un_from_sizet
+#undef mk_num_composite_un_from_umaxt
+#undef mk_num_composite_un_from_smaxt
+
+#undef mk_num_composite_un_to_char
+#undef mk_num_composite_un_to_uchar
+#undef mk_num_composite_un_to_schar
+#undef mk_num_composite_un_to_ushort
+#undef mk_num_composite_un_to_sshort
+#undef mk_num_composite_un_to_uint
+#undef mk_num_composite_un_to_sint
+#undef mk_num_composite_un_to_ulong
+#undef mk_num_composite_un_to_slong
+#undef mk_num_composite_un_to_ullong
+#undef mk_num_composite_un_to_sllong
+#undef mk_num_composite_un_to_sizet
+#undef mk_num_composite_un_to_umaxt
+#undef mk_num_composite_un_to_smaxt
+
+#undef mk_num_composite_un_is_zero
+#undef mk_num_composite_un_eq
+#undef mk_num_composite_un_ne
+#undef mk_num_composite_un_lt
+#undef mk_num_composite_un_le
+#undef mk_num_composite_un_gt
+#undef mk_num_composite_un_ge
+
+#undef mk_num_composite_un_inc
+#undef mk_num_composite_un_dec
+
+#undef mk_num_composite_un_not2
+#undef mk_num_composite_un_not1
+#undef mk_num_composite_un_or3
+#undef mk_num_composite_un_or2
+#undef mk_num_composite_un_and3
+#undef mk_num_composite_un_and2
+#undef mk_num_composite_un_xor3
+#undef mk_num_composite_un_xor2
+
+#undef mk_num_composite_un_shl3
+#undef mk_num_composite_un_shl2
+#undef mk_num_composite_un_shr3
+#undef mk_num_composite_un_shr2
+
+#undef mk_num_composite_un_add3_wrap_cid_cod
+#undef mk_num_composite_un_add3_wrap_cid_coe
+#undef mk_num_composite_un_add3_wrap_cie_cod
+#undef mk_num_composite_un_add3_wrap_cie_coe
+#undef mk_num_composite_un_add3_sat_cid_cod
+#undef mk_num_composite_un_add3_sat_cid_coe
+#undef mk_num_composite_un_add3_sat_cie_cod
+#undef mk_num_composite_un_add3_sat_cie_coe
+#undef mk_num_composite_un_add3_crash_cid_cod
+#undef mk_num_composite_un_add3_crash_cid_coe
+#undef mk_num_composite_un_add3_crash_cie_cod
+#undef mk_num_composite_un_add3_crash_cie_coe
+#undef mk_num_composite_un_add2_wrap_cid_cod
+#undef mk_num_composite_un_add2_wrap_cid_coe
+#undef mk_num_composite_un_add2_wrap_cie_cod
+#undef mk_num_composite_un_add2_wrap_cie_coe
+#undef mk_num_composite_un_add2_sat_cid_cod
+#undef mk_num_composite_un_add2_sat_cid_coe
+#undef mk_num_composite_un_add2_sat_cie_cod
+#undef mk_num_composite_un_add2_sat_cie_coe
+#undef mk_num_composite_un_add2_crash_cid_cod
+#undef mk_num_composite_un_add2_crash_cid_coe
+#undef mk_num_composite_un_add2_crash_cie_cod
+#undef mk_num_composite_un_add2_crash_cie_coe
+
+#undef mk_num_composite_un_sub3_wrap_cid_cod
+#undef mk_num_composite_un_sub3_wrap_cid_coe
+#undef mk_num_composite_un_sub3_wrap_cie_cod
+#undef mk_num_composite_un_sub3_wrap_cie_coe
+#undef mk_num_composite_un_sub3_sat_cid_cod
+#undef mk_num_composite_un_sub3_sat_cid_coe
+#undef mk_num_composite_un_sub3_sat_cie_cod
+#undef mk_num_composite_un_sub3_sat_cie_coe
+#undef mk_num_composite_un_sub3_crash_cid_cod
+#undef mk_num_composite_un_sub3_crash_cid_coe
+#undef mk_num_composite_un_sub3_crash_cie_cod
+#undef mk_num_composite_un_sub3_crash_cie_coe
+#undef mk_num_composite_un_sub2_wrap_cid_cod
+#undef mk_num_composite_un_sub2_wrap_cid_coe
+#undef mk_num_composite_un_sub2_wrap_cie_cod
+#undef mk_num_composite_un_sub2_wrap_cie_coe
+#undef mk_num_composite_un_sub2_sat_cid_cod
+#undef mk_num_composite_un_sub2_sat_cid_coe
+#undef mk_num_composite_un_sub2_sat_cie_cod
+#undef mk_num_composite_un_sub2_sat_cie_coe
+#undef mk_num_composite_un_sub2_crash_cid_cod
+#undef mk_num_composite_un_sub2_crash_cid_coe
+#undef mk_num_composite_un_sub2_crash_cie_cod
+#undef mk_num_composite_un_sub2_crash_cie_coe
