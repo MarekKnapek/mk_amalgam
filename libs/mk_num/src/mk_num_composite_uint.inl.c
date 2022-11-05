@@ -16,8 +16,10 @@
 #if defined(_MSC_VER)
 #pragma warning(push)
 #pragma warning(disable:4514) /* warning C4514: 'xxx': unreferenced inline function has been removed */
+#pragma warning(disable:4702) /* warning C4702: unreachable code */
 #pragma warning(disable:4710) /* warning C4710: 'xxx': function not inlined */
 #pragma warning(disable:4711) /* warning C4711: function 'xxx' selected for automatic inline expansion */
+#pragma warning(disable:5045) /* warning C5045: Compiler will insert Spectre mitigation for memory load if /Qspectre switch specified */
 #endif
 
 
@@ -1671,6 +1673,124 @@ mk_lang_jumbo void mk_num_composite_un_sub2_crash_cie_cod(mk_num_composite_un_t*
 mk_lang_jumbo void mk_num_composite_un_sub2_crash_cie_coe(mk_num_composite_un_t* x, mk_num_composite_un_t const* y, mk_lang_bool_t ci, mk_lang_bool_t* co)
 {
 	mk_num_composite_un_sub3_crash_cie_coe(x, y, ci, x, co);
+}
+
+mk_lang_jumbo void mk_num_composite_un_mul3_wrap_cid_cod_restrict(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* z)
+{
+	int i;
+	int j;
+	int k;
+	mk_num_composite_base_type digit1;
+	mk_num_composite_base_type digit2;
+	mk_lang_bool_t c1;
+
+	mk_lang_assert(x);
+	mk_lang_assert(y);
+	mk_lang_assert(z);
+	mk_lang_assert(z != x && z != y);
+	mk_lang_assert(mk_num_composite_un_parts >= 2);
+
+	#if defined(_MSC_VER)
+	#pragma warning(push)
+	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
+	#endif
+	if(mk_num_composite_un_parts == 2)
+	#if defined(_MSC_VER)
+	#pragma warning(pop)
+	#endif
+	{
+		mk_num_composite_un_base_mul3_wrap_cid_coe(&y->m_parts[0], &x->m_parts[0], &z->m_parts[0], &z->m_parts[1]);
+		mk_num_composite_un_base_mul3_wrap_cid_cod(&y->m_parts[0], &x->m_parts[1], &digit1);
+		mk_num_composite_un_base_add2_wrap_cid_cod(&z->m_parts[1], &digit1);
+		mk_num_composite_un_base_mul3_wrap_cid_cod(&y->m_parts[1], &x->m_parts[0], &digit1);
+		mk_num_composite_un_base_add2_wrap_cid_cod(&z->m_parts[1], &digit1);
+	}
+	else
+	{
+		mk_num_composite_un_base_mul3_wrap_cid_coe(&y->m_parts[0], &x->m_parts[0], &z->m_parts[0], &z->m_parts[1]);
+		mk_num_composite_un_base_mul3_wrap_cid_coe(&y->m_parts[0], &x->m_parts[1], &digit1, &z->m_parts[2]);
+		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c1);
+		for(i = 2; i != mk_num_composite_un_parts - 1; ++i)
+		{
+			mk_num_composite_un_base_mul3_wrap_cid_coe(&y->m_parts[0], &x->m_parts[i], &digit1, &z->m_parts[i + 1]);
+			mk_num_composite_un_base_add2_wrap_cie_coe(&z->m_parts[i], &digit1, c1, &c1);
+		}
+		mk_num_composite_un_base_mul3_wrap_cid_cod(&y->m_parts[0], &x->m_parts[mk_num_composite_un_parts - 1], &digit1);
+		mk_num_composite_un_base_add2_wrap_cie_cod(&z->m_parts[mk_num_composite_un_parts - 1], &digit1, c1);
+		for(j = 1; j != mk_num_composite_un_parts - 2; ++j)
+		{
+			for(i = 0; i < mk_num_composite_un_parts - 1 - j - 1; ++i)
+			{
+				mk_num_composite_un_base_mul3_wrap_cid_coe(&y->m_parts[j], &x->m_parts[i], &digit1, &digit2);
+				mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[j + i], &digit1, &c1);
+				mk_num_composite_un_base_add2_wrap_cie_coe(&z->m_parts[j + i + 1], &digit2, c1, &c1);
+				if(c1)
+				{
+					k = 0;
+					do
+					{
+						mk_num_composite_un_base_inc(&z->m_parts[j + i + 2 + k]);
+					}while(mk_num_composite_un_base_is_zero(&z->m_parts[j + i + 2 + k]) && ++k != mk_num_composite_un_parts - 2 - j - i);
+				}
+			}
+			mk_num_composite_un_base_mul3_wrap_cid_coe(&y->m_parts[j], &x->m_parts[i], &digit1, &digit2);
+			mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[mk_num_composite_un_parts - 2], &digit1, &c1);
+			mk_num_composite_un_base_add2_wrap_cie_cod(&z->m_parts[mk_num_composite_un_parts - 1], &digit2, c1);
+			mk_num_composite_un_base_mul3_wrap_cid_cod(&y->m_parts[j], &x->m_parts[i + 1], &digit1);
+			mk_num_composite_un_base_add2_wrap_cid_cod(&z->m_parts[mk_num_composite_un_parts - 1], &digit1);
+		}
+		mk_num_composite_un_base_mul3_wrap_cid_coe(&y->m_parts[mk_num_composite_un_parts - 2], &x->m_parts[0], &digit1, &digit2);
+		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[mk_num_composite_un_parts - 2], &digit1, &c1);
+		mk_num_composite_un_base_add2_wrap_cie_cod(&z->m_parts[mk_num_composite_un_parts - 1], &digit2, c1);
+		mk_num_composite_un_base_mul3_wrap_cid_cod(&y->m_parts[mk_num_composite_un_parts - 2], &x->m_parts[1], &digit1);
+		mk_num_composite_un_base_add2_wrap_cid_cod(&z->m_parts[mk_num_composite_un_parts - 1], &digit1);
+		mk_num_composite_un_base_mul3_wrap_cid_cod(&y->m_parts[mk_num_composite_un_parts - 1], &x->m_parts[0], &digit1);
+		mk_num_composite_un_base_add2_wrap_cid_cod(&z->m_parts[mk_num_composite_un_parts - 1], &digit1);
+	}
+}
+
+mk_lang_jumbo void mk_num_composite_un_mul3_wrap_cid_cod_alias(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* z)
+{
+	mk_num_composite_un_t zz;
+
+	mk_lang_assert(x);
+	mk_lang_assert(y);
+	mk_lang_assert(z);
+	mk_lang_assert(z == x || z == y);
+
+	mk_num_composite_un_mul3_wrap_cid_cod_restrict(x, y, &zz);
+	*z = zz;
+}
+
+mk_lang_jumbo void mk_num_composite_un_mul3_wrap_cid_cod(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* z)
+{
+	mk_lang_assert(x);
+	mk_lang_assert(y);
+	mk_lang_assert(z);
+
+	#if defined(_MSC_VER)
+	#pragma warning(push)
+	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
+	#endif
+	if(mk_num_composite_un_parts == 1)
+	#if defined(_MSC_VER)
+	#pragma warning(pop)
+	#endif
+	{
+		mk_num_composite_un_base_mul3_wrap_cid_cod(&x->m_parts[0], &y->m_parts[0], &z->m_parts[0]);
+	}
+	else
+	{
+		if(x != z && y != z)
+		{
+			mk_num_composite_un_mul3_wrap_cid_cod_restrict(x, y, z);
+		}
+		else
+		{
+			mk_num_composite_un_mul3_wrap_cid_cod_alias(x, y, z);
+		}
+	}
+	mk_num_composite_un_normalize_msd(z);
 }
 
 

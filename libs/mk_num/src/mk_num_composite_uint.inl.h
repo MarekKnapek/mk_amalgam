@@ -126,6 +126,8 @@ mk_lang_jumbo void mk_num_composite_un_sub2_crash_cid_coe(mk_num_composite_un_t*
 mk_lang_jumbo void mk_num_composite_un_sub2_crash_cie_cod(mk_num_composite_un_t* x, mk_num_composite_un_t const* y, mk_lang_bool_t ci);
 mk_lang_jumbo void mk_num_composite_un_sub2_crash_cie_coe(mk_num_composite_un_t* x, mk_num_composite_un_t const* y, mk_lang_bool_t ci, mk_lang_bool_t* co);
 
+mk_lang_jumbo void mk_num_composite_un_mul3_wrap_cid_cod(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* z);
+
 
 #include "mk_num_composite_uint_undef.h"
 
