@@ -33,12 +33,12 @@ mk_lang_jumbo void mk_num_composite_un_normalize(mk_num_composite_base_type* x)
 	mk_num_composite_un_base_and2(x, &mask);
 }
 
-mk_lang_jumbo void mk_num_composite_un_normalize_msd(mk_num_composite_base_type* x)
+mk_lang_jumbo void mk_num_composite_un_normalize_msd(mk_num_composite_un_t* x)
 {
 	mk_num_composite_base_type mask;
 
 	mk_num_composite_un_base_set_mask(&mask, mk_num_composite_bits - (mk_num_composite_un_parts - 1) * mk_num_composite_base_bits);
-	mk_num_composite_un_base_and2(x, &mask);
+	mk_num_composite_un_base_and2(&x->m_parts[mk_num_composite_un_parts - 1], &mask);
 }
 
 
@@ -876,7 +876,7 @@ mk_lang_jumbo void mk_num_composite_un_inc(mk_num_composite_un_t* x)
 		mk_num_composite_un_base_inc(&x->m_parts[i]);
 	}
 	while(mk_num_composite_un_base_is_zero(&x->m_parts[i++]) && i != mk_num_composite_un_parts);
-	mk_num_composite_un_normalize_msd(&x->m_parts[mk_num_composite_un_parts - 1]);
+	mk_num_composite_un_normalize_msd(x);
 }
 
 mk_lang_jumbo void mk_num_composite_un_dec(mk_num_composite_un_t* x)
@@ -894,7 +894,7 @@ mk_lang_jumbo void mk_num_composite_un_dec(mk_num_composite_un_t* x)
 		++i;
 	}
 	while(b && i != mk_num_composite_un_parts);
-	mk_num_composite_un_normalize_msd(&x->m_parts[mk_num_composite_un_parts - 1]);
+	mk_num_composite_un_normalize_msd(x);
 }
 
 
@@ -909,7 +909,7 @@ mk_lang_jumbo void mk_num_composite_un_not2(mk_num_composite_un_t const* x, mk_n
 	{
 		mk_num_composite_un_base_not2(&x->m_parts[i], &y->m_parts[i]);
 	}
-	mk_num_composite_un_normalize_msd(&y->m_parts[mk_num_composite_un_parts - 1]);
+	mk_num_composite_un_normalize_msd(y);
 }
 
 mk_lang_jumbo void mk_num_composite_un_not1(mk_num_composite_un_t* x)
@@ -999,7 +999,7 @@ mk_lang_jumbo void mk_num_composite_un_shl3(mk_num_composite_un_t const* x, int 
 		{
 			mk_num_composite_un_base_set_zero(&y->m_parts[mk_num_composite_un_parts - 1 - i]);
 		}
-		mk_num_composite_un_normalize_msd(&y->m_parts[mk_num_composite_un_parts - 1]);
+		mk_num_composite_un_normalize_msd(y);
 	}
 	else
 	{
@@ -1014,7 +1014,7 @@ mk_lang_jumbo void mk_num_composite_un_shl3(mk_num_composite_un_t const* x, int 
 		{
 			mk_num_composite_un_base_set_zero(&y->m_parts[mk_num_composite_un_parts - 1 - i]);
 		}
-		mk_num_composite_un_normalize_msd(&y->m_parts[mk_num_composite_un_parts - 1]);
+		mk_num_composite_un_normalize_msd(y);
 	}
 }
 
@@ -1098,7 +1098,7 @@ mk_lang_jumbo void mk_num_composite_un_add3_wrap_cid_cod(mk_num_composite_un_t c
 		}
 		mk_num_composite_un_base_add3_wrap_cie_cod(&x->m_parts[mk_num_composite_un_parts - 1], &y->m_parts[mk_num_composite_un_parts - 1], b, &z->m_parts[mk_num_composite_un_parts - 1]);
 	}
-	mk_num_composite_un_normalize_msd(&z->m_parts[mk_num_composite_un_parts - 1]);
+	mk_num_composite_un_normalize_msd(z);
 }
 
 mk_lang_jumbo void mk_num_composite_un_add3_wrap_cid_coe(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* z, mk_lang_bool_t* co)
@@ -1402,7 +1402,7 @@ mk_lang_jumbo void mk_num_composite_un_sub3_wrap_cid_cod(mk_num_composite_un_t c
 		}
 		mk_num_composite_un_base_sub3_wrap_cie_cod(&x->m_parts[mk_num_composite_un_parts - 1], &y->m_parts[mk_num_composite_un_parts - 1], b, &z->m_parts[mk_num_composite_un_parts - 1]);
 	}
-	mk_num_composite_un_normalize_msd(&z->m_parts[mk_num_composite_un_parts - 1]);
+	mk_num_composite_un_normalize_msd(z);
 }
 
 mk_lang_jumbo void mk_num_composite_un_sub3_wrap_cid_coe(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* z, mk_lang_bool_t* co)
