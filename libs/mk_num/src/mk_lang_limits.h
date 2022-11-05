@@ -24,7 +24,7 @@
 #if mk_lang_limits_ullongmax_has != 0
 #define mk_lang_limits_ullongmax ULLONG_MAX
 #else
-#define mk_lang_limits_ullongmax_has ((mk_lang_ullong_t)(((mk_lang_ullong_t)(((mk_lang_ullong_t)(((mk_lang_ullong_t)(((mk_lang_ullong_t)(1)) << (sizeof(mk_lang_ullong_t) * CHAR_BIT - 1))) - 1)) << 1)) + 1))
+#define mk_lang_limits_ullongmax ((mk_lang_ullong_t)(((mk_lang_ullong_t)(((mk_lang_ullong_t)(((mk_lang_ullong_t)(((mk_lang_ullong_t)(1)) << (sizeof(mk_lang_ullong_t) * CHAR_BIT - 1))) - 1)) << 1)) + 1))
 #endif
 
 #undef mk_lang_limits_ullongmax_has
