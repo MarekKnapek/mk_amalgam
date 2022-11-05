@@ -120,6 +120,31 @@ mk_lang_jumbo void mk_num_sub2_crash_cid_coe(mk_detail_num_basic_ut_type* x, mk_
 mk_lang_jumbo void mk_num_sub2_crash_cie_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_lang_bool_t ci);
 mk_lang_jumbo void mk_num_sub2_crash_cie_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_lang_bool_t ci, mk_lang_bool_t* co);
 
+mk_lang_jumbo void mk_num_mul3_wrap_cid_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z);
+mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co);
+mk_lang_jumbo void mk_num_mul3_wrap_cie_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* z);
+mk_lang_jumbo void mk_num_mul3_wrap_cie_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co);
+mk_lang_jumbo void mk_num_mul3_sat_cid_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z);
+mk_lang_jumbo void mk_num_mul3_sat_cid_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co);
+mk_lang_jumbo void mk_num_mul3_sat_cie_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* z);
+mk_lang_jumbo void mk_num_mul3_sat_cie_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co);
+mk_lang_jumbo void mk_num_mul3_crash_cid_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z);
+mk_lang_jumbo void mk_num_mul3_crash_cid_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co);
+mk_lang_jumbo void mk_num_mul3_crash_cie_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* z);
+mk_lang_jumbo void mk_num_mul3_crash_cie_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co);
+mk_lang_jumbo void mk_num_mul2_wrap_cid_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y);
+mk_lang_jumbo void mk_num_mul2_wrap_cid_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* co);
+mk_lang_jumbo void mk_num_mul2_wrap_cie_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci);
+mk_lang_jumbo void mk_num_mul2_wrap_cie_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* co);
+mk_lang_jumbo void mk_num_mul2_sat_cid_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y);
+mk_lang_jumbo void mk_num_mul2_sat_cid_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* co);
+mk_lang_jumbo void mk_num_mul2_sat_cie_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci);
+mk_lang_jumbo void mk_num_mul2_sat_cie_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* co);
+mk_lang_jumbo void mk_num_mul2_crash_cid_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y);
+mk_lang_jumbo void mk_num_mul2_crash_cid_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* co);
+mk_lang_jumbo void mk_num_mul2_crash_cie_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci);
+mk_lang_jumbo void mk_num_mul2_crash_cie_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* co);
+
 
 #include "mk_num_basic_uint_undef.h"
 
