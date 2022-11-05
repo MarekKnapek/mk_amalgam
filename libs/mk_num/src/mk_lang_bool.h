@@ -14,11 +14,10 @@
 #define mk_lang_bool_t _Bool
 #define mk_lang_true ((mk_lang_bool_t)(1))
 #define mk_lang_false ((mk_lang_bool_t)(0))
-#elif defined(__STDC__)
+#else
 #define mk_lang_bool_t int
 #define mk_lang_true ((mk_lang_bool_t)(1))
 #define mk_lang_false ((mk_lang_bool_t)(0))
-#else
 #endif
 
 
