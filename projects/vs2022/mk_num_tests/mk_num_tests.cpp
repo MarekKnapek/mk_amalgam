@@ -14,6 +14,9 @@
 #define mk_num_composite_bits 25
 #include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uint.inl.h"
+#define mk_num_composite_bits 8192
+#include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
+#include "../../../libs/mk_num/src/mk_num_composite_uint.inl.h"
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
@@ -124,6 +127,31 @@ mk_lang_bool_t test_basic_types_mul_2(unsigned char const* data, size_t size)
 	#endif
 }
 
+mk_lang_bool_t test_basic_types_mul_3(void)
+{
+	static int once = 0;
+
+	int n;
+	mk_num_composite_u8192_t a;
+	mk_num_composite_u8192_t b;
+	int i;
+	mk_lang_bool_t ret;
+
+	if(once != 0) return mk_lang_true;
+	if(once == 0) ++once;
+
+	n = 800;
+	mk_num_composite_u8192_set_one(&a);
+	b = a;
+	for(i = 0; i != n - 1; ++i)
+	{
+		mk_num_composite_u8192_inc(&b);
+		mk_num_composite_u8192_mul3_wrap_cid_cod(&a, &b, &a);
+	}
+	ret = mk_lang_true;
+	return ret;
+}
+
 mk_lang_bool_t test_basic_types(unsigned char const* data, size_t size)
 {
 	mk_lang_bool_t ret;
@@ -132,6 +160,7 @@ mk_lang_bool_t test_basic_types(unsigned char const* data, size_t size)
 	ret = ret && test_basic_types_max();
 	ret = ret && test_basic_types_mul(data, size);
 	ret = ret && test_basic_types_mul_2(data, size);
+	ret = ret && test_basic_types_mul_3();
 	return ret;
 }
 
@@ -240,6 +269,9 @@ int main(void)
 #include "../../../libs/mk_num/src/mk_num_composite_uints.c"
 #include "../../../libs/mk_num/src/mk_lang_crash.c"
 #define mk_num_composite_bits 25
+#include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
+#include "../../../libs/mk_num/src/mk_num_composite_uint.inl.c"
+#define mk_num_composite_bits 8192
 #include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uint.inl.c"
 #if defined(_MSC_VER)
