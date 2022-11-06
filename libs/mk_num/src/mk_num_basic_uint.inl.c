@@ -12,14 +12,21 @@
 #include <limits.h> /* CHAR_BIT */
 
 
-#if defined(_MSC_VER) && _MSC_VER >= 1500 /* VS 2008 */
+#if defined(_MSC_VER) && _MSC_VER >= 1700 /* VS 2012 */ && defined(_M_AMD64)
 #include <intrin.h>
-#if defined(_M_IX86) || defined(_M_AMD64)
+#pragma intrinsic(_umul128)
+#endif
+#if defined(_MSC_VER) && _MSC_VER >= 1600 /* VS 2010 */ && (defined(_M_AMD64) || defined(_M_IA64))
+#include <intrin.h>
+#pragma intrinsic(__umulh)
+#endif
+#if defined(_MSC_VER) && _MSC_VER >= 1500 /* VS 2008 */ && (defined(_M_IX86) || defined(_M_AMD64))
+#include <intrin.h>
 #pragma intrinsic(__emulu)
 #endif
-#if defined(_M_AMD64)
+#if defined(_MSC_VER) && _MSC_VER >= 1500 /* VS 2008 */ && defined(_M_AMD64)
+#include <intrin.h>
 #pragma intrinsic(__ull_rshift)
-#endif
 #endif
 
 
@@ -967,6 +974,47 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 		zz = ((unsigned long long int)(xx * yy));
 		*z = ((mk_detail_num_basic_ut_type)(zz));
 		*co = ((mk_detail_num_basic_ut_type)(zz >> 32));
+	}
+	#endif
+	#if defined(_MSC_VER) && _MSC_VER >= 1700 /* VS 2012 */ && defined(_M_AMD64)
+	#pragma warning(push)
+	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
+	else if(sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT == 64)
+	#pragma warning(pop)
+	{
+		unsigned __int64 xx;
+		unsigned __int64 yy;
+		unsigned __int64 cc;
+
+		mk_lang_assert(x);
+		mk_lang_assert(y);
+		mk_lang_assert(z);
+		mk_lang_assert(co);
+
+		xx = ((unsigned __int64)(*x));
+		yy = ((unsigned __int64)(*y));
+		*z = ((mk_detail_num_basic_ut_type)(_umul128(xx, yy, &cc)));
+		*co = ((mk_detail_num_basic_ut_type)(cc));
+	}
+	#endif
+	#if defined(_MSC_VER) && _MSC_VER >= 1600 /* VS 2010 */ && (defined(_M_AMD64) || defined(_M_IA64))
+	#pragma warning(push)
+	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
+	else if(sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT == 64)
+	#pragma warning(pop)
+	{
+		unsigned __int64 xx;
+		unsigned __int64 yy;
+
+		mk_lang_assert(x);
+		mk_lang_assert(y);
+		mk_lang_assert(z);
+		mk_lang_assert(co);
+
+		xx = ((unsigned __int64)(*x));
+		yy = ((unsigned __int64)(*y));
+		*z = ((mk_detail_num_basic_ut_type)(*x * *y));
+		*co = ((mk_detail_num_basic_ut_type)(__umulh(xx, yy)));
 	}
 	#endif
 	#if mk_lang_i128_has != 0
