@@ -2,6 +2,11 @@
 #undef mk_num_set_one
 #undef mk_num_set_mask
 
+#undef mk_num_from_buff_le
+#undef mk_num_from_buff_be
+#undef mk_num_to_buff_le
+#undef mk_num_to_buff_be
+
 #undef mk_num_from_char
 #undef mk_num_from_uchar
 #undef mk_num_from_schar

@@ -11,6 +11,11 @@
 #undef mk_num_composite_un_set_one
 #undef mk_num_composite_un_set_mask
 
+#undef mk_num_composite_un_from_buff_le
+#undef mk_num_composite_un_from_buff_be
+#undef mk_num_composite_un_to_buff_le
+#undef mk_num_composite_un_to_buff_be
+
 #undef mk_num_composite_un_from_char
 #undef mk_num_composite_un_from_uchar
 #undef mk_num_composite_un_from_schar

@@ -15,6 +15,11 @@ mk_lang_jumbo void mk_num_set_zero(mk_detail_num_basic_ut_type* x);
 mk_lang_jumbo void mk_num_set_one(mk_detail_num_basic_ut_type* x);
 mk_lang_jumbo void mk_num_set_mask(mk_detail_num_basic_ut_type* x, int bits);
 
+mk_lang_jumbo void mk_num_from_buff_le(mk_detail_num_basic_ut_type* x, void const* buff);
+mk_lang_jumbo void mk_num_from_buff_be(mk_detail_num_basic_ut_type* x, void const* buff);
+mk_lang_jumbo void mk_num_to_buff_le(mk_detail_num_basic_ut_type const* x, void* buff);
+mk_lang_jumbo void mk_num_to_buff_be(mk_detail_num_basic_ut_type const* x, void* buff);
+
 mk_lang_jumbo void mk_num_from_char(mk_detail_num_basic_ut_type* x, char src);
 mk_lang_jumbo void mk_num_from_uchar(mk_detail_num_basic_ut_type* x, unsigned char src);
 mk_lang_jumbo void mk_num_from_schar(mk_detail_num_basic_ut_type* x, signed char src);

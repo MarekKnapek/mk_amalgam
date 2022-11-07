@@ -21,6 +21,11 @@ mk_lang_jumbo void mk_num_composite_un_set_zero(mk_num_composite_un_t* x);
 mk_lang_jumbo void mk_num_composite_un_set_one(mk_num_composite_un_t* x);
 mk_lang_jumbo void mk_num_composite_un_set_mask(mk_num_composite_un_t* x, int bits);
 
+mk_lang_jumbo void mk_num_composite_un_from_buff_le(mk_num_composite_un_t* x, void const* buff);
+mk_lang_jumbo void mk_num_composite_un_from_buff_be(mk_num_composite_un_t* x, void const* buff);
+mk_lang_jumbo void mk_num_composite_un_to_buff_le(mk_num_composite_un_t const* x, void* buff);
+mk_lang_jumbo void mk_num_composite_un_to_buff_be(mk_num_composite_un_t const* x, void* buff);
+
 mk_lang_jumbo void mk_num_composite_un_from_char(mk_num_composite_un_t* x, char src);
 mk_lang_jumbo void mk_num_composite_un_from_uchar(mk_num_composite_un_t* x, unsigned char src);
 mk_lang_jumbo void mk_num_composite_un_from_schar(mk_num_composite_un_t* x, signed char src);

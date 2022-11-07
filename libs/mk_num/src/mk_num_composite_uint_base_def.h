@@ -2,6 +2,11 @@
 #define mk_num_composite_un_base_set_one mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _set_one)
 #define mk_num_composite_un_base_set_mask mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _set_mask)
 
+#define mk_num_composite_un_base_from_buff_le mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _from_buff_le)
+#define mk_num_composite_un_base_from_buff_be mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _from_buff_be)
+#define mk_num_composite_un_base_to_buff_le mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _to_buff_le)
+#define mk_num_composite_un_base_to_buff_be mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _to_buff_be)
+
 #define mk_num_composite_un_base_from_char mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _from_char)
 #define mk_num_composite_un_base_from_uchar mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _from_uchar)
 #define mk_num_composite_un_base_from_schar mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _from_schar)

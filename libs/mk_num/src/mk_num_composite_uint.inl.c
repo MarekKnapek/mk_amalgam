@@ -83,6 +83,59 @@ mk_lang_jumbo void mk_num_composite_un_set_mask(mk_num_composite_un_t* x, int bi
 }
 
 
+mk_lang_jumbo void mk_num_composite_un_from_buff_le(mk_num_composite_un_t* x, void const* buff)
+{
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	for(i = 0; i != mk_num_composite_un_parts; ++i)
+	{
+		mk_num_composite_un_base_from_buff_le(&x->m_parts[i], ((unsigned char const*)(buff)) + i * sizeof(mk_num_composite_base_type));
+	}
+}
+
+mk_lang_jumbo void mk_num_composite_un_from_buff_be(mk_num_composite_un_t* x, void const* buff)
+{
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	for(i = 0; i != mk_num_composite_un_parts; ++i)
+	{
+		mk_num_composite_un_base_from_buff_be(&x->m_parts[i], ((unsigned char const*)(buff)) + (mk_num_composite_un_parts - 1 - i) * sizeof(mk_num_composite_base_type));
+	}
+}
+
+mk_lang_jumbo void mk_num_composite_un_to_buff_le(mk_num_composite_un_t const* x, void* buff)
+{
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	for(i = 0; i != mk_num_composite_un_parts; ++i)
+	{
+		mk_num_composite_un_base_to_buff_le(&x->m_parts[i], ((unsigned char*)(buff)) + i * sizeof(mk_num_composite_base_type));
+	}
+}
+
+mk_lang_jumbo void mk_num_composite_un_to_buff_be(mk_num_composite_un_t const* x, void* buff)
+{
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	for(i = 0; i != mk_num_composite_un_parts; ++i)
+	{
+		mk_num_composite_un_base_to_buff_be(&x->m_parts[i], ((unsigned char*)(buff)) + (mk_num_composite_un_parts - 1 - i) * sizeof(mk_num_composite_base_type));
+	}
+}
+
+
 mk_lang_jumbo void mk_num_composite_un_from_char(mk_num_composite_un_t* x, char src)
 {
 	unsigned char buff[sizeof(src)];

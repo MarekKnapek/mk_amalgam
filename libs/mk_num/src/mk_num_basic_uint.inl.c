@@ -78,6 +78,89 @@ mk_lang_jumbo void mk_num_set_mask(mk_detail_num_basic_ut_type* x, int bits)
 }
 
 
+mk_lang_jumbo void mk_num_from_buff_le(mk_detail_num_basic_ut_type* x, void const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(((unsigned char const*)(x))[0]));
+	for(i = 1; i != ((int)(sizeof(mk_detail_num_basic_ut_type))); ++i)
+	{
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << CHAR_BIT));
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(((unsigned char const*)(x))[i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_buff_be(mk_detail_num_basic_ut_type* x, void const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(((unsigned char const*)(x))[sizeof(mk_detail_num_basic_ut_type) - 1]));
+	for(i = 1; i != ((int)(sizeof(mk_detail_num_basic_ut_type))); ++i)
+	{
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << CHAR_BIT));
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(((unsigned char const*)(x))[sizeof(mk_detail_num_basic_ut_type) - 1 - i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_to_buff_le(mk_detail_num_basic_ut_type const* x, void* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	((unsigned char*)(buff))[0] = ((unsigned char)(tmp));
+	for(i = 1; i != ((int)(sizeof(mk_detail_num_basic_ut_type))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> CHAR_BIT));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		((unsigned char*)(buff))[i] = ((unsigned char)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_buff_be(mk_detail_num_basic_ut_type const* x, void* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	((unsigned char*)(buff))[sizeof(mk_detail_num_basic_ut_type) - 1] = ((unsigned char)(tmp));
+	for(i = 1; i != ((int)(sizeof(mk_detail_num_basic_ut_type))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> CHAR_BIT));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		((unsigned char*)(buff))[sizeof(mk_detail_num_basic_ut_type) - 1 - i] = ((unsigned char)(tmp));
+	}
+}
+
+
 mk_lang_jumbo void mk_num_from_char(mk_detail_num_basic_ut_type* x, char src)
 {
 	mk_lang_assert(x);

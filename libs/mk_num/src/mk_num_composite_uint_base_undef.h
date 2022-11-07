@@ -2,6 +2,11 @@
 #undef mk_num_composite_un_base_set_one
 #undef mk_num_composite_un_base_set_mask
 
+#undef mk_num_composite_un_base_from_buff_le
+#undef mk_num_composite_un_base_from_buff_be
+#undef mk_num_composite_un_base_to_buff_le
+#undef mk_num_composite_un_base_to_buff_be
+
 #undef mk_num_composite_un_base_from_char
 #undef mk_num_composite_un_base_from_uchar
 #undef mk_num_composite_un_base_from_schar

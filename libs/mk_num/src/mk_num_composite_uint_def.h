@@ -18,6 +18,11 @@
 #define mk_num_composite_un_set_one mk_lang_concat(mk_lang_concat(mk_num_composite_u, mk_num_composite_bits), _set_one)
 #define mk_num_composite_un_set_mask mk_lang_concat(mk_lang_concat(mk_num_composite_u, mk_num_composite_bits), _set_mask)
 
+#define mk_num_composite_un_from_buff_le mk_lang_concat(mk_lang_concat(mk_num_composite_u, mk_num_composite_bits), _from_buff_le)
+#define mk_num_composite_un_from_buff_be mk_lang_concat(mk_lang_concat(mk_num_composite_u, mk_num_composite_bits), _from_buff_be)
+#define mk_num_composite_un_to_buff_le mk_lang_concat(mk_lang_concat(mk_num_composite_u, mk_num_composite_bits), _to_buff_le)
+#define mk_num_composite_un_to_buff_be mk_lang_concat(mk_lang_concat(mk_num_composite_u, mk_num_composite_bits), _to_buff_be)
+
 #define mk_num_composite_un_from_char mk_lang_concat(mk_lang_concat(mk_num_composite_u, mk_num_composite_bits), _from_char)
 #define mk_num_composite_un_from_uchar mk_lang_concat(mk_lang_concat(mk_num_composite_u, mk_num_composite_bits), _from_uchar)
 #define mk_num_composite_un_from_schar mk_lang_concat(mk_lang_concat(mk_num_composite_u, mk_num_composite_bits), _from_schar)
