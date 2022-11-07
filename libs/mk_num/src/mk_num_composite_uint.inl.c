@@ -37,10 +37,19 @@ mk_lang_jumbo void mk_num_composite_un_normalize(mk_num_composite_base_type* x)
 
 mk_lang_jumbo void mk_num_composite_un_normalize_msd(mk_num_composite_un_t* x)
 {
-	mk_num_composite_base_type mask;
-
-	mk_num_composite_un_base_set_mask(&mask, mk_num_composite_bits - (mk_num_composite_un_parts - 1) * mk_num_composite_base_bits);
-	mk_num_composite_un_base_and2(&x->m_parts[mk_num_composite_un_parts - 1], &mask);
+	#if defined(_MSC_VER)
+	#pragma warning(push)
+	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
+	#endif
+	if(mk_num_composite_bits - (mk_num_composite_un_parts - 1) * mk_num_composite_base_bits != mk_num_composite_base_bits)
+	#if defined(_MSC_VER)
+	#pragma warning(pop)
+	#endif
+	{
+		mk_num_composite_base_type mask;
+		mk_num_composite_un_base_set_mask(&mask, mk_num_composite_bits - (mk_num_composite_un_parts - 1) * mk_num_composite_base_bits);
+		mk_num_composite_un_base_and2(&x->m_parts[mk_num_composite_un_parts - 1], &mask);
+	}
 }
 
 
