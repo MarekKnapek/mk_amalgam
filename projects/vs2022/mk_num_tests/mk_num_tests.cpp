@@ -14,7 +14,7 @@
 #define mk_num_composite_bits 25
 #include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uint.inl.h"
-#define mk_num_composite_bits 8192
+#define mk_num_composite_bits 6656
 #include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uint.inl.h"
 #if defined(_MSC_VER)
@@ -134,24 +134,24 @@ mk_lang_bool_t test_basic_types_mul_3(void)
 	static int g_once = 0;
 
 	int n;
-	mk_num_composite_u8192_t a;
-	mk_num_composite_u8192_t b;
+	mk_num_composite_u6656_t a;
+	mk_num_composite_u6656_t b;
 	int i;
-	unsigned char buff[8192 / CHAR_BIT];
+	unsigned char buff[6656 / CHAR_BIT];
 	mk_lang_bool_t ret;
 
 	if(g_once != 0) return mk_lang_true;
 	if(g_once == 0) ++g_once;
 
 	n = 800;
-	mk_num_composite_u8192_set_one(&a);
+	mk_num_composite_u6656_set_one(&a);
 	b = a;
 	for(i = 0; i != n - 1; ++i)
 	{
-		mk_num_composite_u8192_inc(&b);
-		mk_num_composite_u8192_mul3_wrap_cid_cod(&a, &b, &a);
+		mk_num_composite_u6656_inc(&b);
+		mk_num_composite_u6656_mul3_wrap_cid_cod(&a, &b, &a);
 	}
-	mk_num_composite_u8192_to_buff_be(&a, buff);
+	mk_num_composite_u6656_to_buff_be(&a, buff);
 	ret = memcmp(buff + (sizeof(buff) - sizeof(s_factorial_800_be)), s_factorial_800_be, sizeof(s_factorial_800_be)) == 0;
 	return ret;
 }
@@ -275,7 +275,7 @@ int main(void)
 #define mk_num_composite_bits 25
 #include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uint.inl.c"
-#define mk_num_composite_bits 8192
+#define mk_num_composite_bits 6656
 #include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uint.inl.c"
 #if defined(_MSC_VER)
