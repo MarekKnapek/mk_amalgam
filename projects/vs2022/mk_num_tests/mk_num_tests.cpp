@@ -7,8 +7,10 @@
 #include "../../../libs/mk_num/src/mk_lang_crash.h"
 #include "../../../libs/mk_num/src/mk_lang_limits.h"
 #include "../../../libs/mk_num/src/mk_lang_llong.h"
+#include "../../../libs/mk_num/src/mk_lang_i128.h"
 #include "../../../libs/mk_num/src/mk_lang_uintmaxt.h"
 #include "../../../libs/mk_num/src/mk_lang_sizet.h"
+#include "../../../libs/mk_num/src/mk_num_div_mod.h"
 #include "../../../libs/mk_num/src/mk_num_basic_uints.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uints.h"
 #define mk_num_composite_bits 25
@@ -156,6 +158,419 @@ mk_lang_bool_t test_basic_types_mul_3(void)
 	return ret;
 }
 
+mk_lang_bool_t test_basic_types_div_l4(unsigned char const* data, size_t size)
+{
+	unsigned long int x;
+	unsigned long int y;
+	unsigned long int z;
+	unsigned long int r;
+	unsigned long int mz;
+	unsigned long int mr;
+	mk_lang_bool_t ret;
+
+	if(!data) return mk_lang_true;
+	if(!(size >= 8)) return mk_lang_true;
+	x = 0;
+	y = 0;
+	memcpy(&x, data + 0, 4);
+	memcpy(&y, data + 4, 4);
+	if(!(y != 0)) return mk_lang_true;
+	z = x / y;
+	r = x % y;
+
+	{
+		unsigned char xx[4];
+		unsigned char yy[4];
+		unsigned char dd[4];
+		unsigned char mm[4];
+
+		xx[0] = (x >> (0 * 8)) & 0xff;
+		xx[1] = (x >> (1 * 8)) & 0xff;
+		xx[2] = (x >> (2 * 8)) & 0xff;
+		xx[3] = (x >> (3 * 8)) & 0xff;
+		yy[0] = (y >> (0 * 8)) & 0xff;
+		yy[1] = (y >> (1 * 8)) & 0xff;
+		yy[2] = (y >> (2 * 8)) & 0xff;
+		yy[3] = (y >> (3 * 8)) & 0xff;
+		mk_num_div_mod_uchar_4_4(xx, yy, dd, mm);
+		mz =
+			(((unsigned long int)(dd[0])) << (0 * 8)) |
+			(((unsigned long int)(dd[1])) << (1 * 8)) |
+			(((unsigned long int)(dd[2])) << (2 * 8)) |
+			(((unsigned long int)(dd[3])) << (3 * 8));
+		mr =
+			(((unsigned long int)(mm[0])) << (0 * 8)) |
+			(((unsigned long int)(mm[1])) << (1 * 8)) |
+			(((unsigned long int)(mm[2])) << (2 * 8)) |
+			(((unsigned long int)(mm[3])) << (3 * 8));
+	}
+
+	ret = mz == z && mr == r;
+	return ret;
+}
+
+mk_lang_bool_t test_basic_types_div_ll8(unsigned char const* data, size_t size)
+{
+	unsigned long long int x;
+	unsigned long long int y;
+	unsigned long long int z;
+	unsigned long long int r;
+	unsigned long long int mz;
+	unsigned long long int mr;
+	mk_lang_bool_t ret;
+
+	if(!data) return mk_lang_true;
+	if(!(size >= 16)) return mk_lang_true;
+	x = 0;
+	y = 0;
+	memcpy(&x, data + 0, 8);
+	memcpy(&y, data + 8, 8);
+	if(!(y != 0)) return mk_lang_true;
+	z = x / y;
+	r = x % y;
+
+	{
+		unsigned char xx[8];
+		unsigned char yy[8];
+		unsigned char dd[8];
+		unsigned char mm[8];
+
+		xx[0] = (x >> (0 * 8)) & 0xff;
+		xx[1] = (x >> (1 * 8)) & 0xff;
+		xx[2] = (x >> (2 * 8)) & 0xff;
+		xx[3] = (x >> (3 * 8)) & 0xff;
+		xx[4] = (x >> (4 * 8)) & 0xff;
+		xx[5] = (x >> (5 * 8)) & 0xff;
+		xx[6] = (x >> (6 * 8)) & 0xff;
+		xx[7] = (x >> (7 * 8)) & 0xff;
+		yy[0] = (y >> (0 * 8)) & 0xff;
+		yy[1] = (y >> (1 * 8)) & 0xff;
+		yy[2] = (y >> (2 * 8)) & 0xff;
+		yy[3] = (y >> (3 * 8)) & 0xff;
+		yy[4] = (y >> (4 * 8)) & 0xff;
+		yy[5] = (y >> (5 * 8)) & 0xff;
+		yy[6] = (y >> (6 * 8)) & 0xff;
+		yy[7] = (y >> (7 * 8)) & 0xff;
+		mk_num_div_mod_uchar_8_8(xx, yy, dd, mm);
+		mz =
+			(((unsigned long long int)(dd[0])) << (0 * 8)) |
+			(((unsigned long long int)(dd[1])) << (1 * 8)) |
+			(((unsigned long long int)(dd[2])) << (2 * 8)) |
+			(((unsigned long long int)(dd[3])) << (3 * 8)) |
+			(((unsigned long long int)(dd[4])) << (4 * 8)) |
+			(((unsigned long long int)(dd[5])) << (5 * 8)) |
+			(((unsigned long long int)(dd[6])) << (6 * 8)) |
+			(((unsigned long long int)(dd[7])) << (7 * 8));
+		mr =
+			(((unsigned long long int)(mm[0])) << (0 * 8)) |
+			(((unsigned long long int)(mm[1])) << (1 * 8)) |
+			(((unsigned long long int)(mm[2])) << (2 * 8)) |
+			(((unsigned long long int)(mm[3])) << (3 * 8)) |
+			(((unsigned long long int)(mm[4])) << (4 * 8)) |
+			(((unsigned long long int)(mm[5])) << (5 * 8)) |
+			(((unsigned long long int)(mm[6])) << (6 * 8)) |
+			(((unsigned long long int)(mm[7])) << (7 * 8));
+	}
+
+	ret = mz == z && mr == r;
+	return ret;
+}
+
+mk_lang_bool_t test_basic_types_div_ll4(unsigned char const* data, size_t size)
+{
+	unsigned long long int x;
+	unsigned long long int y;
+	unsigned long long int z;
+	unsigned long long int r;
+	unsigned long long int mz;
+	unsigned long long int mr;
+	mk_lang_bool_t ret;
+
+	if(!data) return mk_lang_true;
+	if(!(size >= 16)) return mk_lang_true;
+	x = 0;
+	y = 0;
+	memcpy(&x, data + 0, 8);
+	memcpy(&y, data + 8, 8);
+	if(!(y != 0)) return mk_lang_true;
+	z = x / y;
+	r = x % y;
+
+	{
+		unsigned short int xx[4];
+		unsigned short int yy[4];
+		unsigned short int dd[4];
+		unsigned short int mm[4];
+
+		xx[0] = (x >> (0 * 16)) & 0xffff;
+		xx[1] = (x >> (1 * 16)) & 0xffff;
+		xx[2] = (x >> (2 * 16)) & 0xffff;
+		xx[3] = (x >> (3 * 16)) & 0xffff;
+		yy[0] = (y >> (0 * 16)) & 0xffff;
+		yy[1] = (y >> (1 * 16)) & 0xffff;
+		yy[2] = (y >> (2 * 16)) & 0xffff;
+		yy[3] = (y >> (3 * 16)) & 0xffff;
+		mk_num_div_mod_ushort_4_4(xx, yy, dd, mm);
+		mz =
+			(((unsigned long long int)(dd[0])) << (0 * 16)) |
+			(((unsigned long long int)(dd[1])) << (1 * 16)) |
+			(((unsigned long long int)(dd[2])) << (2 * 16)) |
+			(((unsigned long long int)(dd[3])) << (3 * 16));
+		mr =
+			(((unsigned long long int)(mm[0])) << (0 * 16)) |
+			(((unsigned long long int)(mm[1])) << (1 * 16)) |
+			(((unsigned long long int)(mm[2])) << (2 * 16)) |
+			(((unsigned long long int)(mm[3])) << (3 * 16));
+	}
+
+	ret = mz == z && mr == r;
+	return ret;
+}
+
+#if mk_lang_i128_has != 0
+mk_lang_bool_t test_basic_types_div_lll16(unsigned char const* data, size_t size)
+{
+	unsigned __int128 x;
+	unsigned __int128 y;
+	unsigned __int128 z;
+	unsigned __int128 r;
+	unsigned __int128 mz;
+	unsigned __int128 mr;
+	mk_lang_bool_t ret;
+
+	if(!data) return mk_lang_true;
+	if(!(size >= 32)) return mk_lang_true;
+	x = 0;
+	y = 0;
+	memcpy(&x, data +  0, 16);
+	memcpy(&y, data + 16, 16);
+	if(!(y != 0)) return mk_lang_true;
+	z = x / y;
+	r = x % y;
+
+	{
+		unsigned char xx[16];
+		unsigned char yy[16];
+		unsigned char dd[16];
+		unsigned char mm[16];
+
+		xx[0] = (x >> (0 * 8)) & 0xff;
+		xx[1] = (x >> (1 * 8)) & 0xff;
+		xx[2] = (x >> (2 * 8)) & 0xff;
+		xx[3] = (x >> (3 * 8)) & 0xff;
+		xx[4] = (x >> (4 * 8)) & 0xff;
+		xx[5] = (x >> (5 * 8)) & 0xff;
+		xx[6] = (x >> (6 * 8)) & 0xff;
+		xx[7] = (x >> (7 * 8)) & 0xff;
+		xx[8] = (x >> (8 * 8)) & 0xff;
+		xx[9] = (x >> (9 * 8)) & 0xff;
+		xx[10] = (x >> (10 * 8)) & 0xff;
+		xx[11] = (x >> (11 * 8)) & 0xff;
+		xx[12] = (x >> (12 * 8)) & 0xff;
+		xx[13] = (x >> (13 * 8)) & 0xff;
+		xx[14] = (x >> (14 * 8)) & 0xff;
+		xx[15] = (x >> (15 * 8)) & 0xff;
+		yy[0] = (y >> (0 * 8)) & 0xff;
+		yy[1] = (y >> (1 * 8)) & 0xff;
+		yy[2] = (y >> (2 * 8)) & 0xff;
+		yy[3] = (y >> (3 * 8)) & 0xff;
+		yy[4] = (y >> (4 * 8)) & 0xff;
+		yy[5] = (y >> (5 * 8)) & 0xff;
+		yy[6] = (y >> (6 * 8)) & 0xff;
+		yy[7] = (y >> (7 * 8)) & 0xff;
+		yy[8] = (y >> (8 * 8)) & 0xff;
+		yy[9] = (y >> (9 * 8)) & 0xff;
+		yy[10] = (y >> (10 * 8)) & 0xff;
+		yy[11] = (y >> (11 * 8)) & 0xff;
+		yy[12] = (y >> (12 * 8)) & 0xff;
+		yy[13] = (y >> (13 * 8)) & 0xff;
+		yy[14] = (y >> (14 * 8)) & 0xff;
+		yy[15] = (y >> (15 * 8)) & 0xff;
+		mk_num_div_mod_uchar_16_16(xx, yy, dd, mm);
+		mz =
+			(((unsigned __int128)(dd[0])) << (0 * 8)) |
+			(((unsigned __int128)(dd[1])) << (1 * 8)) |
+			(((unsigned __int128)(dd[2])) << (2 * 8)) |
+			(((unsigned __int128)(dd[3])) << (3 * 8)) |
+			(((unsigned __int128)(dd[4])) << (4 * 8)) |
+			(((unsigned __int128)(dd[5])) << (5 * 8)) |
+			(((unsigned __int128)(dd[6])) << (6 * 8)) |
+			(((unsigned __int128)(dd[7])) << (7 * 8)) |
+			(((unsigned __int128)(dd[8])) << (8 * 8)) |
+			(((unsigned __int128)(dd[9])) << (9 * 8)) |
+			(((unsigned __int128)(dd[10])) << (10 * 8)) |
+			(((unsigned __int128)(dd[11])) << (11 * 8)) |
+			(((unsigned __int128)(dd[12])) << (12 * 8)) |
+			(((unsigned __int128)(dd[13])) << (13 * 8)) |
+			(((unsigned __int128)(dd[14])) << (14 * 8)) |
+			(((unsigned __int128)(dd[15])) << (15 * 8));
+		mr =
+			(((unsigned __int128)(mm[0])) << (0 * 8)) |
+			(((unsigned __int128)(mm[1])) << (1 * 8)) |
+			(((unsigned __int128)(mm[2])) << (2 * 8)) |
+			(((unsigned __int128)(mm[3])) << (3 * 8)) |
+			(((unsigned __int128)(mm[4])) << (4 * 8)) |
+			(((unsigned __int128)(mm[5])) << (5 * 8)) |
+			(((unsigned __int128)(mm[6])) << (6 * 8)) |
+			(((unsigned __int128)(mm[7])) << (7 * 8)) |
+			(((unsigned __int128)(mm[8])) << (8 * 8)) |
+			(((unsigned __int128)(mm[9])) << (9 * 8)) |
+			(((unsigned __int128)(mm[10])) << (10 * 8)) |
+			(((unsigned __int128)(mm[11])) << (11 * 8)) |
+			(((unsigned __int128)(mm[12])) << (12 * 8)) |
+			(((unsigned __int128)(mm[13])) << (13 * 8)) |
+			(((unsigned __int128)(mm[14])) << (14 * 8)) |
+			(((unsigned __int128)(mm[15])) << (15 * 8));
+	}
+
+	ret = mz == z && mr == r;
+	return ret;
+}
+#else
+mk_lang_bool_t test_basic_types_div_lll16(unsigned char const* data, size_t size)
+{
+	(void)data;
+	(void)size;
+	return mk_lang_true;
+}
+#endif
+
+#if mk_lang_i128_has != 0
+mk_lang_bool_t test_basic_types_div_lll8(unsigned char const* data, size_t size)
+{
+	unsigned __int128 x;
+	unsigned __int128 y;
+	unsigned __int128 z;
+	unsigned __int128 r;
+	unsigned __int128 mz;
+	unsigned __int128 mr;
+	mk_lang_bool_t ret;
+
+	if(!data) return mk_lang_true;
+	if(!(size >= 32)) return mk_lang_true;
+	x = 0;
+	y = 0;
+	memcpy(&x, data +  0, 16);
+	memcpy(&y, data + 16, 16);
+	if(!(y != 0)) return mk_lang_true;
+	z = x / y;
+	r = x % y;
+
+	{
+		unsigned short int xx[8];
+		unsigned short int yy[8];
+		unsigned short int dd[8];
+		unsigned short int mm[8];
+
+		xx[0] = (x >> (0 * 16)) & 0xffff;
+		xx[1] = (x >> (1 * 16)) & 0xffff;
+		xx[2] = (x >> (2 * 16)) & 0xffff;
+		xx[3] = (x >> (3 * 16)) & 0xffff;
+		xx[4] = (x >> (4 * 16)) & 0xffff;
+		xx[5] = (x >> (5 * 16)) & 0xffff;
+		xx[6] = (x >> (6 * 16)) & 0xffff;
+		xx[7] = (x >> (7 * 16)) & 0xffff;
+		yy[0] = (y >> (0 * 16)) & 0xffff;
+		yy[1] = (y >> (1 * 16)) & 0xffff;
+		yy[2] = (y >> (2 * 16)) & 0xffff;
+		yy[3] = (y >> (3 * 16)) & 0xffff;
+		yy[4] = (y >> (4 * 16)) & 0xffff;
+		yy[5] = (y >> (5 * 16)) & 0xffff;
+		yy[6] = (y >> (6 * 16)) & 0xffff;
+		yy[7] = (y >> (7 * 16)) & 0xffff;
+		mk_num_div_mod_ushort_8_8(xx, yy, dd, mm);
+		mz =
+			(((unsigned __int128)(dd[0])) << (0 * 16)) |
+			(((unsigned __int128)(dd[1])) << (1 * 16)) |
+			(((unsigned __int128)(dd[2])) << (2 * 16)) |
+			(((unsigned __int128)(dd[3])) << (3 * 16)) |
+			(((unsigned __int128)(dd[4])) << (4 * 16)) |
+			(((unsigned __int128)(dd[5])) << (5 * 16)) |
+			(((unsigned __int128)(dd[6])) << (6 * 16)) |
+			(((unsigned __int128)(dd[7])) << (7 * 16));
+		mr =
+			(((unsigned __int128)(mm[0])) << (0 * 16)) |
+			(((unsigned __int128)(mm[1])) << (1 * 16)) |
+			(((unsigned __int128)(mm[2])) << (2 * 16)) |
+			(((unsigned __int128)(mm[3])) << (3 * 16)) |
+			(((unsigned __int128)(mm[4])) << (4 * 16)) |
+			(((unsigned __int128)(mm[5])) << (5 * 16)) |
+			(((unsigned __int128)(mm[6])) << (6 * 16)) |
+			(((unsigned __int128)(mm[7])) << (7 * 16));
+	}
+
+	ret = mz == z && mr == r;
+	return ret;
+}
+#else
+mk_lang_bool_t test_basic_types_div_lll8(unsigned char const* data, size_t size)
+{
+	(void)data;
+	(void)size;
+	return mk_lang_true;
+}
+#endif
+
+#if mk_lang_i128_has != 0
+mk_lang_bool_t test_basic_types_div_lll4(unsigned char const* data, size_t size)
+{
+	unsigned __int128 x;
+	unsigned __int128 y;
+	unsigned __int128 z;
+	unsigned __int128 r;
+	unsigned __int128 mz;
+	unsigned __int128 mr;
+	mk_lang_bool_t ret;
+
+	if(!data) return mk_lang_true;
+	if(!(size >= 32)) return mk_lang_true;
+	x = 0;
+	y = 0;
+	memcpy(&x, data +  0, 16);
+	memcpy(&y, data + 16, 16);
+	if(!(y != 0)) return mk_lang_true;
+	z = x / y;
+	r = x % y;
+
+	{
+		unsigned long int xx[4];
+		unsigned long int yy[4];
+		unsigned long int dd[4];
+		unsigned long int mm[4];
+
+		xx[0] = (x >> (0 * 32)) & 0xfffffffful;
+		xx[1] = (x >> (1 * 32)) & 0xfffffffful;
+		xx[2] = (x >> (2 * 32)) & 0xfffffffful;
+		xx[3] = (x >> (3 * 32)) & 0xfffffffful;
+		yy[0] = (y >> (0 * 32)) & 0xfffffffful;
+		yy[1] = (y >> (1 * 32)) & 0xfffffffful;
+		yy[2] = (y >> (2 * 32)) & 0xfffffffful;
+		yy[3] = (y >> (3 * 32)) & 0xfffffffful;
+		mk_num_div_mod_ulong_4_4(xx, yy, dd, mm);
+		mz =
+			(((unsigned __int128)(dd[0])) << (0 * 32)) |
+			(((unsigned __int128)(dd[1])) << (1 * 32)) |
+			(((unsigned __int128)(dd[2])) << (2 * 32)) |
+			(((unsigned __int128)(dd[3])) << (3 * 32));
+		mr =
+			(((unsigned __int128)(mm[0])) << (0 * 32)) |
+			(((unsigned __int128)(mm[1])) << (1 * 32)) |
+			(((unsigned __int128)(mm[2])) << (2 * 32)) |
+			(((unsigned __int128)(mm[3])) << (3 * 32));
+	}
+
+	ret = mz == z && mr == r;
+	return ret;
+}
+#else
+mk_lang_bool_t test_basic_types_div_lll4(unsigned char const* data, size_t size)
+{
+	(void)data;
+	(void)size;
+	return mk_lang_true;
+}
+#endif
+
 mk_lang_bool_t test_basic_types(unsigned char const* data, size_t size)
 {
 	mk_lang_bool_t ret;
@@ -165,6 +580,12 @@ mk_lang_bool_t test_basic_types(unsigned char const* data, size_t size)
 	ret = ret && test_basic_types_mul(data, size);
 	ret = ret && test_basic_types_mul_2(data, size);
 	ret = ret && test_basic_types_mul_3();
+	ret = ret && test_basic_types_div_l4(data, size);
+	ret = ret && test_basic_types_div_ll8(data, size);
+	ret = ret && test_basic_types_div_ll4(data, size);
+	ret = ret && test_basic_types_div_lll16(data, size);
+	ret = ret && test_basic_types_div_lll8(data, size);
+	ret = ret && test_basic_types_div_lll4(data, size);
 	return ret;
 }
 
@@ -269,6 +690,7 @@ int main(void)
 #pragma warning(push)
 #pragma warning(disable:4464) /* warning C4464: relative include path contains '..' */
 #endif
+#include "../../../libs/mk_num/src/mk_num_div_mod.c"
 #include "../../../libs/mk_num/src/mk_num_basic_uints.c"
 #include "../../../libs/mk_num/src/mk_num_composite_uints.c"
 #include "../../../libs/mk_num/src/mk_lang_crash.c"
