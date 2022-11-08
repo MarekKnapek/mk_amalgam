@@ -211,6 +211,8 @@ mk_lang_bool_t test_basic_types_div_l4(unsigned char const* data, size_t size)
 
 mk_lang_bool_t test_basic_types_div_ll8(unsigned char const* data, size_t size)
 {
+	#if mk_lang_llong_has != 0
+
 	unsigned long long int x;
 	unsigned long long int y;
 	unsigned long long int z;
@@ -274,10 +276,18 @@ mk_lang_bool_t test_basic_types_div_ll8(unsigned char const* data, size_t size)
 
 	ret = mz == z && mr == r;
 	return ret;
+
+	#else
+	((void)(data));
+	((void)(size));
+	return mk_lang_true;
+	#endif
 }
 
 mk_lang_bool_t test_basic_types_div_ll4(unsigned char const* data, size_t size)
 {
+	#if mk_lang_llong_has != 0
+
 	unsigned long long int x;
 	unsigned long long int y;
 	unsigned long long int z;
@@ -325,11 +335,18 @@ mk_lang_bool_t test_basic_types_div_ll4(unsigned char const* data, size_t size)
 
 	ret = mz == z && mr == r;
 	return ret;
+
+	#else
+	((void)(data));
+	((void)(size));
+	return mk_lang_true;
+	#endif
 }
 
-#if mk_lang_i128_has != 0
 mk_lang_bool_t test_basic_types_div_lll16(unsigned char const* data, size_t size)
 {
+	#if mk_lang_i128_has != 0
+
 	unsigned __int128 x;
 	unsigned __int128 y;
 	unsigned __int128 z;
@@ -425,19 +442,18 @@ mk_lang_bool_t test_basic_types_div_lll16(unsigned char const* data, size_t size
 
 	ret = mz == z && mr == r;
 	return ret;
-}
-#else
-mk_lang_bool_t test_basic_types_div_lll16(unsigned char const* data, size_t size)
-{
-	(void)data;
-	(void)size;
-	return mk_lang_true;
-}
-#endif
 
-#if mk_lang_i128_has != 0
+	#else
+	((void)(data));
+	((void)(size));
+	return mk_lang_true;
+	#endif
+}
+
 mk_lang_bool_t test_basic_types_div_lll8(unsigned char const* data, size_t size)
 {
+	#if mk_lang_i128_has != 0
+
 	unsigned __int128 x;
 	unsigned __int128 y;
 	unsigned __int128 z;
@@ -501,19 +517,18 @@ mk_lang_bool_t test_basic_types_div_lll8(unsigned char const* data, size_t size)
 
 	ret = mz == z && mr == r;
 	return ret;
-}
-#else
-mk_lang_bool_t test_basic_types_div_lll8(unsigned char const* data, size_t size)
-{
-	(void)data;
-	(void)size;
-	return mk_lang_true;
-}
-#endif
 
-#if mk_lang_i128_has != 0
+	#else
+	((void)(data));
+	((void)(size));
+	return mk_lang_true;
+	#endif
+}
+
 mk_lang_bool_t test_basic_types_div_lll4(unsigned char const* data, size_t size)
 {
+	#if mk_lang_i128_has != 0
+
 	unsigned __int128 x;
 	unsigned __int128 y;
 	unsigned __int128 z;
@@ -561,15 +576,13 @@ mk_lang_bool_t test_basic_types_div_lll4(unsigned char const* data, size_t size)
 
 	ret = mz == z && mr == r;
 	return ret;
-}
-#else
-mk_lang_bool_t test_basic_types_div_lll4(unsigned char const* data, size_t size)
-{
-	(void)data;
-	(void)size;
+
+	#else
+	((void)(data));
+	((void)(size));
 	return mk_lang_true;
+	#endif
 }
-#endif
 
 mk_lang_bool_t test_basic_types(unsigned char const* data, size_t size)
 {
