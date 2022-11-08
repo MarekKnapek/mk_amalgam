@@ -660,7 +660,7 @@ mk_lang_extern_c int LLVMFuzzerTestOneInput(unsigned char const* data, size_t si
 #include <time.h>
 int main(void)
 {
-	static long int const rep = 1000000;
+	static long int const rep = 1000000l;
 	unsigned char buff[32];
 	long int i;
 	int j;
@@ -673,7 +673,7 @@ int main(void)
 			buff[j] = ((unsigned char)(rand()));
 		}
 		tested = LLVMFuzzerTestOneInput(buff, sizeof(buff));
-		(void)tested;
+		((void)(tested));
 	}
 	printf("%s\n", "Not crashed.");
 	return 0;
