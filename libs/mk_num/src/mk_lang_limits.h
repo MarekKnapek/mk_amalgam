@@ -2,16 +2,18 @@
 #define mk_detail_include_guard_lang_limits
 
 
-
-
-
-#include "mk_lang_llong.h"
-
 #if defined(__cplusplus)
-#include <climits>
+#include <climits> /* CHAR_BIT UCHAR_MAX USHRT_MAX UINT_MAX ULONG_MAX ULLONG_MAX */
 #else
-#include <limits.h>
+#include <limits.h> /* CHAR_BIT UCHAR_MAX USHRT_MAX UINT_MAX ULONG_MAX ULLONG_MAX */
 #endif
+
+
+#define mk_lang_limits_ucharmax UCHAR_MAX
+#define mk_lang_limits_ushortmax USHRT_MAX
+#define mk_lang_limits_uintmax UINT_MAX
+#define mk_lang_limits_ulongmax ULONG_MAX
+
 
 #if defined(__cplusplus) && __cplusplus >= 201103l
 #define mk_lang_limits_ullongmax_has 1
@@ -24,16 +26,11 @@
 #if mk_lang_limits_ullongmax_has != 0
 #define mk_lang_limits_ullongmax ULLONG_MAX
 #else
-#define mk_lang_limits_ullongmax ((mk_lang_ullong_t)(((mk_lang_ullong_t)(((mk_lang_ullong_t)(((mk_lang_ullong_t)(((mk_lang_ullong_t)(1)) << (sizeof(mk_lang_ullong_t) * CHAR_BIT - 1))) - 1)) << 1)) + 1))
+#define mk_lang_limits_ullongmax ((unsigned long int)(((unsigned long int)(((unsigned long int)(((unsigned long int)(((unsigned long int)(1)) << (sizeof(unsigned long int) * CHAR_BIT - 1))) - 1)) << 1)) + 1))
 #endif
 
 #undef mk_lang_limits_ullongmax_has
 
-
-
-
-
-#include "mk_lang_sizet.h"
 
 #if defined(__cplusplus) && __cplusplus >= 201103l
 #define mk_lang_limits_sizemax_has 1
@@ -45,27 +42,22 @@
 
 #if mk_lang_limits_sizemax_has != 0
 #if defined(__cplusplus)
-#include <cstdint>
+#include <cstdint> /* SIZE_MAX */
 #else
-#include <stdint.h>
+#include <stdint.h> /* SIZE_MAX */
 #endif
 #define mk_lang_limits_sizemax SIZE_MAX
 #else
 #if defined(__cplusplus)
-#include <climits>
+#include <cstddef> /* size_t */
 #else
-#include <limits.h>
+#include <stddef.h> /* size_t */
 #endif
-#define mk_lang_limits_sizemax ((mk_lang_size_t)(((mk_lang_size_t)(((mk_lang_size_t)(((mk_lang_size_t)(((mk_lang_size_t)(1)) << (sizeof(mk_lang_size_t) * CHAR_BIT - 1))) - 1)) << 1)) + 1))
+#define mk_lang_limits_sizemax ((size_t)(((size_t)(((size_t)(((size_t)(((size_t)(1)) << (sizeof(size_t) * CHAR_BIT - 1))) - 1)) << 1)) + 1))
 #endif
 
 #undef mk_lang_limits_sizemax_has
 
-
-
-
-
-#include "mk_lang_uintmaxt.h"
 
 #if defined(__cplusplus) && __cplusplus >= 201103l
 #define mk_lang_limits_uintmaxmax_has 1
@@ -77,24 +69,16 @@
 
 #if mk_lang_limits_uintmaxmax_has != 0
 #if defined(__cplusplus)
-#include <cstdint>
+#include <cstdint> /* UINTMAX_MAX */
 #else
-#include <stdint.h>
+#include <stdint.h> /* UINTMAX_MAX */
 #endif
 #define mk_lang_limits_uintmaxmax UINTMAX_MAX
 #else
-#if defined(__cplusplus)
-#include <climits>
-#else
-#include <limits.h>
-#endif
-#define mk_lang_limits_uintmaxmax ((mk_lang_uintmax_t)(((mk_lang_uintmax_t)(((mk_lang_uintmax_t)(((mk_lang_uintmax_t)(((mk_lang_uintmax_t)(1)) << (sizeof(mk_lang_uintmax_t) * CHAR_BIT - 1))) - 1)) << 1)) + 1))
+#define mk_lang_limits_uintmaxmax ((unsigned long int)(((unsigned long int)(((unsigned long int)(((unsigned long int)(((unsigned long int)(1)) << (sizeof(unsigned long int) * CHAR_BIT - 1))) - 1)) << 1)) + 1))
 #endif
 
 #undef mk_lang_limits_uintmaxmax_has
-
-
-
 
 
 #endif

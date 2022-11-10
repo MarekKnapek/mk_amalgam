@@ -15,9 +15,9 @@
 #define mk_lang_sintmax_t signed long int
 #else
 #if defined(__cplusplus)
-#include <cstdint>
+#include <cstdint> /* uintmax_t intmax_t */
 #else
-#include <stdint.h>
+#include <stdint.h> /* uintmax_t intmax_t */
 #endif
 #define mk_lang_uintmax_t uintmax_t
 #define mk_lang_sintmax_t intmax_t

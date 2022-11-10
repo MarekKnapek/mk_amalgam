@@ -5,7 +5,7 @@
 #if defined(NDEBUG)
 
 
-#if defined(_MSC_VER) && _MSC_VER >= 1200
+#if defined(_MSC_VER) && _MSC_VER >= 1200 /* VS 6 */
 #define mk_lang_assert(x) __assume(x)
 #elif defined (__GNUC__) && defined(__GNUC_MINOR__) && (__GNUC__ * 10000l + __GNUC_MINOR__) >= 40005l
 #define mk_lang_assert(x) do{ if(!(x)){ __builtin_unreachable(); } }while(0)
@@ -18,9 +18,9 @@
 
 
 #if defined(__cplusplus)
-#include <cassert>
+#include <cassert> /* assert */
 #else
-#include <assert.h>
+#include <assert.h> /* assert */
 #endif
 
 

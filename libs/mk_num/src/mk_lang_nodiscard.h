@@ -4,7 +4,7 @@
 
 #if defined(__cplusplus) && __cplusplus >= 201703l
 #define mk_lang_nodiscard [[nodiscard]]
-#elif defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202399l/*TODO c23*/
+#elif defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202299l/*TODO c23*/
 #define mk_lang_nodiscard [[nodiscard]]
 #else
 #define mk_lang_nodiscard

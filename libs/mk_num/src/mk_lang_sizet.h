@@ -3,9 +3,9 @@
 
 
 #if defined(__cplusplus)
-#include <cstddef>
+#include <cstddef> /* size_t */
 #else
-#include <stddef.h>
+#include <stddef.h> /* size_t */
 #endif
 #define mk_lang_size_t size_t
 

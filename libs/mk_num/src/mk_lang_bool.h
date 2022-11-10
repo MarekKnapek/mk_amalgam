@@ -6,7 +6,7 @@
 #define mk_lang_bool_t bool
 #define mk_lang_true ((mk_lang_bool_t)(true))
 #define mk_lang_false ((mk_lang_bool_t)(false))
-#elif defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202399l/*TODO c23*/
+#elif defined(__STDC_VERSION__) && __STDC_VERSION__ >= 202299l/*TODO c23*/
 #define mk_lang_bool_t bool
 #define mk_lang_true ((mk_lang_bool_t)(true))
 #define mk_lang_false ((mk_lang_bool_t)(false))
