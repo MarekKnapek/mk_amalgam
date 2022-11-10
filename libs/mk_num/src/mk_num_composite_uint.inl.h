@@ -140,3 +140,4 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_cid_cod(mk_num_composite_un_t c
 #undef mk_num_composite_bits
 #undef mk_num_composite_base_type
 #undef mk_num_composite_base_name
+#undef mk_num_composite_base_bits

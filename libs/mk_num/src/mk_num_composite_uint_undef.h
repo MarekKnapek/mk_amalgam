@@ -1,4 +1,3 @@
-#undef mk_num_composite_base_bits
 #undef mk_num_composite_un_parts
 
 #undef mk_num_composite_un_s

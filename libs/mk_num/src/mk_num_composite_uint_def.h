@@ -1,12 +1,8 @@
-#include <limits.h> /* CHAR_BIT */
-
-
 #if !defined(mk_num_composite_prefix)
 #define mk_num_composite_prefix /* TODO: prefix */
 #endif
 
-#define mk_num_composite_base_bits ((int)(sizeof(mk_num_composite_base_type) * CHAR_BIT))
-#define mk_num_composite_un_parts ((mk_num_composite_bits + mk_num_composite_base_bits - 1) / mk_num_composite_base_bits)
+#define mk_num_composite_un_parts ((mk_num_composite_bits + (mk_num_composite_base_bits - 1)) / mk_num_composite_base_bits)
 
 #define mk_num_composite_un_s mk_lang_concat(mk_lang_concat(mk_num_composite_u, mk_num_composite_bits), _s)
 #define mk_num_composite_un_t mk_lang_concat(mk_lang_concat(mk_num_composite_u, mk_num_composite_bits), _t)
