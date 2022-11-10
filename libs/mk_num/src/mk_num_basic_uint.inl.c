@@ -1186,6 +1186,166 @@ mk_lang_jumbo void mk_num_mul2_crash_cie_cod(mk_detail_num_basic_ut_type* x, mk_
 mk_lang_jumbo void mk_num_mul2_crash_cie_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* co);
 
 
+mk_lang_jumbo void mk_num_div3_wrap(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res)
+{
+	mk_lang_assert(x);
+	mk_lang_assert(y);
+	mk_lang_assert(res);
+
+	*res = ((mk_detail_num_basic_ut_type)(*x / *y));
+}
+
+mk_lang_jumbo void mk_num_mod3_wrap(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res)
+{
+	mk_lang_assert(x);
+	mk_lang_assert(y);
+	mk_lang_assert(res);
+
+	*res = ((mk_detail_num_basic_ut_type)(*x % *y));
+}
+
+mk_lang_jumbo void mk_num_divmod3_wrap(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res_div, mk_detail_num_basic_ut_type* res_mod)
+{
+	mk_lang_assert(x);
+	mk_lang_assert(y);
+	mk_lang_assert(res_div);
+	mk_lang_assert(res_mod);
+	mk_lang_assert(res_div != x);
+	mk_lang_assert(res_div != y);
+
+	*res_div = ((mk_detail_num_basic_ut_type)(*x / *y));
+	*res_mod = ((mk_detail_num_basic_ut_type)(*x % *y));
+}
+
+mk_lang_jumbo void mk_num_div3_sat(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res)
+{
+	mk_lang_assert(y);
+	mk_lang_assert(res);
+
+	if(*y == 0)
+	{
+		mk_detail_num_basic_ut_type mx;
+		mx = 0;
+		--mx;
+		*res = mx;
+	}
+	else
+	{
+		mk_num_div3_wrap(x, y, res);
+	}
+}
+
+mk_lang_jumbo void mk_num_mod3_sat(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res)
+{
+	mk_lang_assert(y);
+	mk_lang_assert(res);
+
+	if(*y == 0)
+	{
+		mk_detail_num_basic_ut_type mx;
+		mx = 0;
+		--mx;
+		*res = mx;
+	}
+	else
+	{
+		mk_num_mod3_wrap(x, y, res);
+	}
+}
+
+mk_lang_jumbo void mk_num_divmod3_sat(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res_div, mk_detail_num_basic_ut_type* res_mod)
+{
+	mk_lang_assert(y);
+	mk_lang_assert(res_div);
+	mk_lang_assert(res_mod);
+
+	if(*y == 0)
+	{
+		mk_detail_num_basic_ut_type mx;
+		mx = 0;
+		--mx;
+		*res_div = mx;
+		*res_mod = mx;
+	}
+	else
+	{
+		mk_num_divmod3_wrap(x, y, res_div, res_mod);
+	}
+}
+
+mk_lang_jumbo void mk_num_div3_crash(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res)
+{
+	mk_lang_assert(y);
+
+	if(*y == 0)
+	{
+		mk_lang_crash();
+	}
+	else
+	{
+		mk_num_div3_wrap(x, y, res);
+	}
+}
+
+mk_lang_jumbo void mk_num_mod3_crash(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res)
+{
+	mk_lang_assert(y);
+
+	if(*y == 0)
+	{
+		mk_lang_crash();
+	}
+	else
+	{
+		mk_num_mod3_wrap(x, y, res);
+	}
+}
+
+mk_lang_jumbo void mk_num_divmod3_crash(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res_div, mk_detail_num_basic_ut_type* res_mod)
+{
+	mk_lang_assert(y);
+
+	if(*y == 0)
+	{
+		mk_lang_crash();
+	}
+	else
+	{
+		mk_num_divmod3_wrap(x, y, res_div, res_mod);
+	}
+}
+
+mk_lang_jumbo void mk_num_div2_wrap(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y)
+{
+	mk_num_div3_wrap(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_mod2_wrap(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y)
+{
+	mk_num_mod3_wrap(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_div2_sat(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y)
+{
+	mk_num_div3_sat(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_mod2_sat(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y)
+{
+	mk_num_mod3_sat(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_div2_crash(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y)
+{
+	mk_num_div3_crash(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_mod2_crash(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y)
+{
+	mk_num_mod3_crash(x, y, x);
+}
+
+
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif

@@ -150,6 +150,21 @@ mk_lang_jumbo void mk_num_mul2_crash_cid_coe(mk_detail_num_basic_ut_type* x, mk_
 mk_lang_jumbo void mk_num_mul2_crash_cie_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci);
 mk_lang_jumbo void mk_num_mul2_crash_cie_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* co);
 
+mk_lang_jumbo void mk_num_div3_wrap(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res);
+mk_lang_jumbo void mk_num_mod3_wrap(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res);
+mk_lang_jumbo void mk_num_divmod3_wrap(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res_div, mk_detail_num_basic_ut_type* res_mod);
+mk_lang_jumbo void mk_num_div3_sat(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res);
+mk_lang_jumbo void mk_num_mod3_sat(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res);
+mk_lang_jumbo void mk_num_divmod3_sat(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res_div, mk_detail_num_basic_ut_type* res_mod);
+mk_lang_jumbo void mk_num_div3_crash(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res);
+mk_lang_jumbo void mk_num_mod3_crash(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res);
+mk_lang_jumbo void mk_num_divmod3_crash(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res_div, mk_detail_num_basic_ut_type* res_mod);
+mk_lang_jumbo void mk_num_div2_wrap(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y);
+mk_lang_jumbo void mk_num_mod2_wrap(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y);
+mk_lang_jumbo void mk_num_div2_sat(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y);
+mk_lang_jumbo void mk_num_mod2_sat(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y);
+mk_lang_jumbo void mk_num_div2_crash(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y);
+mk_lang_jumbo void mk_num_mod2_crash(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y);
 
 #include "mk_num_basic_uint_undef.h"
 

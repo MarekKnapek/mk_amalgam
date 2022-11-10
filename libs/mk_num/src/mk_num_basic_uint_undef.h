@@ -136,3 +136,19 @@
 #undef mk_num_mul2_crash_cid_coe
 #undef mk_num_mul2_crash_cie_cod
 #undef mk_num_mul2_crash_cie_coe
+
+#undef mk_num_div3_wrap
+#undef mk_num_mod3_wrap
+#undef mk_num_divmod3_wrap
+#undef mk_num_div3_sat
+#undef mk_num_mod3_sat
+#undef mk_num_divmod3_sat
+#undef mk_num_div3_crash
+#undef mk_num_mod3_crash
+#undef mk_num_divmod3_crash
+#undef mk_num_div2_wrap
+#undef mk_num_mod2_wrap
+#undef mk_num_div2_sat
+#undef mk_num_mod2_sat
+#undef mk_num_div2_crash
+#undef mk_num_mod2_crash
