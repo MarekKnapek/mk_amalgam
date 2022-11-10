@@ -1,11 +1,19 @@
 #include "mk_lang_assert.h"
 #include "mk_lang_bool.h"
+#include "mk_lang_charbit.h"
 #include "mk_lang_concat.h"
 #include "mk_lang_jumbo.h"
 #include "mk_lang_minmax.h"
 
 
-#define mk_num_div_mod mk_lang_concat(mk_lang_concat(mk_lang_concat(mk_lang_concat(mk_lang_concat(mk_num_div_mod_, mk_num_div_mod_small_name), _), mk_num_div_mod_len_x), _), mk_num_div_mod_len_y)
+#if(mk_num_div_mod_use_r1d2 == 0)
+#define mk_num_div_mod_prefix r3d2
+#elif(mk_num_div_mod_use_r1d2 == 1)
+#define mk_num_div_mod_prefix r2d1
+#define mk_num_div_mod_big_type mk_num_div_mod_mid_type
+#endif
+
+#define mk_num_div_mod mk_lang_concat(mk_lang_concat(mk_lang_concat(mk_lang_concat(mk_lang_concat(mk_lang_concat(mk_lang_concat(mk_num_div_mod_, mk_num_div_mod_small_name), _), mk_num_div_mod_len_x), _), mk_num_div_mod_len_y), _), mk_num_div_mod_prefix)
 
 
 mk_lang_jumbo void mk_num_div_mod(mk_num_div_mod_small_type const* x, mk_num_div_mod_small_type const* y, mk_num_div_mod_small_type* res_div, mk_num_div_mod_small_type* res_mod)
@@ -143,7 +151,7 @@ mk_lang_jumbo void mk_num_div_mod(mk_num_div_mod_small_type const* x, mk_num_div
 		res_div[lenx - 1] = d;
 		for(i = 1; i != lenx; ++i)
 		{
-			tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(m)) << (sizeof(mk_num_div_mod_small_type) * CHAR_BIT))) | ((mk_num_div_mod_mid_type)(x[lenx - 1 - i]))));
+			tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(m)) << (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit))) | ((mk_num_div_mod_mid_type)(x[lenx - 1 - i]))));
 			d = ((mk_num_div_mod_small_type)(tmp / yy));
 			m = ((mk_num_div_mod_small_type)(tmp % yy));
 			res_div[lenx - 1 - i] = d;
@@ -169,35 +177,35 @@ mk_lang_jumbo void mk_num_div_mod(mk_num_div_mod_small_type const* x, mk_num_div
 		}
 		f =
 			((mk_num_div_mod_small_type)(
-				((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(1)) << (sizeof(mk_num_div_mod_small_type) * CHAR_BIT))) /
+				((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(1)) << (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit))) /
 				((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(y[leny - 1])) + ((mk_num_div_mod_mid_type)(1))))
 			));
 		tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(x[0])) * ((mk_num_div_mod_mid_type)(f))));
 		xx[0] = ((mk_num_div_mod_small_type)(tmp));
-		carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * CHAR_BIT)));
+		carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit)));
 		for(i = 1; i != lenx; ++i)
 		{
 			tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(x[i])) * ((mk_num_div_mod_mid_type)(f)))) + ((mk_num_div_mod_mid_type)(carry))));
 			xx[i] = ((mk_num_div_mod_small_type)(tmp));
-			carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * CHAR_BIT)));
+			carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit)));
 		}
 		xx[lenx] = carry;
 		tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(y[0])) * ((mk_num_div_mod_mid_type)(f))));
 		yy[0] = ((mk_num_div_mod_small_type)(tmp));
-		carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * CHAR_BIT)));
+		carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit)));
 		for(i = 1; i != leny - 1; ++i)
 		{
 			tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(y[i])) * ((mk_num_div_mod_mid_type)(f)))) + ((mk_num_div_mod_mid_type)(carry))));
 			yy[i] = ((mk_num_div_mod_small_type)(tmp));
-			carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * CHAR_BIT)));
+			carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit)));
 		}
 		tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(y[i])) * ((mk_num_div_mod_mid_type)(f)))) + ((mk_num_div_mod_mid_type)(carry))));
 		yy[i] = ((mk_num_div_mod_small_type)(tmp));
-		mk_lang_assert(((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * CHAR_BIT))) == 0);
+		mk_lang_assert(((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit))) == 0);
 		for(id = 0; id != lenx - leny + 1; ++id)
 		{
-			mk_num_div_mod_big_type r3;
-			mk_num_div_mod_mid_type d2;
+			mk_num_div_mod_big_type rn;
+			mk_num_div_mod_mid_type dn;
 			mk_num_div_mod_mid_type qtmid;
 			mk_num_div_mod_small_type qt;
 			mk_num_div_mod_small_type dq[mk_num_div_mod_len_y + 1];
@@ -205,29 +213,38 @@ mk_lang_jumbo void mk_num_div_mod(mk_num_div_mod_small_type const* x, mk_num_div
 			mk_lang_bool_t borrow2;
 			mk_lang_bool_t borrow1;
 
-			r3 =
+			#if(mk_num_div_mod_use_r1d2 == 0)
+			rn =
 				((mk_num_div_mod_big_type)(
 					((mk_num_div_mod_big_type)(
-						((mk_num_div_mod_big_type)(((mk_num_div_mod_big_type)(xx[lenx - id])) << (2 * sizeof(mk_num_div_mod_small_type) * CHAR_BIT))) |
-						((mk_num_div_mod_big_type)(((mk_num_div_mod_big_type)(xx[lenx - id - 1])) << (sizeof(mk_num_div_mod_small_type ) * CHAR_BIT)))
+						((mk_num_div_mod_big_type)(((mk_num_div_mod_big_type)(xx[lenx - id])) << (2 * sizeof(mk_num_div_mod_small_type) * mk_lang_charbit))) |
+						((mk_num_div_mod_big_type)(((mk_num_div_mod_big_type)(xx[lenx - id - 1])) << (sizeof(mk_num_div_mod_small_type ) * mk_lang_charbit)))
 					)) |
 					((mk_num_div_mod_big_type)(xx[lenx - id - 2]))
 				));
-			d2 =
+			dn =
 				((mk_num_div_mod_mid_type)(
-					((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(yy[leny - 1])) << (sizeof(mk_num_div_mod_small_type) * CHAR_BIT))) |
+					((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(yy[leny - 1])) << (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit))) |
 					((mk_num_div_mod_mid_type)(yy[leny - 2]))
 				));
-			qtmid = ((mk_num_div_mod_mid_type)(r3 / d2));
+			#elif(mk_num_div_mod_use_r1d2 == 1)
+			rn =
+				((mk_num_div_mod_mid_type)(
+						((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(xx[lenx - id])) << (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit))) |
+						((mk_num_div_mod_mid_type)(xx[lenx - id - 1]))
+				));
+			dn = ((mk_num_div_mod_mid_type)(yy[leny - 1]));
+			#endif
+			qtmid = ((mk_num_div_mod_mid_type)(rn / dn));
 			qt = ((mk_num_div_mod_small_type)(mk_lang_min(qtmid, ((mk_num_div_mod_small_type)(((mk_num_div_mod_small_type)(0)) - ((mk_num_div_mod_small_type)(1)))))));
 			tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(yy[0])) * ((mk_num_div_mod_mid_type)(qt))));
 			dq[0] = ((mk_num_div_mod_small_type)(tmp));
-			carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * CHAR_BIT)));
+			carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit)));
 			for(i = 1; i != leny; ++i)
 			{
 				tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(yy[i])) * ((mk_num_div_mod_mid_type)(qt)))) + ((mk_num_div_mod_mid_type)(carry))));
 				dq[i] = ((mk_num_div_mod_small_type)(tmp));
-				carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * CHAR_BIT)));
+				carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit)));
 			}
 			dq[leny] = carry;
 			overshoot = mk_lang_false;
@@ -241,14 +258,37 @@ mk_lang_jumbo void mk_num_div_mod(mk_num_div_mod_small_type const* x, mk_num_div
 				--qt;
 				tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(yy[0])) * ((mk_num_div_mod_mid_type)(qt))));
 				dq[0] = ((mk_num_div_mod_small_type)(tmp));
-				carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * CHAR_BIT)));
+				carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit)));
 				for(i = 1; i != leny; ++i)
 				{
 					tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(yy[i])) * ((mk_num_div_mod_mid_type)(qt)))) + ((mk_num_div_mod_mid_type)(carry))));
 					dq[i] = ((mk_num_div_mod_small_type)(tmp));
-					carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * CHAR_BIT)));
+					carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit)));
 				}
 				dq[leny] = carry;
+				#if(mk_num_div_mod_use_r1d2 == 0)
+				#elif(mk_num_div_mod_use_r1d2 == 1)
+				overshoot = mk_lang_false;
+				for(i = 0; i != leny + 1; ++i)
+				{
+					if(dq[leny - i] > xx[lenx - id - i]) { overshoot = mk_lang_true; break; }
+					if(dq[leny - i] < xx[lenx - id - i]) { overshoot = mk_lang_false; break; }
+				}
+				if(overshoot)
+				{
+					--qt;
+					tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(yy[0])) * ((mk_num_div_mod_mid_type)(qt))));
+					dq[0] = ((mk_num_div_mod_small_type)(tmp));
+					carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit)));
+					for(i = 1; i != leny; ++i)
+					{
+						tmp = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(yy[i])) * ((mk_num_div_mod_mid_type)(qt)))) + ((mk_num_div_mod_mid_type)(carry))));
+						dq[i] = ((mk_num_div_mod_small_type)(tmp));
+						carry = ((mk_num_div_mod_small_type)(tmp >> (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit)));
+					}
+					dq[leny] = carry;
+				}
+				#endif
 			}
 			res_div[lenx - leny - id] = qt;
 			borrow2 = (xx[lenx - leny - id] < dq[0]);
@@ -281,12 +321,12 @@ mk_lang_jumbo void mk_num_div_mod(mk_num_div_mod_small_type const* x, mk_num_div
 			res_mod[(lenm - 1) - (lenm - leny)] = m;
 			for(i = 1; i != leny - 1; ++i)
 			{
-				t = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(o)) << (sizeof(mk_num_div_mod_small_type) * CHAR_BIT))) | ((mk_num_div_mod_mid_type)(xx[leny - 1 - i]))));
+				t = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(o)) << (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit))) | ((mk_num_div_mod_mid_type)(xx[leny - 1 - i]))));
 				m = ((mk_num_div_mod_small_type)(t / f));
 				o = ((mk_num_div_mod_small_type)(xx[leny - 1 - i] - ((mk_num_div_mod_small_type)(m * f))));
 				res_mod[(lenm - 1) - (lenm - leny) - i] = m;
 			}
-			t = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(o)) << (sizeof(mk_num_div_mod_small_type) * CHAR_BIT))) | ((mk_num_div_mod_mid_type)(xx[leny - 1 - i]))));
+			t = ((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(((mk_num_div_mod_mid_type)(o)) << (sizeof(mk_num_div_mod_small_type) * mk_lang_charbit))) | ((mk_num_div_mod_mid_type)(xx[leny - 1 - i]))));
 			m = ((mk_num_div_mod_small_type)(t / f));
 			mk_lang_assert(((mk_num_div_mod_small_type)(xx[leny - 1 - i] - ((mk_num_div_mod_small_type)(m * f)))) == 0);
 			res_mod[(lenm - 1) - (lenm - leny) - i] = m;
@@ -298,12 +338,14 @@ mk_lang_jumbo void mk_num_div_mod(mk_num_div_mod_small_type const* x, mk_num_div
 }
 
 
+#undef mk_num_div_mod_prefix
 #undef mk_num_div_mod
 
 
 #undef mk_num_div_mod_len_x
 #undef mk_num_div_mod_len_y
-#undef mk_num_div_mod_small_type
+#undef mk_num_div_mod_use_r1d2
 #undef mk_num_div_mod_small_name
+#undef mk_num_div_mod_small_type
 #undef mk_num_div_mod_mid_type
 #undef mk_num_div_mod_big_type
