@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+	<PropertyGroup Label="Globals">
+		<MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+		<HasSharedItems>true</HasSharedItems>
+		<ItemsProjectGuid>{dec1ca7d-6a21-4a31-b5a7-5a82282a43dd}</ItemsProjectGuid>
+	</PropertyGroup>
+	<ItemDefinitionGroup>
+		<ClCompile>
+			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(MSBuildThisFileDirectory)</AdditionalIncludeDirectories>
+		</ClCompile>
+	</ItemDefinitionGroup>
+	<ItemGroup>
+		<ProjectCapability Include="SourceItemsFromImports"/>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_assert.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_bool.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_charbit.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_concat.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_cpp.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_crash.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_i128.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_inline.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_jumbo.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_limits.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_llong.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_minmax.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_nodiscard.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_sizeof.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_sizet.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_uintmaxt.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_basic_uint.inl.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_basic_uint_def.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_basic_uint_undef.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_basic_uints.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_composite_guess_base.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_composite_uint.inl.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_composite_uint_base_def.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_composite_uint_base_undef.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_composite_uint_def.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_composite_uint_undef.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_composite_uints.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_div_mod.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_div_mod.inl.h"/>
+	</ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_crash.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_sizeof.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_basic_uint.inl.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_basic_uints.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_composite_uint.inl.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_composite_uints.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_div_mod.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_div_mod.inl.c"/>
+	</ItemGroup>
+</Project>
