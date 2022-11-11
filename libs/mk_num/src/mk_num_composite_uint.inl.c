@@ -4,13 +4,11 @@
 #include "mk_lang_crash.h"
 #include "mk_lang_jumbo.h"
 #include "mk_lang_llong.h"
+#include "mk_lang_memcpy.h"
 #include "mk_lang_minmax.h"
 #include "mk_lang_nodiscard.h"
 #include "mk_lang_sizet.h"
 #include "mk_lang_uintmaxt.h"
-
-#include <limits.h> /* CHAR_BIT */
-#include <string.h> /* memcpy */
 
 
 #if defined(_MSC_VER)
@@ -150,8 +148,8 @@ mk_lang_jumbo void mk_num_composite_un_from_char(mk_num_composite_un_t* x, char 
 
 	mk_lang_assert(sizeof(uint) == sizeof(src));
 
-	memcpy(buff, &src, sizeof(src));
-	memcpy(&uint, buff, sizeof(src));
+	mk_lang_memcpy(buff, &src, sizeof(src));
+	mk_lang_memcpy(&uint, buff, sizeof(src));
 	mk_num_composite_un_from_uchar(x, uint);
 }
 
@@ -195,8 +193,8 @@ mk_lang_jumbo void mk_num_composite_un_from_schar(mk_num_composite_un_t* x, sign
 
 	mk_lang_assert(sizeof(uint) == sizeof(src));
 
-	memcpy(buff, &src, sizeof(src));
-	memcpy(&uint, buff, sizeof(src));
+	mk_lang_memcpy(buff, &src, sizeof(src));
+	mk_lang_memcpy(&uint, buff, sizeof(src));
 	mk_num_composite_un_from_uchar(x, uint);
 }
 
@@ -240,8 +238,8 @@ mk_lang_jumbo void mk_num_composite_un_from_sshort(mk_num_composite_un_t* x, sig
 
 	mk_lang_assert(sizeof(uint) == sizeof(src));
 
-	memcpy(buff, &src, sizeof(src));
-	memcpy(&uint, buff, sizeof(src));
+	mk_lang_memcpy(buff, &src, sizeof(src));
+	mk_lang_memcpy(&uint, buff, sizeof(src));
 	mk_num_composite_un_from_ushort(x, uint);
 }
 
@@ -285,8 +283,8 @@ mk_lang_jumbo void mk_num_composite_un_from_sint(mk_num_composite_un_t* x, signe
 
 	mk_lang_assert(sizeof(uint) == sizeof(src));
 
-	memcpy(buff, &src, sizeof(src));
-	memcpy(&uint, buff, sizeof(src));
+	mk_lang_memcpy(buff, &src, sizeof(src));
+	mk_lang_memcpy(&uint, buff, sizeof(src));
 	mk_num_composite_un_from_uint(x, uint);
 }
 
@@ -330,8 +328,8 @@ mk_lang_jumbo void mk_num_composite_un_from_slong(mk_num_composite_un_t* x, sign
 
 	mk_lang_assert(sizeof(uint) == sizeof(src));
 
-	memcpy(buff, &src, sizeof(src));
-	memcpy(&uint, buff, sizeof(src));
+	mk_lang_memcpy(buff, &src, sizeof(src));
+	mk_lang_memcpy(&uint, buff, sizeof(src));
 	mk_num_composite_un_from_ulong(x, uint);
 }
 
@@ -375,8 +373,8 @@ mk_lang_jumbo void mk_num_composite_un_from_sllong(mk_num_composite_un_t* x, mk_
 
 	mk_lang_assert(sizeof(uint) == sizeof(src));
 
-	memcpy(buff, &src, sizeof(src));
-	memcpy(&uint, buff, sizeof(src));
+	mk_lang_memcpy(buff, &src, sizeof(src));
+	mk_lang_memcpy(&uint, buff, sizeof(src));
 	mk_num_composite_un_from_ullong(x, uint);
 }
 
@@ -453,8 +451,8 @@ mk_lang_jumbo void mk_num_composite_un_from_smaxt(mk_num_composite_un_t* x, mk_l
 
 	mk_lang_assert(sizeof(uint) == sizeof(src));
 
-	memcpy(buff, &src, sizeof(src));
-	memcpy(&uint, buff, sizeof(src));
+	mk_lang_memcpy(buff, &src, sizeof(src));
+	mk_lang_memcpy(&uint, buff, sizeof(src));
 	mk_num_composite_un_from_umaxt(x, uint);
 }
 
@@ -469,8 +467,8 @@ mk_lang_nodiscard mk_lang_jumbo char mk_num_composite_un_to_char(mk_num_composit
 	mk_lang_assert(sizeof(uint) == sizeof(sint));
 
 	uint = mk_num_composite_un_to_uchar(x);
-	memcpy(buff, &uint, sizeof(uint));
-	memcpy(&sint, buff, sizeof(uint));
+	mk_lang_memcpy(buff, &uint, sizeof(uint));
+	mk_lang_memcpy(&sint, buff, sizeof(uint));
 	return sint;
 }
 
@@ -518,8 +516,8 @@ mk_lang_nodiscard mk_lang_jumbo signed char mk_num_composite_un_to_schar(mk_num_
 	mk_lang_assert(sizeof(uint) == sizeof(sint));
 
 	uint = mk_num_composite_un_to_uchar(x);
-	memcpy(buff, &uint, sizeof(uint));
-	memcpy(&sint, buff, sizeof(uint));
+	mk_lang_memcpy(buff, &uint, sizeof(uint));
+	mk_lang_memcpy(&sint, buff, sizeof(uint));
 	return sint;
 }
 
@@ -567,8 +565,8 @@ mk_lang_nodiscard mk_lang_jumbo signed short int mk_num_composite_un_to_sshort(m
 	mk_lang_assert(sizeof(uint) == sizeof(sint));
 
 	uint = mk_num_composite_un_to_ushort(x);
-	memcpy(buff, &uint, sizeof(uint));
-	memcpy(&sint, buff, sizeof(uint));
+	mk_lang_memcpy(buff, &uint, sizeof(uint));
+	mk_lang_memcpy(&sint, buff, sizeof(uint));
 	return sint;
 }
 
@@ -616,8 +614,8 @@ mk_lang_nodiscard mk_lang_jumbo signed int mk_num_composite_un_to_sint(mk_num_co
 	mk_lang_assert(sizeof(uint) == sizeof(sint));
 
 	uint = mk_num_composite_un_to_uint(x);
-	memcpy(buff, &uint, sizeof(uint));
-	memcpy(&sint, buff, sizeof(uint));
+	mk_lang_memcpy(buff, &uint, sizeof(uint));
+	mk_lang_memcpy(&sint, buff, sizeof(uint));
 	return sint;
 }
 
@@ -665,8 +663,8 @@ mk_lang_nodiscard mk_lang_jumbo signed long int mk_num_composite_un_to_slong(mk_
 	mk_lang_assert(sizeof(uint) == sizeof(sint));
 
 	uint = mk_num_composite_un_to_ulong(x);
-	memcpy(buff, &uint, sizeof(uint));
-	memcpy(&sint, buff, sizeof(uint));
+	mk_lang_memcpy(buff, &uint, sizeof(uint));
+	mk_lang_memcpy(&sint, buff, sizeof(uint));
 	return sint;
 }
 
@@ -714,8 +712,8 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_sllong_t mk_num_composite_un_to_sllong(m
 	mk_lang_assert(sizeof(uint) == sizeof(sint));
 
 	uint = mk_num_composite_un_to_ullong(x);
-	memcpy(buff, &uint, sizeof(uint));
-	memcpy(&sint, buff, sizeof(uint));
+	mk_lang_memcpy(buff, &uint, sizeof(uint));
+	mk_lang_memcpy(&sint, buff, sizeof(uint));
 	return sint;
 }
 
@@ -797,8 +795,8 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_sintmax_t mk_num_composite_un_to_smaxt(m
 	mk_lang_assert(sizeof(uint) == sizeof(sint));
 
 	uint = mk_num_composite_un_to_umaxt(x);
-	memcpy(buff, &uint, sizeof(uint));
-	memcpy(&sint, buff, sizeof(uint));
+	mk_lang_memcpy(buff, &uint, sizeof(uint));
+	mk_lang_memcpy(&sint, buff, sizeof(uint));
 	return sint;
 }
 

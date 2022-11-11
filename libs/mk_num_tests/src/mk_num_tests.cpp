@@ -3,12 +3,14 @@
 #pragma warning(disable:4464) /* warning C4464: relative include path contains '..' */
 #endif
 #include "../../../libs/mk_num/src/mk_lang_bool.h"
-#include "../../../libs/mk_num/src/mk_lang_cpp.h"
 #include "../../../libs/mk_num/src/mk_lang_charbit.h"
+#include "../../../libs/mk_num/src/mk_lang_cpp.h"
 #include "../../../libs/mk_num/src/mk_lang_crash.h"
 #include "../../../libs/mk_num/src/mk_lang_i128.h"
 #include "../../../libs/mk_num/src/mk_lang_limits.h"
 #include "../../../libs/mk_num/src/mk_lang_llong.h"
+#include "../../../libs/mk_num/src/mk_lang_memcmp.h"
+#include "../../../libs/mk_num/src/mk_lang_memcpy.h"
 #include "../../../libs/mk_num/src/mk_lang_sizeof.h"
 #include "../../../libs/mk_num/src/mk_lang_sizet.h"
 #include "../../../libs/mk_num/src/mk_lang_uintmaxt.h"
@@ -100,9 +102,6 @@
 #pragma warning(pop)
 #endif
 
-#include <stddef.h>
-#include <string.h>
-
 
 #if defined(_MSC_VER)
 #pragma warning(push)
@@ -161,7 +160,7 @@ void test_factorial_800(void)
 		mk_num_composite_u6656_mul3_wrap_cid_cod(&a, &b, &a);
 	}
 	mk_num_composite_u6656_to_buff_be(&a, buff);
-	test(memcmp(buff + (sizeof(buff) - sizeof(s_factorial_800_be)), s_factorial_800_be, sizeof(s_factorial_800_be)) == 0);
+	test(mk_lang_memcmp(buff + (sizeof(buff) - sizeof(s_factorial_800_be)), s_factorial_800_be, sizeof(s_factorial_800_be)) == 0);
 }
 
 void test_division_long(unsigned char const* data, size_t size)
@@ -177,8 +176,8 @@ void test_division_long(unsigned char const* data, size_t size)
 	if(!(size >= 2 * 4)) return;
 	bx = 0;
 	by = 0;
-	memcpy(&bx, data, 4);
-	memcpy(&by, data + 4, 4);
+	mk_lang_memcpy(&bx, data, 4);
+	mk_lang_memcpy(&by, data + 4, 4);
 	if(by == 0)
 	{
 		bresdiv = 0;
@@ -270,8 +269,8 @@ void test_division_llong(unsigned char const* data, size_t size)
 	if(!(size >= 2 * 8)) return;
 	bx = 0;
 	by = 0;
-	memcpy(&bx, data, 8);
-	memcpy(&by, data + 8, 8);
+	mk_lang_memcpy(&bx, data, 8);
+	mk_lang_memcpy(&by, data + 8, 8);
 	if(by == 0)
 	{
 		bresdiv = 0;
@@ -423,8 +422,8 @@ void test_division_lllong(unsigned char const* data, size_t size)
 	if(!(size >= 2 * 16)) return;
 	bx = 0;
 	by = 0;
-	memcpy(&bx, data, 16);
-	memcpy(&by, data + 16, 16);
+	mk_lang_memcpy(&bx, data, 16);
+	mk_lang_memcpy(&by, data + 16, 16);
 	if(by == 0)
 	{
 		bresdiv = 0;
@@ -644,9 +643,9 @@ void test_arithmetics(unsigned char const* data, size_t size)
 	bb = 0;
 	bm = (((((unsigned long int)(1)) << (bits - 1)) - 1) << 1) + 1;
 	shift_ = 0;
-	memcpy(&ba, data, bytes); ba = ba & bm;
-	memcpy(&bb, data + bytes, bytes); bb = bb & bm;
-	memcpy(&shift_, data + 2 * bytes, 1); shift = ((int)(shift_));
+	mk_lang_memcpy(&ba, data, bytes); ba = ba & bm;
+	mk_lang_memcpy(&bb, data + bytes, bytes); bb = bb & bm;
+	mk_lang_memcpy(&shift_, data + 2 * bytes, 1); shift = ((int)(shift_));
 	if(!(shift >= 0 && shift < ((int)(bits)))) return;
 
 	mk_num_composite_u25_from_ulong(&ma, ba); test(mk_num_composite_u25_to_ulong(&ma) == ba);
@@ -749,6 +748,8 @@ int main(void)
 #pragma warning(disable:4514) /* warning C4514: 'xxx': unreferenced inline function has been removed */
 #endif
 #include "../../../libs/mk_num/src/mk_lang_crash.c"
+#include "../../../libs/mk_num/src/mk_lang_memcmp.c"
+#include "../../../libs/mk_num/src/mk_lang_memcpy.c"
 #include "../../../libs/mk_num/src/mk_lang_sizeof.c"
 #include "../../../libs/mk_num/src/mk_num_basic_uints.c"
 #include "../../../libs/mk_num/src/mk_num_composite_uints.c"
