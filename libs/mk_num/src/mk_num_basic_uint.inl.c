@@ -1,5 +1,6 @@
 #include "mk_lang_assert.h"
 #include "mk_lang_bool.h"
+#include "mk_lang_charbit.h"
 #include "mk_lang_concat.h"
 #include "mk_lang_crash.h"
 #include "mk_lang_i128.h"
@@ -8,8 +9,6 @@
 #include "mk_lang_nodiscard.h"
 #include "mk_lang_sizet.h"
 #include "mk_lang_uintmaxt.h"
-
-#include <limits.h> /* CHAR_BIT */
 
 
 #if defined(_MSC_VER) && _MSC_VER >= 1700 /* VS 2012 */ && defined(_M_AMD64)
@@ -63,7 +62,7 @@ mk_lang_jumbo void mk_num_set_mask(mk_detail_num_basic_ut_type* x, int bits)
 	#endif
 
 	mk_lang_assert(x);
-	mk_lang_assert(bits > 0 && bits <= ((int)(sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT)));
+	mk_lang_assert(bits > 0 && bits <= ((int)(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit)));
 
 	#ifdef NDEBUG
 	*x = ((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(1)) << (bits - 1))) - ((mk_detail_num_basic_ut_type)(1)))) << 1)) | ((mk_detail_num_basic_ut_type)(1))));
@@ -89,7 +88,7 @@ mk_lang_jumbo void mk_num_from_buff_le(mk_detail_num_basic_ut_type* x, void cons
 	tmp = ((mk_detail_num_basic_ut_type)(((unsigned char const*)(x))[0]));
 	for(i = 1; i != ((int)(sizeof(mk_detail_num_basic_ut_type))); ++i)
 	{
-		tmp = ((mk_detail_num_basic_ut_type)(tmp << CHAR_BIT));
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << mk_lang_charbit));
 		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(((unsigned char const*)(x))[i]))));
 	}
 	*x = tmp;
@@ -106,7 +105,7 @@ mk_lang_jumbo void mk_num_from_buff_be(mk_detail_num_basic_ut_type* x, void cons
 	tmp = ((mk_detail_num_basic_ut_type)(((unsigned char const*)(x))[sizeof(mk_detail_num_basic_ut_type) - 1]));
 	for(i = 1; i != ((int)(sizeof(mk_detail_num_basic_ut_type))); ++i)
 	{
-		tmp = ((mk_detail_num_basic_ut_type)(tmp << CHAR_BIT));
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << mk_lang_charbit));
 		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(((unsigned char const*)(x))[sizeof(mk_detail_num_basic_ut_type) - 1 - i]))));
 	}
 	*x = tmp;
@@ -128,7 +127,7 @@ mk_lang_jumbo void mk_num_to_buff_le(mk_detail_num_basic_ut_type const* x, void*
 		#pragma warning(push)
 		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
 		#endif
-		tmp = ((mk_detail_num_basic_ut_type)(tmp >> CHAR_BIT));
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> mk_lang_charbit));
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -152,7 +151,7 @@ mk_lang_jumbo void mk_num_to_buff_be(mk_detail_num_basic_ut_type const* x, void*
 		#pragma warning(push)
 		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
 		#endif
-		tmp = ((mk_detail_num_basic_ut_type)(tmp >> CHAR_BIT));
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> mk_lang_charbit));
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -489,7 +488,7 @@ mk_lang_jumbo void mk_num_xor2(mk_detail_num_basic_ut_type* x, mk_detail_num_bas
 mk_lang_jumbo void mk_num_shl3(mk_detail_num_basic_ut_type const* x, int bits, mk_detail_num_basic_ut_type* y)
 {
 	mk_lang_assert(x);
-	mk_lang_assert(bits >= 0 && bits < ((int)(sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT)));
+	mk_lang_assert(bits >= 0 && bits < ((int)(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit)));
 	mk_lang_assert(y);
 
 	*y = ((mk_detail_num_basic_ut_type)(*x << bits));
@@ -503,7 +502,7 @@ mk_lang_jumbo void mk_num_shl2(mk_detail_num_basic_ut_type* x, int bits)
 mk_lang_jumbo void mk_num_shr3(mk_detail_num_basic_ut_type const* x, int bits, mk_detail_num_basic_ut_type* y)
 {
 	mk_lang_assert(x);
-	mk_lang_assert(bits >= 0 && bits < ((int)(sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT)));
+	mk_lang_assert(bits >= 0 && bits < ((int)(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit)));
 	mk_lang_assert(y);
 
 	*y = ((mk_detail_num_basic_ut_type)(*x >> bits));
@@ -963,7 +962,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
 	#endif
-	if(sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT == 8)
+	if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 8)
 	#if defined(_MSC_VER)
 	#pragma warning(pop)
 	#endif
@@ -987,7 +986,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
 	#endif
-	else if(sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT == 16)
+	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 16)
 	#if defined(_MSC_VER)
 	#pragma warning(pop)
 	#endif
@@ -1010,7 +1009,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#if defined(_MSC_VER) && _MSC_VER >= 1500 /* VS 2008 */ && (defined(_M_IX86) || defined(_M_AMD64))
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
-	else if(sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT == 32)
+	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 32)
 	#pragma warning(pop)
 	{
 		unsigned int xx;
@@ -1038,7 +1037,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
 	#endif
-	else if(sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT == 32)
+	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 32)
 	#if defined(_MSC_VER)
 	#pragma warning(pop)
 	#endif
@@ -1062,7 +1061,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#if defined(_MSC_VER) && _MSC_VER >= 1700 /* VS 2012 */ && defined(_M_AMD64)
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
-	else if(sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT == 64)
+	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 64)
 	#pragma warning(pop)
 	{
 		unsigned __int64 xx;
@@ -1083,7 +1082,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#if defined(_MSC_VER) && _MSC_VER >= 1600 /* VS 2010 */ && (defined(_M_AMD64) || defined(_M_IA64))
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
-	else if(sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT == 64)
+	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 64)
 	#pragma warning(pop)
 	{
 		unsigned __int64 xx;
@@ -1105,7 +1104,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
 	#endif
-	else if(sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT == 64)
+	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 64)
 	#if defined(_MSC_VER)
 	#pragma warning(pop)
 	#endif
@@ -1128,7 +1127,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#endif
 	else
 	{
-		#define shift (sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT / 2)
+		#define shift (sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit / 2)
 		#define mask ((mk_detail_num_basic_ut_type)(((((mk_detail_num_basic_ut_type)(1)) << shift)) - 1))
 
 		mk_detail_num_basic_ut_type m;
@@ -1145,7 +1144,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 		mk_lang_assert(y);
 		mk_lang_assert(z);
 		mk_lang_assert(co);
-		mk_lang_assert(((sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT) % 2) == 0);
+		mk_lang_assert(((sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit) % 2) == 0);
 
 		m = mask;
 		xlo = ((mk_detail_num_basic_ut_type)(*x & m));
