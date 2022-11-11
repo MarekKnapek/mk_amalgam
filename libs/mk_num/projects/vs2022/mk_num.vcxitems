@@ -25,6 +25,9 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_jumbo.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_limits.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_llong.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_memcmp.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_memcpy.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_memset.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_minmax.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_nodiscard.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_sizeof.h"/>
@@ -46,6 +49,9 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_crash.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_memcmp.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_memcpy.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_memset.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_sizeof.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_basic_uint.inl.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_num_basic_uints.c"/>
