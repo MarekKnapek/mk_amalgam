@@ -23,7 +23,7 @@
 #include "mk_num_basic_uint.inl.c"
 
 #if mk_lang_llong_has != 0
-#define mk_detail_num_basic_ut_type unsigned long long int
+#define mk_detail_num_basic_ut_type mk_lang_ullong_t
 #define mk_detail_num_basic_ut_name ullong
 #include "mk_num_basic_uint.inl.c"
 #endif

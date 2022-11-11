@@ -2,6 +2,10 @@
 #define mk_detail_include_guard_lang_limits
 
 
+#include "mk_lang_charbit.h"
+#include "mk_lang_llong.h"
+
+
 #if defined(__cplusplus)
 #include <climits> /* CHAR_BIT UCHAR_MAX USHRT_MAX UINT_MAX ULONG_MAX ULLONG_MAX */
 #else
@@ -23,10 +27,10 @@
 #define mk_lang_limits_ullongmax_has 0
 #endif
 
-#if mk_lang_limits_ullongmax_has != 0
+#if mk_lang_limits_ullongmax_has != 0 && defined(ULLONG_MAX)
 #define mk_lang_limits_ullongmax ULLONG_MAX
 #else
-#define mk_lang_limits_ullongmax ((unsigned long int)(((unsigned long int)(((unsigned long int)(((unsigned long int)(((unsigned long int)(1)) << (sizeof(unsigned long int) * CHAR_BIT - 1))) - 1)) << 1)) + 1))
+#define mk_lang_limits_ullongmax ((mk_lang_ullong_t)(((mk_lang_ullong_t)(((mk_lang_ullong_t)(((mk_lang_ullong_t)(((mk_lang_ullong_t)(1)) << (sizeof(mk_lang_ullong_t) * mk_lang_charbit - 1))) - 1)) << 1)) + 1))
 #endif
 
 #undef mk_lang_limits_ullongmax_has

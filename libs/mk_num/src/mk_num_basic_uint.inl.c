@@ -1043,18 +1043,18 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#pragma warning(pop)
 	#endif
 	{
-		unsigned long long int xx;
-		unsigned long long int yy;
-		unsigned long long int zz;
+		mk_lang_ullong_t xx;
+		mk_lang_ullong_t yy;
+		mk_lang_ullong_t zz;
 
 		mk_lang_assert(x);
 		mk_lang_assert(y);
 		mk_lang_assert(z);
 		mk_lang_assert(co);
 
-		xx = ((unsigned long long int)(*x));
-		yy = ((unsigned long long int)(*y));
-		zz = ((unsigned long long int)(xx * yy));
+		xx = ((mk_lang_ullong_t)(*x));
+		yy = ((mk_lang_ullong_t)(*y));
+		zz = ((mk_lang_ullong_t)(xx * yy));
 		*z = ((mk_detail_num_basic_ut_type)(zz));
 		*co = ((mk_detail_num_basic_ut_type)(zz >> 32));
 	}
@@ -1131,6 +1131,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 		#define shift (sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT / 2)
 		#define mask ((mk_detail_num_basic_ut_type)(((((mk_detail_num_basic_ut_type)(1)) << shift)) - 1))
 
+		mk_detail_num_basic_ut_type m;
 		mk_detail_num_basic_ut_type xlo;
 		mk_detail_num_basic_ut_type xhi;
 		mk_detail_num_basic_ut_type ylo;
@@ -1146,16 +1147,17 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 		mk_lang_assert(co);
 		mk_lang_assert(((sizeof(mk_detail_num_basic_ut_type) * CHAR_BIT) % 2) == 0);
 
-		xlo = ((mk_detail_num_basic_ut_type)(*x & mask));
+		m = mask;
+		xlo = ((mk_detail_num_basic_ut_type)(*x & m));
 		xhi = ((mk_detail_num_basic_ut_type)(*x >> shift));
-		ylo = ((mk_detail_num_basic_ut_type)(*y & mask));
+		ylo = ((mk_detail_num_basic_ut_type)(*y & m));
 		yhi = ((mk_detail_num_basic_ut_type)(*y >> shift));
 		xylo = ((mk_detail_num_basic_ut_type)(xlo * ylo));
 		xymi = ((mk_detail_num_basic_ut_type)(xlo * yhi));
 		yxmi = ((mk_detail_num_basic_ut_type)(xhi * ylo));
 		xyhi = ((mk_detail_num_basic_ut_type)(xhi * yhi));
 		*z = ((mk_detail_num_basic_ut_type)(*x * *y));
-		*co = ((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(xyhi + ((mk_detail_num_basic_ut_type)(xymi >> shift)))) + ((mk_detail_num_basic_ut_type)(yxmi >> shift)))) + ((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(xymi & mask)) + ((mk_detail_num_basic_ut_type)(yxmi & mask)))) + ((mk_detail_num_basic_ut_type)(xylo >> shift)))) >> shift))));
+		*co = ((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(xyhi + ((mk_detail_num_basic_ut_type)(xymi >> shift)))) + ((mk_detail_num_basic_ut_type)(yxmi >> shift)))) + ((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(xymi & m)) + ((mk_detail_num_basic_ut_type)(yxmi & m)))) + ((mk_detail_num_basic_ut_type)(xylo >> shift)))) >> shift))));
 
 		#undef shift
 		#undef mask

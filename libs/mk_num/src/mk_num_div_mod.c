@@ -48,7 +48,7 @@
 #define mk_num_div_mod_small_name ushort
 #define mk_num_div_mod_small_type unsigned short int
 #define mk_num_div_mod_mid_type unsigned long int
-#define mk_num_div_mod_big_type unsigned long long int
+#define mk_num_div_mod_big_type mk_lang_ullong_t
 #include "mk_num_div_mod.inl.c"
 #endif
 
@@ -58,7 +58,7 @@
 #define mk_num_div_mod_use_r1d2 0
 #define mk_num_div_mod_small_name ulong
 #define mk_num_div_mod_small_type unsigned long int
-#define mk_num_div_mod_mid_type unsigned long long int
+#define mk_num_div_mod_mid_type mk_lang_ullong_t
 #define mk_num_div_mod_big_type unsigned __int128
 #include "mk_num_div_mod.inl.c"
 #endif
@@ -110,6 +110,6 @@
 #define mk_num_div_mod_use_r1d2 1
 #define mk_num_div_mod_small_name ulong
 #define mk_num_div_mod_small_type unsigned long int
-#define mk_num_div_mod_mid_type unsigned long long int
+#define mk_num_div_mod_mid_type mk_lang_ullong_t
 #include "mk_num_div_mod.inl.c"
 #endif

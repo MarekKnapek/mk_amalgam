@@ -25,7 +25,7 @@
 #endif
 #elif mk_num_composite_bits <= 64
 #if mk_lang_llong_has != 0
-#define mk_num_composite_base_type unsigned long long int
+#define mk_num_composite_base_type mk_lang_ullong_t
 #define mk_num_composite_base_name ullong
 #define mk_num_composite_base_bits (mk_lang_sizeof_ullong * mk_lang_charbit)
 #elif mk_lang_limits_uintmax >= 0xfffffffful
@@ -43,7 +43,7 @@
 #define mk_num_composite_base_name u128
 #define mk_num_composite_base_bits (mk_lang_sizeof_ui128t * mk_lang_charbit)
 #elif mk_lang_llong_has != 0
-#define mk_num_composite_base_type unsigned long long int
+#define mk_num_composite_base_type mk_lang_ullong_t
 #define mk_num_composite_base_name ullong
 #define mk_num_composite_base_bits (mk_lang_sizeof_ullong * mk_lang_charbit)
 #elif mk_lang_limits_uintmax >= 0xfffffffful

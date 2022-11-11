@@ -24,7 +24,7 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_bool_t mk_lang_sizeof_test(void)
 	ret = ret && (sizeof(unsigned int) == mk_lang_sizeof_uint);
 	ret = ret && (sizeof(unsigned long int) == mk_lang_sizeof_ulong);
 	#if mk_lang_llong_has != 0
-	ret = ret && (sizeof(unsigned long long int) == mk_lang_sizeof_ullong);
+	ret = ret && (sizeof(mk_lang_ullong_t) == mk_lang_sizeof_ullong);
 	#endif
 	#if mk_lang_i128_has != 0
 	ret = ret && (sizeof(unsigned __int128) == mk_lang_sizeof_ui128t);
