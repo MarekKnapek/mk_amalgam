@@ -3,6 +3,7 @@
 #include "mk_lang_concat.h"
 #include "mk_lang_crash.h"
 #include "mk_lang_jumbo.h"
+#include "mk_lang_lllong.h"
 #include "mk_lang_llong.h"
 #include "mk_lang_memcpy.h"
 #include "mk_lang_minmax.h"
@@ -378,6 +379,51 @@ mk_lang_jumbo void mk_num_composite_un_from_sllong(mk_num_composite_un_t* x, mk_
 	mk_num_composite_un_from_ullong(x, uint);
 }
 
+mk_lang_jumbo void mk_num_composite_un_from_ulllong(mk_num_composite_un_t* x, mk_lang_ulllong_t src)
+{
+	int i;
+
+	mk_lang_assert(x);
+
+	mk_num_composite_un_base_from_ulllong(&x->m_parts[0], src);
+	for(i = 1; i < sizeof(src) / sizeof(mk_num_composite_base_type) && i != mk_num_composite_un_parts; ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
+		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
+		src = ((mk_lang_ulllong_t)(src >> mk_num_composite_base_bits));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		mk_num_composite_un_base_from_ulllong(&x->m_parts[i], src);
+	}
+	for(; i != mk_num_composite_un_parts; ++i)
+	{
+		mk_num_composite_un_base_set_zero(&x->m_parts[i]);
+	}
+}
+
+mk_lang_jumbo void mk_num_composite_un_from_slllong(mk_num_composite_un_t* x, mk_lang_slllong_t src)
+{
+	unsigned char buff[sizeof(src)];
+	mk_lang_ulllong_t uint;
+
+	mk_lang_assert(sizeof(uint) == sizeof(src));
+
+	mk_lang_memcpy(buff, &src, sizeof(src));
+	mk_lang_memcpy(&uint, buff, sizeof(src));
+	mk_num_composite_un_from_ulllong(x, uint);
+}
+
 mk_lang_jumbo void mk_num_composite_un_from_sizet(mk_num_composite_un_t* x, mk_lang_size_t src)
 {
 	int i;
@@ -712,6 +758,55 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_sllong_t mk_num_composite_un_to_sllong(m
 	mk_lang_assert(sizeof(uint) == sizeof(sint));
 
 	uint = mk_num_composite_un_to_ullong(x);
+	mk_lang_memcpy(buff, &uint, sizeof(uint));
+	mk_lang_memcpy(&sint, buff, sizeof(uint));
+	return sint;
+}
+
+mk_lang_nodiscard mk_lang_jumbo mk_lang_ulllong_t mk_num_composite_un_to_ulllong(mk_num_composite_un_t const* x)
+{
+	#define n mk_lang_min(mk_num_composite_un_parts, mk_lang_max(1, sizeof(uint) / sizeof(mk_num_composite_base_type)))
+
+	mk_lang_ulllong_t uint;
+	int i;
+
+	mk_lang_assert(x);
+
+	uint = mk_num_composite_un_base_to_ulllong(&x->m_parts[n - 1]);
+	for(i = 1; i != n; ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
+		uint = ((mk_lang_ulllong_t)(uint << mk_num_composite_base_bits));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		uint = ((mk_lang_ulllong_t)(uint | mk_num_composite_un_base_to_ulllong(&x->m_parts[n - 1 - i])));
+	}
+	return uint;
+
+	#undef n
+}
+
+mk_lang_nodiscard mk_lang_jumbo mk_lang_slllong_t mk_num_composite_un_to_slllong(mk_num_composite_un_t const* x)
+{
+	mk_lang_ulllong_t uint;
+	unsigned char buff[sizeof(uint)];
+	mk_lang_slllong_t sint;
+
+	mk_lang_assert(x);
+	mk_lang_assert(sizeof(uint) == sizeof(sint));
+
+	uint = mk_num_composite_un_to_ulllong(x);
 	mk_lang_memcpy(buff, &uint, sizeof(uint));
 	mk_lang_memcpy(&sint, buff, sizeof(uint));
 	return sint;

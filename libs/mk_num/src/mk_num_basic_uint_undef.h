@@ -18,6 +18,8 @@
 #undef mk_num_from_slong
 #undef mk_num_from_ullong
 #undef mk_num_from_sllong
+#undef mk_num_from_ulllong
+#undef mk_num_from_slllong
 #undef mk_num_from_sizet
 #undef mk_num_from_umaxt
 #undef mk_num_from_smaxt
@@ -33,6 +35,8 @@
 #undef mk_num_to_slong
 #undef mk_num_to_ullong
 #undef mk_num_to_sllong
+#undef mk_num_to_ulllong
+#undef mk_num_to_slllong
 #undef mk_num_to_sizet
 #undef mk_num_to_umaxt
 #undef mk_num_to_smaxt

@@ -237,6 +237,20 @@ mk_lang_jumbo void mk_num_from_sllong(mk_detail_num_basic_ut_type* x, mk_lang_sl
 	*x = ((mk_detail_num_basic_ut_type)(src));
 }
 
+mk_lang_jumbo void mk_num_from_ulllong(mk_detail_num_basic_ut_type* x, mk_lang_ulllong_t src)
+{
+	mk_lang_assert(x);
+
+	*x = ((mk_detail_num_basic_ut_type)(src));
+}
+
+mk_lang_jumbo void mk_num_from_slllong(mk_detail_num_basic_ut_type* x, mk_lang_slllong_t src)
+{
+	mk_lang_assert(x);
+
+	*x = ((mk_detail_num_basic_ut_type)(src));
+}
+
 mk_lang_jumbo void mk_num_from_sizet(mk_detail_num_basic_ut_type* x, mk_lang_size_t src)
 {
 	mk_lang_assert(x);
@@ -334,6 +348,20 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_sllong_t mk_num_to_sllong(mk_detail_num_
 	mk_lang_assert(x);
 
 	return ((mk_lang_sllong_t)(*x));
+}
+
+mk_lang_nodiscard mk_lang_jumbo mk_lang_ulllong_t mk_num_to_ulllong(mk_detail_num_basic_ut_type const* x)
+{
+	mk_lang_assert(x);
+
+	return ((mk_lang_ulllong_t)(*x));
+}
+
+mk_lang_nodiscard mk_lang_jumbo mk_lang_slllong_t mk_num_to_slllong(mk_detail_num_basic_ut_type const* x)
+{
+	mk_lang_assert(x);
+
+	return ((mk_lang_slllong_t)(*x));
 }
 
 mk_lang_nodiscard mk_lang_jumbo mk_lang_size_t mk_num_to_sizet(mk_detail_num_basic_ut_type const* x)

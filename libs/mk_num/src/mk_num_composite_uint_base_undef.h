@@ -18,6 +18,8 @@
 #undef mk_num_composite_un_base_from_slong
 #undef mk_num_composite_un_base_from_ullong
 #undef mk_num_composite_un_base_from_sllong
+#undef mk_num_composite_un_base_from_ulllong
+#undef mk_num_composite_un_base_from_slllong
 #undef mk_num_composite_un_base_from_sizet
 #undef mk_num_composite_un_base_from_umaxt
 #undef mk_num_composite_un_base_from_smaxt
@@ -33,6 +35,8 @@
 #undef mk_num_composite_un_base_to_slong
 #undef mk_num_composite_un_base_to_ullong
 #undef mk_num_composite_un_base_to_sllong
+#undef mk_num_composite_un_base_to_ulllong
+#undef mk_num_composite_un_base_to_slllong
 #undef mk_num_composite_un_base_to_sizet
 #undef mk_num_composite_un_base_to_umaxt
 #undef mk_num_composite_un_base_to_smaxt

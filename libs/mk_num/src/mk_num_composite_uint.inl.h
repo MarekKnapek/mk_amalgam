@@ -1,6 +1,7 @@
 #include "mk_lang_bool.h"
 #include "mk_lang_concat.h"
 #include "mk_lang_jumbo.h"
+#include "mk_lang_lllong.h"
 #include "mk_lang_llong.h"
 #include "mk_lang_nodiscard.h"
 #include "mk_lang_sizet.h"
@@ -37,6 +38,8 @@ mk_lang_jumbo void mk_num_composite_un_from_ulong(mk_num_composite_un_t* x, unsi
 mk_lang_jumbo void mk_num_composite_un_from_slong(mk_num_composite_un_t* x, signed long int src);
 mk_lang_jumbo void mk_num_composite_un_from_ullong(mk_num_composite_un_t* x, mk_lang_ullong_t src);
 mk_lang_jumbo void mk_num_composite_un_from_sllong(mk_num_composite_un_t* x, mk_lang_sllong_t src);
+mk_lang_jumbo void mk_num_composite_un_from_ulllong(mk_num_composite_un_t* x, mk_lang_ulllong_t src);
+mk_lang_jumbo void mk_num_composite_un_from_slllong(mk_num_composite_un_t* x, mk_lang_slllong_t src);
 mk_lang_jumbo void mk_num_composite_un_from_sizet(mk_num_composite_un_t* x, mk_lang_size_t src);
 mk_lang_jumbo void mk_num_composite_un_from_umaxt(mk_num_composite_un_t* x, mk_lang_uintmax_t src);
 mk_lang_jumbo void mk_num_composite_un_from_smaxt(mk_num_composite_un_t* x, mk_lang_sintmax_t src);
@@ -52,6 +55,8 @@ mk_lang_nodiscard mk_lang_jumbo unsigned long int mk_num_composite_un_to_ulong(m
 mk_lang_nodiscard mk_lang_jumbo signed long int mk_num_composite_un_to_slong(mk_num_composite_un_t const* x);
 mk_lang_nodiscard mk_lang_jumbo mk_lang_ullong_t mk_num_composite_un_to_ullong(mk_num_composite_un_t const* x);
 mk_lang_nodiscard mk_lang_jumbo mk_lang_sllong_t mk_num_composite_un_to_sllong(mk_num_composite_un_t const* x);
+mk_lang_nodiscard mk_lang_jumbo mk_lang_ulllong_t mk_num_composite_un_to_ulllong(mk_num_composite_un_t const* x);
+mk_lang_nodiscard mk_lang_jumbo mk_lang_slllong_t mk_num_composite_un_to_slllong(mk_num_composite_un_t const* x);
 mk_lang_nodiscard mk_lang_jumbo mk_lang_size_t mk_num_composite_un_to_sizet(mk_num_composite_un_t const* x);
 mk_lang_nodiscard mk_lang_jumbo mk_lang_uintmax_t mk_num_composite_un_to_umaxt(mk_num_composite_un_t const* x);
 mk_lang_nodiscard mk_lang_jumbo mk_lang_sintmax_t mk_num_composite_un_to_smaxt(mk_num_composite_un_t const* x);
