@@ -102,11 +102,11 @@ mk_lang_jumbo void mk_num_from_buff_be(mk_detail_num_basic_ut_type* x, void cons
 	mk_lang_assert(x);
 	mk_lang_assert(buff);
 
-	tmp = ((mk_detail_num_basic_ut_type)(((unsigned char const*)(x))[sizeof(mk_detail_num_basic_ut_type) - 1]));
+	tmp = ((mk_detail_num_basic_ut_type)(((unsigned char const*)(buff))[sizeof(mk_detail_num_basic_ut_type) - 1]));
 	for(i = 1; i != ((int)(sizeof(mk_detail_num_basic_ut_type))); ++i)
 	{
 		tmp = ((mk_detail_num_basic_ut_type)(tmp << mk_lang_charbit));
-		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(((unsigned char const*)(x))[sizeof(mk_detail_num_basic_ut_type) - 1 - i]))));
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(((unsigned char const*)(buff))[sizeof(mk_detail_num_basic_ut_type) - 1 - i]))));
 	}
 	*x = tmp;
 }
