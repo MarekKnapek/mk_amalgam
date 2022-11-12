@@ -1235,15 +1235,18 @@ mk_lang_jumbo void mk_num_mod3_wrap(mk_detail_num_basic_ut_type const* x, mk_det
 
 mk_lang_jumbo void mk_num_divmod3_wrap(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res_div, mk_detail_num_basic_ut_type* res_mod)
 {
+	mk_detail_num_basic_ut_type xx;
+	mk_detail_num_basic_ut_type yy;
+
 	mk_lang_assert(x);
 	mk_lang_assert(y);
 	mk_lang_assert(res_div);
 	mk_lang_assert(res_mod);
-	mk_lang_assert(res_div != x);
-	mk_lang_assert(res_div != y);
 
-	*res_div = ((mk_detail_num_basic_ut_type)(*x / *y));
-	*res_mod = ((mk_detail_num_basic_ut_type)(*x % *y));
+	xx = *x;
+	yy = *y;
+	*res_div = ((mk_detail_num_basic_ut_type)(xx / yy));
+	*res_mod = ((mk_detail_num_basic_ut_type)(xx % yy));
 }
 
 mk_lang_jumbo void mk_num_div3_sat(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res)
