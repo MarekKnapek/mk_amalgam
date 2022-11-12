@@ -12,7 +12,7 @@
 #define mk_lang_sizeof_uint 4
 #define mk_lang_sizeof_ulong 4
 #define mk_lang_sizeof_ullong 8
-#define mk_lang_sizeof_ui128t 16
+#define mk_lang_sizeof_ulllong 16
 
 
 mk_lang_nodiscard mk_lang_jumbo mk_lang_bool_t mk_lang_sizeof_test(void);

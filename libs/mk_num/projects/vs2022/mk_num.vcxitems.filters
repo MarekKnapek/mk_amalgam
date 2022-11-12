@@ -12,10 +12,10 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_concat.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_cpp.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_crash.h"><Filter>src</Filter></ClInclude>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_i128.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_inline.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_jumbo.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_limits.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_lllong.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_llong.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_minmax.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_nodiscard.h"><Filter>src</Filter></ClInclude>

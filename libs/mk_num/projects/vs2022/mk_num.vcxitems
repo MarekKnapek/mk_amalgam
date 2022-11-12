@@ -20,10 +20,10 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_concat.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_cpp.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_crash.h"/>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_i128.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_inline.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_jumbo.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_limits.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_lllong.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_llong.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_memcmp.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_lang_memcpy.h"/>

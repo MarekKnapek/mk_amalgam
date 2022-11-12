@@ -1,6 +1,6 @@
 #include "mk_lang_charbit.h"
-#include "mk_lang_i128.h"
 #include "mk_lang_limits.h"
+#include "mk_lang_lllong.h"
 #include "mk_lang_llong.h"
 #include "mk_lang_sizeof.h"
 
@@ -38,10 +38,10 @@
 #define mk_num_composite_base_bits (mk_lang_sizeof_ulong * mk_lang_charbit)
 #endif
 #else
-#if mk_lang_i128_has != 0
-#define mk_num_composite_base_type unsigned __int128
-#define mk_num_composite_base_name u128
-#define mk_num_composite_base_bits (mk_lang_sizeof_ui128t * mk_lang_charbit)
+#if mk_lang_lllong_has != 0
+#define mk_num_composite_base_type mk_lang_ulllong_t
+#define mk_num_composite_base_name ulllong
+#define mk_num_composite_base_bits (mk_lang_sizeof_ulllong * mk_lang_charbit)
 #elif mk_lang_llong_has != 0
 #define mk_num_composite_base_type mk_lang_ullong_t
 #define mk_num_composite_base_name ullong

@@ -3,8 +3,8 @@
 #include "mk_lang_charbit.h"
 #include "mk_lang_concat.h"
 #include "mk_lang_crash.h"
-#include "mk_lang_i128.h"
 #include "mk_lang_jumbo.h"
+#include "mk_lang_lllong.h"
 #include "mk_lang_llong.h"
 #include "mk_lang_nodiscard.h"
 #include "mk_lang_sizet.h"
@@ -1099,7 +1099,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 		*co = ((mk_detail_num_basic_ut_type)(__umulh(xx, yy)));
 	}
 	#endif
-	#if mk_lang_i128_has != 0
+	#if mk_lang_lllong_has != 0
 	#if defined(_MSC_VER)
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
@@ -1109,18 +1109,18 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#pragma warning(pop)
 	#endif
 	{
-		unsigned __int128 xx;
-		unsigned __int128 yy;
-		unsigned __int128 zz;
+		mk_lang_ulllong_t xx;
+		mk_lang_ulllong_t yy;
+		mk_lang_ulllong_t zz;
 
 		mk_lang_assert(x);
 		mk_lang_assert(y);
 		mk_lang_assert(z);
 		mk_lang_assert(co);
 
-		xx = ((unsigned __int128)(*x));
-		yy = ((unsigned __int128)(*y));
-		zz = ((unsigned __int128)(xx * yy));
+		xx = ((mk_lang_ulllong_t)(*x));
+		yy = ((mk_lang_ulllong_t)(*y));
+		zz = ((mk_lang_ulllong_t)(xx * yy));
 		*z = ((mk_detail_num_basic_ut_type)(zz));
 		*co = ((mk_detail_num_basic_ut_type)(zz >> 64));
 	}

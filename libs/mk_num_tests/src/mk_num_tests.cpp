@@ -6,8 +6,8 @@
 #include "../../../libs/mk_num/src/mk_lang_charbit.h"
 #include "../../../libs/mk_num/src/mk_lang_cpp.h"
 #include "../../../libs/mk_num/src/mk_lang_crash.h"
-#include "../../../libs/mk_num/src/mk_lang_i128.h"
 #include "../../../libs/mk_num/src/mk_lang_limits.h"
+#include "../../../libs/mk_num/src/mk_lang_lllong.h"
 #include "../../../libs/mk_num/src/mk_lang_llong.h"
 #include "../../../libs/mk_num/src/mk_lang_memcmp.h"
 #include "../../../libs/mk_num/src/mk_lang_memcpy.h"
@@ -60,7 +60,7 @@
 #define mk_num_div_mod_small_type unsigned short int
 #include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
 #endif
-#if mk_lang_i128_has != 0
+#if mk_lang_lllong_has != 0
 #define mk_num_div_mod_len_x 16
 #define mk_num_div_mod_len_y 16
 #define mk_num_div_mod_use_r1d2 0
@@ -411,12 +411,12 @@ void test_division_llong(unsigned char const* data, size_t size)
 
 void test_division_lllong(unsigned char const* data, size_t size)
 {
-	#if mk_lang_charbit == 8 && mk_lang_i128_has != 0
+	#if mk_lang_charbit == 8 && mk_lang_lllong_has != 0
 
-	unsigned __int128 bx;
-	unsigned __int128 by;
-	unsigned __int128 bresdiv;
-	unsigned __int128 bresmod;
+	mk_lang_ulllong_t bx;
+	mk_lang_ulllong_t by;
+	mk_lang_ulllong_t bresdiv;
+	mk_lang_ulllong_t bresmod;
 
 	if(!(data)) return;
 	if(!(size >= 2 * 16)) return;
@@ -442,8 +442,8 @@ void test_division_lllong(unsigned char const* data, size_t size)
 		unsigned char my[16];
 		unsigned char mresdiv[16];
 		unsigned char mresmod[16];
-		unsigned __int128 mresdiv_;
-		unsigned __int128 mresmod_;
+		mk_lang_ulllong_t mresdiv_;
+		mk_lang_ulllong_t mresmod_;
 		for(i = 0; i != 16; ++i)
 		{
 			mx[i] = (bx >> (i * mk_lang_charbit)) & 0xfful;
@@ -457,11 +457,11 @@ void test_division_lllong(unsigned char const* data, size_t size)
 		mresmod_ = 0;
 		for(i = 0; i != 16; ++i)
 		{
-			mresdiv_ |= ((unsigned __int128)(mresdiv[i])) << (i * mk_lang_charbit);
+			mresdiv_ |= ((mk_lang_ulllong_t)(mresdiv[i])) << (i * mk_lang_charbit);
 		}
 		for(i = 0; i != 16; ++i)
 		{
-			mresmod_ |= ((unsigned __int128)(mresmod[i])) << (i * mk_lang_charbit);
+			mresmod_ |= ((mk_lang_ulllong_t)(mresmod[i])) << (i * mk_lang_charbit);
 		}
 		test(mresdiv_ == bresdiv);
 		test(mresmod_ == bresmod);
@@ -472,8 +472,8 @@ void test_division_lllong(unsigned char const* data, size_t size)
 		unsigned char my[16];
 		unsigned char mresdiv[16];
 		unsigned char mresmod[16];
-		unsigned __int128 mresdiv_;
-		unsigned __int128 mresmod_;
+		mk_lang_ulllong_t mresdiv_;
+		mk_lang_ulllong_t mresmod_;
 		for(i = 0; i != 16; ++i)
 		{
 			mx[i] = (bx >> (i * mk_lang_charbit)) & 0xfful;
@@ -487,11 +487,11 @@ void test_division_lllong(unsigned char const* data, size_t size)
 		mresmod_ = 0;
 		for(i = 0; i != 16; ++i)
 		{
-			mresdiv_ |= ((unsigned __int128)(mresdiv[i])) << (i * mk_lang_charbit);
+			mresdiv_ |= ((mk_lang_ulllong_t)(mresdiv[i])) << (i * mk_lang_charbit);
 		}
 		for(i = 0; i != 16; ++i)
 		{
-			mresmod_ |= ((unsigned __int128)(mresmod[i])) << (i * mk_lang_charbit);
+			mresmod_ |= ((mk_lang_ulllong_t)(mresmod[i])) << (i * mk_lang_charbit);
 		}
 		test(mresdiv_ == bresdiv);
 		test(mresmod_ == bresmod);
@@ -502,8 +502,8 @@ void test_division_lllong(unsigned char const* data, size_t size)
 		unsigned short int my[8];
 		unsigned short int mresdiv[8];
 		unsigned short int mresmod[8];
-		unsigned __int128 mresdiv_;
-		unsigned __int128 mresmod_;
+		mk_lang_ulllong_t mresdiv_;
+		mk_lang_ulllong_t mresmod_;
 		for(i = 0; i != 8; ++i)
 		{
 			mx[i] = (bx >> (i * 2 * mk_lang_charbit)) & 0xfffful;
@@ -517,11 +517,11 @@ void test_division_lllong(unsigned char const* data, size_t size)
 		mresmod_ = 0;
 		for(i = 0; i != 8; ++i)
 		{
-			mresdiv_ |= ((unsigned __int128)(mresdiv[i])) << (i * 2 * mk_lang_charbit);
+			mresdiv_ |= ((mk_lang_ulllong_t)(mresdiv[i])) << (i * 2 * mk_lang_charbit);
 		}
 		for(i = 0; i != 8; ++i)
 		{
-			mresmod_ |= ((unsigned __int128)(mresmod[i])) << (i * 2 * mk_lang_charbit);
+			mresmod_ |= ((mk_lang_ulllong_t)(mresmod[i])) << (i * 2 * mk_lang_charbit);
 		}
 		test(mresdiv_ == bresdiv);
 		test(mresmod_ == bresmod);
@@ -532,8 +532,8 @@ void test_division_lllong(unsigned char const* data, size_t size)
 		unsigned short int my[8];
 		unsigned short int mresdiv[8];
 		unsigned short int mresmod[8];
-		unsigned __int128 mresdiv_;
-		unsigned __int128 mresmod_;
+		mk_lang_ulllong_t mresdiv_;
+		mk_lang_ulllong_t mresmod_;
 		for(i = 0; i != 8; ++i)
 		{
 			mx[i] = (bx >> (i * 2 * mk_lang_charbit)) & 0xfffful;
@@ -547,11 +547,11 @@ void test_division_lllong(unsigned char const* data, size_t size)
 		mresmod_ = 0;
 		for(i = 0; i != 8; ++i)
 		{
-			mresdiv_ |= ((unsigned __int128)(mresdiv[i])) << (i * 2 * mk_lang_charbit);
+			mresdiv_ |= ((mk_lang_ulllong_t)(mresdiv[i])) << (i * 2 * mk_lang_charbit);
 		}
 		for(i = 0; i != 8; ++i)
 		{
-			mresmod_ |= ((unsigned __int128)(mresmod[i])) << (i * 2 * mk_lang_charbit);
+			mresmod_ |= ((mk_lang_ulllong_t)(mresmod[i])) << (i * 2 * mk_lang_charbit);
 		}
 		test(mresdiv_ == bresdiv);
 		test(mresmod_ == bresmod);
@@ -562,8 +562,8 @@ void test_division_lllong(unsigned char const* data, size_t size)
 		unsigned long int my[4];
 		unsigned long int mresdiv[4];
 		unsigned long int mresmod[4];
-		unsigned __int128 mresdiv_;
-		unsigned __int128 mresmod_;
+		mk_lang_ulllong_t mresdiv_;
+		mk_lang_ulllong_t mresmod_;
 		for(i = 0; i != 4; ++i)
 		{
 			mx[i] = (bx >> (i * 4 * mk_lang_charbit)) & 0xfffffffful;
@@ -577,11 +577,11 @@ void test_division_lllong(unsigned char const* data, size_t size)
 		mresmod_ = 0;
 		for(i = 0; i != 4; ++i)
 		{
-			mresdiv_ |= ((unsigned __int128)(mresdiv[i])) << (i * 4 * mk_lang_charbit);
+			mresdiv_ |= ((mk_lang_ulllong_t)(mresdiv[i])) << (i * 4 * mk_lang_charbit);
 		}
 		for(i = 0; i != 4; ++i)
 		{
-			mresmod_ |= ((unsigned __int128)(mresmod[i])) << (i * 4 * mk_lang_charbit);
+			mresmod_ |= ((mk_lang_ulllong_t)(mresmod[i])) << (i * 4 * mk_lang_charbit);
 		}
 		test(mresdiv_ == bresdiv);
 		test(mresmod_ == bresmod);
@@ -592,8 +592,8 @@ void test_division_lllong(unsigned char const* data, size_t size)
 		unsigned long int my[4];
 		unsigned long int mresdiv[4];
 		unsigned long int mresmod[4];
-		unsigned __int128 mresdiv_;
-		unsigned __int128 mresmod_;
+		mk_lang_ulllong_t mresdiv_;
+		mk_lang_ulllong_t mresmod_;
 		for(i = 0; i != 4; ++i)
 		{
 			mx[i] = (bx >> (i * 4 * mk_lang_charbit)) & 0xfffffffful;
@@ -607,11 +607,11 @@ void test_division_lllong(unsigned char const* data, size_t size)
 		mresmod_ = 0;
 		for(i = 0; i != 4; ++i)
 		{
-			mresdiv_ |= ((unsigned __int128)(mresdiv[i])) << (i * 4 * mk_lang_charbit);
+			mresdiv_ |= ((mk_lang_ulllong_t)(mresdiv[i])) << (i * 4 * mk_lang_charbit);
 		}
 		for(i = 0; i != 4; ++i)
 		{
-			mresmod_ |= ((unsigned __int128)(mresmod[i])) << (i * 4 * mk_lang_charbit);
+			mresmod_ |= ((mk_lang_ulllong_t)(mresmod[i])) << (i * 4 * mk_lang_charbit);
 		}
 		test(mresdiv_ == bresdiv);
 		test(mresmod_ == bresmod);
@@ -806,7 +806,7 @@ int main(void)
 #define mk_num_div_mod_mid_type unsigned long int
 #include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
 #endif
-#if mk_lang_i128_has != 0
+#if mk_lang_lllong_has != 0
 #define mk_num_div_mod_len_x 16
 #define mk_num_div_mod_len_y 16
 #define mk_num_div_mod_use_r1d2 0
@@ -843,7 +843,7 @@ int main(void)
 #define mk_num_div_mod_small_name ulong
 #define mk_num_div_mod_small_type unsigned long int
 #define mk_num_div_mod_mid_type mk_lang_ullong_t
-#define mk_num_div_mod_big_type unsigned __int128
+#define mk_num_div_mod_big_type mk_lang_ulllong_t
 #include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
 #define mk_num_div_mod_len_x 4
 #define mk_num_div_mod_len_y 4

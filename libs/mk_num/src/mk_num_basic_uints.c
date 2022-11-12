@@ -1,6 +1,6 @@
 #include "mk_num_basic_uints.h"
 
-#include "mk_lang_i128.h"
+#include "mk_lang_lllong.h"
 #include "mk_lang_llong.h"
 #include "mk_lang_sizet.h"
 #include "mk_lang_uintmaxt.h"
@@ -38,8 +38,8 @@
 #include "mk_num_basic_uint.inl.c"
 #endif
 
-#if mk_lang_i128_has != 0
-#define mk_detail_num_basic_ut_type unsigned __int128
-#define mk_detail_num_basic_ut_name u128
+#if mk_lang_lllong_has != 0
+#define mk_detail_num_basic_ut_type mk_lang_ulllong_t
+#define mk_detail_num_basic_ut_name ulllong
 #include "mk_num_basic_uint.inl.c"
 #endif

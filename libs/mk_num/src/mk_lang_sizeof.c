@@ -1,8 +1,8 @@
 #include "mk_lang_sizeof.h"
 
 #include "mk_lang_bool.h"
-#include "mk_lang_i128.h"
 #include "mk_lang_jumbo.h"
+#include "mk_lang_lllong.h"
 #include "mk_lang_llong.h"
 #include "mk_lang_nodiscard.h"
 
@@ -26,8 +26,8 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_bool_t mk_lang_sizeof_test(void)
 	#if mk_lang_llong_has != 0
 	ret = ret && (sizeof(mk_lang_ullong_t) == mk_lang_sizeof_ullong);
 	#endif
-	#if mk_lang_i128_has != 0
-	ret = ret && (sizeof(unsigned __int128) == mk_lang_sizeof_ui128t);
+	#if mk_lang_lllong_has != 0
+	ret = ret && (sizeof(mk_lang_ulllong_t) == mk_lang_sizeof_ulllong);
 	#endif
 	return ret;
 }

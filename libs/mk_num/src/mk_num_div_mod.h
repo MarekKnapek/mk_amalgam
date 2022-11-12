@@ -2,8 +2,8 @@
 #define mk_detail_include_guard_num_div_mod
 
 
+#include "mk_lang_lllong.h"
 #include "mk_lang_llong.h"
-#include "mk_lang_i128.h"
 
 
 #define mk_num_div_mod_len_x 4
@@ -43,7 +43,7 @@
 #include "mk_num_div_mod.inl.h"
 #endif
 
-#if mk_lang_i128_has != 0
+#if mk_lang_lllong_has != 0
 #define mk_num_div_mod_len_x 4
 #define mk_num_div_mod_len_y 4
 #define mk_num_div_mod_use_r1d2 0
