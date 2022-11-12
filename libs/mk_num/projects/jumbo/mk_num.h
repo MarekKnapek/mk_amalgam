@@ -16,6 +16,7 @@
 #include "../../src/mk_lang_memcmp.h"
 #include "../../src/mk_lang_memcpy.h"
 #include "../../src/mk_lang_memset.h"
+#include "../../src/mk_lang_memzero.h"
 #include "../../src/mk_lang_minmax.h"
 #include "../../src/mk_lang_nodiscard.h"
 #include "../../src/mk_lang_sizeof.h"
