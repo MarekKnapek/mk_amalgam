@@ -16,88 +16,13 @@
 #include "../../../libs/mk_num/src/mk_lang_uintmaxt.h"
 #include "../../../libs/mk_num/src/mk_num_basic_uints.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uints.h"
+#include "../../../libs/mk_num/src/mk_num_div_mod.h"
 #define mk_num_composite_bits 25
 #include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uint.inl.h"
 #define mk_num_composite_bits 6656
 #include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uint.inl.h"
-#define mk_num_div_mod_len_x 4
-#define mk_num_div_mod_len_y 4
-#define mk_num_div_mod_use_r1d2 0
-#define mk_num_div_mod_small_name uchar
-#define mk_num_div_mod_small_type unsigned char
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
-#define mk_num_div_mod_len_x 4
-#define mk_num_div_mod_len_y 4
-#define mk_num_div_mod_use_r1d2 1
-#define mk_num_div_mod_small_name uchar
-#define mk_num_div_mod_small_type unsigned char
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
-#if mk_lang_llong_has != 0
-#define mk_num_div_mod_len_x 8
-#define mk_num_div_mod_len_y 8
-#define mk_num_div_mod_use_r1d2 0
-#define mk_num_div_mod_small_name uchar
-#define mk_num_div_mod_small_type unsigned char
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
-#define mk_num_div_mod_len_x 8
-#define mk_num_div_mod_len_y 8
-#define mk_num_div_mod_use_r1d2 1
-#define mk_num_div_mod_small_name uchar
-#define mk_num_div_mod_small_type unsigned char
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
-#define mk_num_div_mod_len_x 4
-#define mk_num_div_mod_len_y 4
-#define mk_num_div_mod_use_r1d2 0
-#define mk_num_div_mod_small_name ushort
-#define mk_num_div_mod_small_type unsigned short int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
-#define mk_num_div_mod_len_x 4
-#define mk_num_div_mod_len_y 4
-#define mk_num_div_mod_use_r1d2 1
-#define mk_num_div_mod_small_name ushort
-#define mk_num_div_mod_small_type unsigned short int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
-#endif
-#if mk_lang_lllong_has != 0
-#define mk_num_div_mod_len_x 16
-#define mk_num_div_mod_len_y 16
-#define mk_num_div_mod_use_r1d2 0
-#define mk_num_div_mod_small_name uchar
-#define mk_num_div_mod_small_type unsigned char
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
-#define mk_num_div_mod_len_x 16
-#define mk_num_div_mod_len_y 16
-#define mk_num_div_mod_use_r1d2 1
-#define mk_num_div_mod_small_name uchar
-#define mk_num_div_mod_small_type unsigned char
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
-#define mk_num_div_mod_len_x 8
-#define mk_num_div_mod_len_y 8
-#define mk_num_div_mod_use_r1d2 0
-#define mk_num_div_mod_small_name ushort
-#define mk_num_div_mod_small_type unsigned short int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
-#define mk_num_div_mod_len_x 8
-#define mk_num_div_mod_len_y 8
-#define mk_num_div_mod_use_r1d2 1
-#define mk_num_div_mod_small_name ushort
-#define mk_num_div_mod_small_type unsigned short int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
-#define mk_num_div_mod_len_x 4
-#define mk_num_div_mod_len_y 4
-#define mk_num_div_mod_use_r1d2 0
-#define mk_num_div_mod_small_name ulong
-#define mk_num_div_mod_small_type unsigned long int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
-#define mk_num_div_mod_len_x 4
-#define mk_num_div_mod_len_y 4
-#define mk_num_div_mod_use_r1d2 1
-#define mk_num_div_mod_small_name ulong
-#define mk_num_div_mod_small_type unsigned long int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.h"
-#endif
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
@@ -753,106 +678,13 @@ int main(void)
 #include "../../../libs/mk_num/src/mk_lang_sizeof.c"
 #include "../../../libs/mk_num/src/mk_num_basic_uints.c"
 #include "../../../libs/mk_num/src/mk_num_composite_uints.c"
+#include "../../../libs/mk_num/src/mk_num_div_mod.c"
 #define mk_num_composite_bits 25
 #include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uint.inl.c"
 #define mk_num_composite_bits 6656
 #include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uint.inl.c"
-#define mk_num_div_mod_len_x 4
-#define mk_num_div_mod_len_y 4
-#define mk_num_div_mod_use_r1d2 0
-#define mk_num_div_mod_small_name uchar
-#define mk_num_div_mod_small_type unsigned char
-#define mk_num_div_mod_mid_type unsigned short int
-#define mk_num_div_mod_big_type unsigned long int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
-#define mk_num_div_mod_len_x 4
-#define mk_num_div_mod_len_y 4
-#define mk_num_div_mod_use_r1d2 1
-#define mk_num_div_mod_small_name uchar
-#define mk_num_div_mod_small_type unsigned char
-#define mk_num_div_mod_mid_type unsigned short int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
-#if mk_lang_llong_has != 0
-#define mk_num_div_mod_len_x 8
-#define mk_num_div_mod_len_y 8
-#define mk_num_div_mod_use_r1d2 0
-#define mk_num_div_mod_small_name uchar
-#define mk_num_div_mod_small_type unsigned char
-#define mk_num_div_mod_mid_type unsigned short int
-#define mk_num_div_mod_big_type unsigned long int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
-#define mk_num_div_mod_len_x 8
-#define mk_num_div_mod_len_y 8
-#define mk_num_div_mod_use_r1d2 1
-#define mk_num_div_mod_small_name uchar
-#define mk_num_div_mod_small_type unsigned char
-#define mk_num_div_mod_mid_type unsigned long int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
-#define mk_num_div_mod_len_x 4
-#define mk_num_div_mod_len_y 4
-#define mk_num_div_mod_use_r1d2 0
-#define mk_num_div_mod_small_name ushort
-#define mk_num_div_mod_small_type unsigned short int
-#define mk_num_div_mod_mid_type unsigned long int
-#define mk_num_div_mod_big_type mk_lang_ullong_t
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
-#define mk_num_div_mod_len_x 4
-#define mk_num_div_mod_len_y 4
-#define mk_num_div_mod_use_r1d2 1
-#define mk_num_div_mod_small_name ushort
-#define mk_num_div_mod_small_type unsigned short int
-#define mk_num_div_mod_mid_type unsigned long int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
-#endif
-#if mk_lang_lllong_has != 0
-#define mk_num_div_mod_len_x 16
-#define mk_num_div_mod_len_y 16
-#define mk_num_div_mod_use_r1d2 0
-#define mk_num_div_mod_small_name uchar
-#define mk_num_div_mod_small_type unsigned char
-#define mk_num_div_mod_mid_type unsigned short int
-#define mk_num_div_mod_big_type unsigned long int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
-#define mk_num_div_mod_len_x 16
-#define mk_num_div_mod_len_y 16
-#define mk_num_div_mod_use_r1d2 1
-#define mk_num_div_mod_small_name uchar
-#define mk_num_div_mod_small_type unsigned char
-#define mk_num_div_mod_mid_type unsigned short int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
-#define mk_num_div_mod_len_x 8
-#define mk_num_div_mod_len_y 8
-#define mk_num_div_mod_use_r1d2 0
-#define mk_num_div_mod_small_name ushort
-#define mk_num_div_mod_small_type unsigned short int
-#define mk_num_div_mod_mid_type unsigned long int
-#define mk_num_div_mod_big_type mk_lang_ullong_t
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
-#define mk_num_div_mod_len_x 8
-#define mk_num_div_mod_len_y 8
-#define mk_num_div_mod_use_r1d2 1
-#define mk_num_div_mod_small_name ushort
-#define mk_num_div_mod_small_type unsigned short int
-#define mk_num_div_mod_mid_type unsigned long int
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
-#define mk_num_div_mod_len_x 4
-#define mk_num_div_mod_len_y 4
-#define mk_num_div_mod_use_r1d2 0
-#define mk_num_div_mod_small_name ulong
-#define mk_num_div_mod_small_type unsigned long int
-#define mk_num_div_mod_mid_type mk_lang_ullong_t
-#define mk_num_div_mod_big_type mk_lang_ulllong_t
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
-#define mk_num_div_mod_len_x 4
-#define mk_num_div_mod_len_y 4
-#define mk_num_div_mod_use_r1d2 1
-#define mk_num_div_mod_small_name ulong
-#define mk_num_div_mod_small_type unsigned long int
-#define mk_num_div_mod_mid_type mk_lang_ullong_t
-#include "../../../libs/mk_num/src/mk_num_div_mod.inl.c"
-#endif
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
