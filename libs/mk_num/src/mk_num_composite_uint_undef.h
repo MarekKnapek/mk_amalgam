@@ -138,3 +138,19 @@
 #undef mk_num_composite_un_mul2_sat_cod
 #undef mk_num_composite_un_mul2_sat_coe
 #undef mk_num_composite_un_mul2_crash
+
+#undef mk_num_composite_un_div3_wrap
+#undef mk_num_composite_un_mod3_wrap
+#undef mk_num_composite_un_divmod3_wrap
+#undef mk_num_composite_un_div3_sat
+#undef mk_num_composite_un_mod3_sat
+#undef mk_num_composite_un_divmod3_sat
+#undef mk_num_composite_un_div3_crash
+#undef mk_num_composite_un_mod3_crash
+#undef mk_num_composite_un_divmod3_crash
+#undef mk_num_composite_un_div2_wrap
+#undef mk_num_composite_un_mod2_wrap
+#undef mk_num_composite_un_div2_sat
+#undef mk_num_composite_un_mod2_sat
+#undef mk_num_composite_un_div2_crash
+#undef mk_num_composite_un_mod2_crash

@@ -147,6 +147,22 @@ mk_lang_jumbo void mk_num_composite_un_mul2_sat_cod(mk_num_composite_un_t* x, mk
 mk_lang_jumbo void mk_num_composite_un_mul2_sat_coe(mk_num_composite_un_t* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* co);
 mk_lang_jumbo void mk_num_composite_un_mul2_crash(mk_num_composite_un_t* x, mk_num_composite_un_t const* y);
 
+mk_lang_jumbo void mk_num_composite_un_div3_wrap(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res);
+mk_lang_jumbo void mk_num_composite_un_mod3_wrap(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res);
+mk_lang_jumbo void mk_num_composite_un_divmod3_wrap(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res_div, mk_num_composite_un_t* res_mod);
+mk_lang_jumbo void mk_num_composite_un_div3_sat(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res);
+mk_lang_jumbo void mk_num_composite_un_mod3_sat(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res);
+mk_lang_jumbo void mk_num_composite_un_divmod3_sat(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res_div, mk_num_composite_un_t* res_mod);
+mk_lang_jumbo void mk_num_composite_un_div3_crash(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res);
+mk_lang_jumbo void mk_num_composite_un_mod3_crash(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res);
+mk_lang_jumbo void mk_num_composite_un_divmod3_crash(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res_div, mk_num_composite_un_t* res_mod);
+mk_lang_jumbo void mk_num_composite_un_div2_wrap(mk_num_composite_un_t* x, mk_num_composite_un_t const* y);
+mk_lang_jumbo void mk_num_composite_un_mod2_wrap(mk_num_composite_un_t* x, mk_num_composite_un_t const* y);
+mk_lang_jumbo void mk_num_composite_un_div2_sat(mk_num_composite_un_t* x, mk_num_composite_un_t const* y);
+mk_lang_jumbo void mk_num_composite_un_mod2_sat(mk_num_composite_un_t* x, mk_num_composite_un_t const* y);
+mk_lang_jumbo void mk_num_composite_un_div2_crash(mk_num_composite_un_t* x, mk_num_composite_un_t const* y);
+mk_lang_jumbo void mk_num_composite_un_mod2_crash(mk_num_composite_un_t* x, mk_num_composite_un_t const* y);
+
 
 #include "mk_num_composite_uint_undef.h"
 

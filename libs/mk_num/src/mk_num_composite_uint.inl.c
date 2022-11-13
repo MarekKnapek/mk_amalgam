@@ -2204,6 +2204,253 @@ mk_lang_jumbo void mk_num_composite_un_mul2_crash(mk_num_composite_un_t* x, mk_n
 	mk_num_composite_un_mul3_crash(x, y, x);
 }
 
+
+#include "mk_lang_charbit.h"
+#include "mk_lang_concat.h"
+#include "mk_lang_lllong.h"
+#include "mk_lang_llong.h"
+#include "mk_lang_sizeof.h"
+#if mk_lang_sizeof_uchar * mk_lang_charbit >= mk_num_composite_bits
+#define uint_t unsigned char
+#define to_uint mk_num_composite_un_to_uchar
+#define from_uint mk_num_composite_un_from_uchar
+#elif mk_lang_sizeof_ushort * mk_lang_charbit >= mk_num_composite_bits
+#define uint_t unsigned short
+#define to_uint mk_num_composite_un_to_ushort
+#define from_uint mk_num_composite_un_from_ushort
+#elif mk_lang_sizeof_uint * mk_lang_charbit >= mk_num_composite_bits
+#define uint_t unsigned int
+#define to_uint mk_num_composite_un_to_uint
+#define from_uint mk_num_composite_un_from_uint
+#elif mk_lang_sizeof_ulong * mk_lang_charbit >= mk_num_composite_bits
+#define uint_t unsigned long int
+#define to_uint mk_num_composite_un_to_ulong
+#define from_uint mk_num_composite_un_from_ulong
+#elif mk_lang_sizeof_ullong * mk_lang_charbit >= mk_num_composite_bits
+#define uint_t mk_lang_ullong_t
+#define to_uint mk_num_composite_un_to_ullong
+#define from_uint mk_num_composite_un_from_ullong
+#elif mk_lang_sizeof_ulllong * mk_lang_charbit >= mk_num_composite_bits
+#define uint_t mk_lang_ulllong_t
+#define to_uint mk_num_composite_un_to_ulllong
+#define from_uint mk_num_composite_un_from_ulllong
+#else
+#if mk_lang_lllong_has != 0
+#define name mk_lang_concat(ullongc_, mk_num_composite_bits)
+#define small_t mk_lang_ullong_t
+#define to_uint mk_num_composite_un_to_ullong
+#define from_uint mk_num_composite_un_from_ullong
+#define mk_num_div_mod_name name
+#define mk_num_div_mod_small_type small_t
+#include "mk_num_div_mod.inl.h"
+#define mk_num_div_mod_name name
+#define mk_num_div_mod_small_type small_t
+#define len_xy ((mk_num_composite_bits + (mk_lang_sizeof_ullong * mk_lang_charbit - 1)) / (mk_lang_sizeof_ullong * mk_lang_charbit))
+#define mk_num_div_mod_len_x len_xy
+#define mk_num_div_mod_len_y len_xy
+#define mk_num_div_mod_use_r1d2 1
+#define mk_num_div_mod_mid_type mk_lang_ulllong_t
+#include "mk_num_div_mod.inl.c"
+#elif mk_lang_llong_has != 0
+#define name mk_lang_concat(ulongc_, mk_num_composite_bits)
+#define small_t unsigned long int
+#define to_uint mk_num_composite_un_to_ulong
+#define from_uint mk_num_composite_un_from_ulong
+#define mk_num_div_mod_name name
+#define mk_num_div_mod_small_type small_t
+#include "mk_num_div_mod.inl.h"
+#define mk_num_div_mod_name name
+#define mk_num_div_mod_small_type small_t
+#define len_xy ((mk_num_composite_bits + (mk_lang_sizeof_ulong * mk_lang_charbit - 1)) / (mk_lang_sizeof_ulong * mk_lang_charbit))
+#define mk_num_div_mod_len_x len_xy
+#define mk_num_div_mod_len_y len_xy
+#define mk_num_div_mod_use_r1d2 1
+#define mk_num_div_mod_mid_type mk_lang_ullong_t
+#include "mk_num_div_mod.inl.c"
+#else
+#define name mk_lang_concat(ushortc_, mk_num_composite_bits)
+#define small_t unsigned short int
+#define to_uint mk_num_composite_un_to_ushort
+#define from_uint mk_num_composite_un_from_ushort
+#define mk_num_div_mod_name name
+#define mk_num_div_mod_small_type small_t
+#include "mk_num_div_mod.inl.h"
+#define mk_num_div_mod_name name
+#define mk_num_div_mod_small_type small_t
+#define len_xy ((mk_num_composite_bits + (mk_lang_sizeof_ushort * mk_lang_charbit - 1)) / (mk_lang_sizeof_ushort * mk_lang_charbit))
+#define mk_num_div_mod_len_x len_xy
+#define mk_num_div_mod_len_y len_xy
+#define mk_num_div_mod_use_r1d2 1
+#define mk_num_div_mod_mid_type unsigned long int
+#include "mk_num_div_mod.inl.c"
+#endif
+#endif
+
+mk_lang_jumbo void mk_num_composite_un_div3_wrap(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res)
+{
+	mk_num_composite_un_t mod;
+
+	mk_num_composite_un_divmod3_wrap(x, y, res, &mod);
+}
+
+mk_lang_jumbo void mk_num_composite_un_mod3_wrap(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res)
+{
+	mk_num_composite_un_t div;
+
+	mk_num_composite_un_divmod3_wrap(x, y, &div, res);
+}
+
+mk_lang_jumbo void mk_num_composite_un_divmod3_wrap(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res_div, mk_num_composite_un_t* res_mod)
+{
+	mk_lang_assert(x);
+	mk_lang_assert(y);
+	mk_lang_assert(res_div);
+	mk_lang_assert(res_mod);
+
+	#ifdef uint_t
+	{
+		uint_t xx;
+		uint_t yy;
+		uint_t dd;
+		uint_t mm;
+		xx = to_uint(x);
+		yy = to_uint(y);
+		dd = ((uint_t)(xx / yy));
+		mm = ((uint_t)(xx % yy));
+		from_uint(res_div, dd);
+		from_uint(res_mod, mm);
+	}
+	#else
+	{
+		int i;
+		mk_num_composite_un_t xxx;
+		mk_num_composite_un_t yyy;
+		small_t xx[(mk_num_composite_bits + (sizeof(small_t) * mk_lang_charbit - 1)) / (sizeof(small_t) * mk_lang_charbit)];
+		small_t yy[(mk_num_composite_bits + (sizeof(small_t) * mk_lang_charbit - 1)) / (sizeof(small_t) * mk_lang_charbit)];
+		small_t dd[(mk_num_composite_bits + (sizeof(small_t) * mk_lang_charbit - 1)) / (sizeof(small_t) * mk_lang_charbit)];
+		small_t mm[(mk_num_composite_bits + (sizeof(small_t) * mk_lang_charbit - 1)) / (sizeof(small_t) * mk_lang_charbit)];
+		xxx = *x;
+		xx[0] = to_uint(&xxx);
+		for(i = 1; i != (mk_num_composite_bits + (sizeof(small_t) * mk_lang_charbit - 1)) / (sizeof(small_t) * mk_lang_charbit); ++i)
+		{
+			mk_num_composite_un_shr2(&xxx, sizeof(small_t) * mk_lang_charbit);
+			xx[i] = to_uint(&xxx);
+		}
+		yyy = *y;
+		yy[0] = to_uint(&yyy);
+		for(i = 1; i != (mk_num_composite_bits + (sizeof(small_t) * mk_lang_charbit - 1)) / (sizeof(small_t) * mk_lang_charbit); ++i)
+		{
+			mk_num_composite_un_shr2(&yyy, sizeof(small_t) * mk_lang_charbit);
+			yy[i] = to_uint(&yyy);
+		}
+		mk_lang_concat(mk_num_div_mod_, name)(xx, yy, dd, mm);
+		from_uint(res_div, dd[sizeof(dd) / sizeof(dd[0]) - 1]);
+		for(i = 1; i != (mk_num_composite_bits + (sizeof(small_t) * mk_lang_charbit - 1)) / (sizeof(small_t) * mk_lang_charbit); ++i)
+		{
+			mk_num_composite_un_shl2(res_div, sizeof(small_t) * mk_lang_charbit);
+			from_uint(&xxx, dd[sizeof(dd) / sizeof(dd[0]) - 1 - i]);
+			mk_num_composite_un_or2(res_div, &xxx);
+		}
+		from_uint(res_mod, mm[sizeof(mm) / sizeof(mm[0]) - 1]);
+		for(i = 1; i != (mk_num_composite_bits + (sizeof(small_t) * mk_lang_charbit - 1)) / (sizeof(small_t) * mk_lang_charbit); ++i)
+		{
+			mk_num_composite_un_shl2(res_mod, sizeof(small_t) * mk_lang_charbit);
+			from_uint(&xxx, mm[sizeof(mm) / sizeof(mm[0]) - 1 - i]);
+			mk_num_composite_un_or2(res_mod, &xxx);
+		}
+	}
+	#endif
+}
+
+#undef uint_t
+#undef to_uint
+#undef from_uint
+#undef name
+#undef small_t
+#undef len_xy
+
+mk_lang_jumbo void mk_num_composite_un_div3_sat(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res)
+{
+	mk_num_composite_un_div3_wrap(x, y, res);
+}
+
+mk_lang_jumbo void mk_num_composite_un_mod3_sat(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res)
+{
+	mk_num_composite_un_mod3_wrap(x, y, res);
+}
+
+mk_lang_jumbo void mk_num_composite_un_divmod3_sat(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res_div, mk_num_composite_un_t* res_mod)
+{
+	mk_num_composite_un_divmod3_wrap(x, y, res_div, res_mod);
+}
+
+mk_lang_jumbo void mk_num_composite_un_div3_crash(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res)
+{
+	if(mk_num_composite_un_is_zero(y))
+	{
+		mk_lang_crash();
+	}
+	else
+	{
+		mk_num_composite_un_div3_wrap(x, y, res);
+	}
+}
+
+mk_lang_jumbo void mk_num_composite_un_mod3_crash(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res)
+{
+	if(mk_num_composite_un_is_zero(y))
+	{
+		mk_lang_crash();
+	}
+	else
+	{
+		mk_num_composite_un_mod3_wrap(x, y, res);
+	}
+}
+
+mk_lang_jumbo void mk_num_composite_un_divmod3_crash(mk_num_composite_un_t const* x, mk_num_composite_un_t const* y, mk_num_composite_un_t* res_div, mk_num_composite_un_t* res_mod)
+{
+	if(mk_num_composite_un_is_zero(y))
+	{
+		mk_lang_crash();
+	}
+	else
+	{
+		mk_num_composite_un_divmod3_wrap(x, y, res_div, res_mod);
+	}
+}
+
+mk_lang_jumbo void mk_num_composite_un_div2_wrap(mk_num_composite_un_t* x, mk_num_composite_un_t const* y)
+{
+	mk_num_composite_un_div3_wrap(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_composite_un_mod2_wrap(mk_num_composite_un_t* x, mk_num_composite_un_t const* y)
+{
+	mk_num_composite_un_mod3_wrap(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_composite_un_div2_sat(mk_num_composite_un_t* x, mk_num_composite_un_t const* y)
+{
+	mk_num_composite_un_div3_sat(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_composite_un_mod2_sat(mk_num_composite_un_t* x, mk_num_composite_un_t const* y)
+{
+	mk_num_composite_un_mod3_sat(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_composite_un_div2_crash(mk_num_composite_un_t* x, mk_num_composite_un_t const* y)
+{
+	mk_num_composite_un_div3_crash(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_composite_un_mod2_crash(mk_num_composite_un_t* x, mk_num_composite_un_t const* y)
+{
+	mk_num_composite_un_mod3_crash(x, y, x);
+}
+
+
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
