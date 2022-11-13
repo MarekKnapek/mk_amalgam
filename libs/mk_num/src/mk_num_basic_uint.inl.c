@@ -975,7 +975,7 @@ mk_lang_jumbo void mk_num_sub2_crash_cie_coe(mk_detail_num_basic_ut_type* x, mk_
 }
 
 
-mk_lang_jumbo void mk_num_mul3_wrap_cid_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z)
+mk_lang_jumbo void mk_num_mul3_wrap_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z)
 {
 	mk_lang_assert(x);
 	mk_lang_assert(y);
@@ -984,13 +984,13 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_cod(mk_detail_num_basic_ut_type const* x
 	*z = ((mk_detail_num_basic_ut_type)(*x * *y));
 }
 
-mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co)
+mk_lang_jumbo void mk_num_mul3_wrap_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co)
 {
 	#if defined(_MSC_VER)
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
 	#endif
-	if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 8)
+	if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit <= 8)
 	#if defined(_MSC_VER)
 	#pragma warning(pop)
 	#endif
@@ -1014,7 +1014,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
 	#endif
-	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 16)
+	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit <= 16)
 	#if defined(_MSC_VER)
 	#pragma warning(pop)
 	#endif
@@ -1037,7 +1037,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#if defined(_MSC_VER) && _MSC_VER >= 1500 /* VS 2008 */ && (defined(_M_IX86) || defined(_M_AMD64))
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
-	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 32)
+	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit <= 32)
 	#pragma warning(pop)
 	{
 		unsigned int xx;
@@ -1065,7 +1065,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
 	#endif
-	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 32)
+	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit <= 32)
 	#if defined(_MSC_VER)
 	#pragma warning(pop)
 	#endif
@@ -1089,7 +1089,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#if defined(_MSC_VER) && _MSC_VER >= 1700 /* VS 2012 */ && defined(_M_AMD64)
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
-	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 64)
+	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit <= 64)
 	#pragma warning(pop)
 	{
 		unsigned __int64 xx;
@@ -1110,7 +1110,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#if defined(_MSC_VER) && _MSC_VER >= 1600 /* VS 2010 */ && (defined(_M_AMD64) || defined(_M_IA64))
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
-	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 64)
+	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit <= 64)
 	#pragma warning(pop)
 	{
 		unsigned __int64 xx;
@@ -1132,7 +1132,7 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#pragma warning(push)
 	#pragma warning(disable:4127) /* warning C4127: conditional expression is constant */
 	#endif
-	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit == 64)
+	else if(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit <= 64)
 	#if defined(_MSC_VER)
 	#pragma warning(pop)
 	#endif
@@ -1155,8 +1155,8 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 	#endif
 	else
 	{
-		#define shift (sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit / 2)
-		#define mask ((mk_detail_num_basic_ut_type)(((((mk_detail_num_basic_ut_type)(1)) << shift)) - 1))
+		#define shift ((int)(sizeof(mk_detail_num_basic_ut_type) * mk_lang_charbit / 2))
+		#define mask ((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(1)) << shift)) - ((mk_detail_num_basic_ut_type)(1))))
 
 		mk_detail_num_basic_ut_type m;
 		mk_detail_num_basic_ut_type xlo;
@@ -1184,35 +1184,103 @@ mk_lang_jumbo void mk_num_mul3_wrap_cid_coe(mk_detail_num_basic_ut_type const* x
 		yxmi = ((mk_detail_num_basic_ut_type)(xhi * ylo));
 		xyhi = ((mk_detail_num_basic_ut_type)(xhi * yhi));
 		*z = ((mk_detail_num_basic_ut_type)(*x * *y));
-		*co = ((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(xyhi + ((mk_detail_num_basic_ut_type)(xymi >> shift)))) + ((mk_detail_num_basic_ut_type)(yxmi >> shift)))) + ((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(((mk_detail_num_basic_ut_type)(xymi & m)) + ((mk_detail_num_basic_ut_type)(yxmi & m)))) + ((mk_detail_num_basic_ut_type)(xylo >> shift)))) >> shift))));
+		*co =
+			((mk_detail_num_basic_ut_type)(
+				((mk_detail_num_basic_ut_type)(
+					((mk_detail_num_basic_ut_type)(
+						((mk_detail_num_basic_ut_type)(xymi >> shift)) +
+						((mk_detail_num_basic_ut_type)(yxmi >> shift))
+					)) +
+					xyhi
+				)) +
+				((mk_detail_num_basic_ut_type)(
+					((mk_detail_num_basic_ut_type)(
+						((mk_detail_num_basic_ut_type)(
+							((mk_detail_num_basic_ut_type)(xymi & m)) +
+							((mk_detail_num_basic_ut_type)(yxmi & m))
+						)) +
+						((mk_detail_num_basic_ut_type)(xylo >> shift))
+					)) >>
+					shift
+				))
+			));
 
 		#undef shift
 		#undef mask
 	}
 }
 
-mk_lang_jumbo void mk_num_mul3_wrap_cie_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* z);
-mk_lang_jumbo void mk_num_mul3_wrap_cie_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co);
-mk_lang_jumbo void mk_num_mul3_sat_cid_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z);
-mk_lang_jumbo void mk_num_mul3_sat_cid_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co);
-mk_lang_jumbo void mk_num_mul3_sat_cie_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* z);
-mk_lang_jumbo void mk_num_mul3_sat_cie_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co);
-mk_lang_jumbo void mk_num_mul3_crash_cid_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z);
-mk_lang_jumbo void mk_num_mul3_crash_cid_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co);
-mk_lang_jumbo void mk_num_mul3_crash_cie_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* z);
-mk_lang_jumbo void mk_num_mul3_crash_cie_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co);
-mk_lang_jumbo void mk_num_mul2_wrap_cid_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y);
-mk_lang_jumbo void mk_num_mul2_wrap_cid_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* co);
-mk_lang_jumbo void mk_num_mul2_wrap_cie_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci);
-mk_lang_jumbo void mk_num_mul2_wrap_cie_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* co);
-mk_lang_jumbo void mk_num_mul2_sat_cid_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y);
-mk_lang_jumbo void mk_num_mul2_sat_cid_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* co);
-mk_lang_jumbo void mk_num_mul2_sat_cie_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci);
-mk_lang_jumbo void mk_num_mul2_sat_cie_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* co);
-mk_lang_jumbo void mk_num_mul2_crash_cid_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y);
-mk_lang_jumbo void mk_num_mul2_crash_cid_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* co);
-mk_lang_jumbo void mk_num_mul2_crash_cie_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci);
-mk_lang_jumbo void mk_num_mul2_crash_cie_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type ci, mk_detail_num_basic_ut_type* co);
+mk_lang_jumbo void mk_num_mul3_sat_cod(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z)
+{
+	mk_detail_num_basic_ut_type zz;
+	mk_detail_num_basic_ut_type cc;
+
+	mk_lang_assert(z);
+
+	mk_num_mul3_wrap_coe(x, y, &zz, &cc);
+	if(cc != 0)
+	{
+		zz = 0;
+		--zz;
+	}
+	*z = zz;
+}
+
+mk_lang_jumbo void mk_num_mul3_sat_coe(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z, mk_detail_num_basic_ut_type* co)
+{
+	mk_detail_num_basic_ut_type zz;
+	mk_detail_num_basic_ut_type cc;
+
+	mk_lang_assert(z);
+	mk_lang_assert(co);
+
+	mk_num_mul3_wrap_coe(x, y, &zz, &cc);
+	if(cc != 0)
+	{
+		zz = 0;
+		--zz;
+	}
+	*z = zz;
+	*co = cc;
+}
+
+mk_lang_jumbo void mk_num_mul3_crash(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* z)
+{
+	mk_detail_num_basic_ut_type cc;
+
+	mk_lang_assert(z);
+
+	mk_num_mul3_wrap_coe(x, y, z, &cc);
+	if(cc != 0)
+	{
+		mk_lang_crash();
+	}
+}
+
+mk_lang_jumbo void mk_num_mul2_wrap_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y)
+{
+	mk_num_mul3_wrap_cod(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_mul2_wrap_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* co)
+{
+	mk_num_mul3_wrap_coe(x, y, x, co);
+}
+
+mk_lang_jumbo void mk_num_mul2_sat_cod(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y)
+{
+	mk_num_mul3_sat_cod(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_mul2_sat_coe(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* co)
+{
+	mk_num_mul3_sat_coe(x, y, x, co);
+}
+
+mk_lang_jumbo void mk_num_mul2_crash(mk_detail_num_basic_ut_type* x, mk_detail_num_basic_ut_type const* y)
+{
+	mk_num_mul3_crash(x, y, x);
+}
 
 
 mk_lang_jumbo void mk_num_div3_wrap(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y, mk_detail_num_basic_ut_type* res)
