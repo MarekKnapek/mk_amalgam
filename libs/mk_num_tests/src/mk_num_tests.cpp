@@ -605,6 +605,11 @@ void test_arithmetics(unsigned char const* data, size_t size)
 	bc = ba + bb; bc = bc & bm; mk_num_composite_u25_add3_wrap_cid_cod(&ma, &mb, &mc); test(mk_num_composite_u25_to_ulong(&mc) == bc);
 	bc = ba - bb; bc = bc & bm; mk_num_composite_u25_sub3_wrap_cid_cod(&ma, &mb, &mc); test(mk_num_composite_u25_to_ulong(&mc) == bc);
 	bc = ba * bb; bc = bc & bm; mk_num_composite_u25_mul3_wrap_cod(&ma, &mb, &mc); test(mk_num_composite_u25_to_ulong(&mc) == bc);
+	if(bb != 0)
+	{
+		bc = ba / bb; bc = bc & bm; mk_num_composite_u25_div3_wrap(&ma, &mb, &mc); test(mk_num_composite_u25_to_ulong(&mc) == bc);
+		bc = ba % bb; bc = bc & bm; mk_num_composite_u25_mod3_wrap(&ma, &mb, &mc); test(mk_num_composite_u25_to_ulong(&mc) == bc);
+	}
 }
 
 void test_mul_coe_ll_2(unsigned char const* data, size_t size)
@@ -724,6 +729,34 @@ void test_mul_coe_ll_4(unsigned char const* data, size_t size)
 	#endif
 }
 
+void test_div(unsigned char const* data, size_t size)
+{
+	mk_num_composite_u512_t a;
+	mk_num_composite_u512_t b;
+	mk_num_composite_u512_t d;
+	mk_num_composite_u512_t m;
+
+	/*if(!(mk_lang_charbit == 8)) return;*/
+	if(!(data)) return;
+	if(!(size >= 2 * 64)) return;
+	mk_num_composite_u512_from_buff_le(&a, data);
+	mk_num_composite_u512_from_buff_le(&b, data + 64);
+	mk_num_composite_u512_divmod3_wrap(&a, &b, &d, &m);
+	if(mk_num_composite_u512_is_zero(&b))
+	{
+		mk_num_composite_u512_set_zero(&a);
+		mk_num_composite_u512_dec(&a);
+		test(mk_num_composite_u512_eq(&d, &a));
+		test(mk_num_composite_u512_eq(&m, &a));
+	}
+	else
+	{
+		mk_num_composite_u512_mul2_wrap_cod(&d, &b);
+		mk_num_composite_u512_add2_wrap_cid_cod(&d, &m);
+		test(mk_num_composite_u512_eq(&d, &a));
+	}
+}
+
 void test_once()
 {
 	static mk_lang_bool_t g_once = mk_lang_false;
@@ -744,6 +777,7 @@ void test_multiple(unsigned char const* data, size_t size)
 	test_mul_coe_ll_2(data, size);
 	test_mul_coe_ll_3(data, size);
 	test_mul_coe_ll_4(data, size);
+	test_div(data, size);
 }
 
 mk_lang_extern_c int LLVMFuzzerTestOneInput(unsigned char const* data, size_t size)
@@ -768,7 +802,7 @@ int main(void)
 {
 	static long int const rep = 1000000l;
 
-	unsigned char buff[64];
+	unsigned char buff[128];
 	long int i;
 	int j;
 	int tested;
