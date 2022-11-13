@@ -82,7 +82,7 @@ void test_factorial_800(void)
 	for(i = 0; i != n - 1; ++i)
 	{
 		mk_num_composite_u6656_inc(&b);
-		mk_num_composite_u6656_mul3_wrap_cid_cod(&a, &b, &a);
+		mk_num_composite_u6656_mul3_wrap_cod(&a, &b, &a);
 	}
 	mk_num_composite_u6656_to_buff_be(&a, buff);
 	test(mk_lang_memcmp(buff + (sizeof(buff) - sizeof(s_factorial_800_be)), s_factorial_800_be, sizeof(s_factorial_800_be)) == 0);
@@ -597,7 +597,7 @@ void test_arithmetics(unsigned char const* data, size_t size)
 
 	bc = ba + bb; bc = bc & bm; mk_num_composite_u25_add3_wrap_cid_cod(&ma, &mb, &mc); test(mk_num_composite_u25_to_ulong(&mc) == bc);
 	bc = ba - bb; bc = bc & bm; mk_num_composite_u25_sub3_wrap_cid_cod(&ma, &mb, &mc); test(mk_num_composite_u25_to_ulong(&mc) == bc);
-	bc = ba * bb; bc = bc & bm; mk_num_composite_u25_mul3_wrap_cid_cod(&ma, &mb, &mc); test(mk_num_composite_u25_to_ulong(&mc) == bc);
+	bc = ba * bb; bc = bc & bm; mk_num_composite_u25_mul3_wrap_cod(&ma, &mb, &mc); test(mk_num_composite_u25_to_ulong(&mc) == bc);
 }
 
 void test_once()
