@@ -11,6 +11,7 @@
 #include "../../../libs/mk_num/src/mk_lang_llong.h"
 #include "../../../libs/mk_num/src/mk_lang_memcmp.h"
 #include "../../../libs/mk_num/src/mk_lang_memcpy.h"
+#include "../../../libs/mk_num/src/mk_lang_memzero.h"
 #include "../../../libs/mk_num/src/mk_lang_sizeof.h"
 #include "../../../libs/mk_num/src/mk_lang_sizet.h"
 #include "../../../libs/mk_num/src/mk_lang_uintmaxt.h"
@@ -18,6 +19,12 @@
 #include "../../../libs/mk_num/src/mk_num_composite_uints.h"
 #include "../../../libs/mk_num/src/mk_num_div_mod.h"
 #define mk_num_composite_bits 25
+#include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
+#include "../../../libs/mk_num/src/mk_num_composite_uint.inl.h"
+#define mk_num_composite_bits 192
+#include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
+#include "../../../libs/mk_num/src/mk_num_composite_uint.inl.h"
+#define mk_num_composite_bits 384
 #include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uint.inl.h"
 #define mk_num_composite_bits 6656
@@ -82,7 +89,7 @@ void test_factorial_800(void)
 	for(i = 0; i != n - 1; ++i)
 	{
 		mk_num_composite_u6656_inc(&b);
-		mk_num_composite_u6656_mul3_wrap_cod(&a, &b, &a);
+		mk_num_composite_u6656_mul2_wrap_cod(&a, &b);
 	}
 	mk_num_composite_u6656_to_buff_be(&a, buff);
 	test(mk_lang_memcmp(buff + (sizeof(buff) - sizeof(s_factorial_800_be)), s_factorial_800_be, sizeof(s_factorial_800_be)) == 0);
@@ -600,13 +607,129 @@ void test_arithmetics(unsigned char const* data, size_t size)
 	bc = ba * bb; bc = bc & bm; mk_num_composite_u25_mul3_wrap_cod(&ma, &mb, &mc); test(mk_num_composite_u25_to_ulong(&mc) == bc);
 }
 
+void test_mul_coe_ll_2(unsigned char const* data, size_t size)
+{
+	#if mk_lang_llong_has != 0 && mk_lang_lllong_has == 0
+
+	mk_num_composite_u128_t a;
+	mk_num_composite_u128_t b;
+	mk_num_composite_u128_t c;
+	mk_num_composite_u128_t d;
+	unsigned char buff1[2 * 128 / mk_lang_charbit];
+	mk_num_composite_u256_t aa;
+	mk_num_composite_u256_t bb;
+	mk_num_composite_u256_t cc;
+	unsigned char buff2[2 * 128 / mk_lang_charbit];
+
+	/*if(!(mk_lang_charbit == 8)) return;*/
+	if(!(data)) return;
+	if(!(size >= 2 * 128 / mk_lang_charbit)) return;
+
+	mk_num_composite_u128_from_buff_le(&a, data);
+	mk_num_composite_u128_from_buff_le(&b, data + 128 / mk_lang_charbit);
+	mk_num_composite_u128_mul3_wrap_coe(&a, &b, &c, &d);
+	mk_num_composite_u128_to_buff_le(&c, buff1);
+	mk_num_composite_u128_to_buff_le(&d, buff1 + 128 / mk_lang_charbit);
+
+	mk_lang_memzero(buff2 + 128 / mk_lang_charbit, 128 / mk_lang_charbit);
+	mk_lang_memcpy(buff2, data, 128 / mk_lang_charbit);
+	mk_num_composite_u256_from_buff_le(&aa, buff2);
+	mk_lang_memcpy(buff2, data + 128 / mk_lang_charbit, 128 / mk_lang_charbit);
+	mk_num_composite_u256_from_buff_le(&bb, buff2);
+	mk_num_composite_u256_mul3_wrap_cod(&aa, &bb, &cc);
+	mk_num_composite_u256_to_buff_le(&cc, buff2);
+
+	test(mk_lang_memcmp(buff1, buff2, 2 * 128 / mk_lang_charbit) == 0);
+	#else
+	((void)(data));
+	((void)(size));
+	#endif
+}
+
+void test_mul_coe_ll_3(unsigned char const* data, size_t size)
+{
+	#if mk_lang_llong_has != 0 && mk_lang_lllong_has == 0
+
+	mk_num_composite_u192_t a;
+	mk_num_composite_u192_t b;
+	mk_num_composite_u192_t c;
+	mk_num_composite_u192_t d;
+	unsigned char buff1[2 * 192 / mk_lang_charbit];
+	mk_num_composite_u384_t aa;
+	mk_num_composite_u384_t bb;
+	mk_num_composite_u384_t cc;
+	unsigned char buff2[2 * 192 / mk_lang_charbit];
+
+	/*if(!(mk_lang_charbit == 8)) return;*/
+	if(!(data)) return;
+	if(!(size >= 2 * 192 / mk_lang_charbit)) return;
+
+	mk_num_composite_u192_from_buff_le(&a, data);
+	mk_num_composite_u192_from_buff_le(&b, data + 192 / mk_lang_charbit);
+	mk_num_composite_u192_mul3_wrap_coe(&a, &b, &c, &d);
+	mk_num_composite_u192_to_buff_le(&c, buff1);
+	mk_num_composite_u192_to_buff_le(&d, buff1 + 192 / mk_lang_charbit);
+
+	mk_lang_memzero(buff2 + 192 / mk_lang_charbit, 192 / mk_lang_charbit);
+	mk_lang_memcpy(buff2, data, 192 / mk_lang_charbit);
+	mk_num_composite_u384_from_buff_le(&aa, buff2);
+	mk_lang_memcpy(buff2, data + 192 / mk_lang_charbit, 192 / mk_lang_charbit);
+	mk_num_composite_u384_from_buff_le(&bb, buff2);
+	mk_num_composite_u384_mul3_wrap_cod(&aa, &bb, &cc);
+	mk_num_composite_u384_to_buff_le(&cc, buff2);
+
+	test(mk_lang_memcmp(buff1, buff2, 2 * 192 / mk_lang_charbit) == 0);
+	#else
+	((void)(data));
+	((void)(size));
+	#endif
+}
+
+void test_mul_coe_ll_4(unsigned char const* data, size_t size)
+{
+	#if mk_lang_llong_has != 0 && mk_lang_lllong_has == 0
+
+	mk_num_composite_u256_t a;
+	mk_num_composite_u256_t b;
+	mk_num_composite_u256_t c;
+	mk_num_composite_u256_t d;
+	unsigned char buff1[2 * 256 / mk_lang_charbit];
+	mk_num_composite_u512_t aa;
+	mk_num_composite_u512_t bb;
+	mk_num_composite_u512_t cc;
+	unsigned char buff2[2 * 256 / mk_lang_charbit];
+
+	/*if(!(mk_lang_charbit == 8)) return;*/
+	if(!(data)) return;
+	if(!(size >= 2 * 256 / mk_lang_charbit)) return;
+
+	mk_num_composite_u256_from_buff_le(&a, data);
+	mk_num_composite_u256_from_buff_le(&b, data + 256 / mk_lang_charbit);
+	mk_num_composite_u256_mul3_wrap_coe(&a, &b, &c, &d);
+	mk_num_composite_u256_to_buff_le(&c, buff1);
+	mk_num_composite_u256_to_buff_le(&d, buff1 + 256 / mk_lang_charbit);
+
+	mk_lang_memzero(buff2 + 256 / mk_lang_charbit, 256 / mk_lang_charbit);
+	mk_lang_memcpy(buff2, data, 256 / mk_lang_charbit);
+	mk_num_composite_u512_from_buff_le(&aa, buff2);
+	mk_lang_memcpy(buff2, data + 256 / mk_lang_charbit, 256 / mk_lang_charbit);
+	mk_num_composite_u512_from_buff_le(&bb, buff2);
+	mk_num_composite_u512_mul3_wrap_cod(&aa, &bb, &cc);
+	mk_num_composite_u512_to_buff_le(&cc, buff2);
+
+	test(mk_lang_memcmp(buff1, buff2, 2 * 256 / mk_lang_charbit) == 0);
+	#else
+	((void)(data));
+	((void)(size));
+	#endif
+}
+
 void test_once()
 {
 	static mk_lang_bool_t g_once = mk_lang_false;
 
 	if(g_once) return;
 	if(!g_once) g_once = mk_lang_true;
-
 	test(mk_lang_sizeof_test());
 	test_basic_types_max();
 	test_factorial_800();
@@ -618,6 +741,9 @@ void test_multiple(unsigned char const* data, size_t size)
 	test_division_llong(data, size);
 	test_division_lllong(data, size);
 	test_arithmetics(data, size);
+	test_mul_coe_ll_2(data, size);
+	test_mul_coe_ll_3(data, size);
+	test_mul_coe_ll_4(data, size);
 }
 
 mk_lang_extern_c int LLVMFuzzerTestOneInput(unsigned char const* data, size_t size)
@@ -642,7 +768,7 @@ int main(void)
 {
 	static long int const rep = 1000000l;
 
-	unsigned char buff[32];
+	unsigned char buff[64];
 	long int i;
 	int j;
 	int tested;
@@ -675,11 +801,18 @@ int main(void)
 #include "../../../libs/mk_num/src/mk_lang_crash.c"
 #include "../../../libs/mk_num/src/mk_lang_memcmp.c"
 #include "../../../libs/mk_num/src/mk_lang_memcpy.c"
+#include "../../../libs/mk_num/src/mk_lang_memzero.c"
 #include "../../../libs/mk_num/src/mk_lang_sizeof.c"
 #include "../../../libs/mk_num/src/mk_num_basic_uints.c"
 #include "../../../libs/mk_num/src/mk_num_composite_uints.c"
 #include "../../../libs/mk_num/src/mk_num_div_mod.c"
 #define mk_num_composite_bits 25
+#include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
+#include "../../../libs/mk_num/src/mk_num_composite_uint.inl.c"
+#define mk_num_composite_bits 192
+#include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
+#include "../../../libs/mk_num/src/mk_num_composite_uint.inl.c"
+#define mk_num_composite_bits 384
 #include "../../../libs/mk_num/src/mk_num_composite_guess_base.h"
 #include "../../../libs/mk_num/src/mk_num_composite_uint.inl.c"
 #define mk_num_composite_bits 6656
