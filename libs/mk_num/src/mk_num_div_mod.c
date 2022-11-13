@@ -39,7 +39,7 @@
 #define mk_num_div_mod_len_y 4
 #define mk_num_div_mod_use_r1d2 0
 #define mk_num_div_mod_mid_type unsigned long int
-#define mk_num_div_mod_big_type unsigned long long int
+#define mk_num_div_mod_big_type mk_lang_ullong_t
 #include "mk_num_div_mod.inl.c"
 
 #define mk_num_div_mod_name ushort_8_8_r3d2
