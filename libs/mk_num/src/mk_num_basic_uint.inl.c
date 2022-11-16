@@ -77,89 +77,6 @@ mk_lang_jumbo void mk_num_set_mask(mk_detail_num_basic_ut_type* x, int bits)
 }
 
 
-mk_lang_jumbo void mk_num_from_buff_le(mk_detail_num_basic_ut_type* x, void const* buff)
-{
-	mk_detail_num_basic_ut_type tmp;
-	int i;
-
-	mk_lang_assert(x);
-	mk_lang_assert(buff);
-
-	tmp = ((mk_detail_num_basic_ut_type)(((unsigned char const*)(buff))[sizeof(tmp) - 1]));
-	for(i = 1; i != ((int)(sizeof(mk_detail_num_basic_ut_type))); ++i)
-	{
-		tmp = ((mk_detail_num_basic_ut_type)(tmp << mk_lang_charbit));
-		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(((unsigned char const*)(buff))[sizeof(tmp) - 1 - i]))));
-	}
-	*x = tmp;
-}
-
-mk_lang_jumbo void mk_num_from_buff_be(mk_detail_num_basic_ut_type* x, void const* buff)
-{
-	mk_detail_num_basic_ut_type tmp;
-	int i;
-
-	mk_lang_assert(x);
-	mk_lang_assert(buff);
-
-	tmp = ((mk_detail_num_basic_ut_type)(((unsigned char const*)(buff))[sizeof(mk_detail_num_basic_ut_type) - 1]));
-	for(i = 1; i != ((int)(sizeof(mk_detail_num_basic_ut_type))); ++i)
-	{
-		tmp = ((mk_detail_num_basic_ut_type)(tmp << mk_lang_charbit));
-		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(((unsigned char const*)(buff))[sizeof(mk_detail_num_basic_ut_type) - 1 - i]))));
-	}
-	*x = tmp;
-}
-
-mk_lang_jumbo void mk_num_to_buff_le(mk_detail_num_basic_ut_type const* x, void* buff)
-{
-	mk_detail_num_basic_ut_type tmp;
-	int i;
-
-	mk_lang_assert(x);
-	mk_lang_assert(buff);
-
-	tmp = *x;
-	((unsigned char*)(buff))[0] = ((unsigned char)(tmp));
-	for(i = 1; i != ((int)(sizeof(mk_detail_num_basic_ut_type))); ++i)
-	{
-		#if defined(_MSC_VER)
-		#pragma warning(push)
-		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
-		#endif
-		tmp = ((mk_detail_num_basic_ut_type)(tmp >> mk_lang_charbit));
-		#if defined(_MSC_VER)
-		#pragma warning(pop)
-		#endif
-		((unsigned char*)(buff))[i] = ((unsigned char)(tmp));
-	}
-}
-
-mk_lang_jumbo void mk_num_to_buff_be(mk_detail_num_basic_ut_type const* x, void* buff)
-{
-	mk_detail_num_basic_ut_type tmp;
-	int i;
-
-	mk_lang_assert(x);
-	mk_lang_assert(buff);
-
-	tmp = *x;
-	((unsigned char*)(buff))[sizeof(mk_detail_num_basic_ut_type) - 1] = ((unsigned char)(tmp));
-	for(i = 1; i != ((int)(sizeof(mk_detail_num_basic_ut_type))); ++i)
-	{
-		#if defined(_MSC_VER)
-		#pragma warning(push)
-		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
-		#endif
-		tmp = ((mk_detail_num_basic_ut_type)(tmp >> mk_lang_charbit));
-		#if defined(_MSC_VER)
-		#pragma warning(pop)
-		#endif
-		((unsigned char*)(buff))[sizeof(mk_detail_num_basic_ut_type) - 1 - i] = ((unsigned char)(tmp));
-	}
-}
-
-
 mk_lang_jumbo void mk_num_from_char(mk_detail_num_basic_ut_type* x, char src)
 {
 	mk_lang_assert(x);
@@ -383,6 +300,750 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_sintmax_t mk_num_to_smaxt(mk_detail_num_
 	mk_lang_assert(x);
 
 	return ((mk_lang_sintmax_t)(*x));
+}
+
+
+mk_lang_jumbo void mk_num_from_uchars_le(mk_detail_num_basic_ut_type* x, unsigned char const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_ushorts_le(mk_detail_num_basic_ut_type* x, unsigned short int const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_uints_le(mk_detail_num_basic_ut_type* x, unsigned int const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_ulongs_le(mk_detail_num_basic_ut_type* x, unsigned long int const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_ullongs_le(mk_detail_num_basic_ut_type* x, mk_lang_ullong_t const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_ulllongs_le(mk_detail_num_basic_ut_type* x, mk_lang_ulllong_t const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_sizets_le(mk_detail_num_basic_ut_type* x, mk_lang_size_t const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_umaxts_le(mk_detail_num_basic_ut_type* x, mk_lang_uintmax_t const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+	}
+	*x = tmp;
+}
+
+
+mk_lang_jumbo void mk_num_to_uchars_le(mk_detail_num_basic_ut_type const* x, unsigned char* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[0] = ((unsigned char)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[i] = ((unsigned char)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_ushorts_le(mk_detail_num_basic_ut_type const* x, unsigned short int* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[0] = ((unsigned short int)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[i] = ((unsigned short int)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_uints_le(mk_detail_num_basic_ut_type const* x, unsigned int* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[0] = ((unsigned int)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[i] = ((unsigned int)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_ulongs_le(mk_detail_num_basic_ut_type const* x, unsigned long int* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[0] = ((unsigned long int)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[i] = ((unsigned long int)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_ullongs_le(mk_detail_num_basic_ut_type const* x, mk_lang_ullong_t* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[0] = ((mk_lang_ullong_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[i] = ((mk_lang_ullong_t)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_ulllongs_le(mk_detail_num_basic_ut_type const* x, mk_lang_ulllong_t* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[0] = ((mk_lang_ulllong_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[i] = ((mk_lang_ulllong_t)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_sizets_le(mk_detail_num_basic_ut_type const* x, mk_lang_size_t* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[0] = ((mk_lang_size_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[i] = ((mk_lang_size_t)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_umaxts_le(mk_detail_num_basic_ut_type const* x, mk_lang_uintmax_t* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[0] = ((mk_lang_uintmax_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[i] = ((mk_lang_uintmax_t)(tmp));
+	}
+}
+
+
+mk_lang_jumbo void mk_num_from_uchars_be(mk_detail_num_basic_ut_type* x, unsigned char const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_ushorts_be(mk_detail_num_basic_ut_type* x, unsigned short int const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_uints_be(mk_detail_num_basic_ut_type* x, unsigned int const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_ulongs_be(mk_detail_num_basic_ut_type* x, unsigned long int const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_ullongs_be(mk_detail_num_basic_ut_type* x, mk_lang_ullong_t const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_ulllongs_be(mk_detail_num_basic_ut_type* x, mk_lang_ulllong_t const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_sizets_be(mk_detail_num_basic_ut_type* x, mk_lang_size_t const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_umaxts_be(mk_detail_num_basic_ut_type* x, mk_lang_uintmax_t const* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = ((mk_detail_num_basic_ut_type)(buff[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp | ((mk_detail_num_basic_ut_type)(buff[i]))));
+	}
+	*x = tmp;
+}
+
+
+mk_lang_jumbo void mk_num_to_uchars_be(mk_detail_num_basic_ut_type const* x, unsigned char* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((unsigned char)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((unsigned char)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_ushorts_be(mk_detail_num_basic_ut_type const* x, unsigned short int* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((unsigned short int)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((unsigned short int)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_uints_be(mk_detail_num_basic_ut_type const* x, unsigned int* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((unsigned int)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((unsigned int)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_ulongs_be(mk_detail_num_basic_ut_type const* x, unsigned long int* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((unsigned long int)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((unsigned long int)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_ullongs_be(mk_detail_num_basic_ut_type const* x, mk_lang_ullong_t* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((mk_lang_ullong_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((mk_lang_ullong_t)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_ulllongs_be(mk_detail_num_basic_ut_type const* x, mk_lang_ulllong_t* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((mk_lang_ulllong_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((mk_lang_ulllong_t)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_sizets_be(mk_detail_num_basic_ut_type const* x, mk_lang_size_t* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((mk_lang_size_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((mk_lang_size_t)(tmp));
+	}
+}
+
+mk_lang_jumbo void mk_num_to_umaxts_be(mk_detail_num_basic_ut_type const* x, mk_lang_uintmax_t* buff)
+{
+	mk_detail_num_basic_ut_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(buff);
+
+	tmp = *x;
+	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((mk_lang_uintmax_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
+		#endif
+		tmp = ((mk_detail_num_basic_ut_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((mk_lang_uintmax_t)(tmp));
+	}
 }
 
 

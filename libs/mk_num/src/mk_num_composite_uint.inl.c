@@ -98,7 +98,7 @@ mk_lang_jumbo void mk_num_composite_un_from_buff_le(mk_num_composite_un_t* x, vo
 
 	for(i = 0; i != mk_num_composite_un_parts; ++i)
 	{
-		mk_num_composite_un_base_from_buff_le(&x->m_parts[i], ((unsigned char const*)(buff)) + i * sizeof(mk_num_composite_base_type));
+		mk_num_composite_un_base_from_uchars_le(&x->m_parts[i], ((unsigned char const*)(buff)) + i * sizeof(mk_num_composite_base_type));
 	}
 }
 
@@ -111,7 +111,7 @@ mk_lang_jumbo void mk_num_composite_un_from_buff_be(mk_num_composite_un_t* x, vo
 
 	for(i = 0; i != mk_num_composite_un_parts; ++i)
 	{
-		mk_num_composite_un_base_from_buff_be(&x->m_parts[i], ((unsigned char const*)(buff)) + (mk_num_composite_un_parts - 1 - i) * sizeof(mk_num_composite_base_type));
+		mk_num_composite_un_base_from_uchars_be(&x->m_parts[i], ((unsigned char const*)(buff)) + (mk_num_composite_un_parts - 1 - i) * sizeof(mk_num_composite_base_type));
 	}
 }
 
@@ -124,7 +124,7 @@ mk_lang_jumbo void mk_num_composite_un_to_buff_le(mk_num_composite_un_t const* x
 
 	for(i = 0; i != mk_num_composite_un_parts; ++i)
 	{
-		mk_num_composite_un_base_to_buff_le(&x->m_parts[i], ((unsigned char*)(buff)) + i * sizeof(mk_num_composite_base_type));
+		mk_num_composite_un_base_to_uchars_le(&x->m_parts[i], ((unsigned char*)(buff)) + i * sizeof(mk_num_composite_base_type));
 	}
 }
 
@@ -137,7 +137,7 @@ mk_lang_jumbo void mk_num_composite_un_to_buff_be(mk_num_composite_un_t const* x
 
 	for(i = 0; i != mk_num_composite_un_parts; ++i)
 	{
-		mk_num_composite_un_base_to_buff_be(&x->m_parts[i], ((unsigned char*)(buff)) + (mk_num_composite_un_parts - 1 - i) * sizeof(mk_num_composite_base_type));
+		mk_num_composite_un_base_to_uchars_be(&x->m_parts[i], ((unsigned char*)(buff)) + (mk_num_composite_un_parts - 1 - i) * sizeof(mk_num_composite_base_type));
 	}
 }
 

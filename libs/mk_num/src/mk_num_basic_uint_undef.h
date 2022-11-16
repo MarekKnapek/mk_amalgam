@@ -2,11 +2,6 @@
 #undef mk_num_set_one
 #undef mk_num_set_mask
 
-#undef mk_num_from_buff_le
-#undef mk_num_from_buff_be
-#undef mk_num_to_buff_le
-#undef mk_num_to_buff_be
-
 #undef mk_num_from_char
 #undef mk_num_from_uchar
 #undef mk_num_from_schar
@@ -40,6 +35,42 @@
 #undef mk_num_to_sizet
 #undef mk_num_to_umaxt
 #undef mk_num_to_smaxt
+
+#undef mk_num_from_uchars_le
+#undef mk_num_from_ushorts_le
+#undef mk_num_from_uints_le
+#undef mk_num_from_ulongs_le
+#undef mk_num_from_ullongs_le
+#undef mk_num_from_ulllongs_le
+#undef mk_num_from_sizets_le
+#undef mk_num_from_umaxts_le
+
+#undef mk_num_to_uchars_le
+#undef mk_num_to_ushorts_le
+#undef mk_num_to_uints_le
+#undef mk_num_to_ulongs_le
+#undef mk_num_to_ullongs_le
+#undef mk_num_to_ulllongs_le
+#undef mk_num_to_sizets_le
+#undef mk_num_to_umaxts_le
+
+#undef mk_num_from_uchars_be
+#undef mk_num_from_ushorts_be
+#undef mk_num_from_uints_be
+#undef mk_num_from_ulongs_be
+#undef mk_num_from_ullongs_be
+#undef mk_num_from_ulllongs_be
+#undef mk_num_from_sizets_be
+#undef mk_num_from_umaxts_be
+
+#undef mk_num_to_uchars_be
+#undef mk_num_to_ushorts_be
+#undef mk_num_to_uints_be
+#undef mk_num_to_ulongs_be
+#undef mk_num_to_ullongs_be
+#undef mk_num_to_ulllongs_be
+#undef mk_num_to_sizets_be
+#undef mk_num_to_umaxts_be
 
 #undef mk_num_is_zero
 #undef mk_num_eq

@@ -15,11 +15,6 @@ mk_lang_jumbo void mk_num_set_zero(mk_detail_num_basic_ut_type* x);
 mk_lang_jumbo void mk_num_set_one(mk_detail_num_basic_ut_type* x);
 mk_lang_jumbo void mk_num_set_mask(mk_detail_num_basic_ut_type* x, int bits);
 
-mk_lang_jumbo void mk_num_from_buff_le(mk_detail_num_basic_ut_type* x, void const* buff);
-mk_lang_jumbo void mk_num_from_buff_be(mk_detail_num_basic_ut_type* x, void const* buff);
-mk_lang_jumbo void mk_num_to_buff_le(mk_detail_num_basic_ut_type const* x, void* buff);
-mk_lang_jumbo void mk_num_to_buff_be(mk_detail_num_basic_ut_type const* x, void* buff);
-
 mk_lang_jumbo void mk_num_from_char(mk_detail_num_basic_ut_type* x, char src);
 mk_lang_jumbo void mk_num_from_uchar(mk_detail_num_basic_ut_type* x, unsigned char src);
 mk_lang_jumbo void mk_num_from_schar(mk_detail_num_basic_ut_type* x, signed char src);
@@ -53,6 +48,42 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_slllong_t mk_num_to_slllong(mk_detail_nu
 mk_lang_nodiscard mk_lang_jumbo mk_lang_size_t mk_num_to_sizet(mk_detail_num_basic_ut_type const* x);
 mk_lang_nodiscard mk_lang_jumbo mk_lang_uintmax_t mk_num_to_umaxt(mk_detail_num_basic_ut_type const* x);
 mk_lang_nodiscard mk_lang_jumbo mk_lang_sintmax_t mk_num_to_smaxt(mk_detail_num_basic_ut_type const* x);
+
+mk_lang_jumbo void mk_num_from_uchars_le(mk_detail_num_basic_ut_type* x, unsigned char const* buff);
+mk_lang_jumbo void mk_num_from_ushorts_le(mk_detail_num_basic_ut_type* x, unsigned short int const* buff);
+mk_lang_jumbo void mk_num_from_uints_le(mk_detail_num_basic_ut_type* x, unsigned int const* buff);
+mk_lang_jumbo void mk_num_from_ulongs_le(mk_detail_num_basic_ut_type* x, unsigned long int const* buff);
+mk_lang_jumbo void mk_num_from_ullongs_le(mk_detail_num_basic_ut_type* x, mk_lang_ullong_t const* buff);
+mk_lang_jumbo void mk_num_from_ulllongs_le(mk_detail_num_basic_ut_type* x, mk_lang_ulllong_t const* buff);
+mk_lang_jumbo void mk_num_from_sizets_le(mk_detail_num_basic_ut_type* x, mk_lang_size_t const* buff);
+mk_lang_jumbo void mk_num_from_umaxts_le(mk_detail_num_basic_ut_type* x, mk_lang_uintmax_t const* buff);
+
+mk_lang_jumbo void mk_num_to_uchars_le(mk_detail_num_basic_ut_type const* x, unsigned char* buff);
+mk_lang_jumbo void mk_num_to_ushorts_le(mk_detail_num_basic_ut_type const* x, unsigned short int* buff);
+mk_lang_jumbo void mk_num_to_uints_le(mk_detail_num_basic_ut_type const* x, unsigned int* buff);
+mk_lang_jumbo void mk_num_to_ulongs_le(mk_detail_num_basic_ut_type const* x, unsigned long int* buff);
+mk_lang_jumbo void mk_num_to_ullongs_le(mk_detail_num_basic_ut_type const* x, mk_lang_ullong_t* buff);
+mk_lang_jumbo void mk_num_to_ulllongs_le(mk_detail_num_basic_ut_type const* x, mk_lang_ulllong_t* buff);
+mk_lang_jumbo void mk_num_to_sizets_le(mk_detail_num_basic_ut_type const* x, mk_lang_size_t* buff);
+mk_lang_jumbo void mk_num_to_umaxts_le(mk_detail_num_basic_ut_type const* x, mk_lang_uintmax_t* buff);
+
+mk_lang_jumbo void mk_num_from_uchars_be(mk_detail_num_basic_ut_type* x, unsigned char const* buff);
+mk_lang_jumbo void mk_num_from_ushorts_be(mk_detail_num_basic_ut_type* x, unsigned short int const* buff);
+mk_lang_jumbo void mk_num_from_uints_be(mk_detail_num_basic_ut_type* x, unsigned int const* buff);
+mk_lang_jumbo void mk_num_from_ulongs_be(mk_detail_num_basic_ut_type* x, unsigned long int const* buff);
+mk_lang_jumbo void mk_num_from_ullongs_be(mk_detail_num_basic_ut_type* x, mk_lang_ullong_t const* buff);
+mk_lang_jumbo void mk_num_from_ulllongs_be(mk_detail_num_basic_ut_type* x, mk_lang_ulllong_t const* buff);
+mk_lang_jumbo void mk_num_from_sizets_be(mk_detail_num_basic_ut_type* x, mk_lang_size_t const* buff);
+mk_lang_jumbo void mk_num_from_umaxts_be(mk_detail_num_basic_ut_type* x, mk_lang_uintmax_t const* buff);
+
+mk_lang_jumbo void mk_num_to_uchars_be(mk_detail_num_basic_ut_type const* x, unsigned char* buff);
+mk_lang_jumbo void mk_num_to_ushorts_be(mk_detail_num_basic_ut_type const* x, unsigned short int* buff);
+mk_lang_jumbo void mk_num_to_uints_be(mk_detail_num_basic_ut_type const* x, unsigned int* buff);
+mk_lang_jumbo void mk_num_to_ulongs_be(mk_detail_num_basic_ut_type const* x, unsigned long int* buff);
+mk_lang_jumbo void mk_num_to_ullongs_be(mk_detail_num_basic_ut_type const* x, mk_lang_ullong_t* buff);
+mk_lang_jumbo void mk_num_to_ulllongs_be(mk_detail_num_basic_ut_type const* x, mk_lang_ulllong_t* buff);
+mk_lang_jumbo void mk_num_to_sizets_be(mk_detail_num_basic_ut_type const* x, mk_lang_size_t* buff);
+mk_lang_jumbo void mk_num_to_umaxts_be(mk_detail_num_basic_ut_type const* x, mk_lang_uintmax_t* buff);
 
 mk_lang_nodiscard mk_lang_jumbo mk_lang_bool_t mk_num_is_zero(mk_detail_num_basic_ut_type const* x);
 mk_lang_nodiscard mk_lang_jumbo mk_lang_bool_t mk_num_eq(mk_detail_num_basic_ut_type const* x, mk_detail_num_basic_ut_type const* y);
