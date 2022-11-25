@@ -335,81 +335,50 @@ mk_lang_jumbo void mk_num_to_smaxt(mk_num_basic_uint_type const* x, mk_lang_sint
 }
 
 
-mk_lang_jumbo void mk_num_from_uchars_le(mk_num_basic_uint_type* x, unsigned char const* buff)
+mk_lang_jumbo void mk_num_from_uchars_le(mk_num_basic_uint_type* x, unsigned char const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1 - i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_ushorts_le(mk_num_basic_uint_type* x, unsigned short int const* buff)
+mk_lang_jumbo void mk_num_from_ushorts_le(mk_num_basic_uint_type* x, unsigned short int const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1 - i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_uints_le(mk_num_basic_uint_type* x, unsigned int const* buff)
+mk_lang_jumbo void mk_num_from_uints_le(mk_num_basic_uint_type* x, unsigned int const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
-	{
-		#if defined(_MSC_VER)
-		#pragma warning(push)
-		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
-		#endif
-		#if defined(__GNUC__)
-		#pragma GCC diagnostic push
-		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
-		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
-		#if defined(__GNUC__)
-		#pragma GCC diagnostic pop
-		#endif
-		#if defined(_MSC_VER)
-		#pragma warning(pop)
-		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
-	}
-	*x = tmp;
-}
-
-mk_lang_jumbo void mk_num_from_ulongs_le(mk_num_basic_uint_type* x, unsigned long int const* buff)
-{
-	mk_num_basic_uint_type tmp;
-	int i;
-
-	mk_lang_assert(x);
-	mk_lang_assert(buff);
-
-	tmp = ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -419,28 +388,28 @@ mk_lang_jumbo void mk_num_from_ulongs_le(mk_num_basic_uint_type* x, unsigned lon
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1 - i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_ullongs_le(mk_num_basic_uint_type* x, mk_lang_ullong_t const* buff)
+mk_lang_jumbo void mk_num_from_ulongs_le(mk_num_basic_uint_type* x, unsigned long int const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -450,28 +419,28 @@ mk_lang_jumbo void mk_num_from_ullongs_le(mk_num_basic_uint_type* x, mk_lang_ull
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1 - i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_ulllongs_le(mk_num_basic_uint_type* x, mk_lang_ulllong_t const* buff)
+mk_lang_jumbo void mk_num_from_ullongs_le(mk_num_basic_uint_type* x, mk_lang_ullong_t const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -481,28 +450,28 @@ mk_lang_jumbo void mk_num_from_ulllongs_le(mk_num_basic_uint_type* x, mk_lang_ul
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1 - i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_sizets_le(mk_num_basic_uint_type* x, mk_lang_size_t const* buff)
+mk_lang_jumbo void mk_num_from_ulllongs_le(mk_num_basic_uint_type* x, mk_lang_ulllong_t const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -512,28 +481,59 @@ mk_lang_jumbo void mk_num_from_sizets_le(mk_num_basic_uint_type* x, mk_lang_size
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1 - i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_umaxts_le(mk_num_basic_uint_type* x, mk_lang_uintmax_t const* buff)
+mk_lang_jumbo void mk_num_from_sizets_le(mk_num_basic_uint_type* x, mk_lang_size_t const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
+	{
+		#if defined(_MSC_VER)
+		#pragma warning(push)
+		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
+		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
+		#if defined(_MSC_VER)
+		#pragma warning(pop)
+		#endif
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1 - i]))));
+	}
+	*x = tmp;
+}
+
+mk_lang_jumbo void mk_num_from_umaxts_le(mk_num_basic_uint_type* x, mk_lang_uintmax_t const* src)
+{
+	mk_num_basic_uint_type tmp;
+	int i;
+
+	mk_lang_assert(x);
+	mk_lang_assert(src);
+
+	tmp = ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -543,78 +543,78 @@ mk_lang_jumbo void mk_num_from_umaxts_le(mk_num_basic_uint_type* x, mk_lang_uint
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[(sizeof(tmp) + (sizeof(*src) - 1)) / sizeof(*src) - 1 - i]))));
 	}
 	*x = tmp;
 }
 
 
-mk_lang_jumbo void mk_num_to_uchars_le(mk_num_basic_uint_type const* x, unsigned char* buff)
+mk_lang_jumbo void mk_num_to_uchars_le(mk_num_basic_uint_type const* x, unsigned char* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[0] = ((unsigned char)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[0] = ((unsigned char)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
 		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[i] = ((unsigned char)(tmp));
+		dst[i] = ((unsigned char)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_ushorts_le(mk_num_basic_uint_type const* x, unsigned short int* buff)
+mk_lang_jumbo void mk_num_to_ushorts_le(mk_num_basic_uint_type const* x, unsigned short int* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[0] = ((unsigned short int)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[0] = ((unsigned short int)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
 		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[i] = ((unsigned short int)(tmp));
+		dst[i] = ((unsigned short int)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_uints_le(mk_num_basic_uint_type const* x, unsigned int* buff)
+mk_lang_jumbo void mk_num_to_uints_le(mk_num_basic_uint_type const* x, unsigned int* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[0] = ((unsigned int)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[0] = ((unsigned int)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -624,28 +624,28 @@ mk_lang_jumbo void mk_num_to_uints_le(mk_num_basic_uint_type const* x, unsigned 
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[i] = ((unsigned int)(tmp));
+		dst[i] = ((unsigned int)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_ulongs_le(mk_num_basic_uint_type const* x, unsigned long int* buff)
+mk_lang_jumbo void mk_num_to_ulongs_le(mk_num_basic_uint_type const* x, unsigned long int* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[0] = ((unsigned long int)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[0] = ((unsigned long int)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -655,28 +655,28 @@ mk_lang_jumbo void mk_num_to_ulongs_le(mk_num_basic_uint_type const* x, unsigned
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[i] = ((unsigned long int)(tmp));
+		dst[i] = ((unsigned long int)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_ullongs_le(mk_num_basic_uint_type const* x, mk_lang_ullong_t* buff)
+mk_lang_jumbo void mk_num_to_ullongs_le(mk_num_basic_uint_type const* x, mk_lang_ullong_t* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[0] = ((mk_lang_ullong_t)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[0] = ((mk_lang_ullong_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -686,28 +686,28 @@ mk_lang_jumbo void mk_num_to_ullongs_le(mk_num_basic_uint_type const* x, mk_lang
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[i] = ((mk_lang_ullong_t)(tmp));
+		dst[i] = ((mk_lang_ullong_t)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_ulllongs_le(mk_num_basic_uint_type const* x, mk_lang_ulllong_t* buff)
+mk_lang_jumbo void mk_num_to_ulllongs_le(mk_num_basic_uint_type const* x, mk_lang_ulllong_t* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[0] = ((mk_lang_ulllong_t)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[0] = ((mk_lang_ulllong_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -717,28 +717,28 @@ mk_lang_jumbo void mk_num_to_ulllongs_le(mk_num_basic_uint_type const* x, mk_lan
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[i] = ((mk_lang_ulllong_t)(tmp));
+		dst[i] = ((mk_lang_ulllong_t)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_sizets_le(mk_num_basic_uint_type const* x, mk_lang_size_t* buff)
+mk_lang_jumbo void mk_num_to_sizets_le(mk_num_basic_uint_type const* x, mk_lang_size_t* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[0] = ((mk_lang_size_t)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[0] = ((mk_lang_size_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -748,28 +748,28 @@ mk_lang_jumbo void mk_num_to_sizets_le(mk_num_basic_uint_type const* x, mk_lang_
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[i] = ((mk_lang_size_t)(tmp));
+		dst[i] = ((mk_lang_size_t)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_umaxts_le(mk_num_basic_uint_type const* x, mk_lang_uintmax_t* buff)
+mk_lang_jumbo void mk_num_to_umaxts_le(mk_num_basic_uint_type const* x, mk_lang_uintmax_t* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[0] = ((mk_lang_uintmax_t)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[0] = ((mk_lang_uintmax_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -779,62 +779,62 @@ mk_lang_jumbo void mk_num_to_umaxts_le(mk_num_basic_uint_type const* x, mk_lang_
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[i] = ((mk_lang_uintmax_t)(tmp));
+		dst[i] = ((mk_lang_uintmax_t)(tmp));
 	}
 }
 
 
-mk_lang_jumbo void mk_num_from_uchars_be(mk_num_basic_uint_type* x, unsigned char const* buff)
+mk_lang_jumbo void mk_num_from_uchars_be(mk_num_basic_uint_type* x, unsigned char const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[0]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_ushorts_be(mk_num_basic_uint_type* x, unsigned short int const* buff)
+mk_lang_jumbo void mk_num_from_ushorts_be(mk_num_basic_uint_type* x, unsigned short int const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[0]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_uints_be(mk_num_basic_uint_type* x, unsigned int const* buff)
+mk_lang_jumbo void mk_num_from_uints_be(mk_num_basic_uint_type* x, unsigned int const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[0]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -844,28 +844,28 @@ mk_lang_jumbo void mk_num_from_uints_be(mk_num_basic_uint_type* x, unsigned int 
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_ulongs_be(mk_num_basic_uint_type* x, unsigned long int const* buff)
+mk_lang_jumbo void mk_num_from_ulongs_be(mk_num_basic_uint_type* x, unsigned long int const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[0]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -875,28 +875,28 @@ mk_lang_jumbo void mk_num_from_ulongs_be(mk_num_basic_uint_type* x, unsigned lon
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_ullongs_be(mk_num_basic_uint_type* x, mk_lang_ullong_t const* buff)
+mk_lang_jumbo void mk_num_from_ullongs_be(mk_num_basic_uint_type* x, mk_lang_ullong_t const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[0]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -906,28 +906,28 @@ mk_lang_jumbo void mk_num_from_ullongs_be(mk_num_basic_uint_type* x, mk_lang_ull
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_ulllongs_be(mk_num_basic_uint_type* x, mk_lang_ulllong_t const* buff)
+mk_lang_jumbo void mk_num_from_ulllongs_be(mk_num_basic_uint_type* x, mk_lang_ulllong_t const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[0]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -937,28 +937,28 @@ mk_lang_jumbo void mk_num_from_ulllongs_be(mk_num_basic_uint_type* x, mk_lang_ul
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_sizets_be(mk_num_basic_uint_type* x, mk_lang_size_t const* buff)
+mk_lang_jumbo void mk_num_from_sizets_be(mk_num_basic_uint_type* x, mk_lang_size_t const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[0]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -968,28 +968,28 @@ mk_lang_jumbo void mk_num_from_sizets_be(mk_num_basic_uint_type* x, mk_lang_size
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[i]))));
 	}
 	*x = tmp;
 }
 
-mk_lang_jumbo void mk_num_from_umaxts_be(mk_num_basic_uint_type* x, mk_lang_uintmax_t const* buff)
+mk_lang_jumbo void mk_num_from_umaxts_be(mk_num_basic_uint_type* x, mk_lang_uintmax_t const* src)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(src);
 
-	tmp = ((mk_num_basic_uint_type)(buff[0]));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / (sizeof(*buff)))); ++i)
+	tmp = ((mk_num_basic_uint_type)(src[0]));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*src) - 1)) / (sizeof(*src)))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -999,78 +999,78 @@ mk_lang_jumbo void mk_num_from_umaxts_be(mk_num_basic_uint_type* x, mk_lang_uint
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*src) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(buff[i]))));
+		tmp = ((mk_num_basic_uint_type)(tmp | ((mk_num_basic_uint_type)(src[i]))));
 	}
 	*x = tmp;
 }
 
 
-mk_lang_jumbo void mk_num_to_uchars_be(mk_num_basic_uint_type const* x, unsigned char* buff)
+mk_lang_jumbo void mk_num_to_uchars_be(mk_num_basic_uint_type const* x, unsigned char* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((unsigned char)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1] = ((unsigned char)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
 		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((unsigned char)(tmp));
+		dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1 - i] = ((unsigned char)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_ushorts_be(mk_num_basic_uint_type const* x, unsigned short int* buff)
+mk_lang_jumbo void mk_num_to_ushorts_be(mk_num_basic_uint_type const* x, unsigned short int* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((unsigned short int)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1] = ((unsigned short int)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
 		#pragma warning(disable:4333) /* warning C4333: '>>': right shift by too large amount, data loss */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((unsigned short int)(tmp));
+		dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1 - i] = ((unsigned short int)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_uints_be(mk_num_basic_uint_type const* x, unsigned int* buff)
+mk_lang_jumbo void mk_num_to_uints_be(mk_num_basic_uint_type const* x, unsigned int* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((unsigned int)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1] = ((unsigned int)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -1080,28 +1080,28 @@ mk_lang_jumbo void mk_num_to_uints_be(mk_num_basic_uint_type const* x, unsigned 
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((unsigned int)(tmp));
+		dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1 - i] = ((unsigned int)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_ulongs_be(mk_num_basic_uint_type const* x, unsigned long int* buff)
+mk_lang_jumbo void mk_num_to_ulongs_be(mk_num_basic_uint_type const* x, unsigned long int* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((unsigned long int)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1] = ((unsigned long int)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -1111,28 +1111,28 @@ mk_lang_jumbo void mk_num_to_ulongs_be(mk_num_basic_uint_type const* x, unsigned
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((unsigned long int)(tmp));
+		dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1 - i] = ((unsigned long int)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_ullongs_be(mk_num_basic_uint_type const* x, mk_lang_ullong_t* buff)
+mk_lang_jumbo void mk_num_to_ullongs_be(mk_num_basic_uint_type const* x, mk_lang_ullong_t* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((mk_lang_ullong_t)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1] = ((mk_lang_ullong_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -1142,28 +1142,28 @@ mk_lang_jumbo void mk_num_to_ullongs_be(mk_num_basic_uint_type const* x, mk_lang
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((mk_lang_ullong_t)(tmp));
+		dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1 - i] = ((mk_lang_ullong_t)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_ulllongs_be(mk_num_basic_uint_type const* x, mk_lang_ulllong_t* buff)
+mk_lang_jumbo void mk_num_to_ulllongs_be(mk_num_basic_uint_type const* x, mk_lang_ulllong_t* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((mk_lang_ulllong_t)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1] = ((mk_lang_ulllong_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -1173,28 +1173,28 @@ mk_lang_jumbo void mk_num_to_ulllongs_be(mk_num_basic_uint_type const* x, mk_lan
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((mk_lang_ulllong_t)(tmp));
+		dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1 - i] = ((mk_lang_ulllong_t)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_sizets_be(mk_num_basic_uint_type const* x, mk_lang_size_t* buff)
+mk_lang_jumbo void mk_num_to_sizets_be(mk_num_basic_uint_type const* x, mk_lang_size_t* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((mk_lang_size_t)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1] = ((mk_lang_size_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -1204,28 +1204,28 @@ mk_lang_jumbo void mk_num_to_sizets_be(mk_num_basic_uint_type const* x, mk_lang_
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((mk_lang_size_t)(tmp));
+		dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1 - i] = ((mk_lang_size_t)(tmp));
 	}
 }
 
-mk_lang_jumbo void mk_num_to_umaxts_be(mk_num_basic_uint_type const* x, mk_lang_uintmax_t* buff)
+mk_lang_jumbo void mk_num_to_umaxts_be(mk_num_basic_uint_type const* x, mk_lang_uintmax_t* dst)
 {
 	mk_num_basic_uint_type tmp;
 	int i;
 
 	mk_lang_assert(x);
-	mk_lang_assert(buff);
+	mk_lang_assert(dst);
 
 	tmp = *x;
-	buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1] = ((mk_lang_uintmax_t)(tmp));
-	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff))); ++i)
+	dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1] = ((mk_lang_uintmax_t)(tmp));
+	for(i = 1; i != ((int)((sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst))); ++i)
 	{
 		#if defined(_MSC_VER)
 		#pragma warning(push)
@@ -1235,14 +1235,14 @@ mk_lang_jumbo void mk_num_to_umaxts_be(mk_num_basic_uint_type const* x, mk_lang_
 		#pragma GCC diagnostic push
 		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
 		#endif
-		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*dst) * mk_lang_charbit)));
 		#if defined(__GNUC__)
 		#pragma GCC diagnostic pop
 		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		buff[(sizeof(tmp) + (sizeof(*buff) - 1)) / sizeof(*buff) - 1 - i] = ((mk_lang_uintmax_t)(tmp));
+		dst[(sizeof(tmp) + (sizeof(*dst) - 1)) / sizeof(*dst) - 1 - i] = ((mk_lang_uintmax_t)(tmp));
 	}
 }
 
