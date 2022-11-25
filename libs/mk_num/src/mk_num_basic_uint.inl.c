@@ -1347,6 +1347,7 @@ mk_lang_jumbo void mk_num_not1(mk_num_basic_uint_type* x)
 	mk_num_not2(x, x);
 }
 
+
 mk_lang_jumbo void mk_num_or3(mk_num_basic_uint_type const* x, mk_num_basic_uint_type const* y, mk_num_basic_uint_type* z)
 {
 	mk_lang_assert(x);
@@ -1354,11 +1355,6 @@ mk_lang_jumbo void mk_num_or3(mk_num_basic_uint_type const* x, mk_num_basic_uint
 	mk_lang_assert(z);
 
 	*z = ((mk_num_basic_uint_type)(*x | *y));
-}
-
-mk_lang_jumbo void mk_num_or2(mk_num_basic_uint_type* x, mk_num_basic_uint_type const* y)
-{
-	mk_num_or3(x, y, x);
 }
 
 mk_lang_jumbo void mk_num_and3(mk_num_basic_uint_type const* x, mk_num_basic_uint_type const* y, mk_num_basic_uint_type* z)
@@ -1370,11 +1366,6 @@ mk_lang_jumbo void mk_num_and3(mk_num_basic_uint_type const* x, mk_num_basic_uin
 	*z = ((mk_num_basic_uint_type)(*x & *y));
 }
 
-mk_lang_jumbo void mk_num_and2(mk_num_basic_uint_type* x, mk_num_basic_uint_type const* y)
-{
-	mk_num_and3(x, y, x);
-}
-
 mk_lang_jumbo void mk_num_xor3(mk_num_basic_uint_type const* x, mk_num_basic_uint_type const* y, mk_num_basic_uint_type* z)
 {
 	mk_lang_assert(x);
@@ -1382,6 +1373,16 @@ mk_lang_jumbo void mk_num_xor3(mk_num_basic_uint_type const* x, mk_num_basic_uin
 	mk_lang_assert(z);
 
 	*z = ((mk_num_basic_uint_type)(*x ^ *y));
+}
+
+mk_lang_jumbo void mk_num_or2(mk_num_basic_uint_type* x, mk_num_basic_uint_type const* y)
+{
+	mk_num_or3(x, y, x);
+}
+
+mk_lang_jumbo void mk_num_and2(mk_num_basic_uint_type* x, mk_num_basic_uint_type const* y)
+{
+	mk_num_and3(x, y, x);
 }
 
 mk_lang_jumbo void mk_num_xor2(mk_num_basic_uint_type* x, mk_num_basic_uint_type const* y)

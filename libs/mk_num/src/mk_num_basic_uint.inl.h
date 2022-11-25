@@ -99,11 +99,12 @@ mk_lang_jumbo void mk_num_dec1(mk_num_basic_uint_type* x);
 
 mk_lang_jumbo void mk_num_not2(mk_num_basic_uint_type const* x, mk_num_basic_uint_type* y);
 mk_lang_jumbo void mk_num_not1(mk_num_basic_uint_type* x);
+
 mk_lang_jumbo void mk_num_or3(mk_num_basic_uint_type const* x, mk_num_basic_uint_type const* y, mk_num_basic_uint_type* z);
-mk_lang_jumbo void mk_num_or2(mk_num_basic_uint_type* x, mk_num_basic_uint_type const* y);
 mk_lang_jumbo void mk_num_and3(mk_num_basic_uint_type const* x, mk_num_basic_uint_type const* y, mk_num_basic_uint_type* z);
-mk_lang_jumbo void mk_num_and2(mk_num_basic_uint_type* x, mk_num_basic_uint_type const* y);
 mk_lang_jumbo void mk_num_xor3(mk_num_basic_uint_type const* x, mk_num_basic_uint_type const* y, mk_num_basic_uint_type* z);
+mk_lang_jumbo void mk_num_or2(mk_num_basic_uint_type* x, mk_num_basic_uint_type const* y);
+mk_lang_jumbo void mk_num_and2(mk_num_basic_uint_type* x, mk_num_basic_uint_type const* y);
 mk_lang_jumbo void mk_num_xor2(mk_num_basic_uint_type* x, mk_num_basic_uint_type const* y);
 
 mk_lang_jumbo void mk_num_shl3(mk_num_basic_uint_type const* x, int bits, mk_num_basic_uint_type* y);

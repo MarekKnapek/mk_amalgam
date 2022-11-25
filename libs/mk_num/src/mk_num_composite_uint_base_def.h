@@ -87,11 +87,12 @@
 
 #define mk_num_composite_un_base_not2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _not2)
 #define mk_num_composite_un_base_not1 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _not1)
+
 #define mk_num_composite_un_base_or3 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _or3)
-#define mk_num_composite_un_base_or2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _or2)
 #define mk_num_composite_un_base_and3 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _and3)
-#define mk_num_composite_un_base_and2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _and2)
 #define mk_num_composite_un_base_xor3 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _xor3)
+#define mk_num_composite_un_base_or2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _or2)
+#define mk_num_composite_un_base_and2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _and2)
 #define mk_num_composite_un_base_xor2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _xor2)
 
 #define mk_num_composite_un_base_shl3 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _shl3)

@@ -87,11 +87,12 @@
 
 #undef mk_num_not2
 #undef mk_num_not1
+
 #undef mk_num_or3
-#undef mk_num_or2
 #undef mk_num_and3
-#undef mk_num_and2
 #undef mk_num_xor3
+#undef mk_num_or2
+#undef mk_num_and2
 #undef mk_num_xor2
 
 #undef mk_num_shl3

@@ -90,11 +90,12 @@
 
 #define mk_num_not2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _not2)
 #define mk_num_not1 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _not1)
+
 #define mk_num_or3 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _or3)
-#define mk_num_or2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _or2)
 #define mk_num_and3 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _and3)
-#define mk_num_and2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _and2)
 #define mk_num_xor3 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _xor3)
+#define mk_num_or2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _or2)
+#define mk_num_and2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _and2)
 #define mk_num_xor2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _xor2)
 
 #define mk_num_shl3 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _shl3)
