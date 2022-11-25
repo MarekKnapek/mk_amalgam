@@ -368,7 +368,14 @@ mk_lang_jumbo void mk_num_from_uints_le(mk_num_basic_uint_type* x, unsigned int 
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -392,7 +399,14 @@ mk_lang_jumbo void mk_num_from_ulongs_le(mk_num_basic_uint_type* x, unsigned lon
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -416,7 +430,14 @@ mk_lang_jumbo void mk_num_from_ullongs_le(mk_num_basic_uint_type* x, mk_lang_ull
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -440,7 +461,14 @@ mk_lang_jumbo void mk_num_from_ulllongs_le(mk_num_basic_uint_type* x, mk_lang_ul
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -464,7 +492,14 @@ mk_lang_jumbo void mk_num_from_sizets_le(mk_num_basic_uint_type* x, mk_lang_size
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -488,7 +523,14 @@ mk_lang_jumbo void mk_num_from_umaxts_le(mk_num_basic_uint_type* x, mk_lang_uint
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
 		#endif
+			#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -562,7 +604,14 @@ mk_lang_jumbo void mk_num_to_uints_le(mk_num_basic_uint_type const* x, unsigned 
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
 		#endif
+			#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -586,7 +635,14 @@ mk_lang_jumbo void mk_num_to_ulongs_le(mk_num_basic_uint_type const* x, unsigned
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -610,7 +666,14 @@ mk_lang_jumbo void mk_num_to_ullongs_le(mk_num_basic_uint_type const* x, mk_lang
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -634,7 +697,14 @@ mk_lang_jumbo void mk_num_to_ulllongs_le(mk_num_basic_uint_type const* x, mk_lan
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -658,7 +728,14 @@ mk_lang_jumbo void mk_num_to_sizets_le(mk_num_basic_uint_type const* x, mk_lang_
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -682,7 +759,14 @@ mk_lang_jumbo void mk_num_to_umaxts_le(mk_num_basic_uint_type const* x, mk_lang_
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -740,7 +824,14 @@ mk_lang_jumbo void mk_num_from_uints_be(mk_num_basic_uint_type* x, unsigned int 
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -764,7 +855,14 @@ mk_lang_jumbo void mk_num_from_ulongs_be(mk_num_basic_uint_type* x, unsigned lon
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -788,7 +886,14 @@ mk_lang_jumbo void mk_num_from_ullongs_be(mk_num_basic_uint_type* x, mk_lang_ull
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -812,7 +917,14 @@ mk_lang_jumbo void mk_num_from_ulllongs_be(mk_num_basic_uint_type* x, mk_lang_ul
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -836,7 +948,14 @@ mk_lang_jumbo void mk_num_from_sizets_be(mk_num_basic_uint_type* x, mk_lang_size
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -860,7 +979,14 @@ mk_lang_jumbo void mk_num_from_umaxts_be(mk_num_basic_uint_type* x, mk_lang_uint
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '<<': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: left shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp << (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -934,7 +1060,14 @@ mk_lang_jumbo void mk_num_to_uints_be(mk_num_basic_uint_type const* x, unsigned 
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -958,7 +1091,14 @@ mk_lang_jumbo void mk_num_to_ulongs_be(mk_num_basic_uint_type const* x, unsigned
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -982,7 +1122,14 @@ mk_lang_jumbo void mk_num_to_ullongs_be(mk_num_basic_uint_type const* x, mk_lang
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -1006,7 +1153,14 @@ mk_lang_jumbo void mk_num_to_ulllongs_be(mk_num_basic_uint_type const* x, mk_lan
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -1030,7 +1184,14 @@ mk_lang_jumbo void mk_num_to_sizets_be(mk_num_basic_uint_type const* x, mk_lang_
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
@@ -1054,7 +1215,14 @@ mk_lang_jumbo void mk_num_to_umaxts_be(mk_num_basic_uint_type const* x, mk_lang_
 		#pragma warning(push)
 		#pragma warning(disable:4293) /* warning C4293: '>>': shift count negative or too big, undefined behavior */
 		#endif
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic push
+		#pragma GCC diagnostic ignored "-Wshift-count-overflow" /* warning: right shift count >= width of type [-Wshift-count-overflow] */
+		#endif
 		tmp = ((mk_num_basic_uint_type)(tmp >> (sizeof(*buff) * mk_lang_charbit)));
+		#if defined(__GNUC__)
+		#pragma GCC diagnostic pop
+		#endif
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
