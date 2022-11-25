@@ -1,3 +1,6 @@
+#include "mk_lang_concat.h"
+
+
 #define mk_num_set_zero mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _set_zero)
 #define mk_num_set_one mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _set_one)
 #define mk_num_set_mask mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _set_mask)
