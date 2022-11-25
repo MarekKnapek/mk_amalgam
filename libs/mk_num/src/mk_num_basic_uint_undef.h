@@ -80,8 +80,10 @@
 #undef mk_num_gt
 #undef mk_num_ge
 
-#undef mk_num_inc
-#undef mk_num_dec
+#undef mk_num_inc2
+#undef mk_num_dec2
+#undef mk_num_inc1
+#undef mk_num_dec1
 
 #undef mk_num_not2
 #undef mk_num_not1

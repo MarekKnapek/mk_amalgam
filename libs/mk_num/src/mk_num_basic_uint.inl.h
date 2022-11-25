@@ -92,8 +92,10 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_bool_t mk_num_le(mk_num_basic_uint_type 
 mk_lang_nodiscard mk_lang_jumbo mk_lang_bool_t mk_num_gt(mk_num_basic_uint_type const* x, mk_num_basic_uint_type const* y);
 mk_lang_nodiscard mk_lang_jumbo mk_lang_bool_t mk_num_ge(mk_num_basic_uint_type const* x, mk_num_basic_uint_type const* y);
 
-mk_lang_jumbo void mk_num_inc(mk_num_basic_uint_type* x);
-mk_lang_jumbo void mk_num_dec(mk_num_basic_uint_type* x);
+mk_lang_jumbo void mk_num_inc2(mk_num_basic_uint_type* x);
+mk_lang_jumbo void mk_num_dec2(mk_num_basic_uint_type* x);
+mk_lang_jumbo void mk_num_inc1(mk_num_basic_uint_type* x);
+mk_lang_jumbo void mk_num_dec1(mk_num_basic_uint_type* x);
 
 mk_lang_jumbo void mk_num_not2(mk_num_basic_uint_type const* x, mk_num_basic_uint_type* y);
 mk_lang_jumbo void mk_num_not1(mk_num_basic_uint_type* x);

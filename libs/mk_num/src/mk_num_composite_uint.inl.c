@@ -1072,7 +1072,7 @@ mk_lang_jumbo void mk_num_composite_un_inc(mk_num_composite_un_t* x)
 	i = 0;
 	do
 	{
-		mk_num_composite_un_base_inc(&x->m_parts[i]);
+		mk_num_composite_un_base_inc1(&x->m_parts[i]);
 	}
 	while(mk_num_composite_un_base_is_zero(&x->m_parts[i++]) && i != mk_num_composite_un_parts);
 	mk_num_composite_un_normalize_msd(x);
@@ -1089,7 +1089,7 @@ mk_lang_jumbo void mk_num_composite_un_dec(mk_num_composite_un_t* x)
 	do
 	{
 		b = mk_num_composite_un_base_is_zero(&x->m_parts[i]);
-		mk_num_composite_un_base_dec(&x->m_parts[i]);
+		mk_num_composite_un_base_dec1(&x->m_parts[i]);
 		++i;
 	}
 	while(b && i != mk_num_composite_un_parts);
@@ -1378,7 +1378,7 @@ mk_lang_jumbo void mk_num_composite_un_add3_sat_cid_cod(mk_num_composite_un_t co
 	if(b)
 	{
 		mk_num_composite_un_base_set_zero(&smol);
-		mk_num_composite_un_base_dec(&smol);
+		mk_num_composite_un_base_dec1(&smol);
 		for(i = 0; i != mk_num_composite_un_parts; ++i)
 		{
 			z->m_parts[i] = smol;
@@ -1399,7 +1399,7 @@ mk_lang_jumbo void mk_num_composite_un_add3_sat_cid_coe(mk_num_composite_un_t co
 	if(b)
 	{
 		mk_num_composite_un_base_set_zero(&smol);
-		mk_num_composite_un_base_dec(&smol);
+		mk_num_composite_un_base_dec1(&smol);
 		for(i = 0; i != mk_num_composite_un_parts; ++i)
 		{
 			z->m_parts[i] = smol;
@@ -1420,7 +1420,7 @@ mk_lang_jumbo void mk_num_composite_un_add3_sat_cie_cod(mk_num_composite_un_t co
 	if(b)
 	{
 		mk_num_composite_un_base_set_zero(&smol);
-		mk_num_composite_un_base_dec(&smol);
+		mk_num_composite_un_base_dec1(&smol);
 		for(i = 0; i != mk_num_composite_un_parts; ++i)
 		{
 			z->m_parts[i] = smol;
@@ -1441,7 +1441,7 @@ mk_lang_jumbo void mk_num_composite_un_add3_sat_cie_coe(mk_num_composite_un_t co
 	if(b)
 	{
 		mk_num_composite_un_base_set_zero(&smol);
-		mk_num_composite_un_base_dec(&smol);
+		mk_num_composite_un_base_dec1(&smol);
 		for(i = 0; i != mk_num_composite_un_parts; ++i)
 		{
 			z->m_parts[i] = smol;
@@ -1850,7 +1850,7 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_cod_restrict(mk_num_composite_u
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[0], &z->m_parts[0], &z->m_parts[1]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[1], &digit1, &z->m_parts[2]);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c);
-		if(c) mk_num_composite_un_base_inc(&z->m_parts[2]);
+		if(c) mk_num_composite_un_base_inc1(&z->m_parts[2]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[1], &x->m_parts[0], &digit1, &digit2);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c);
 		mk_num_composite_un_base_add2_wrap_cie_cod(&z->m_parts[2], &digit2, c);
@@ -1869,7 +1869,7 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_cod_restrict(mk_num_composite_u
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[0], &z->m_parts[0], &z->m_parts[1]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[1], &digit1, &z->m_parts[2]);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c);
-		if(c) mk_num_composite_un_base_inc(&z->m_parts[2]);
+		if(c) mk_num_composite_un_base_inc1(&z->m_parts[2]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[1], &x->m_parts[0], &digit1, &digit2);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c);
 		mk_num_composite_un_base_add2_wrap_cie_coe(&z->m_parts[2], &digit2, c, &c);
@@ -1902,7 +1902,7 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_cod_restrict(mk_num_composite_u
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[0], &z->m_parts[0], &z->m_parts[1]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[1], &digit1, &z->m_parts[2]);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c);
-		if(c) mk_num_composite_un_base_inc(&z->m_parts[2]);
+		if(c) mk_num_composite_un_base_inc1(&z->m_parts[2]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[1], &x->m_parts[0], &digit1, &digit2);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c);
 		mk_num_composite_un_base_add2_wrap_cie_coe(&z->m_parts[2], &digit2, c, &c);
@@ -1918,7 +1918,7 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_cod_restrict(mk_num_composite_u
 				mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[i], &x->m_parts[j - i], &digit1, &digit2);
 				mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[j], &digit1, &c);
 				mk_num_composite_un_base_add2_wrap_cie_coe(&z->m_parts[j + 1], &digit2, c, &c);
-				if(c) mk_num_composite_un_base_inc(&z->m_parts[j + 2]);
+				if(c) mk_num_composite_un_base_inc1(&z->m_parts[j + 2]);
 			}
 		}
 		for(i = 0; i != j + 1; ++i)
@@ -1954,7 +1954,7 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_coe_restrict(mk_num_composite_u
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[0], &z->m_parts[0], &z->m_parts[1]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[1], &digit1, &co->m_parts[0]);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c);
-		if(c) mk_num_composite_un_base_inc(&co->m_parts[0]);
+		if(c) mk_num_composite_un_base_inc1(&co->m_parts[0]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[1], &x->m_parts[0], &digit1, &digit2);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c);
 		mk_num_composite_un_base_add2_wrap_cie_coe(&co->m_parts[0], &digit2, c, &c);
@@ -1971,7 +1971,7 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_coe_restrict(mk_num_composite_u
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[0], &z->m_parts[0], &z->m_parts[1]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[1], &digit1, &z->m_parts[2]);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c);
-		if(c) mk_num_composite_un_base_inc(&z->m_parts[2]);
+		if(c) mk_num_composite_un_base_inc1(&z->m_parts[2]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[1], &x->m_parts[0], &digit1, &digit2);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c);
 		mk_num_composite_un_base_add2_wrap_cie_coe(&z->m_parts[2], &digit2, c, &c);
@@ -1983,11 +1983,11 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_coe_restrict(mk_num_composite_u
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[1], &x->m_parts[1], &digit1, &digit2);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[2], &digit1, &c);
 		mk_num_composite_un_base_add2_wrap_cie_coe(&co->m_parts[0], &digit2, c, &c);
-		if(c) mk_num_composite_un_base_inc(&co->m_parts[1]);
+		if(c) mk_num_composite_un_base_inc1(&co->m_parts[1]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[2], &x->m_parts[0], &digit1, &digit2);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[2], &digit1, &c);
 		mk_num_composite_un_base_add2_wrap_cie_coe(&co->m_parts[0], &digit2, c, &c);
-		if(c) mk_num_composite_un_base_inc(&co->m_parts[1]);
+		if(c) mk_num_composite_un_base_inc1(&co->m_parts[1]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[1], &x->m_parts[2], &digit1, &digit2);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&co->m_parts[0], &digit1, &c);
 		mk_num_composite_un_base_add2_wrap_cie_coe(&co->m_parts[1], &digit2, c, &c);
@@ -1995,7 +1995,7 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_coe_restrict(mk_num_composite_u
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[2], &x->m_parts[1], &digit1, &digit2);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&co->m_parts[0], &digit1, &c);
 		mk_num_composite_un_base_add2_wrap_cie_coe(&co->m_parts[1], &digit2, c, &c);
-		if(c) mk_num_composite_un_base_inc(&co->m_parts[2]);
+		if(c) mk_num_composite_un_base_inc1(&co->m_parts[2]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[2], &x->m_parts[2], &digit1, &digit2);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&co->m_parts[1], &digit1, &c);
 		mk_num_composite_un_base_add2_wrap_cie_cod(&co->m_parts[2], &digit2, c);
@@ -2010,7 +2010,7 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_coe_restrict(mk_num_composite_u
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[0], &z->m_parts[0], &z->m_parts[1]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[1], &digit1, &z->m_parts[2]);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c);
-		if(c) mk_num_composite_un_base_inc(&z->m_parts[2]);
+		if(c) mk_num_composite_un_base_inc1(&z->m_parts[2]);
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[1], &x->m_parts[0], &digit1, &digit2);
 		mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[1], &digit1, &c);
 		mk_num_composite_un_base_add2_wrap_cie_coe(&z->m_parts[2], &digit2, c, &c);
@@ -2026,7 +2026,7 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_coe_restrict(mk_num_composite_u
 				mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[i], &x->m_parts[j - i], &digit1, &digit2);
 				mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[j], &digit1, &c);
 				mk_num_composite_un_base_add2_wrap_cie_coe(&z->m_parts[j + 1], &digit2, c, &c);
-				if(c) mk_num_composite_un_base_inc(&z->m_parts[j + 2]);
+				if(c) mk_num_composite_un_base_inc1(&z->m_parts[j + 2]);
 			}
 		}
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[j], &digit1, &digit2);
@@ -2038,7 +2038,7 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_coe_restrict(mk_num_composite_u
 			mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[i], &x->m_parts[j - i], &digit1, &digit2);
 			mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[j], &digit1, &c);
 			mk_num_composite_un_base_add2_wrap_cie_coe(&z->m_parts[j + 1], &digit2, c, &c);
-			if(c) mk_num_composite_un_base_inc(&co->m_parts[0]);
+			if(c) mk_num_composite_un_base_inc1(&co->m_parts[0]);
 		}
 		++j;
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[0], &x->m_parts[j], &digit1, &digit2);
@@ -2050,7 +2050,7 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_coe_restrict(mk_num_composite_u
 			mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[i], &x->m_parts[j - i], &digit1, &digit2);
 			mk_num_composite_un_base_add2_wrap_cid_coe(&z->m_parts[j], &digit1, &c);
 			mk_num_composite_un_base_add2_wrap_cie_coe(&co->m_parts[0], &digit2, c, &c);
-			if(c) mk_num_composite_un_base_inc(&co->m_parts[1]);
+			if(c) mk_num_composite_un_base_inc1(&co->m_parts[1]);
 		}
 		for(j = 0; j != mk_num_composite_un_parts - 2; ++j)
 		{
@@ -2063,7 +2063,7 @@ mk_lang_jumbo void mk_num_composite_un_mul3_wrap_coe_restrict(mk_num_composite_u
 				mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[2 + j + i], &x->m_parts[mk_num_composite_un_parts - 2 - i], &digit1, &digit2);
 				mk_num_composite_un_base_add2_wrap_cid_coe(&co->m_parts[j], &digit1, &c);
 				mk_num_composite_un_base_add2_wrap_cie_coe(&co->m_parts[j + 1], &digit2, c, &c);
-				if(c) mk_num_composite_un_base_inc(&co->m_parts[j + 2]);
+				if(c) mk_num_composite_un_base_inc1(&co->m_parts[j + 2]);
 			}
 		}
 		mk_num_composite_un_base_mul3_wrap_coe(&y->m_parts[j + 1], &x->m_parts[mk_num_composite_un_parts - 1], &digit1, &digit2);

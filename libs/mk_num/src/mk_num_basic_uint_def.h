@@ -83,8 +83,10 @@
 #define mk_num_gt mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _gt)
 #define mk_num_ge mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _ge)
 
-#define mk_num_inc mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _inc)
-#define mk_num_dec mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _dec)
+#define mk_num_inc2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _inc2)
+#define mk_num_dec2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _dec2)
+#define mk_num_inc1 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _inc1)
+#define mk_num_dec1 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _dec1)
 
 #define mk_num_not2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _not2)
 #define mk_num_not1 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_basic_uint_name), _not1)

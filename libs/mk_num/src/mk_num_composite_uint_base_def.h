@@ -80,8 +80,10 @@
 #define mk_num_composite_un_base_gt mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _gt)
 #define mk_num_composite_un_base_ge mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _ge)
 
-#define mk_num_composite_un_base_inc mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _inc)
-#define mk_num_composite_un_base_dec mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _dec)
+#define mk_num_composite_un_base_inc2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _inc2)
+#define mk_num_composite_un_base_dec2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _dec2)
+#define mk_num_composite_un_base_inc1 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _inc1)
+#define mk_num_composite_un_base_dec1 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _dec1)
 
 #define mk_num_composite_un_base_not2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _not2)
 #define mk_num_composite_un_base_not1 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _not1)

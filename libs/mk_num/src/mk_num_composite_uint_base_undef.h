@@ -80,8 +80,10 @@
 #undef mk_num_composite_un_base_gt
 #undef mk_num_composite_un_base_ge
 
-#undef mk_num_composite_un_base_inc
-#undef mk_num_composite_un_base_dec
+#undef mk_num_composite_un_base_inc2
+#undef mk_num_composite_un_base_dec2
+#undef mk_num_composite_un_base_inc1
+#undef mk_num_composite_un_base_dec1
 
 #undef mk_num_composite_un_base_not2
 #undef mk_num_composite_un_base_not1
