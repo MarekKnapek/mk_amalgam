@@ -77,116 +77,132 @@ mk_lang_jumbo void mk_num_set_mask(mk_num_basic_uint_type* x, int bits)
 }
 
 
-mk_lang_jumbo void mk_num_from_char(mk_num_basic_uint_type* x, char src)
+mk_lang_jumbo void mk_num_from_char(mk_num_basic_uint_type* x, char const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_uchar(mk_num_basic_uint_type* x, unsigned char src)
+mk_lang_jumbo void mk_num_from_uchar(mk_num_basic_uint_type* x, unsigned char const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_schar(mk_num_basic_uint_type* x, signed char src)
+mk_lang_jumbo void mk_num_from_schar(mk_num_basic_uint_type* x, signed char const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_ushort(mk_num_basic_uint_type* x, unsigned short int src)
+mk_lang_jumbo void mk_num_from_ushort(mk_num_basic_uint_type* x, unsigned short int const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_sshort(mk_num_basic_uint_type* x, signed short int src)
+mk_lang_jumbo void mk_num_from_sshort(mk_num_basic_uint_type* x, signed short int const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_uint(mk_num_basic_uint_type* x, unsigned int src)
+mk_lang_jumbo void mk_num_from_uint(mk_num_basic_uint_type* x, unsigned int const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_sint(mk_num_basic_uint_type* x, signed int src)
+mk_lang_jumbo void mk_num_from_sint(mk_num_basic_uint_type* x, signed int const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_ulong(mk_num_basic_uint_type* x, unsigned long int src)
+mk_lang_jumbo void mk_num_from_ulong(mk_num_basic_uint_type* x, unsigned long int const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_slong(mk_num_basic_uint_type* x, signed long int src)
+mk_lang_jumbo void mk_num_from_slong(mk_num_basic_uint_type* x, signed long int const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_ullong(mk_num_basic_uint_type* x, mk_lang_ullong_t src)
+mk_lang_jumbo void mk_num_from_ullong(mk_num_basic_uint_type* x, mk_lang_ullong_t const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_sllong(mk_num_basic_uint_type* x, mk_lang_sllong_t src)
+mk_lang_jumbo void mk_num_from_sllong(mk_num_basic_uint_type* x, mk_lang_sllong_t const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_ulllong(mk_num_basic_uint_type* x, mk_lang_ulllong_t src)
+mk_lang_jumbo void mk_num_from_ulllong(mk_num_basic_uint_type* x, mk_lang_ulllong_t const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_slllong(mk_num_basic_uint_type* x, mk_lang_slllong_t src)
+mk_lang_jumbo void mk_num_from_slllong(mk_num_basic_uint_type* x, mk_lang_slllong_t const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_sizet(mk_num_basic_uint_type* x, mk_lang_size_t src)
+mk_lang_jumbo void mk_num_from_sizet(mk_num_basic_uint_type* x, mk_lang_size_t const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_umaxt(mk_num_basic_uint_type* x, mk_lang_uintmax_t src)
+mk_lang_jumbo void mk_num_from_umaxt(mk_num_basic_uint_type* x, mk_lang_uintmax_t const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
-mk_lang_jumbo void mk_num_from_smaxt(mk_num_basic_uint_type* x, mk_lang_sintmax_t src)
+mk_lang_jumbo void mk_num_from_smaxt(mk_num_basic_uint_type* x, mk_lang_sintmax_t const* src)
 {
 	mk_lang_assert(x);
+	mk_lang_assert(src);
 
-	*x = ((mk_num_basic_uint_type)(src));
+	*x = ((mk_num_basic_uint_type)(*src));
 }
 
 

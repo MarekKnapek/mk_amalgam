@@ -160,7 +160,7 @@ mk_lang_jumbo void mk_num_composite_un_from_uchar(mk_num_composite_un_t* x, unsi
 
 	mk_lang_assert(x);
 
-	mk_num_composite_un_base_from_uchar(&x->m_parts[0], src);
+	mk_num_composite_un_base_from_uchar(&x->m_parts[0], &src);
 	#if defined(_MSC_VER)
 	#pragma warning(push)
 	#pragma warning(disable:4296) /* warning C4296: '<': expression is always false */
@@ -186,7 +186,7 @@ mk_lang_jumbo void mk_num_composite_un_from_uchar(mk_num_composite_un_t* x, unsi
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		mk_num_composite_un_base_from_uchar(&x->m_parts[i], src);
+		mk_num_composite_un_base_from_uchar(&x->m_parts[i], &src);
 	}
 	for(; i != mk_num_composite_un_parts; ++i)
 	{
@@ -212,7 +212,7 @@ mk_lang_jumbo void mk_num_composite_un_from_ushort(mk_num_composite_un_t* x, uns
 
 	mk_lang_assert(x);
 
-	mk_num_composite_un_base_from_ushort(&x->m_parts[0], src);
+	mk_num_composite_un_base_from_ushort(&x->m_parts[0], &src);
 	#if defined(_MSC_VER)
 	#pragma warning(push)
 	#pragma warning(disable:4296) /* warning C4296: '<': expression is always false */
@@ -238,7 +238,7 @@ mk_lang_jumbo void mk_num_composite_un_from_ushort(mk_num_composite_un_t* x, uns
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		mk_num_composite_un_base_from_ushort(&x->m_parts[i], src);
+		mk_num_composite_un_base_from_ushort(&x->m_parts[i], &src);
 	}
 	for(; i != mk_num_composite_un_parts; ++i)
 	{
@@ -264,7 +264,7 @@ mk_lang_jumbo void mk_num_composite_un_from_uint(mk_num_composite_un_t* x, unsig
 
 	mk_lang_assert(x);
 
-	mk_num_composite_un_base_from_uint(&x->m_parts[0], src);
+	mk_num_composite_un_base_from_uint(&x->m_parts[0], &src);
 	#if defined(_MSC_VER)
 	#pragma warning(push)
 	#pragma warning(disable:4296) /* warning C4296: '<': expression is always false */
@@ -290,7 +290,7 @@ mk_lang_jumbo void mk_num_composite_un_from_uint(mk_num_composite_un_t* x, unsig
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		mk_num_composite_un_base_from_uint(&x->m_parts[i], src);
+		mk_num_composite_un_base_from_uint(&x->m_parts[i], &src);
 	}
 	for(; i != mk_num_composite_un_parts; ++i)
 	{
@@ -316,7 +316,7 @@ mk_lang_jumbo void mk_num_composite_un_from_ulong(mk_num_composite_un_t* x, unsi
 
 	mk_lang_assert(x);
 
-	mk_num_composite_un_base_from_ulong(&x->m_parts[0], src);
+	mk_num_composite_un_base_from_ulong(&x->m_parts[0], &src);
 	#if defined(_MSC_VER)
 	#pragma warning(push)
 	#pragma warning(disable:4296) /* warning C4296: '<': expression is always false */
@@ -342,7 +342,7 @@ mk_lang_jumbo void mk_num_composite_un_from_ulong(mk_num_composite_un_t* x, unsi
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		mk_num_composite_un_base_from_ulong(&x->m_parts[i], src);
+		mk_num_composite_un_base_from_ulong(&x->m_parts[i], &src);
 	}
 	for(; i != mk_num_composite_un_parts; ++i)
 	{
@@ -368,7 +368,7 @@ mk_lang_jumbo void mk_num_composite_un_from_ullong(mk_num_composite_un_t* x, mk_
 
 	mk_lang_assert(x);
 
-	mk_num_composite_un_base_from_ullong(&x->m_parts[0], src);
+	mk_num_composite_un_base_from_ullong(&x->m_parts[0], &src);
 	for(i = 1; i < ((int)(sizeof(src) / sizeof(mk_num_composite_base_type))) && i != mk_num_composite_un_parts; ++i)
 	{
 		#if defined(_MSC_VER)
@@ -387,7 +387,7 @@ mk_lang_jumbo void mk_num_composite_un_from_ullong(mk_num_composite_un_t* x, mk_
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		mk_num_composite_un_base_from_ullong(&x->m_parts[i], src);
+		mk_num_composite_un_base_from_ullong(&x->m_parts[i], &src);
 	}
 	for(; i != mk_num_composite_un_parts; ++i)
 	{
@@ -413,7 +413,7 @@ mk_lang_jumbo void mk_num_composite_un_from_ulllong(mk_num_composite_un_t* x, mk
 
 	mk_lang_assert(x);
 
-	mk_num_composite_un_base_from_ulllong(&x->m_parts[0], src);
+	mk_num_composite_un_base_from_ulllong(&x->m_parts[0], &src);
 	for(i = 1; i < ((int)(sizeof(src) / sizeof(mk_num_composite_base_type))) && i != mk_num_composite_un_parts; ++i)
 	{
 		#if defined(_MSC_VER)
@@ -432,7 +432,7 @@ mk_lang_jumbo void mk_num_composite_un_from_ulllong(mk_num_composite_un_t* x, mk
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		mk_num_composite_un_base_from_ulllong(&x->m_parts[i], src);
+		mk_num_composite_un_base_from_ulllong(&x->m_parts[i], &src);
 	}
 	for(; i != mk_num_composite_un_parts; ++i)
 	{
@@ -458,7 +458,7 @@ mk_lang_jumbo void mk_num_composite_un_from_sizet(mk_num_composite_un_t* x, mk_l
 
 	mk_lang_assert(x);
 
-	mk_num_composite_un_base_from_sizet(&x->m_parts[0], src);
+	mk_num_composite_un_base_from_sizet(&x->m_parts[0], &src);
 	for(i = 1; i < ((int)(sizeof(src) / sizeof(mk_num_composite_base_type))) && i != mk_num_composite_un_parts; ++i)
 	{
 		#if defined(_MSC_VER)
@@ -477,7 +477,7 @@ mk_lang_jumbo void mk_num_composite_un_from_sizet(mk_num_composite_un_t* x, mk_l
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		mk_num_composite_un_base_from_sizet(&x->m_parts[i], src);
+		mk_num_composite_un_base_from_sizet(&x->m_parts[i], &src);
 	}
 	for(; i != mk_num_composite_un_parts; ++i)
 	{
@@ -491,7 +491,7 @@ mk_lang_jumbo void mk_num_composite_un_from_umaxt(mk_num_composite_un_t* x, mk_l
 
 	mk_lang_assert(x);
 
-	mk_num_composite_un_base_from_umaxt(&x->m_parts[0], src);
+	mk_num_composite_un_base_from_umaxt(&x->m_parts[0], &src);
 	for(i = 1; i < ((int)(sizeof(src) / sizeof(mk_num_composite_base_type))) && i != mk_num_composite_un_parts; ++i)
 	{
 		#if defined(_MSC_VER)
@@ -510,7 +510,7 @@ mk_lang_jumbo void mk_num_composite_un_from_umaxt(mk_num_composite_un_t* x, mk_l
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		mk_num_composite_un_base_from_umaxt(&x->m_parts[i], src);
+		mk_num_composite_un_base_from_umaxt(&x->m_parts[i], &src);
 	}
 	for(; i != mk_num_composite_un_parts; ++i)
 	{
