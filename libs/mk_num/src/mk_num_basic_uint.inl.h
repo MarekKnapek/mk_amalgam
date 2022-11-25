@@ -31,22 +31,22 @@ mk_lang_jumbo void mk_num_from_sizet(mk_num_basic_uint_type* x, mk_lang_size_t s
 mk_lang_jumbo void mk_num_from_umaxt(mk_num_basic_uint_type* x, mk_lang_uintmax_t src);
 mk_lang_jumbo void mk_num_from_smaxt(mk_num_basic_uint_type* x, mk_lang_sintmax_t src);
 
-mk_lang_nodiscard mk_lang_jumbo char mk_num_to_char(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo unsigned char mk_num_to_uchar(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo signed char mk_num_to_schar(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo unsigned short int mk_num_to_ushort(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo signed short int mk_num_to_sshort(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo unsigned int mk_num_to_uint(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo signed int mk_num_to_sint(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo unsigned long int mk_num_to_ulong(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo signed long int mk_num_to_slong(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo mk_lang_ullong_t mk_num_to_ullong(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo mk_lang_sllong_t mk_num_to_sllong(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo mk_lang_ulllong_t mk_num_to_ulllong(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo mk_lang_slllong_t mk_num_to_slllong(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo mk_lang_size_t mk_num_to_sizet(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo mk_lang_uintmax_t mk_num_to_umaxt(mk_num_basic_uint_type const* x);
-mk_lang_nodiscard mk_lang_jumbo mk_lang_sintmax_t mk_num_to_smaxt(mk_num_basic_uint_type const* x);
+mk_lang_jumbo void mk_num_to_char(mk_num_basic_uint_type const* x, char* dst);
+mk_lang_jumbo void mk_num_to_uchar(mk_num_basic_uint_type const* x, unsigned char* dst);
+mk_lang_jumbo void mk_num_to_schar(mk_num_basic_uint_type const* x, signed char* dst);
+mk_lang_jumbo void mk_num_to_ushort(mk_num_basic_uint_type const* x, unsigned short int* dst);
+mk_lang_jumbo void mk_num_to_sshort(mk_num_basic_uint_type const* x, signed short int* dst);
+mk_lang_jumbo void mk_num_to_uint(mk_num_basic_uint_type const* x, unsigned int* dst);
+mk_lang_jumbo void mk_num_to_sint(mk_num_basic_uint_type const* x, signed int* dst);
+mk_lang_jumbo void mk_num_to_ulong(mk_num_basic_uint_type const* x, unsigned long int* dst);
+mk_lang_jumbo void mk_num_to_slong(mk_num_basic_uint_type const* x, signed long int* dst);
+mk_lang_jumbo void mk_num_to_ullong(mk_num_basic_uint_type const* x, mk_lang_ullong_t* dst);
+mk_lang_jumbo void mk_num_to_sllong(mk_num_basic_uint_type const* x, mk_lang_sllong_t* dst);
+mk_lang_jumbo void mk_num_to_ulllong(mk_num_basic_uint_type const* x, mk_lang_ulllong_t* dst);
+mk_lang_jumbo void mk_num_to_slllong(mk_num_basic_uint_type const* x, mk_lang_slllong_t* dst);
+mk_lang_jumbo void mk_num_to_sizet(mk_num_basic_uint_type const* x, mk_lang_size_t* dst);
+mk_lang_jumbo void mk_num_to_umaxt(mk_num_basic_uint_type const* x, mk_lang_uintmax_t* dst);
+mk_lang_jumbo void mk_num_to_smaxt(mk_num_basic_uint_type const* x, mk_lang_sintmax_t* dst);
 
 mk_lang_jumbo void mk_num_from_uchars_le(mk_num_basic_uint_type* x, unsigned char const* buff);
 mk_lang_jumbo void mk_num_from_ushorts_le(mk_num_basic_uint_type* x, unsigned short int const* buff);

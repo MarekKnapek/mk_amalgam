@@ -552,10 +552,11 @@ mk_lang_nodiscard mk_lang_jumbo unsigned char mk_num_composite_un_to_uchar(mk_nu
 
 	unsigned char uint;
 	int i;
+	unsigned char tmp;
 
 	mk_lang_assert(x);
 
-	uint = mk_num_composite_un_base_to_uchar(&x->m_parts[n - 1]);
+	mk_num_composite_un_base_to_uchar(&x->m_parts[n - 1], &uint);
 	for(i = 1; i != n; ++i)
 	{
 		#if defined(_MSC_VER)
@@ -573,7 +574,8 @@ mk_lang_nodiscard mk_lang_jumbo unsigned char mk_num_composite_un_to_uchar(mk_nu
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		uint = ((unsigned char)(uint | mk_num_composite_un_base_to_uchar(&x->m_parts[n - 1 - i])));
+		mk_num_composite_un_base_to_uchar(&x->m_parts[n - 1 - i], &tmp);
+		uint = ((unsigned char)(uint | tmp));
 	}
 	return uint;
 
@@ -601,10 +603,11 @@ mk_lang_nodiscard mk_lang_jumbo unsigned short int mk_num_composite_un_to_ushort
 
 	unsigned short int uint;
 	int i;
+	unsigned short int tmp;
 
 	mk_lang_assert(x);
 
-	uint = mk_num_composite_un_base_to_ushort(&x->m_parts[n - 1]);
+	mk_num_composite_un_base_to_ushort(&x->m_parts[n - 1], &uint);
 	for(i = 1; i != n; ++i)
 	{
 		#if defined(_MSC_VER)
@@ -622,7 +625,8 @@ mk_lang_nodiscard mk_lang_jumbo unsigned short int mk_num_composite_un_to_ushort
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		uint = ((unsigned short int)(uint | mk_num_composite_un_base_to_ushort(&x->m_parts[n - 1 - i])));
+		mk_num_composite_un_base_to_ushort(&x->m_parts[n - 1 - i], &tmp);
+		uint = ((unsigned short int)(uint | tmp));
 	}
 	return uint;
 
@@ -650,10 +654,11 @@ mk_lang_nodiscard mk_lang_jumbo unsigned int mk_num_composite_un_to_uint(mk_num_
 
 	unsigned int uint;
 	int i;
+	unsigned int tmp;
 
 	mk_lang_assert(x);
 
-	uint = mk_num_composite_un_base_to_uint(&x->m_parts[n - 1]);
+	mk_num_composite_un_base_to_uint(&x->m_parts[n - 1], &uint);
 	for(i = 1; i != n; ++i)
 	{
 		#if defined(_MSC_VER)
@@ -671,7 +676,8 @@ mk_lang_nodiscard mk_lang_jumbo unsigned int mk_num_composite_un_to_uint(mk_num_
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		uint = ((unsigned int)(uint | mk_num_composite_un_base_to_uint(&x->m_parts[n - 1 - i])));
+		mk_num_composite_un_base_to_uint(&x->m_parts[n - 1 - i], &tmp);
+		uint = ((unsigned int)(uint | tmp));
 	}
 	return uint;
 
@@ -699,10 +705,11 @@ mk_lang_nodiscard mk_lang_jumbo unsigned long int mk_num_composite_un_to_ulong(m
 
 	unsigned long int uint;
 	int i;
+	unsigned long int tmp;
 
 	mk_lang_assert(x);
 
-	uint = mk_num_composite_un_base_to_ulong(&x->m_parts[n - 1]);
+	mk_num_composite_un_base_to_ulong(&x->m_parts[n - 1], &uint);
 	for(i = 1; i != n; ++i)
 	{
 		#if defined(_MSC_VER)
@@ -720,7 +727,8 @@ mk_lang_nodiscard mk_lang_jumbo unsigned long int mk_num_composite_un_to_ulong(m
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		uint = ((unsigned long int)(uint | mk_num_composite_un_base_to_ulong(&x->m_parts[n - 1 - i])));
+		mk_num_composite_un_base_to_ulong(&x->m_parts[n - 1 - i], &tmp);
+		uint = ((unsigned long int)(uint | tmp));
 	}
 	return uint;
 
@@ -748,10 +756,11 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_ullong_t mk_num_composite_un_to_ullong(m
 
 	mk_lang_ullong_t uint;
 	int i;
+	mk_lang_ullong_t tmp;
 
 	mk_lang_assert(x);
 
-	uint = mk_num_composite_un_base_to_ullong(&x->m_parts[n - 1]);
+	mk_num_composite_un_base_to_ullong(&x->m_parts[n - 1], &uint);
 	for(i = 1; i != n; ++i)
 	{
 		#if defined(_MSC_VER)
@@ -769,7 +778,8 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_ullong_t mk_num_composite_un_to_ullong(m
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		uint = ((mk_lang_ullong_t)(uint | mk_num_composite_un_base_to_ullong(&x->m_parts[n - 1 - i])));
+		mk_num_composite_un_base_to_ullong(&x->m_parts[n - 1 - i], &tmp);
+		uint = ((mk_lang_ullong_t)(uint | tmp));
 	}
 	return uint;
 
@@ -797,10 +807,11 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_ulllong_t mk_num_composite_un_to_ulllong
 
 	mk_lang_ulllong_t uint;
 	int i;
+	mk_lang_ulllong_t tmp;
 
 	mk_lang_assert(x);
 
-	uint = mk_num_composite_un_base_to_ulllong(&x->m_parts[n - 1]);
+	mk_num_composite_un_base_to_ulllong(&x->m_parts[n - 1], &uint);
 	for(i = 1; i != n; ++i)
 	{
 		#if defined(_MSC_VER)
@@ -818,7 +829,8 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_ulllong_t mk_num_composite_un_to_ulllong
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		uint = ((mk_lang_ulllong_t)(uint | mk_num_composite_un_base_to_ulllong(&x->m_parts[n - 1 - i])));
+		mk_num_composite_un_base_to_ulllong(&x->m_parts[n - 1 - i], &tmp);
+		uint = ((mk_lang_ulllong_t)(uint | tmp));
 	}
 	return uint;
 
@@ -846,10 +858,11 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_size_t mk_num_composite_un_to_sizet(mk_n
 
 	mk_lang_size_t uint;
 	int i;
+	mk_lang_size_t tmp;
 
 	mk_lang_assert(x);
 
-	uint = mk_num_composite_un_base_to_sizet(&x->m_parts[n - 1]);
+	mk_num_composite_un_base_to_sizet(&x->m_parts[n - 1], &uint);
 	for(i = 1; i != n; ++i)
 	{
 		#if defined(_MSC_VER)
@@ -867,7 +880,8 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_size_t mk_num_composite_un_to_sizet(mk_n
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		uint = ((mk_lang_size_t)(uint | mk_num_composite_un_base_to_sizet(&x->m_parts[n - 1 - i])));
+		mk_num_composite_un_base_to_sizet(&x->m_parts[n - 1 - i], &tmp);
+		uint = ((mk_lang_size_t)(uint | tmp));
 	}
 	return uint;
 
@@ -880,10 +894,11 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_uintmax_t mk_num_composite_un_to_umaxt(m
 
 	mk_lang_uintmax_t uint;
 	int i;
+	mk_lang_uintmax_t tmp;
 
 	mk_lang_assert(x);
 
-	uint = mk_num_composite_un_base_to_umaxt(&x->m_parts[n - 1]);
+	mk_num_composite_un_base_to_umaxt(&x->m_parts[n - 1], &uint);
 	for(i = 1; i != n; ++i)
 	{
 		#if defined(_MSC_VER)
@@ -901,7 +916,8 @@ mk_lang_nodiscard mk_lang_jumbo mk_lang_uintmax_t mk_num_composite_un_to_umaxt(m
 		#if defined(_MSC_VER)
 		#pragma warning(pop)
 		#endif
-		uint = ((mk_lang_uintmax_t)(uint | mk_num_composite_un_base_to_umaxt(&x->m_parts[n - 1 - i])));
+		mk_num_composite_un_base_to_umaxt(&x->m_parts[n - 1 - i], &tmp);
+		uint = ((mk_lang_uintmax_t)(uint | tmp));
 	}
 	return uint;
 
