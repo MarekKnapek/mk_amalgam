@@ -6,34 +6,34 @@
 #include "mk_lang_uintmaxt.h"
 
 
-#define mk_detail_num_basic_ut_type unsigned char
-#define mk_detail_num_basic_ut_name uchar
+#define mk_num_basic_uint_type unsigned char
+#define mk_num_basic_uint_name uchar
 #include "mk_num_basic_uint.inl.c"
 
-#define mk_detail_num_basic_ut_type unsigned short int
-#define mk_detail_num_basic_ut_name ushort
+#define mk_num_basic_uint_type unsigned short int
+#define mk_num_basic_uint_name ushort
 #include "mk_num_basic_uint.inl.c"
 
-#define mk_detail_num_basic_ut_type unsigned int
-#define mk_detail_num_basic_ut_name uint
+#define mk_num_basic_uint_type unsigned int
+#define mk_num_basic_uint_name uint
 #include "mk_num_basic_uint.inl.c"
 
-#define mk_detail_num_basic_ut_type unsigned long int
-#define mk_detail_num_basic_ut_name ulong
+#define mk_num_basic_uint_type unsigned long int
+#define mk_num_basic_uint_name ulong
 #include "mk_num_basic_uint.inl.c"
 
-#define mk_detail_num_basic_ut_type mk_lang_ullong_t
-#define mk_detail_num_basic_ut_name ullong
+#define mk_num_basic_uint_type mk_lang_ullong_t
+#define mk_num_basic_uint_name ullong
 #include "mk_num_basic_uint.inl.c"
 
-#define mk_detail_num_basic_ut_type mk_lang_ulllong_t
-#define mk_detail_num_basic_ut_name ulllong
+#define mk_num_basic_uint_type mk_lang_ulllong_t
+#define mk_num_basic_uint_name ulllong
 #include "mk_num_basic_uint.inl.c"
 
-#define mk_detail_num_basic_ut_type size_t
-#define mk_detail_num_basic_ut_name usize
+#define mk_num_basic_uint_type size_t
+#define mk_num_basic_uint_name usize
 #include "mk_num_basic_uint.inl.c"
 
-#define mk_detail_num_basic_ut_type uintmax_t
-#define mk_detail_num_basic_ut_name umax
+#define mk_num_basic_uint_type uintmax_t
+#define mk_num_basic_uint_name umax
 #include "mk_num_basic_uint.inl.c"
