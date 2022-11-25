@@ -108,8 +108,8 @@ mk_lang_jumbo void mk_num_and2(mk_num_basic_uint_type* x, mk_num_basic_uint_type
 mk_lang_jumbo void mk_num_xor2(mk_num_basic_uint_type* x, mk_num_basic_uint_type const* y);
 
 mk_lang_jumbo void mk_num_shl3(mk_num_basic_uint_type const* x, int bits, mk_num_basic_uint_type* y);
-mk_lang_jumbo void mk_num_shl2(mk_num_basic_uint_type* x, int bits);
 mk_lang_jumbo void mk_num_shr3(mk_num_basic_uint_type const* x, int bits, mk_num_basic_uint_type* y);
+mk_lang_jumbo void mk_num_shl2(mk_num_basic_uint_type* x, int bits);
 mk_lang_jumbo void mk_num_shr2(mk_num_basic_uint_type* x, int bits);
 
 mk_lang_jumbo void mk_num_add3_wrap_cid_cod(mk_num_basic_uint_type const* x, mk_num_basic_uint_type const* y, mk_num_basic_uint_type* z);

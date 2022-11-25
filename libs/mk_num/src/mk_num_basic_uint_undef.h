@@ -96,8 +96,8 @@
 #undef mk_num_xor2
 
 #undef mk_num_shl3
-#undef mk_num_shl2
 #undef mk_num_shr3
+#undef mk_num_shl2
 #undef mk_num_shr2
 
 #undef mk_num_add3_wrap_cid_cod

@@ -96,8 +96,8 @@
 #undef mk_num_composite_un_base_xor2
 
 #undef mk_num_composite_un_base_shl3
-#undef mk_num_composite_un_base_shl2
 #undef mk_num_composite_un_base_shr3
+#undef mk_num_composite_un_base_shl2
 #undef mk_num_composite_un_base_shr2
 
 #undef mk_num_composite_un_base_add3_wrap_cid_cod

@@ -96,8 +96,8 @@
 #define mk_num_composite_un_base_xor2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _xor2)
 
 #define mk_num_composite_un_base_shl3 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _shl3)
-#define mk_num_composite_un_base_shl2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _shl2)
 #define mk_num_composite_un_base_shr3 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _shr3)
+#define mk_num_composite_un_base_shl2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _shl2)
 #define mk_num_composite_un_base_shr2 mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _shr2)
 
 #define mk_num_composite_un_base_add3_wrap_cid_cod mk_lang_concat(mk_lang_concat(mk_num_basic_, mk_num_composite_base_name), _add3_wrap_cid_cod)

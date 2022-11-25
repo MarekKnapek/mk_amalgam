@@ -1400,11 +1400,6 @@ mk_lang_jumbo void mk_num_shl3(mk_num_basic_uint_type const* x, int bits, mk_num
 	*y = ((mk_num_basic_uint_type)(*x << bits));
 }
 
-mk_lang_jumbo void mk_num_shl2(mk_num_basic_uint_type* x, int bits)
-{
-	mk_num_shl3(x, bits, x);
-}
-
 mk_lang_jumbo void mk_num_shr3(mk_num_basic_uint_type const* x, int bits, mk_num_basic_uint_type* y)
 {
 	mk_lang_assert(x);
@@ -1412,6 +1407,11 @@ mk_lang_jumbo void mk_num_shr3(mk_num_basic_uint_type const* x, int bits, mk_num
 	mk_lang_assert(y);
 
 	*y = ((mk_num_basic_uint_type)(*x >> bits));
+}
+
+mk_lang_jumbo void mk_num_shl2(mk_num_basic_uint_type* x, int bits)
+{
+	mk_num_shl3(x, bits, x);
 }
 
 mk_lang_jumbo void mk_num_shr2(mk_num_basic_uint_type* x, int bits)
