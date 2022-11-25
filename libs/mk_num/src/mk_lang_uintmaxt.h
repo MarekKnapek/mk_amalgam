@@ -11,8 +11,9 @@
 #endif
 
 #if mk_lang_uintmaxt_has == 0
-#define mk_lang_uintmax_t unsigned long int
-#define mk_lang_sintmax_t signed long int
+#include "mk_lang_lllong.h"
+#define mk_lang_uintmax_t mk_lang_ulllong_t
+#define mk_lang_sintmax_t mk_lang_slllong_t
 #else
 #if defined(__cplusplus)
 #include <cstdint> /* uintmax_t intmax_t */
