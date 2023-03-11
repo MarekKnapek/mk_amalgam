@@ -1,0 +1,4 @@
+[submodule "3rdparty/mk_clib"]
+	path = 3rdparty/mk_clib
+	url = https://github.com/MarekKnapek/mk_clib.git
+	branch = main
