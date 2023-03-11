@@ -10,6 +10,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"><Filter>dependencies</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_win\projects\jumbo\mk_win.h"><Filter>dependencies</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_win_base\projects\jumbo\mk_win_base.h"><Filter>dependencies</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtw_float_to_string.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtw_panel.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbtw.h"><Filter>jumbo</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_dacdbt\projects\jumbo\mk_dacdbt.h"><Filter>dependencies</Filter></ClInclude>
@@ -19,6 +20,7 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"><Filter>dependencies</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_win\projects\jumbo\mk_win.c"><Filter>dependencies</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_win_base\projects\jumbo\mk_win_base.c"><Filter>dependencies</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtw_float_to_string.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtw_panel.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbtw.c"><Filter>jumbo</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_dacdbt\projects\jumbo\mk_dacdbt.c"><Filter>dependencies</Filter></ClCompile>

@@ -19,6 +19,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_win\projects\jumbo\mk_win.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\..\mk_win_base\projects\jumbo\mk_win_base.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtw_float_to_string.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtw_panel.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbtw.h"/>
 	</ItemGroup>
@@ -28,6 +29,7 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_utils\projects\jumbo\mk_utils.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_win\projects\jumbo\mk_win.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\..\mk_win_base\projects\jumbo\mk_win_base.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtw_float_to_string.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_dacdbtw_panel.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\jumbo\mk_dacdbtw.c"/>
 	</ItemGroup>
