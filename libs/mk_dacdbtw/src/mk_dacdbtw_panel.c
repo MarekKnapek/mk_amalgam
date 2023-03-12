@@ -1,5 +1,7 @@
 #include "mk_dacdbtw_panel.h"
 
+#include "mk_dacdbtw_float_to_string.h"
+
 #include "../../mk_dacdbt/src/mk_dacdbt_doc.h"
 
 #include "../../mk_win/src/mk_win_api.h"
@@ -1119,34 +1121,50 @@ static mk_inline int mk_dacdbtw_panel_private_value_text_data_u32_w(mk_dacdbtw_p
 
 static mk_inline int mk_dacdbtw_panel_private_value_text_data_f64_a(mk_dacdbtw_panel_t* panel, mk_dacdbt_value_t const* value, char const** text)
 {
-	void* mem;
+	int str_max_len;
+	char* strn;
+	int str_len;
 
 	mk_assert(panel);
 	mk_assert(value);
 	mk_assert(text);
 
-	mk_try(mk_std_buffer_reserve(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], sizeof(char)));
-	mk_try(mk_std_buffer_get_mem(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], &mem));
-	((char*)(mem))[0] = '\0';
+	str_max_len = mk_dacdbtw_float_to_string_get_max_size();
+	mk_try(mk_std_buffer_reserve(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], (str_max_len + 1) * sizeof(char)));
+	mk_try(mk_std_buffer_get_mem(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], (void**)&strn));
 	panel->m_list_callback_texts_idx = (panel->m_list_callback_texts_idx + 1) % (sizeof(panel->m_list_callback_texts) / sizeof(panel->m_list_callback_texts[0]));
-	*text = ((char const*)(mem));
+	str_len = mk_dacdbtw_float_to_string_get_string(&value->m_data.m_f64, strn, str_max_len);
+	strn[str_len] = '\0';
+	*text = strn;
 
 	return 0;
 }
 
 static mk_inline int mk_dacdbtw_panel_private_value_text_data_f64_w(mk_dacdbtw_panel_t* panel, mk_dacdbt_value_t const* value, wchar_t const** text)
 {
-	void* mem;
+	int str_max_len;
+	char* strn;
+	int str_len;
+	wchar_t* strw;
+	int i;
 
 	mk_assert(panel);
 	mk_assert(value);
 	mk_assert(text);
 
-	mk_try(mk_std_buffer_reserve(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], sizeof(wchar_t)));
-	mk_try(mk_std_buffer_get_mem(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], &mem));
-	((wchar_t*)(mem))[0] = L'\0';
+	str_max_len = mk_dacdbtw_float_to_string_get_max_size();
+	mk_try(mk_std_gcallocator_allocate(str_max_len, (void**)&strn));
+	str_len = mk_dacdbtw_float_to_string_get_string(&value->m_data.m_f64, strn, str_max_len);
+	mk_try(mk_std_buffer_reserve(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], (str_len + 1) * sizeof(wchar_t)));
+	mk_try(mk_std_buffer_get_mem(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], (void**)&strw));
 	panel->m_list_callback_texts_idx = (panel->m_list_callback_texts_idx + 1) % (sizeof(panel->m_list_callback_texts) / sizeof(panel->m_list_callback_texts[0]));
-	*text = ((wchar_t const*)(mem));
+	for(i = 0; i != str_len; ++i)
+	{
+		strw[i] = (wchar_t)strn[i];
+	}
+	strw[str_len] = L'\0';
+	mk_try(mk_std_gcallocator_deallocate(strn));
+	*text = strw;
 
 	return 0;
 }
