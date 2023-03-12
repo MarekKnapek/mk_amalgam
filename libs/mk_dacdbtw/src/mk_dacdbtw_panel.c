@@ -1253,36 +1253,176 @@ static mk_inline int mk_dacdbtw_panel_private_value_text_data_str_w(mk_dacdbtw_p
 
 static mk_inline int mk_dacdbtw_panel_private_value_text_data_bin_a(mk_dacdbtw_panel_t* panel, mk_dacdbt_key_t const* key, mk_dacdbt_value_t const* value, char const** text)
 {
+	size_t value_len;
+	int value_name_is_wide;
+	void const* value_name_data;
+	size_t value_name_len;
+	mk_dacdbt_key_t* k;
+	unsigned long n;
+	unsigned long i;
+	mk_dacdbt_value_t* prev_value;
+	mk_dacdbt_value_type_t type;
+	int prev_value_name_is_wide;
+	void const* prev_value_name_data;
+	size_t prev_value_name_len;
+	wchar_t const* strw;
+	char* strn;
 	void* mem;
+	char* str;
 
 	mk_assert(panel);
 	mk_assert(key);
 	mk_assert(value);
 	mk_assert(text);
 
+	mk_try(mk_dacdbt_value_get_len(value, &value_len));
+	if
+	(
+		value_len % 2 == 0 &&
+		value_len >= 4 &&
+		((unsigned char const*)(value->m_data.m_bin.m_mem))[value_len - 2] == 0 &&
+		((unsigned char const*)(value->m_data.m_bin.m_mem))[value_len - 1] == 0
+	)
+	{
+		mk_try(mk_dacdbt_value_get_name(value, &value_name_is_wide, &value_name_data, &value_name_len));
+		if
+		(
+			value_name_is_wide == 0 &&
+			value_name_len >= 5 &&
+			((char const*)(value_name_data))[0] == '@' &&
+			((char const*)(value_name_data))[1] == '@' &&
+			((char const*)(value_name_data))[2] == 'U' &&
+			((char const*)(value_name_data))[0] == '@'
+		)
+		{
+			k = ((mk_dacdbt_key_t*)(key));
+			mk_try(mk_dacdbt_key_get_values_count(k, &n));
+			for(i = 0; i != n; ++i)
+			{
+				mk_try(mk_dacdbt_key_get_value(k, i, &prev_value));
+				if(prev_value == value)
+				{
+					break;
+				}
+			}
+			mk_assert(i != n);
+			if(i != 0)
+			{
+				mk_try(mk_dacdbt_key_get_value(k, i - 1, &prev_value));
+				mk_try(mk_dacdbt_value_get_type(prev_value, &type));
+				if(type == mk_dacdbt_value_type_e_str)
+				{
+					mk_try(mk_dacdbt_value_get_name(prev_value, &prev_value_name_is_wide, &prev_value_name_data, &prev_value_name_len));
+					if
+					(
+						prev_value_name_is_wide == 0 &&
+						prev_value_name_len == value_name_len - 4 &&
+						memcmp(prev_value_name_data, ((char const*)(value_name_data)) + 4, prev_value_name_len) == 0
+					)
+					{
+						strw = ((wchar_t const*)(value->m_data.m_bin.m_mem));
+						mk_try(mk_std_str_convertor_wide_to_narrow_s(strw, value_len / 2, 0, &strn));
+						mk_try(mk_std_buffer_reserve(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], (value_len / 2) * sizeof(char)));
+						mk_try(mk_std_buffer_get_mem(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], &mem));
+						panel->m_list_callback_texts_idx = (panel->m_list_callback_texts_idx + 1) % (sizeof(panel->m_list_callback_texts) / sizeof(panel->m_list_callback_texts[0]));
+						memcpy(mem, strn, value_len / 2);
+						*text = ((char const*)(mem));
+						return 0;
+					}
+				}
+			}
+		}
+	}
 	mk_try(mk_std_buffer_reserve(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], sizeof(char)));
 	mk_try(mk_std_buffer_get_mem(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], &mem));
-	((char*)(mem))[0] = '\0';
 	panel->m_list_callback_texts_idx = (panel->m_list_callback_texts_idx + 1) % (sizeof(panel->m_list_callback_texts) / sizeof(panel->m_list_callback_texts[0]));
-	*text = ((char const*)(mem));
+	str = ((char*)(mem));
+	str[0] = L'\0';
+	*text = str;
 
 	return 0;
 }
 
 static mk_inline int mk_dacdbtw_panel_private_value_text_data_bin_w(mk_dacdbtw_panel_t* panel, mk_dacdbt_key_t const* key, mk_dacdbt_value_t const* value, wchar_t const** text)
 {
+	size_t value_len;
+	int value_name_is_wide;
+	void const* value_name_data;
+	size_t value_name_len;
+	mk_dacdbt_key_t* k;
+	unsigned long n;
+	unsigned long i;
+	mk_dacdbt_value_t* prev_value;
+	mk_dacdbt_value_type_t type;
+	int prev_value_name_is_wide;
+	void const* prev_value_name_data;
+	size_t prev_value_name_len;
 	void* mem;
+	wchar_t* str;
 
 	mk_assert(panel);
 	mk_assert(key);
 	mk_assert(value);
 	mk_assert(text);
 
+	mk_try(mk_dacdbt_value_get_len(value, &value_len));
+	if
+	(
+		value_len % 2 == 0 &&
+		value_len >= 4 &&
+		((unsigned char const*)(value->m_data.m_bin.m_mem))[value_len - 2] == 0 &&
+		((unsigned char const*)(value->m_data.m_bin.m_mem))[value_len - 1] == 0
+	)
+	{
+		mk_try(mk_dacdbt_value_get_name(value, &value_name_is_wide, &value_name_data, &value_name_len));
+		if
+		(
+			value_name_is_wide == 0 &&
+			value_name_len >= 5 &&
+			((char const*)(value_name_data))[0] == '@' &&
+			((char const*)(value_name_data))[1] == '@' &&
+			((char const*)(value_name_data))[2] == 'U' &&
+			((char const*)(value_name_data))[0] == '@'
+		)
+		{
+			k = ((mk_dacdbt_key_t*)(key));
+			mk_try(mk_dacdbt_key_get_values_count(k, &n));
+			for(i = 0; i != n; ++i)
+			{
+				mk_try(mk_dacdbt_key_get_value(k, i, &prev_value));
+				if(prev_value == value)
+				{
+					break;
+				}
+			}
+			mk_assert(i != n);
+			if(i != 0)
+			{
+				mk_try(mk_dacdbt_key_get_value(k, i - 1, &prev_value));
+				mk_try(mk_dacdbt_value_get_type(prev_value, &type));
+				if(type == mk_dacdbt_value_type_e_str)
+				{
+					mk_try(mk_dacdbt_value_get_name(prev_value, &prev_value_name_is_wide, &prev_value_name_data, &prev_value_name_len));
+					if
+					(
+						prev_value_name_is_wide == 0 &&
+						prev_value_name_len == value_name_len - 4 &&
+						memcmp(prev_value_name_data, ((char const*)(value_name_data)) + 4, prev_value_name_len) == 0
+					)
+					{
+						*text = ((wchar_t const*)(value->m_data.m_bin.m_mem));
+						return 0;
+					}
+				}
+			}
+		}
+	}
 	mk_try(mk_std_buffer_reserve(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], sizeof(wchar_t)));
 	mk_try(mk_std_buffer_get_mem(&panel->m_list_callback_texts[panel->m_list_callback_texts_idx], &mem));
-	((wchar_t*)(mem))[0] = L'\0';
 	panel->m_list_callback_texts_idx = (panel->m_list_callback_texts_idx + 1) % (sizeof(panel->m_list_callback_texts) / sizeof(panel->m_list_callback_texts[0]));
-	*text = ((wchar_t const*)(mem));
+	str = ((wchar_t*)(mem));
+	str[0] = L'\0';
+	*text = str;
 
 	return 0;
 }
