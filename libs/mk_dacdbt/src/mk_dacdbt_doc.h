@@ -29,15 +29,18 @@ struct mk_dacdbt_doc_hdr_v2_s
 };
 typedef struct mk_dacdbt_doc_hdr_v2_s mk_dacdbt_doc_hdr_v2_t;
 
+union mk_dacdbt_doc_hdr_vn_e
+{
+	mk_dacdbt_doc_hdr_v1_t m_hdr1;
+	mk_dacdbt_doc_hdr_v2_t m_hdr2;
+};
+typedef union mk_dacdbt_doc_hdr_vn_e mk_dacdbt_doc_hdr_vn_t;
+
 
 struct mk_dacdbt_doc_s
 {
 	int m_format;
-	union
-	{
-		mk_dacdbt_doc_hdr_v1_t m_hdr1;
-		mk_dacdbt_doc_hdr_v2_t m_hdr2;
-	} m_hdr;
+	mk_dacdbt_doc_hdr_vn_t m_hdr;
 	mk_dacdbt_key_t m_root;
 };
 typedef struct mk_dacdbt_doc_s mk_dacdbt_doc_t;
