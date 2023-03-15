@@ -12,7 +12,8 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comctl_statusbar.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comctl_treeview.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comdlg_ofn.h"><Filter>src</Filter></ClInclude>
-		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_ctrl_splitter_hor.h"/></ItemGroup>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_ctrl_splitter_hor.h"><Filter>src</Filter></ClInclude>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_ctrl_splitter_ver.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.h"><Filter>src</Filter></ClInclude>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_file.h"><Filter>src</Filter></ClInclude>
@@ -43,7 +44,8 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comctl_statusbar.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comctl_treeview.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comdlg_ofn.c"><Filter>src</Filter></ClCompile>
-		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_ctrl_splitter_hor.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_ctrl_splitter_hor.c"><Filter>src</Filter></ClCompile>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_ctrl_splitter_ver.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.c"><Filter>src</Filter></ClCompile>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_file.c"><Filter>src</Filter></ClCompile>

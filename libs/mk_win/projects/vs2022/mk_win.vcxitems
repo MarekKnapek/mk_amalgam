@@ -22,6 +22,7 @@
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comctl_treeview.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comdlg_ofn.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_ctrl_splitter_hor.h"/>
+		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_ctrl_splitter_ver.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.h"/>
 		<ClInclude Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_file.h"/>
@@ -53,6 +54,7 @@
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comctl_treeview.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_comdlg_ofn.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_ctrl_splitter_hor.c"/>
+		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_ctrl_splitter_ver.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_global.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_instance.c"/>
 		<ClCompile Include="$(MSBuildThisFileDirectory)..\..\src\mk_win_kernel_file.c"/>
