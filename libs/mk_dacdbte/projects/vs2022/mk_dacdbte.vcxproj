@@ -100,7 +100,6 @@
 			<PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;mk_want_jumbo=0;WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ConformanceMode>true</ConformanceMode>
 			<TreatWarningAsError>true</TreatWarningAsError>
-			<LanguageStandard_C>stdc11</LanguageStandard_C>
 		</ClCompile>
 		<Link>
 			<SubSystem>Windows</SubSystem>
@@ -117,7 +116,6 @@
 			<PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;mk_want_jumbo=1;WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ConformanceMode>true</ConformanceMode>
 			<TreatWarningAsError>true</TreatWarningAsError>
-			<LanguageStandard_C>stdc11</LanguageStandard_C>
 		</ClCompile>
 		<Link>
 			<SubSystem>Windows</SubSystem>
@@ -134,7 +132,6 @@
 			<PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;mk_want_jumbo=0;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ConformanceMode>true</ConformanceMode>
 			<TreatWarningAsError>true</TreatWarningAsError>
-			<LanguageStandard_C>stdc11</LanguageStandard_C>
 		</ClCompile>
 		<Link>
 			<SubSystem>Windows</SubSystem>
@@ -151,7 +148,6 @@
 			<PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;mk_want_jumbo=1;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<ConformanceMode>true</ConformanceMode>
 			<TreatWarningAsError>true</TreatWarningAsError>
-			<LanguageStandard_C>stdc11</LanguageStandard_C>
 		</ClCompile>
 		<Link>
 			<SubSystem>Windows</SubSystem>
