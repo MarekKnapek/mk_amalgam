@@ -10,6 +10,7 @@
 #include "../../mk_win/src/mk_win_comctl_listview.h"
 #include "../../mk_win/src/mk_win_comctl_statusbar.h"
 #include "../../mk_win/src/mk_win_comctl_treeview.h"
+#include "../../mk_win/src/mk_win_ctrl_splitter_hor.h"
 #include "../../mk_win/src/mk_win_instance.h"
 #include "../../mk_win/src/mk_win_user_brush.h"
 #include "../../mk_win/src/mk_win_user_class.h"
@@ -42,6 +43,7 @@ struct mk_dacdbtw_panel_s
 	mk_win_base_user_types_hwnd_t m_hwnd;
 	mk_win_base_user_types_hwnd_t m_label;
 	mk_win_base_user_types_hwnd_t m_status;
+	mk_win_base_user_types_hwnd_t m_splitter;
 	mk_win_base_user_types_hwnd_t m_tree;
 	mk_win_base_user_types_hwnd_t m_list;
 	int m_state;
@@ -68,9 +70,10 @@ static mk_win_char_t const mk_dacdbtw_panel_private_class_name[] = mk_win_char_c
 
 
 static mk_inline int mk_dacdbtw_panel_private_create_label(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret);
-static mk_inline int mk_dacdbtw_panel_private_create_list(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret);
-static mk_inline int mk_dacdbtw_panel_private_create_tree(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret);
 static mk_inline int mk_dacdbtw_panel_private_create_status(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret);
+static mk_inline int mk_dacdbtw_panel_private_create_splitter(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret);
+static mk_inline int mk_dacdbtw_panel_private_create_tree(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret);
+static mk_inline int mk_dacdbtw_panel_private_create_list(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret);
 static mk_inline int mk_dacdbtw_panel_private_populate_tree(mk_dacdbtw_panel_t* panel);
 static mk_inline int mk_dacdbtw_panel_private_refresh_statusbar(mk_dacdbtw_panel_t* panel);
 static mk_inline int mk_dacdbtw_panel_private_refresh_listview(mk_dacdbtw_panel_t* panel);
@@ -136,6 +139,8 @@ mk_jumbo int mk_dacdbtw_panel_init(void)
 	mk_try(mk_win_user_class_register(&cls, &atom));
 	mk_assert(atom != 0);
 
+	mk_try(mk_win_ctrl_splitter_hor_class_register());
+
 	mk_try(mk_win_comctl_init());
 
 	return 0;
@@ -143,6 +148,8 @@ mk_jumbo int mk_dacdbtw_panel_init(void)
 
 mk_jumbo int mk_dacdbtw_panel_deinit(void)
 {
+	mk_try(mk_win_ctrl_splitter_hor_class_unregister());
+
 	return 0;
 }
 
@@ -185,79 +192,6 @@ static mk_inline int mk_dacdbtw_panel_private_create_label(mk_dacdbtw_panel_t* p
 	return 0;
 }
 
-static mk_inline int mk_dacdbtw_panel_private_create_list(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret)
-{
-	mk_win_user_window_create_t wi;
-	mk_win_base_user_types_hwnd_t hwnd;
-	mk_win_base_user_types_lresult_t lr;
-	mk_win_comctl_listview_column_t col;
-	mk_win_base_types_intptr_t idx;
-
-	mk_assert(panel);
-	mk_assert(panel->m_hwnd);
-	mk_assert(ret);
-
-	wi.m_extra_style = mk_win_user_window_style_ex_clientedge | mk_win_comctl_listview_wsex_headerdragdrop | mk_win_comctl_listview_wsex_fullrowselect;
-	wi.m_class_name = mk_win_comctl_listview_classname;
-	wi.m_window_name = NULL;
-	wi.m_style = mk_win_comctl_listview_ws_report | mk_win_comctl_listview_ws_showselalways | mk_win_comctl_listview_ws_ownerdata | mk_win_user_window_style_tabstop | mk_win_user_window_style_border | mk_win_user_window_style_child;
-	wi.m_x = 0;
-	wi.m_y = 0;
-	wi.m_width = 0;
-	wi.m_height = 0;
-	wi.m_parent = panel->m_hwnd;
-	wi.m_menu = ((mk_win_base_user_types_hmenu_t)(mk_win_base_types_null));
-	mk_try(mk_win_instance_get(&wi.m_instance));
-	wi.m_param = NULL;
-	mk_try(mk_win_user_window_create(&wi, &hwnd));
-	mk_assert(hwnd);
-
-	mk_try(mk_win_user_window_send(hwnd, mk_win_comctl_listview_wm_setextendedlistviewstyle, ((mk_win_base_user_types_lparam_t)(wi.m_extra_style)), ((mk_win_base_user_types_lparam_t)(wi.m_extra_style)), &lr)); ((void)(lr));
-
-	col.m_mask = mk_win_comctl_listview_colflag_width | mk_win_comctl_listview_colflag_text;
-	col.m_cx = 64;
-	col.m_text = mk_win_char_c("Type");
-	mk_try(mk_win_comctl_listview_insertcolumn(hwnd, 0, &col, &idx)); mk_assert(idx != -1);
-	col.m_text = mk_win_char_c("Name");
-	mk_try(mk_win_comctl_listview_insertcolumn(hwnd, 1, &col, &idx)); mk_assert(idx != -1);
-	col.m_text = mk_win_char_c("Length");
-	mk_try(mk_win_comctl_listview_insertcolumn(hwnd, 2, &col, &idx)); mk_assert(idx != -1);
-	col.m_text = mk_win_char_c("Data");
-	mk_try(mk_win_comctl_listview_insertcolumn(hwnd, 3, &col, &idx)); mk_assert(idx != -1);
-
-	*ret = hwnd;
-
-	return 0;
-}
-
-static mk_inline int mk_dacdbtw_panel_private_create_tree(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret)
-{
-	mk_win_user_window_create_t wi;
-	mk_win_base_user_types_hwnd_t hwnd;
-
-	mk_assert(panel);
-	mk_assert(panel->m_hwnd);
-	mk_assert(ret);
-
-	wi.m_extra_style = mk_win_user_window_style_ex_clientedge;
-	wi.m_class_name = mk_win_char_c("SysTreeView32");
-	wi.m_window_name = NULL;
-	wi.m_style = mk_win_comctl_treeview_vs_hasbuttons | mk_win_comctl_treeview_vs_haslines | mk_win_comctl_treeview_vs_linesatroot | mk_win_comctl_treeview_vs_showselalways | mk_win_user_window_style_tabstop | mk_win_user_window_style_border | mk_win_user_window_style_child;
-	wi.m_x = 0;
-	wi.m_y = 0;
-	wi.m_width = 0;
-	wi.m_height = 0;
-	wi.m_parent = panel->m_hwnd;
-	wi.m_menu = ((mk_win_base_user_types_hmenu_t)(mk_win_base_types_null));
-	mk_try(mk_win_instance_get(&wi.m_instance));
-	wi.m_param = NULL;
-	mk_try(mk_win_user_window_create(&wi, &hwnd));
-	mk_assert(hwnd);
-	*ret = hwnd;
-
-	return 0;
-}
-
 static mk_inline int mk_dacdbtw_panel_private_create_status(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret)
 {
 	mk_win_user_window_create_t wi;
@@ -284,6 +218,107 @@ static mk_inline int mk_dacdbtw_panel_private_create_status(mk_dacdbtw_panel_t* 
 	mk_assert(hwnd);
 
 	mk_try(mk_win_user_window_send(hwnd, mk_win_comctl_statusbar_wm_simple, 1, 0, &lr)); ((void)(lr));
+
+	*ret = hwnd;
+
+	return 0;
+}
+
+static mk_inline int mk_dacdbtw_panel_private_create_splitter(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret)
+{
+	mk_win_user_window_create_t wi;
+	mk_win_base_user_types_hwnd_t hwnd;
+
+	mk_assert(panel);
+	mk_assert(panel->m_hwnd);
+	mk_assert(ret);
+	
+	wi.m_extra_style = 0;
+	mk_win_ctrl_splitter_hor_class_get_name(&wi.m_class_name);
+	wi.m_window_name = NULL;
+	wi.m_style = mk_win_user_window_style_clipchildren | mk_win_user_window_style_visible | mk_win_user_window_style_child;
+	wi.m_x = 0;
+	wi.m_y = 0;
+	wi.m_width = 0;
+	wi.m_height = 0;
+	wi.m_parent = panel->m_hwnd;
+	wi.m_menu = ((mk_win_base_user_types_hmenu_t)(mk_win_base_types_null));
+	mk_try(mk_win_instance_get(&wi.m_instance));
+	wi.m_param = NULL;
+	mk_try(mk_win_user_window_create(&wi, &hwnd));
+	mk_assert(hwnd);
+	*ret = hwnd;
+
+	return 0;
+}
+
+static mk_inline int mk_dacdbtw_panel_private_create_tree(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret)
+{
+	mk_win_user_window_create_t wi;
+	mk_win_base_user_types_hwnd_t hwnd;
+
+	mk_assert(panel);
+	mk_assert(panel->m_splitter);
+	mk_assert(ret);
+
+	wi.m_extra_style = mk_win_user_window_style_ex_clientedge;
+	wi.m_class_name = mk_win_char_c("SysTreeView32");
+	wi.m_window_name = NULL;
+	wi.m_style = mk_win_comctl_treeview_vs_hasbuttons | mk_win_comctl_treeview_vs_haslines | mk_win_comctl_treeview_vs_linesatroot | mk_win_comctl_treeview_vs_showselalways | mk_win_user_window_style_tabstop | mk_win_user_window_style_border | mk_win_user_window_style_child;
+	wi.m_x = 0;
+	wi.m_y = 0;
+	wi.m_width = 0;
+	wi.m_height = 0;
+	wi.m_parent = panel->m_splitter;
+	wi.m_menu = ((mk_win_base_user_types_hmenu_t)(mk_win_base_types_null));
+	mk_try(mk_win_instance_get(&wi.m_instance));
+	wi.m_param = NULL;
+	mk_try(mk_win_user_window_create(&wi, &hwnd));
+	mk_assert(hwnd);
+	*ret = hwnd;
+
+	return 0;
+}
+
+static mk_inline int mk_dacdbtw_panel_private_create_list(mk_dacdbtw_panel_t* panel, mk_win_base_user_types_hwnd_t* ret)
+{
+	mk_win_user_window_create_t wi;
+	mk_win_base_user_types_hwnd_t hwnd;
+	mk_win_base_user_types_lresult_t lr;
+	mk_win_comctl_listview_column_t col;
+	mk_win_base_types_intptr_t idx;
+
+	mk_assert(panel);
+	mk_assert(panel->m_splitter);
+	mk_assert(ret);
+
+	wi.m_extra_style = mk_win_user_window_style_ex_clientedge | mk_win_comctl_listview_wsex_headerdragdrop | mk_win_comctl_listview_wsex_fullrowselect;
+	wi.m_class_name = mk_win_comctl_listview_classname;
+	wi.m_window_name = NULL;
+	wi.m_style = mk_win_comctl_listview_ws_report | mk_win_comctl_listview_ws_showselalways | mk_win_comctl_listview_ws_ownerdata | mk_win_user_window_style_tabstop | mk_win_user_window_style_border | mk_win_user_window_style_child;
+	wi.m_x = 0;
+	wi.m_y = 0;
+	wi.m_width = 0;
+	wi.m_height = 0;
+	wi.m_parent = panel->m_splitter;
+	wi.m_menu = ((mk_win_base_user_types_hmenu_t)(mk_win_base_types_null));
+	mk_try(mk_win_instance_get(&wi.m_instance));
+	wi.m_param = NULL;
+	mk_try(mk_win_user_window_create(&wi, &hwnd));
+	mk_assert(hwnd);
+
+	mk_try(mk_win_user_window_send(hwnd, mk_win_comctl_listview_wm_setextendedlistviewstyle, ((mk_win_base_user_types_lparam_t)(wi.m_extra_style)), ((mk_win_base_user_types_lparam_t)(wi.m_extra_style)), &lr)); ((void)(lr));
+
+	col.m_mask = mk_win_comctl_listview_colflag_width | mk_win_comctl_listview_colflag_text;
+	col.m_cx = 64;
+	col.m_text = mk_win_char_c("Type");
+	mk_try(mk_win_comctl_listview_insertcolumn(hwnd, 0, &col, &idx)); mk_assert(idx != -1);
+	col.m_text = mk_win_char_c("Name");
+	mk_try(mk_win_comctl_listview_insertcolumn(hwnd, 1, &col, &idx)); mk_assert(idx != -1);
+	col.m_text = mk_win_char_c("Length");
+	mk_try(mk_win_comctl_listview_insertcolumn(hwnd, 2, &col, &idx)); mk_assert(idx != -1);
+	col.m_text = mk_win_char_c("Data");
+	mk_try(mk_win_comctl_listview_insertcolumn(hwnd, 3, &col, &idx)); mk_assert(idx != -1);
 
 	*ret = hwnd;
 
@@ -425,8 +460,7 @@ static mk_inline int mk_dacdbtw_panel_private_reposition(mk_dacdbtw_panel_t* pan
 	mk_assert(panel->m_hwnd);
 	mk_assert(panel->m_label);
 	mk_assert(panel->m_status);
-	mk_assert(panel->m_tree);
-	mk_assert(panel->m_list);
+	mk_assert(panel->m_splitter);
 
 	mk_try(mk_win_user_window_get_client_rect(panel->m_hwnd, &rect, &b)); mk_assert(b != 0);
 	mk_assert(rect.m_left == 0);
@@ -437,8 +471,7 @@ static mk_inline int mk_dacdbtw_panel_private_reposition(mk_dacdbtw_panel_t* pan
 	{
 		mk_try(mk_win_user_window_move(panel->m_status, 0, 0, width, height, 1, &b)); mk_assert(b != 0);
 		mk_win_user_window_get_rect(panel->m_status, &rect, &b); mk_assert(b != 0);
-		mk_try(mk_win_user_window_move(panel->m_tree, 0, 0, width / 2 - 2, height - (rect.m_bottom - rect.m_top), 1, &b)); mk_assert(b != 0);
-		mk_try(mk_win_user_window_move(panel->m_list, width / 2 + 2, 0, width / 2, height - (rect.m_bottom - rect.m_top), 1, &b)); mk_assert(b != 0);
+		mk_try(mk_win_user_window_move(panel->m_splitter, 0, 0, width, height - (rect.m_bottom - rect.m_top), 1, &b)); mk_assert(b != 0);
 	}
 	else
 	{
@@ -452,6 +485,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_create(mk_win_base_user_type
 {
 	mk_dacdbtw_panel_t* panel;
 	mk_win_base_types_uintptr_t prev;
+	mk_win_base_user_types_lresult_t lr;
 
 	mk_assert(hwnd);
 	(void)wparam;
@@ -460,10 +494,13 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_create(mk_win_base_user_type
 	mk_try(mk_std_gcallocator_allocate(sizeof(*panel), (void**)&panel));
 	mk_try(mk_win_user_window_set_info(hwnd, 0, (mk_win_base_types_uintptr_t)(mk_dacdbtw_panel_lpt)panel, &prev)); mk_assert(prev == 0);
 	panel->m_hwnd = hwnd;
-	mk_try(mk_dacdbtw_panel_private_create_status(panel, &panel->m_status));
 	mk_try(mk_dacdbtw_panel_private_create_label(panel, &panel->m_label));
+	mk_try(mk_dacdbtw_panel_private_create_status(panel, &panel->m_status));
+	mk_try(mk_dacdbtw_panel_private_create_splitter(panel, &panel->m_splitter));
 	mk_try(mk_dacdbtw_panel_private_create_tree(panel, &panel->m_tree));
 	mk_try(mk_dacdbtw_panel_private_create_list(panel, &panel->m_list));
+	mk_try(mk_win_user_window_send(panel->m_splitter, mk_win_ctrl_splitter_hor_wm_set_child, 0, ((mk_win_base_user_types_lparam_t)(panel->m_tree)), &lr)); ((void)(lr));
+	mk_try(mk_win_user_window_send(panel->m_splitter, mk_win_ctrl_splitter_hor_wm_set_child, 1, ((mk_win_base_user_types_lparam_t)(panel->m_list)), &lr)); ((void)(lr));
 	panel->m_state = mk_dacdbtw_panel_private_state_empty;
 	mk_try(mk_win_user_window_send_set_text(panel->m_label, mk_win_char_c("empty")));
 	panel->m_file_name = NULL;

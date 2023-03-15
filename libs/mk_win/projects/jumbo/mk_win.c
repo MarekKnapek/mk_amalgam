@@ -7,6 +7,7 @@
 #include "../../src/mk_win_comctl_statusbar.c"
 #include "../../src/mk_win_comctl_treeview.c"
 #include "../../src/mk_win_comdlg_ofn.c"
+#include "../../src/mk_win_ctrl_splitter_hor.c"
 #include "../../src/mk_win_global.c"
 #include "../../src/mk_win_instance.c"
 #include "../../src/mk_win_kernel_file.c"
