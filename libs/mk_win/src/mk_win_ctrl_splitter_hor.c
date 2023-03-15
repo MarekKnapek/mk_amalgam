@@ -44,6 +44,7 @@ mk_jumbo int mk_win_ctrl_splitter_hor_on_msg_notify(mk_win_ctrl_splitter_hor_t* 
 mk_jumbo int mk_win_ctrl_splitter_hor_on_msg_mousemove(mk_win_ctrl_splitter_hor_t* const self, mk_win_base_user_types_wparam_t const wparam, mk_win_base_user_types_lparam_t const lparam);
 mk_jumbo int mk_win_ctrl_splitter_hor_on_msg_lbuttondown(mk_win_ctrl_splitter_hor_t* const self, mk_win_base_user_types_wparam_t const wparam, mk_win_base_user_types_lparam_t const lparam);
 mk_jumbo int mk_win_ctrl_splitter_hor_on_msg_lbuttonup(mk_win_ctrl_splitter_hor_t* const self, mk_win_base_user_types_wparam_t const wparam, mk_win_base_user_types_lparam_t const lparam);
+mk_jumbo int mk_win_ctrl_splitter_hor_on_msg_set_ratio(mk_win_ctrl_splitter_hor_t* const self, mk_win_base_user_types_wparam_t const wparam, mk_win_base_user_types_lparam_t const lparam);
 mk_jumbo int mk_win_ctrl_splitter_hor_on_msg_set_child(mk_win_ctrl_splitter_hor_t* const self, mk_win_base_user_types_wparam_t const wparam, mk_win_base_user_types_lparam_t const lparam);
 mk_jumbo int mk_win_ctrl_splitter_hor_on_msg(mk_win_ctrl_splitter_hor_t* const self, mk_win_base_types_uint_t const msg, mk_win_base_user_types_wparam_t const wparam, mk_win_base_user_types_lparam_t const lparam);
 mk_jumbo int mk_win_ctrl_splitter_hor_on_wndproc(mk_win_base_user_types_hwnd_t const hwnd, mk_win_base_types_uint_t const msg, mk_win_base_user_types_wparam_t const wparam, mk_win_base_user_types_lparam_t const lparam, mk_win_base_user_types_lresult_t* const lr);
@@ -247,6 +248,17 @@ mk_jumbo int mk_win_ctrl_splitter_hor_on_msg_lbuttonup(mk_win_ctrl_splitter_hor_
 	return 0;
 }
 
+mk_jumbo int mk_win_ctrl_splitter_hor_on_msg_set_ratio(mk_win_ctrl_splitter_hor_t* const self, mk_win_base_user_types_wparam_t const wparam, mk_win_base_user_types_lparam_t const lparam)
+{
+	mk_assert(self);
+	mk_assert(wparam >= 500 && wparam <= 9500);
+	((void)(lparam));
+
+	self->m_ratio = ((int)(wparam));
+
+	return 0;
+}
+
 mk_jumbo int mk_win_ctrl_splitter_hor_on_msg_set_child(mk_win_ctrl_splitter_hor_t* const self, mk_win_base_user_types_wparam_t const wparam, mk_win_base_user_types_lparam_t const lparam)
 {
 	mk_assert(self);
@@ -273,6 +285,7 @@ mk_jumbo int mk_win_ctrl_splitter_hor_on_msg(mk_win_ctrl_splitter_hor_t* const s
 		case mk_win_user_window_wm_mousemove: mk_try(mk_win_ctrl_splitter_hor_on_msg_mousemove(self, wparam, lparam)); break;
 		case mk_win_user_window_wm_lbuttondown: mk_try(mk_win_ctrl_splitter_hor_on_msg_lbuttondown(self, wparam, lparam)); break;
 		case mk_win_user_window_wm_lbuttonup: mk_try(mk_win_ctrl_splitter_hor_on_msg_lbuttonup(self, wparam, lparam)); break;
+		case mk_win_ctrl_splitter_hor_wm_set_ratio: mk_try(mk_win_ctrl_splitter_hor_on_msg_set_ratio(self, wparam, lparam)); break;
 		case mk_win_ctrl_splitter_hor_wm_set_child: mk_try(mk_win_ctrl_splitter_hor_on_msg_set_child(self, wparam, lparam)); break;
 	}
 

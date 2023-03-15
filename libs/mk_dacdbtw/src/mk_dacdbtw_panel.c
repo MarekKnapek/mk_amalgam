@@ -499,6 +499,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_create(mk_win_base_user_type
 	mk_try(mk_dacdbtw_panel_private_create_splitter(panel, &panel->m_splitter));
 	mk_try(mk_dacdbtw_panel_private_create_tree(panel, &panel->m_tree));
 	mk_try(mk_dacdbtw_panel_private_create_list(panel, &panel->m_list));
+	mk_try(mk_win_user_window_send(panel->m_splitter, mk_win_ctrl_splitter_hor_wm_set_ratio, 2500, ((mk_win_base_user_types_lparam_t)(0)), &lr)); ((void)(lr));
 	mk_try(mk_win_user_window_send(panel->m_splitter, mk_win_ctrl_splitter_hor_wm_set_child, 0, ((mk_win_base_user_types_lparam_t)(panel->m_tree)), &lr)); ((void)(lr));
 	mk_try(mk_win_user_window_send(panel->m_splitter, mk_win_ctrl_splitter_hor_wm_set_child, 1, ((mk_win_base_user_types_lparam_t)(panel->m_list)), &lr)); ((void)(lr));
 	panel->m_state = mk_dacdbtw_panel_private_state_empty;

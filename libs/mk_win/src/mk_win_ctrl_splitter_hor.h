@@ -10,7 +10,8 @@
 #include "../../mk_win/src/mk_win_user_window.h"
 
 
-#define mk_win_ctrl_splitter_hor_wm_set_child ((unsigned short)(mk_win_user_window_wm_user + 0x0001ul))
+#define mk_win_ctrl_splitter_hor_wm_set_ratio ((unsigned short)(mk_win_user_window_wm_user + 0x0001ul))
+#define mk_win_ctrl_splitter_hor_wm_set_child ((unsigned short)(mk_win_user_window_wm_user + 0x0002ul))
 
 
 mk_jumbo int mk_win_ctrl_splitter_hor_class_register(void);
