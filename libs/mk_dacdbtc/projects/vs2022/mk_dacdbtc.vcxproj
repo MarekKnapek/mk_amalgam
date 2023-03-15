@@ -61,6 +61,9 @@
 		<WholeProgramOptimization>true</WholeProgramOptimization>
 		<CharacterSet>Unicode</CharacterSet>
 	</PropertyGroup>
+	<PropertyGroup Label="Configuration" Condition="'$(Configuration)'=='Debug'">
+		<EnableASAN>true</EnableASAN>
+	</PropertyGroup>
 	<Import Project="$(VCTargetsPath)\Microsoft.Cpp.props"/>
 	<ImportGroup Label="ExtensionSettings">
 	</ImportGroup>
