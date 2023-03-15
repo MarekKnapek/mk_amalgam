@@ -64,7 +64,7 @@ mk_jumbo int mk_win_ctrl_splitter_hor_class_register(void)
 	mk_try(mk_win_instance_get(&cls.m_hinstance));
 	cls.m_hicon = ((mk_win_base_user_types_hicon_t)(mk_win_base_types_null));
 	mk_try(mk_win_user_cursor_load_by_id(mk_win_user_cursor_id_sizewe, &cls.m_hcursor));
-	cls.m_background = ((mk_win_base_user_types_hbrush_t)((mk_win_base_types_uintptr_t)(mk_win_user_color_id_window + 1)));
+	cls.m_background = ((mk_win_base_user_types_hbrush_t)((mk_win_base_types_uintptr_t)(mk_win_user_color_id_btnface + 1)));
 	cls.m_menu_name = ((mk_win_strc_t)(mk_win_base_types_null));
 	cls.m_class_name = s_win_ctrl_splitter_hor_class_name;
 	cls.m_small_icon = ((mk_win_base_user_types_hicon_t)(mk_win_base_types_null));
