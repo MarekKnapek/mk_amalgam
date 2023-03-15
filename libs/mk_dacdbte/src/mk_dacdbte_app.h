@@ -14,7 +14,6 @@ struct mk_dacdbte_app_s
 	int m_exit_code;
 	mk_std_ptr_buff_t m_parents;
 };
-typedef struct mk_dacdbte_app_s mk_dacdbte_app_t;
 
 
 mk_jumbo int mk_dacdbte_app_init(void);
