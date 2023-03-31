@@ -1846,6 +1846,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_set_file_name(mk_dacdbtw_pan
 	mk_std_input_stream_t is;
 	int parsed;
 	mk_win_base_types_bool_t b;
+	mk_win_base_user_types_hwnd_t prev_focus;
 
 	mk_assert(panel);
 	mk_assert(wparam == 0);
@@ -1897,6 +1898,7 @@ static mk_inline int mk_dacdbtw_panel_private_on_wm_set_file_name(mk_dacdbtw_pan
 		mk_try(mk_win_user_window_show(panel->m_status, mk_win_user_window_show_show, &b)); (void)b;
 		mk_try(mk_win_user_window_show(panel->m_tree, mk_win_user_window_show_show, &b)); (void)b;
 		mk_try(mk_win_user_window_show(panel->m_list, mk_win_user_window_show_show, &b)); (void)b;
+		mk_try(mk_win_user_window_set_focus(panel->m_tree, &prev_focus)); (void)prev_focus;
 	}
 	else
 	{
